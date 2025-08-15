@@ -1,0 +1,46 @@
+# Build output & caches
+dist/
+.astro/
+.vite/
+node_modules/
+
+# Coverage & logs
+coverage/
+.coverage/
+*.log
+
+# Platform outputs
+.vercel/
+.netlify/
+.output/
+.vscode/
+.idea/
+
+# Lockfiles (optional)
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Env files
+.env
+.env.*
+
+# Generated/minified assets
+**/*.min.js
+**/*.min.css
+**/*.map
+
+# Binary assets (not useful for Prettier)
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.webp
+**/*.avif
+**/*.ico
+**/*.svg
+**/*.pdf
+**/*.zip
+
+# Optional: large static vendor bundles
+public/vendor/

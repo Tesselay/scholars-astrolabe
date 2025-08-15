@@ -1,0 +1,18 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+
+---
+
+<Layout>
+    <h1>{frontmatter.title}</h1>
+    <p>Published on {frontmatter["date-created"].toLocaleDateString()}</p>
+    <p>Updated on {frontmatter["date-modified"].toLocaleDateString()}</p>
+    <div class="tags">
+        {frontmatter.tags.map((tag: string) =>
+                <p class="tag"><a href=`/tags/${tag}`>{tag}</a></p>
+        )}
+    </div>
+    <slot />
+</Layout>

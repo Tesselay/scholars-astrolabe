@@ -1,0 +1,16 @@
+.hero {
+  position: relative;
+  color: var(--ink);
+  background: var(--hero-bg);
+}
+
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(40% 40% at 20% 65%, rgba(210,178,121,.18), transparent 60%),
+    radial-gradient(60% 50% at 70% 20%, rgba(141,166,255,.20), transparent 70%),
+    linear-gradient(180deg, rgba(10,14,25,.75), rgba(10,14,25,.35) 35%, rgba(10,14,25,.85) 100%);
+}
+
+.hero > * { position: relative; }

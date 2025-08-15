@@ -1,0 +1,16 @@
+# Output & caches
+dist/
+.astro/
+node_modules/
+.coverage/
+coverage/
+.vite/
+.vscode/
+.idea/
+
+# System / tooling
+.DS_Store
+*.log
+
+# Optional: generated content
+public/build/
