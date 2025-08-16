@@ -1,0 +1,85 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# prevent overlapping runs on the same branch/PR
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Astro v5 supports Node 20+; this keeps you within the safe range
+      # https://docs.astro.build lists current minimums.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Enable Corepack (Yarn)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # --- Lint / format (cheap safety nets) ---
+      - name: Prettier (format check)
+        run: npx prettier -c .
+
+      - name: ESLint (lint check)
+        if: ${{ hashFiles('.eslintrc*') != '' }}
+        run: npx eslint . --max-warnings=0
+
+      # --- Type & framework checks ---
+      - name: Astro check
+        run: yarn astro check
+
+      - name: TypeScript compile check
+        if: ${{ hashFiles('tsconfig.json') != '' }}
+        run: npx tsc --noEmit
+
+      # --- Build ---
+      - name: Build site
+        run: yarn build
+
+      # --- Link checker on the built HTML ---
+      - name: Link checker (dist)
+        uses: lycheeverse/lychee-action@v2
+        env:
+          # helps with rate limits when checking GitHub links
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >-
+            --no-progress
+            --verbose
+            --root-dir "${{ github.workspace }}/dist"
+            "dist/**/*.html"
+          fail: true
+
+      # --- A11y + tiny E2E smoke on the built site ---
+      - name: Serve dist
+        run: npx http-server dist -p 4321 -c-1 &
+
+      - name: Wait for server
+        run: npx wait-on http://127.0.0.1:4321
+
+      - name: A11y smoke (home)
+        run: npx pa11y-ci --threshold 5 http://127.0.0.1:4321/
+
+      - name: E2E smoke (status 200)
+        run: curl -sSf http://127.0.0.1:4321/ > /dev/null
