@@ -1,4 +1,5 @@
 @import "./tokens.css";
+@import "katex/dist/katex.min.css";
 
 /* A light reset and base typescale */
 * { box-sizing: border-box; }
