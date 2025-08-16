@@ -14,7 +14,7 @@
     "@lucide/astro": "^0.526.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
-    "astro": "^5.12.3",
+    "astro": "^5.12.8",
     "astro-expressive-code": "^0.41.3",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
