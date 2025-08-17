@@ -1,12 +1,12 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import json from '@eslint/json'
-import css from '@eslint/css'
-import astro from 'eslint-plugin-astro'
-import tseslint from 'typescript-eslint'
-import eslintConfigPrettier from 'eslint-config-prettier'
+import js from "@eslint/js";
+import globals from "globals";
+import json from "@eslint/json";
+import css from "@eslint/css";
+import astro from "eslint-plugin-astro";
+import tseslint from "typescript-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 
-import { defineConfig } from 'eslint/config'
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   // JavaScript
@@ -17,7 +17,7 @@ export default defineConfig([
 
   // Astro
   ...astro.configs.recommended,
-  ...astro.configs['jsx-a11y-recommended'],
+  ...astro.configs["jsx-a11y-recommended"],
 
   // JSON
   json.configs.recommended,
@@ -41,19 +41,19 @@ export default defineConfig([
   // Ignores
   {
     ignores: [
-      'dist/',
-      '.astro/',
-      'node_modules/',
-      '.coverage/',
-      'coverage/',
-      '.vite/',
-      '.vscode/',
-      '.idea/',
-      '.git/',
-      '.DS_Store',
-      '*.log',
-      '**/*.d.ts',
-      '.github/',
+      "dist/",
+      ".astro/",
+      "node_modules/",
+      ".coverage/",
+      "coverage/",
+      ".vite/",
+      ".vscode/",
+      ".idea/",
+      ".git/",
+      ".DS_Store",
+      "*.log",
+      "**/*.d.ts",
+      ".github/",
     ],
   },
-])
+]);

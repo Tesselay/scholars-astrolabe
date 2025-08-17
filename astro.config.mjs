@@ -1,31 +1,31 @@
 // astro.config.mjs
-import { defineConfig } from 'astro/config'
+import { defineConfig } from "astro/config";
 
-import mdx from '@astrojs/mdx'
-import sitemap from '@astrojs/sitemap'
-import expressiveCode from 'astro-expressive-code'
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import expressiveCode from "astro-expressive-code";
 
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import remarkDirective from 'remark-directive'
-import wikiLinkPlugin from 'remark-wiki-link'
-import remarkToc from 'remark-toc'
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import remarkDirective from "remark-directive";
+import wikiLinkPlugin from "remark-wiki-link";
+import remarkToc from "remark-toc";
 
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeKatex from 'rehype-katex'
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeKatex from "rehype-katex";
 
-import callouts from './src/markdown/remark-callouts.js'
-import remarkFrontmatter from 'remark-frontmatter'
+import callouts from "./src/markdown/remark-callouts.js";
+import remarkFrontmatter from "remark-frontmatter";
 
 const slugify = (s) =>
   s
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
 export default defineConfig({
-  site: 'http://localhost:4321',
+  site: "http://localhost:4321",
   integrations: [
     expressiveCode(),
     sitemap(),
@@ -39,7 +39,7 @@ export default defineConfig({
         [
           wikiLinkPlugin,
           {
-            aliasDivider: '|',
+            aliasDivider: "|",
             pageResolver: (name) => [slugify(name)],
             hrefTemplate: (permalink) => `/${permalink}`,
           },
@@ -51,12 +51,12 @@ export default defineConfig({
         [
           rehypeAutolinkHeadings,
           {
-            behavior: 'wrap',
-            properties: { class: 'heading-link' },
+            behavior: "wrap",
+            properties: { class: "heading-link" },
           },
         ],
         rehypeKatex,
       ],
     }),
   ],
-})
+});

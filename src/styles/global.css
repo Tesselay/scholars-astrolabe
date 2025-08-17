@@ -1,5 +1,5 @@
-@import './tokens.css';
-@import 'katex/dist/katex.min.css';
+@import "./tokens.css";
+@import "katex/dist/katex.min.css";
 
 /* A light reset and base typescale */
 * {
