@@ -41,6 +41,8 @@ export default defineConfig([
   // Ignores
   {
     ignores: [
+      ".pnp.*",
+      "*.yarn/**",
       "dist/",
       ".astro/",
       "node_modules/",

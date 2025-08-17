@@ -22,8 +22,7 @@ yarn.lock
 package-lock.json
 
 # Yarn PnP
-.pnp.cjs
-.pnp.loader.mjs
+.pnp.*
 .yarn/**
 
 # Env files
