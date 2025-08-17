@@ -50,6 +50,7 @@
     "globals": "^16.3.0",
     "http-server": "^14.1.1",
     "jiti": "^2.5.1",
+    "pa11y-ci": "^4.0.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.9.2",
