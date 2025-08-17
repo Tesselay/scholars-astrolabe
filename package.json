@@ -23,6 +23,7 @@
     "@lucide/astro": "^0.526.0",
     "astro": "^5.12.3",
     "astro-expressive-code": "^0.41.3",
+    "katex": "^0.16.22",
     "open-props": "^1.7.16",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-katex": "^7.0.1",
