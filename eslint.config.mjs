@@ -1,15 +1,34 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
 import js from "@eslint/js";
-import tselint from "@typescript-eslint"
+import globals from "globals";
+import json from "@eslint/json";
+import css from "@eslint/css";
 import astro from "eslint-plugin-astro"
-import prettier from "eslint-config-prettier"
+import tseslint from "typescript-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 
-const tsParser = tselint.parser("typescript");
-const astroParser = astro.parser("typescript");
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-    // Global Configuration
+    // JavaScript
+    js.configs.recommended,
+
+    // TypeScript
+    ...tseslint.configs.recommended,
+
+    // Astro
+    ...astro.configs.recommended,
+    ...astro.configs["jsx-a11y-recommended"],
+
+    // JSON
+    json.configs.recommended,
+
+    // CSS
+    css.configs.recommended,
+
+    // Prettier
+    eslintConfigPrettier,
+
+    // Globals
     {
         languageOptions: {
             globals: {
@@ -19,42 +38,7 @@ export default defineConfig([
         }
     },
 
-    // Base Configuration
-    js.configs.recommended,
-    tselint.configs.recommended,
-
-    // Prettier Configuration
-    {
-        plugins: {
-            prettier: prettier
-        },
-        rules: {
-            "prettier/prettier": "off"
-        }
-    },
-
-    // Astro Configuration
-    astro.configs.recommended,
-    astro.configs["jsx-a11y-recommended"],
-    {
-        files: ["**/*.astro"],
-        languageOptions: {
-            parser: astroParser,
-            parserOptions: {
-                parser: tsParser,
-                extraFileExtensions: [".astro"],
-                sourceType: "module",
-                ecmaVersion: "latest",
-                project: "./tsconfig.json"
-            }
-        },
-        rules: {
-            // "no-undef": "off",
-            // "@typescript-eslint/no-explicit-any": "off"
-        }
-    },
-
-    // Ignore Configuration
+    // Ignores
     {
         ignores: [
             "dist/", ".astro/", "node_modules/", ".coverage/", "coverage/", ".vite/", ".vscode/", ".idea/",  ".git/",
