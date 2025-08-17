@@ -61,7 +61,7 @@ jobs:
         run: yarn wait-on http://127.0.0.1:4321
 
       # --- Link checker on the built HTML ---
-      - name: Link checker (dist)
+      - name: Link checker
         uses: lycheeverse/lychee-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,8 +74,8 @@ jobs:
           fail: true
 
       # --- A11y + tiny E2E smoke on the built site ---
-      - name: A11y smoke (home)
+      - name: A11y smoke
         run: yarn pa11y-ci --threshold 5 http://127.0.0.1:4321/
 
-      - name: E2E smoke (status 200)
+      - name: E2E smoke
         run: curl -sSf http://127.0.0.1:4321/ > /dev/null
