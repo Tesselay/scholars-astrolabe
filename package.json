@@ -18,7 +18,7 @@
     "@astrojs/mdx": "^4.3.1",
     "@astrojs/sitemap": "^3.4.1",
     "@lucide/astro": "^0.526.0",
-    "astro": "^5.12.3",
+    "astro": "^5.12.8",
     "astro-expressive-code": "^0.41.3",
     "open-props": "^1.7.16",
     "rehype-autolink-headings": "^7.1.0",
