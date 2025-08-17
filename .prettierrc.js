@@ -14,4 +14,4 @@ export default {
       options: { proseWrap: 'always' },
     },
   ],
-};
+}

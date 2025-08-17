@@ -1,36 +1,42 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import {getCollection} from "astro:content";
-import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
 
-const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog');
+const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog')
 
-const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
-const pageTitle = 'Tag Index';
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
+const pageTitle = 'Tag Index'
 ---
 
 <Layout pageTitle={pageTitle}>
-    <div class="tags">
-        {tags.map(tag => <p class="tag"><a href=`/tags/${tag}`>{tag}</a></p>)}
-    </div>
+  <div class="tags">
+    {
+      tags.map((tag) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
+  </div>
 </Layout>
 
 <style>
-    a {
-        color: #00539f;
-    }
+  a {
+    color: #00539f;
+  }
 
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .tag {
-        margin: 0.25em;
-        border: dotted 1px #a1a1a1;
-        border-radius: 0.5em;
-        padding: 0.5em 1em;
-        font-size: 1.15em;
-        background-color: #f8fcfd;
-    }
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
 </style>

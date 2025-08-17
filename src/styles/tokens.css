@@ -1,56 +1,56 @@
-@import "open-props/style";
+@import 'open-props/style';
 
 :root {
   /* Colors */
-  --night-900: #0A0E19;
+  --night-900: #0a0e19;
   --night-700: #121831;
-  --night-600: #162E5C;
-  --ink:       #E9E6DF;
+  --night-600: #162e5c;
+  --ink: #e9e6df;
 
-  --ultra-500: #8DA6FF; /* links/buttons */
-  --ultra-200: #BBD0FF; /* hover */
-  --ultra-800: #2246A0; /* focus ring */
+  --ultra-500: #8da6ff; /* links/buttons */
+  --ultra-200: #bbd0ff; /* hover */
+  --ultra-800: #2246a0; /* focus ring */
 
-  --gold-500:  #C8A548; /* rules/icons */
-  --gold-400:  #D2B279;
-  --copper-800:#70532A; /* decorative only */
-  --copper-500:#9E6941;
+  --gold-500: #c8a548; /* rules/icons */
+  --gold-400: #d2b279;
+  --copper-800: #70532a; /* decorative only */
+  --copper-500: #9e6941;
 
-  --panel:     #101726; /* cards, code */
-  --chip:      #141D30; /* inline code */
+  --panel: #101726; /* cards, code */
+  --chip: #141d30; /* inline code */
 
   /* Hero */
   /* Neutral placeholder background (dark mode) */
   --hero-bg: linear-gradient(135deg, var(--night-700), var(--night-600));
 
   /* radius & spacing */
-  --radius:       var(--radius-2);
-  --pad:          var(--size-3);
+  --radius: var(--radius-2);
+  --pad: var(--size-3);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     /* Colors */
-    --paper:#F2E9D6;            /* page background             */
-    --paper-700:#E9DECB;        /* relaxed panels / asides     */
-    --paper-600:#DCD0BA;        /* very subtle tinted panels   */
+    --paper: #f2e9d6; /* page background             */
+    --paper-700: #e9decb; /* relaxed panels / asides     */
+    --paper-600: #dcd0ba; /* very subtle tinted panels   */
 
-    --ink:#1B1D21;              /* primary text                */
-    --panel:#EFE6D3;            /* cards, code blocks          */
-    --chip:#E8DEC7;             /* inline-code & badges        */
+    --ink: #1b1d21; /* primary text                */
+    --panel: #efe6d3; /* cards, code blocks          */
+    --chip: #e8dec7; /* inline-code & badges        */
 
-    --ultra-500:#153A77;        /* links / primary actions     */
-    --ultra-200:#4771C1;        /* hover                       */
-    --ultra-800:#0E2654;        /* focus ring / active states  */
+    --ultra-500: #153a77; /* links / primary actions     */
+    --ultra-200: #4771c1; /* hover                       */
+    --ultra-800: #0e2654; /* focus ring / active states  */
 
-    --gold-500:#C8A548;         /* ornaments / hr / small icons*/
-    --gold-400:#D8BE8D;
+    --gold-500: #c8a548; /* ornaments / hr / small icons*/
+    --gold-400: #d8be8d;
 
-    --copper-500:#9E6941;       /* decorative only             */
+    --copper-500: #9e6941; /* decorative only             */
 
-    --success-500:#3D8F70;
-    --warning-500:#B78A44;
-    --danger-500:#C26F5F;
+    --success-500: #3d8f70;
+    --warning-500: #b78a44;
+    --danger-500: #c26f5f;
 
     /* Hero */
     /* Neutral placeholder background (light mode) */

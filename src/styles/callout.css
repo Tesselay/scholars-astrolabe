@@ -18,15 +18,27 @@ aside.callout::before {
 }
 
 /* simple type colors */
-aside.callout.note { border-left-color: #3b82f6; }
-aside.callout.tip  { border-left-color: #22c55e; }
-aside.callout.warning { border-left-color: #f59e0b; }
-aside.callout.error { border-left-color: #ef4444; }
-aside.callout.check { border-left-color: #10b981; }
-aside.callout.todo { border-left-color: #64748b; }
+aside.callout.note {
+  border-left-color: #3b82f6;
+}
+aside.callout.tip {
+  border-left-color: #22c55e;
+}
+aside.callout.warning {
+  border-left-color: #f59e0b;
+}
+aside.callout.error {
+  border-left-color: #ef4444;
+}
+aside.callout.check {
+  border-left-color: #10b981;
+}
+aside.callout.todo {
+  border-left-color: #64748b;
+}
 
 /* collapsed behavior (optional) */
-aside.callout[data-collapsible="true"][data-collapsed="true"] > *:not(:first-child) {
+aside.callout[data-collapsible='true'][data-collapsed='true'] > *:not(:first-child) {
   display: none;
   /* You can add a disclosure triangle + JS if you want interactivity */
 }
