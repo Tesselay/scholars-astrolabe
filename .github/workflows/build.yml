@@ -53,6 +53,13 @@ jobs:
       - name: Build site
         run: yarn build
 
+      # --- Serve dist ---
+      - name: Serve dist
+        run: yarn http-server dist -p 4321 -c-1 &
+
+      - name: Wait for server
+        run: yarn wait-on http://127.0.0.1:4321
+
       # --- Link checker on the built HTML ---
       - name: Link checker (dist)
         uses: lycheeverse/lychee-action@v2
@@ -62,17 +69,11 @@ jobs:
           args: >-
             --no-progress
             --verbose
-            --root-dir "${{ github.workspace }}/dist"
+            --base "http://127.0.0.1:4321"
             "dist/**/*.html"
           fail: true
 
       # --- A11y + tiny E2E smoke on the built site ---
-      - name: Serve dist
-        run: yarn http-server dist -p 4321 -c-1 &
-
-      - name: Wait for server
-        run: yarn wait-on http://127.0.0.1:4321
-
       - name: A11y smoke (home)
         run: yarn pa11y-ci --threshold 5 http://127.0.0.1:4321/
 
