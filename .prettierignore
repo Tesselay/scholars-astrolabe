@@ -16,7 +16,7 @@ coverage/
 .vscode/
 .idea/
 
-# Lockfiles (optional)
+# Lockfiles
 pnpm-lock.yaml
 yarn.lock
 package-lock.json
@@ -34,7 +34,7 @@ package-lock.json
 **/*.min.css
 **/*.map
 
-# Binary assets (not useful for Prettier)
+# Binary assets
 **/*.png
 **/*.jpg
 **/*.jpeg
@@ -46,5 +46,5 @@ package-lock.json
 **/*.pdf
 **/*.zip
 
-# Optional: large static vendor bundles
+# static vendor bundles
 public/vendor/

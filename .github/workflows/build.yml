@@ -83,7 +83,7 @@ jobs:
         with:
           name: a11y-report
           path: pa11y-report.json
-          if-no-files-found: 'ignore'
+          if-no-files-found: "ignore"
 
       - name: E2E smoke
         run: curl -sSf http://127.0.0.1:4321/ > /dev/null
