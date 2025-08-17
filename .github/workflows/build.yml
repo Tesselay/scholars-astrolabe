@@ -39,7 +39,7 @@ jobs:
 
       - name: ESLint (lint check)
         if: ${{ hashFiles('eslint.config.*') != '' }}
-        run: yarn dlx eslint . --max-warnings=0
+        run: yarn eslint . --max-warnings=0
 
       # --- Type & Framework Checks ---
       - name: Astro check
