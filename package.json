@@ -16,6 +16,7 @@
     "prettier": "prettier . --write"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.1",
     "@astrojs/sitemap": "^3.4.1",
     "@lucide/astro": "^0.526.0",
@@ -47,7 +48,7 @@
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^5.9.0",
+    "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1"
   },
   "packageManager": "yarn@4.9.2"
