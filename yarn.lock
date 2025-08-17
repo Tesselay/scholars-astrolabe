@@ -132,6 +132,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/rss@npm:^4.0.12":
+  version: 4.0.12
+  resolution: "@astrojs/rss@npm:4.0.12"
+  dependencies:
+    fast-xml-parser: "npm:^5.2.0"
+    kleur: "npm:^4.1.5"
+  checksum: 10c0/f7541a39adf3572489b87c45569833df111f9bef672b116191f228860e6f410f0bdc899f6124c3d6cf14a51b745cbfa415d4ed4649d7966070e155363019749c
+  languageName: node
+  linkType: hard
+
 "@astrojs/sitemap@npm:^3.4.1":
   version: 3.5.0
   resolution: "@astrojs/sitemap@npm:3.5.0"
@@ -3272,6 +3282,17 @@ __metadata:
   version: 3.0.6
   resolution: "fast-uri@npm:3.0.6"
   checksum: 10c0/74a513c2af0584448aee71ce56005185f81239eab7a2343110e5bad50c39ad4fb19c5a6f99783ead1cac7ccaf3461a6034fda89fffa2b30b6d99b9f21c2f9d29
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^5.2.0":
+  version: 5.2.5
+  resolution: "fast-xml-parser@npm:5.2.5"
+  dependencies:
+    strnum: "npm:^2.1.0"
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 10c0/d1057d2e790c327ccfc42b872b91786a4912a152d44f9507bf053f800102dfb07ece3da0a86b33ff6a0caa5a5cad86da3326744f6ae5efb0c6c571d754fe48cd
   languageName: node
   linkType: hard
 
@@ -6822,6 +6843,7 @@ __metadata:
   dependencies:
     "@astrojs/check": "npm:^0.9.4"
     "@astrojs/mdx": "npm:^4.3.1"
+    "@astrojs/rss": "npm:^4.0.12"
     "@astrojs/sitemap": "npm:^3.4.1"
     "@eslint/css": "npm:^0.10.0"
     "@eslint/js": "npm:^9.33.0"
@@ -7283,6 +7305,13 @@ __metadata:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 10c0/9681a6257b925a7fa0f285851c0e613cc934a50661fa7bb41ca9cbbff89686bb4a0ee366e6ecedc4daafd01e83eee0720111ab294366fe7c185e935475ebcecd
+  languageName: node
+  linkType: hard
+
+"strnum@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "strnum@npm:2.1.1"
+  checksum: 10c0/1f9bd1f9b4c68333f25c2b1f498ea529189f060cd50aa59f1876139c994d817056de3ce57c12c970f80568d75df2289725e218bd9e3cdf73cd1a876c9c102733
   languageName: node
   linkType: hard
 

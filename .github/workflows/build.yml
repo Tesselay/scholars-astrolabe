@@ -23,13 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Astro v5 supports Node 20+; this keeps you within the safe range
-      # https://docs.astro.build lists current minimums.
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
 
       - name: Enable Corepack (Yarn)
         run: corepack enable
