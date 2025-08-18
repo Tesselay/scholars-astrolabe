@@ -20,7 +20,7 @@
     "*.{js,jsx,ts,tsx,astro}": [
       "eslint --fix"
     ],
-    "*.{js,jsx,ts,tsx,astro,md,css,json}": [
+    "*.{js,jsx,ts,tsx,astro,md,css,json,yml}": [
       "prettier --write"
     ]
   },
