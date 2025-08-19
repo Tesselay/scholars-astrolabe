@@ -81,10 +81,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-puppeteer-
 
-      - name: Install Chrome for Testing (for Pa11y/Puppeteer)
-        env:
-          PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
+      - name: Install Chrome for Testing (Pa11y/Puppeteer)
         run: yarn dlx @puppeteer/browsers install chrome@stable
+
+      - name: Export Chrome path for Puppeteer
+        run: |
+          CHROME_PATH="$(find ~/.cache/puppeteer -type f -name chrome -path '*/chrome-linux*/chrome' -print -quit)"
+          if [ -z "$CHROME_PATH" ]; then
+            echo "Chrome binary not found in ~/.cache/puppeteer"; exit 1
+          fi
+          echo "PUPPETEER_EXECUTABLE_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+          echo "Using Chrome at: $CHROME_PATH"
 
       - name: A11y smoke
         run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json http://127.0.0.1:4321/ > pa11y-report.json
