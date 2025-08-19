@@ -24,23 +24,24 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export default defineConfig(({mode}) => {
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   const mainDomain = env.MAIN_DOMAIN;
-  const site = (mode === 'production') ? `https://${mainDomain}` : `http://${mainDomain}`;
+  const site =
+    mode === "production" ? `https://${mainDomain}` : `http://${mainDomain}`;
 
-  const altDomains = (env.ALT_DOMAINS ?? "")
+  /*const altDomains = (env.ALT_DOMAINS ?? "")
     .split(",")
-    .map(d => d.trim())
-    .filter(Boolean);
+    .map((d) => d.trim())
+    .filter(Boolean);*/
 
   return {
     site,
     integrations: [
       expressiveCode(),
       sitemap({
-        filter: (page) => !page.includes('/test')
+        filter: (page) => !page.includes("/test"),
       }),
       mdx({
         remarkPlugins: [
@@ -72,5 +73,5 @@ export default defineConfig(({mode}) => {
         ],
       }),
     ],
-  }
+  };
 });

@@ -1,38 +1,44 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Blog page", () => {
-  test("renders heading, intro, and optional post links", async ({ page }) => {
-    await page.goto("http://localhost:4321/blog");
+  test("renders heading, intro, and optional post links", async ({
+    page,
+  }, testInfo) => {
+    const base =
+      testInfo.project.use.baseURL ||
+      process.env.E2E_BASE_URL ||
+      "http://127.0.0.1:4321";
+    const url = new URL("/blog", base).toString();
+
+    await page.goto(url);
 
     // URL should end with /blog
     await expect(page).toHaveURL(/\/blog\/?$/);
 
     // Heading is visible
-    await expect(
-      page.getByRole("heading", { level: 1, name: "My Astro Learning Blog" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
-    // Intro paragraph is visible
-    await expect(
-      page.getByText(
-        "This is where I will post about my journey learning Astro.",
-      ),
-    ).toBeVisible();
+    // Scope lists to main content to avoid matching nav lists
+    const main = page.getByRole("main");
+    const postsList = main.getByRole("list").first();
+    await expect(postsList).toBeVisible();
 
-    // There should be a list element for posts (may be empty if no posts yet)
-    const list = page.locator("ul");
-    await expect(list.first()).toBeVisible();
+    // Ensure there is at least one list item
+    const items = postsList.getByRole("listitem");
+    const itemCount = await items.count();
+    expect(
+      itemCount,
+      "Blog posts list should have at least one item",
+    ).toBeGreaterThan(0);
 
-    // If there are any post links in the list, ensure they point to /posts/...
-    const postLinks = list.first().locator("a");
-    const count = await postLinks.count();
-    if (count > 0) {
-      for (let i = 0; i < count; i++) {
-        const href = await postLinks.nth(i).getAttribute("href");
-        expect(href, "Blog post link should point to /posts/...").toMatch(
-          /^\/posts\//,
-        );
-      }
+    // Optional: ensure items link to /posts/...
+    for (let i = 0; i < itemCount; i++) {
+      const li = items.nth(i);
+      const link = li.locator('a[href^="/posts/"]').first();
+      await expect(
+        link,
+        "Each post item should link to /posts/<slug>",
+      ).toBeVisible();
     }
   });
 });

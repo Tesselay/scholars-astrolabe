@@ -25,14 +25,6 @@
     "test:a11y": "pa11y-ci",
     "e2e": "playwright test"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,astro,md,mdx,css,json,yml}": [
-      "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx,astro,md,mdx}": [
-      "eslint --fix"
-    ]
-  },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.1",
