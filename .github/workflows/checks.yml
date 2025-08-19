@@ -1,4 +1,4 @@
-name: Build
+name: Base Checks
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build-test:
+  base-checks:
     runs-on: ubuntu-latest
     env:
       ASTRO_TELEMETRY_DISABLED: 1
@@ -47,11 +47,3 @@ jobs:
       - name: TypeScript compile check
         if: ${{ hashFiles('tsconfig.json') != '' }}
         run: yarn tsc --noEmit
-
-      # --- Build ---
-      - name: Build site
-        run: yarn build
-
-      # --- Serve dist ---
-      - name: Serve dist
-        run: yarn http-server dist -p 4321 -c-1 &

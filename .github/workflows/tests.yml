@@ -25,11 +25,14 @@ jobs:
         run: yarn install --frozen-lockfile
 
       # --- Serve dist ---
+      - name: Build site
+        run: yarn build
+
       - name: Serve dist
         run: yarn http-server dist -p 4321 -c-1 &
 
       - name: Wait for server
-        run: yarn wait-on http://127.0.0.1:4321
+        run: yarn wait-on -t 5m http://127.0.0.1:4321
 
       # --- Link checker on the built HTML ---
       - name: Link checker
