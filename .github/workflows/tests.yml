@@ -4,12 +4,21 @@ on:
   push:
   pull_request:
 
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
+      E2E_BASE_URL: "http://127.0.0.1:4321"
 
     steps:
       - uses: actions/checkout@v4
@@ -21,15 +30,29 @@ jobs:
       - name: Enable Yarn
         run: corepack enable
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      # Cache Yarn artifacts (Yarn Berry)
+      - name: Cache Yarn
+        uses: actions/cache@v4
+        with:
+          path: |
+            .yarn/cache
+            .yarn/install-state.gz
+            .yarn/unplugged
+            .yarn/build-state.yml
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-      # --- Serve dist ---
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      # --- Build + Serve dist ---
       - name: Build site
         run: yarn build
 
       - name: Serve dist
-        run: yarn http-server dist -p 4321 -c-1 &
+        run: yarn astro preview --host 127.0.0.1 --port 4321 &
 
       - name: Wait for server
         run: yarn wait-on -t 5m http://127.0.0.1:4321
@@ -43,6 +66,8 @@ jobs:
           args: >-
             --no-progress
             --verbose
+            --retry 2
+            --max-concurrency 10
             --base "http://127.0.0.1:4321"
             "dist/**/*.html"
           fail: true
@@ -59,19 +84,40 @@ jobs:
           path: pa11y-report.json
           if-no-files-found: "ignore"
 
-      - name: E2E smoke
-        run: curl -sSf http://127.0.0.1:4321/ > /dev/null
-
       # --- Playwright Tests ---
+      # Cache browsers to save time
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
 
       - name: Run Playwright tests
+        env:
+          # Enable GitHub annotations via Playwright config gating (isCI)
+          CI: true
         run: yarn playwright test
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Playwright report
         if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 14
+
+      - name: Upload Playwright traces (on failure)
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: |
+            test-results/**/*.zip
+            test-results/**/*.trace
+          if-no-files-found: "ignore"
+          retention-days: 14
