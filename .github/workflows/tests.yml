@@ -63,6 +63,9 @@ jobs:
         run: curl -sSf http://127.0.0.1:4321/ > /dev/null
 
       # --- Playwright Tests ---
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
       - name: Run Playwright tests
         run: yarn playwright test
 
