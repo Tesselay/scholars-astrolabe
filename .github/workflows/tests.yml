@@ -19,6 +19,8 @@ jobs:
     env:
       ASTRO_TELEMETRY_DISABLED: 1
       E2E_BASE_URL: "http://127.0.0.1:4321"
+      # Use a deterministic Puppeteer cache path inside the workspace
+      PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
 
     steps:
       - uses: actions/checkout@v4
@@ -73,26 +75,34 @@ jobs:
           fail: true
 
       # --- A11y ---
+      # Ensure Puppeteer cache dir exists and cache it
+      - name: Prepare Puppeteer cache dir
+        run: mkdir -p "$PUPPETEER_CACHE_DIR"
+
       - name: Cache Puppeteer browsers
         uses: actions/cache@v4
         with:
-          path: ~/.cache/puppeteer
+          path: ${{ env.PUPPETEER_CACHE_DIR }}
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-puppeteer-
 
       - name: Install Chrome for Testing (Pa11y/Puppeteer)
-        run: yarn dlx @puppeteer/browsers install chrome@stable
+        run: yarn dlx @puppeteer/browsers install chrome@stable --path "$PUPPETEER_CACHE_DIR"
 
       - name: Export Chrome path for Puppeteer
+        shell: bash
         run: |
-          CHROME_PATH="$(find ~/.cache/puppeteer -type f -name chrome -path '*/chrome-linux*/chrome' -print -quit)"
-          if [ -z "$CHROME_PATH" ]; then
-            echo "Chrome binary not found in ~/.cache/puppeteer"; exit 1
+          set -euo pipefail
+          CHROME_PATH="$(find "$PUPPETEER_CACHE_DIR" -type f -executable -name 'chrome' -print -quit || true)"
+          if [ -z "${CHROME_PATH:-}" ]; then
+            echo "Chrome binary not found in $PUPPETEER_CACHE_DIR"
+            echo "Directory tree for debugging:"
+            ls -R "$PUPPETEER_CACHE_DIR" || true
+            exit 1
           fi
           echo "PUPPETEER_EXECUTABLE_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
           echo "Using Chrome at: $CHROME_PATH"
-
       - name: A11y smoke
         run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json http://127.0.0.1:4321/ > pa11y-report.json
 
