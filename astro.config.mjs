@@ -1,5 +1,5 @@
-// astro.config.mjs
 import { defineConfig } from "astro/config";
+import { loadEnv } from "vite";
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -24,39 +24,53 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export default defineConfig({
-  site: "http://localhost:4321",
-  integrations: [
-    expressiveCode(),
-    sitemap(),
-    mdx({
-      remarkPlugins: [
-        remarkGfm,
-        remarkMath,
-        remarkDirective,
-        remarkFrontmatter,
-        remarkToc,
-        [
-          wikiLinkPlugin,
-          {
-            aliasDivider: "|",
-            pageResolver: (name) => [slugify(name)],
-            hrefTemplate: (permalink) => `/${permalink}`,
-          },
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  const mainDomain = env.MAIN_DOMAIN;
+  const site = (mode === 'production') ? `https://${mainDomain}` : `http://${mainDomain}`;
+
+  const altDomains = (env.ALT_DOMAINS ?? "")
+    .split(",")
+    .map(d => d.trim())
+    .filter(Boolean);
+
+  return {
+    site,
+    integrations: [
+      expressiveCode(),
+      sitemap({
+        filter: (page) => !page.includes('/test')
+      }),
+      mdx({
+        remarkPlugins: [
+          remarkGfm,
+          remarkMath,
+          remarkDirective,
+          remarkFrontmatter,
+          remarkToc,
+          [
+            wikiLinkPlugin,
+            {
+              aliasDivider: "|",
+              pageResolver: (name) => [slugify(name)],
+              hrefTemplate: (permalink) => `/${permalink}`,
+            },
+          ],
+          callouts,
         ],
-        callouts,
-      ],
-      rehypePlugins: [
-        rehypeSlug,
-        [
-          rehypeAutolinkHeadings,
-          {
-            behavior: "wrap",
-            properties: { class: "heading-link" },
-          },
+        rehypePlugins: [
+          rehypeSlug,
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: "wrap",
+              properties: { class: "heading-link" },
+            },
+          ],
+          rehypeKatex,
         ],
-        rehypeKatex,
-      ],
-    }),
-  ],
+      }),
+    ],
+  }
 });

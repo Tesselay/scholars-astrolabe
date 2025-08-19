@@ -17,8 +17,7 @@ src/content/blog/*
 !src/content/blog/Example.md
 
 # environment variables
-.env
-.env.production
+.env.*
 
 # macOS-specific files
 .DS_Store
