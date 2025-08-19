@@ -56,11 +56,5 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Build with accessibility in mind
 - [ ] Add test page
 - [ ] Define stylesheets
-- [ ] Add MDX Obsidian Flavor
-  - remark-gfm
-  - remark-wiki-link
-  - remark-directive
-  - remark-math + rehype-katex
-  - rehype-slug + rehype-autolink-heading
-- [ ] Add robots.txt (sitemap)
-- [ ] Tweak prettier/eslint
+- [ ] tweak robots.txt (sitemap)
+- [ ] Main domain and redirects
