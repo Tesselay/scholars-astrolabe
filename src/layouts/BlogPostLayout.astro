@@ -1,18 +1,23 @@
 ---
 import Layout from './Layout.astro'
+import { getLangFromUrl, pathWithLocale } from '../i18n/utils';
 
-const { frontmatter } = Astro.props
+const { frontmatter } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const formattedDateCreated = frontmatter["date-created"].toLocaleDateString(lang);
+const formattedDateModified = frontmatter["date-modified"].toLocaleDateString(lang);
 ---
 
 <Layout>
   <h1>{frontmatter.title}</h1>
-  <p>Published on {frontmatter['date-created'].toLocaleDateString()}</p>
-  <p>Updated on {frontmatter['date-modified'].toLocaleDateString()}</p>
+  <p>Published on {formattedDateCreated}</p>
+  <p>Updated on {formattedDateModified}</p>
   <div class="tags">
     {
       frontmatter.tags.map((tag: string) => (
         <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
+          <a href={pathWithLocale(lang, `/tags/${tag}`)}>{tag}</a>
         </p>
       ))
     }

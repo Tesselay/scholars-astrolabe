@@ -14,7 +14,7 @@ pnpm-debug.log*
 
 # blog posts
 src/content/blog/*
-!src/content/blog/Example.md
+!src/content/blog/*/Example.md
 
 # environment variables
 .env.*

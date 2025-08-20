@@ -1,12 +1,20 @@
 ---
 import Navigation from './Navigation.astro'
+
+import { getLangFromUrl, useTranslations, pathWithLocale } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 ---
 
 <header>
   <div class="nav-links">
-    <Navigation title="Home" link="/" />
-    <Navigation title="Blog" link="/blog" />
-    <Navigation title="Tags" link="/tags" />
+    <Navigation title={t('nav.home')} link={pathWithLocale(lang, '/home/')} />
+    <Navigation title={t('nav.blog')} link={pathWithLocale(lang, '/blog/')} />
+    <Navigation title={t('nav.about')} link={pathWithLocale(lang, '/about/')} />
+    <Navigation title={t('nav.contact')} link={pathWithLocale(lang, '/contact/')} />
     <Navigation title="Test" link="/test" />
+
   </div>
 </header>

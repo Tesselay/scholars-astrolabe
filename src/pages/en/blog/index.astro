@@ -1,0 +1,22 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import '../../../styles/global.css'
+import BlogPost from '../../../components/BlogPost.astro'
+import { getCollection } from 'astro:content'
+import { getLangFromUrl, buildBlogPostPath } from '../../../i18n/utils';
+
+const allPosts = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
+const pageTitle = "Scholar's Blog"
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout pageTitle={pageTitle}>
+  <ul>
+    {allPosts.map((post) => (
+      <BlogPost
+        url={buildBlogPostPath(lang, post.id)}
+        title={post.data.title}
+      />
+    ))}
+  </ul>
+</Layout>

@@ -73,5 +73,9 @@ export default defineConfig(({ mode }) => {
         ],
       }),
     ],
+    i18n: {
+      locales: ["en"],
+      defaultLocale: "en",
+    },
   };
 });

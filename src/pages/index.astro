@@ -1,10 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import '../styles/global.css'
 
-const pageTitle = 'Site Title'
+const pageTitle = 'Redirecting…'
+const target = '/en/'
 ---
 
 <Layout pageTitle={pageTitle}>
-  <h1>Welcome</h1>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <p>Redirecting to <a href={target}>{target}</a></p>
+  <script type="module">
+    const target = '/en/';
+    window.location.replace(target);
+  </script>
 </Layout>
