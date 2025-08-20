@@ -1,17 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Post page (dynamic route) and BlogPostLayout", () => {
-  test("navigates to first post and shows title, dates, and optional tag links", async ({
+  test("navigates to first post and shows title, dates (<time>), and tag links (localized)", async ({
     page,
   }, testInfo) => {
     const base =
       testInfo.project.use.baseURL ||
       process.env.E2E_BASE_URL ||
       "http://127.0.0.1:4321";
-    const url = new URL("/blog", base).toString();
+    const url = new URL("/en/blog", base).toString();
 
     await page.goto(url);
-    const postLink = page.locator('ul a[href^="/posts/"]').first();
+    const main = page.getByRole("main");
+    const postLink = main.locator('ul a[href^="/en/blog/"]').first();
     const hasPost = await postLink.count();
 
     if (hasPost === 0) {
@@ -21,7 +22,7 @@ test.describe("Post page (dynamic route) and BlogPostLayout", () => {
     const postTitle = (await postLink.innerText()).trim();
 
     await Promise.all([
-      page.waitForURL(/\/posts\/[^/]+\/?$/),
+      page.waitForURL(/\/en\/blog\/.+\/?$/),
       postLink.click(),
     ]);
 
@@ -29,8 +30,10 @@ test.describe("Post page (dynamic route) and BlogPostLayout", () => {
       page.getByRole("heading", { level: 1, name: postTitle }),
     ).toBeVisible();
 
-    await expect(page.getByText(/Published on/i)).toBeVisible();
-    await expect(page.getByText(/Updated on/i)).toBeVisible();
+    // Labels are "Published" and "Updated"; there should be two <time> elements
+    await expect(page.getByText(/Published\b/i)).toBeVisible();
+    await expect(page.getByText(/Updated\b/i)).toBeVisible();
+    await expect(page.locator("time[datetime]")).toHaveCount(2);
 
     const tagLinks = page.locator(".tags a");
     const tagCount = await tagLinks.count();
@@ -38,8 +41,8 @@ test.describe("Post page (dynamic route) and BlogPostLayout", () => {
       for (let i = 0; i < tagCount; i++) {
         const href = await tagLinks.nth(i).getAttribute("href");
         expect(href, "Tag link should have an href").toBeTruthy();
-        expect(href!, "Tag link should point to /tags/<tag>").toMatch(
-          /^\/tags\/[^/]+$/,
+        expect(href!, "Tag link should point to /en/tags/<path>").toMatch(
+          /^\/en\/tags\/.+$/,
         );
       }
     }

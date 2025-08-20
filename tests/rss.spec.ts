@@ -48,9 +48,10 @@ test.describe("RSS feed", () => {
         } catch {
           // leave pathname empty so the assertion below fails with a clear message
         }
-        expect(pathname, "Item link pathname should be /posts/<slug>").toMatch(
-          /^\/posts\/[^/?#]+\/?$/,
-        );
+        expect(
+          pathname,
+          "Item link pathname should be /en/blog/<slug>",
+        ).toMatch(/^\/en\/blog\/.+$/);
       }
     }
   });

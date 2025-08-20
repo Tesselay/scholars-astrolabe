@@ -1,19 +1,19 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Tags index page", () => {
-  test("renders tag container and tag links (if any)", async ({
+  test("renders tag container and localized tag links (supports hierarchy)", async ({
     page,
   }, testInfo) => {
     const base =
       testInfo.project.use.baseURL ||
       process.env.E2E_BASE_URL ||
       "http://127.0.0.1:4321";
-    const url = new URL("/tags", base).toString();
+    const url = new URL("/en/tags", base).toString();
 
     await page.goto(url);
 
-    // URL should end with /tags
-    await expect(page).toHaveURL(/\/tags\/?$/);
+    // URL should end with /en/tags
+    await expect(page).toHaveURL(/\/en\/tags\/?$/);
 
     // Tag container is visible
     const container = page.locator(".tags");
@@ -30,8 +30,8 @@ test.describe("Tags index page", () => {
 
         // Be null-safe before matching
         expect(href, "Tag link should have an href").toBeTruthy();
-        expect(href!, "Tag link should point to /tags/<tag>").toMatch(
-          /^\/tags\/[^/]+$/,
+        expect(href!, "Tag link should point to /en/tags/<path>").toMatch(
+          /^\/en\/tags\/.+$/,
         );
 
         // Keep the visual name flexible (avoid enforcing exact slug equality)
