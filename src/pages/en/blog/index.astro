@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import '../../../styles/global.css'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import { getLangFromUrl, buildBlogPostPath } from '../../../i18n/utils';
@@ -11,6 +10,7 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout pageTitle={pageTitle}>
+  <h1>{pageTitle}</h1>
   <ul>
     {allPosts.map((post) => (
       <BlogPost

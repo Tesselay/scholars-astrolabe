@@ -5,22 +5,52 @@ import { getLangFromUrl, pathWithLocale } from '../i18n/utils';
 const { frontmatter } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-const formattedDateCreated = frontmatter["date-created"].toLocaleDateString(lang);
-const formattedDateModified = frontmatter["date-modified"].toLocaleDateString(lang);
+const created = frontmatter["date-created"] as Date;
+const modified = frontmatter["date-modified"] as Date;
+const formattedDateCreated = created.toLocaleDateString(lang);
+const formattedDateModified = modified.toLocaleDateString(lang);
 ---
 
-<Layout>
-  <h1>{frontmatter.title}</h1>
-  <p>Published on {formattedDateCreated}</p>
-  <p>Updated on {formattedDateModified}</p>
-  <div class="tags">
-    {
-      frontmatter.tags.map((tag: string) => (
-        <p class="tag">
-          <a href={pathWithLocale(lang, `/tags/${tag}`)}>{tag}</a>
-        </p>
-      ))
-    }
-  </div>
-  <slot />
+<Layout pageTitle={frontmatter.title}>
+  <article>
+    <header>
+      <h1>{frontmatter.title}</h1>
+      <p>
+        <span>Published </span>
+        <time datetime={created.toISOString()}>{formattedDateCreated}</time>
+      </p>
+      <p>
+        <span>Updated </span>
+        <time datetime={modified.toISOString()}>{formattedDateModified}</time>
+      </p>
+      {Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 && (
+        <nav aria-label="Tags">
+          <ul class="tags">
+            {frontmatter.tags.map((tag: string) => (
+              <li class="tag">
+                <a href={pathWithLocale(lang, `/tags/${tag}`)}>{tag}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </header>
+    <section>
+      <slot />
+    </section>
+  </article>
 </Layout>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  .tag {
+    margin: 0;
+  }
+</style>

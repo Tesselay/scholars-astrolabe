@@ -3,7 +3,7 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { buildBlogPostPath } from '../../../i18n/utils'
+import { buildBlogPostPath, getLangFromUrl } from '../../../i18n/utils'
 
 export async function getStaticPaths() {
   const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
@@ -22,11 +22,12 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params as { tag: string }
 const { posts } = Astro.props as { posts: CollectionEntry<'blog'>[] }
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
+  <h1>Posts tagged with {tag}</h1>
   <ul>
-    {posts.map((post) => <BlogPost url={buildBlogPostPath('en', post.id)} title={post.data.title} />)}
+    {posts.map((post) => <BlogPost url={buildBlogPostPath(lang, post.id)} title={post.data.title} />)}
   </ul>
 </Layout>

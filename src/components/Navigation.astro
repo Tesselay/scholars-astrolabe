@@ -1,5 +1,10 @@
 ---
-const { title, link } = Astro.props
+interface Props {
+  title: string;
+  link: string;
+  isCurrent?: boolean;
+}
+const { title, link, isCurrent = false } = Astro.props as Props;
 ---
 
-<a href={`${link}`}>{title}</a>
+<a href={link} aria-current={isCurrent ? 'page' : undefined}>{title}</a>

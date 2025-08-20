@@ -5,16 +5,33 @@ import { getLangFromUrl, useTranslations, pathWithLocale } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
 
+const homeUrl = pathWithLocale(lang, '/');
+const blogUrl = pathWithLocale(lang, '/blog/');
+const isHome = currentPath === homeUrl;
+const isBlog = currentPath === blogUrl || currentPath.startsWith(blogUrl);
 ---
 
 <header>
-  <div class="nav-links">
-    <Navigation title={t('nav.home')} link={pathWithLocale(lang, '/home/')} />
-    <Navigation title={t('nav.blog')} link={pathWithLocale(lang, '/blog/')} />
-    <Navigation title={t('nav.about')} link={pathWithLocale(lang, '/about/')} />
-    <Navigation title={t('nav.contact')} link={pathWithLocale(lang, '/contact/')} />
-    <Navigation title="Test" link="/test" />
-
-  </div>
+  <nav aria-label="Primary">
+    <ul class="nav-links">
+      <li>
+        <Navigation title={t('nav.home')} link={homeUrl} isCurrent={isHome} />
+      </li>
+      <li>
+        <Navigation title={t('nav.blog')} link={blogUrl} isCurrent={isBlog} />
+      </li>
+    </ul>
+  </nav>
 </header>
+
+<style>
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
