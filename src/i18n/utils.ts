@@ -31,3 +31,18 @@ export function buildBlogPostPath(
   const slug = stripLangFromId(idOrSlug).replace(/^\/+|\/+$/g, "");
   return pathWithLocale(lang, `/blog/${slug}`);
 }
+
+// Encodes each tag path segment for safe URLs while preserving hierarchy
+export function encodeTagPath(tagPath: string): string {
+  return String(tagPath)
+    .replace(/^\/+|\/+$/g, "")
+    .split("/")
+    .map((seg) => encodeURIComponent(seg))
+    .join("/");
+}
+
+// Builds a localized tag path like "/en/tags/programming/javascript" from a tag path
+export function buildTagPath(lang: keyof typeof ui, tagPath: string): string {
+  const encoded = encodeTagPath(tagPath);
+  return pathWithLocale(lang, `/tags/${encoded}`);
+}

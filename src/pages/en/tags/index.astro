@@ -2,7 +2,7 @@
 import Layout from '../../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { pathWithLocale, getLangFromUrl } from '../../../i18n/utils'
+import { buildTagPath, getLangFromUrl } from '../../../i18n/utils'
 
 const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
 
@@ -17,7 +17,7 @@ const lang = getLangFromUrl(Astro.url);
     <ul class="tags">
       {tags.map((tag) => (
         <li class="tag">
-          <a href={pathWithLocale(lang, `/tags/${tag}`)}>{tag}</a>
+          <a href={buildTagPath(lang, tag)}>{tag}</a>
         </li>
       ))}
     </ul>

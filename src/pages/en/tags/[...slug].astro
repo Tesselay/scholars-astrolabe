@@ -3,25 +3,22 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { buildBlogPostPath, getLangFromUrl } from '../../../i18n/utils'
+import { buildBlogPostPath, getLangFromUrl, encodeTagPath } from '../../../i18n/utils'
 
 export async function getStaticPaths() {
   const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
   const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
 
   return uniqueTags.map((tag: string) => {
-    const filteredPosts: CollectionEntry<'blog'>[] = allPosts.filter((post) =>
-      post.data.tags.includes(tag)
-    )
+    const filteredPosts: CollectionEntry<'blog'>[] = allPosts.filter((post) => post.data.tags.includes(tag))
     return {
-      params: { tag },
-      props: { posts: filteredPosts },
+      params: { slug: encodeTagPath(tag) },
+      props: { posts: filteredPosts, tag },
     }
   })
 }
 
-const { tag } = Astro.params as { tag: string }
-const { posts } = Astro.props as { posts: CollectionEntry<'blog'>[] }
+const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blog'>[] }
 const lang = getLangFromUrl(Astro.url);
 ---
 

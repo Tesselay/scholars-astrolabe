@@ -1,6 +1,6 @@
 ---
 import Layout from './Layout.astro'
-import { getLangFromUrl, pathWithLocale } from '../i18n/utils';
+import { getLangFromUrl, buildTagPath } from '../i18n/utils';
 
 const { frontmatter } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -28,7 +28,7 @@ const formattedDateModified = modified.toLocaleDateString(lang);
           <ul class="tags">
             {frontmatter.tags.map((tag: string) => (
               <li class="tag">
-                <a href={pathWithLocale(lang, `/tags/${tag}`)}>{tag}</a>
+                <a href={buildTagPath(lang, tag)}>{tag}</a>
               </li>
             ))}
           </ul>
