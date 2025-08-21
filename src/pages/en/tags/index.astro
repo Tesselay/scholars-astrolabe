@@ -7,7 +7,7 @@ import { buildTagPath, getLangFromUrl } from '../../../i18n/utils'
 const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
 
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
-const pageTitle = 'Tag Index'
+const pageTitle = "Tag Index"
 const lang = getLangFromUrl(Astro.url);
 ---
 

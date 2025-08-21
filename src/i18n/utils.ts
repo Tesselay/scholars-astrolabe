@@ -17,10 +17,38 @@ export function pathWithLocale(lang: keyof typeof ui, path: string): string {
   return ("/" + String(lang) + normalized).replace(/\/+/g, "/");
 }
 
-// Returns the content id without the leading language segment (e.g., "en/foo/bar" -> "foo/bar")
-export function stripLangFromId(id: string): string {
-  const parts = String(id).split("/");
-  return parts.length > 1 ? parts.slice(1).join("/") : id;
+// Returns the content id without the leading language segment (e.g., "en/foo/bar" -> "foo/bar" or "/en/foo" -> "/foo")
+export function stripLangFromUrlOrId(id: string): string {
+  console.log("original url or id");
+  console.log(id);
+  const s = String(id);
+  const hasLeadingSlash = s.startsWith("/");
+  const parts = s.split("/");
+  const langIdx = hasLeadingSlash ? 1 : 0;
+  const candidate = parts[langIdx] ?? "";
+
+  // Only strip when the first segment is a supported language key
+  if (candidate && candidate in ui) {
+    const rest = hasLeadingSlash
+      ? parts.slice(2).join("/")
+      : parts.slice(1).join("/");
+
+    // Normalize duplicate slashes and leading slash presence
+    let normalized = rest.replace(/\/+/g, "/");
+    if (hasLeadingSlash) {
+      normalized = "/" + normalized.replace(/^\/+/, "");
+      if (normalized === "//") normalized = "/";
+    } else {
+      normalized = normalized.replace(/^\/+/, "");
+    }
+    console.log("normalized");
+    console.log(normalized);
+    return normalized;
+  }
+
+  console.log("not normalized");
+  console.log(id);
+  return id;
 }
 
 // Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
@@ -28,7 +56,7 @@ export function buildBlogPostPath(
   lang: keyof typeof ui,
   idOrSlug: string,
 ): string {
-  const slug = stripLangFromId(idOrSlug).replace(/^\/+|\/+$/g, "");
+  const slug = stripLangFromUrlOrId(idOrSlug).replace(/^\/+|\/+$/g, "");
   return pathWithLocale(lang, `/blog/${slug}`);
 }
 
