@@ -1,20 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { defaultLang } from '../i18n/ui';
+import { pathWithLocale } from '../i18n/utils';
 
-const pageTitle = 'Redirecting…'
-const target = '/en/'
+// Only emit this page in non‑production builds, in prod pass redirecting to backend
+export const prerender = import.meta.env.ROOT_REDIRECT_PAGE === 'true';
+
+const pageTitle = 'Redirecting…';
+const target = pathWithLocale(defaultLang, '/'); // e.g., '/en/'
 ---
 
 <Layout pageTitle={pageTitle}>
   <Fragment slot="head">
     <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <link rel="canonical" href={target} />
     <meta name="robots" content="noindex" />
   </Fragment>
 
   <p>Redirecting to <a href={target}>{target}</a></p>
-  <script type="module">
-    const target = '/en/';
-    window.location.replace(target);
-  </script>
 </Layout>

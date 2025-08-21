@@ -2,25 +2,75 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-const { pageTitle } = Astro.props
+const { pageTitle = 'Scholar\'s Astrolabe' } = Astro.props
 
-import { getLangFromUrl, stripLangFromUrlOrId } from '../i18n/utils';
+import { getLangFromUrl, stripLangFromUrlOrId, getAllLocales, pathWithLocale } from '../i18n/utils';
+import { defaultLang } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
-const canonicalUrl = Astro.url.origin + stripLangFromUrlOrId(Astro.url.pathname);
+const base = Astro.site ?? Astro.url.origin;
+const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
+
+const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
+const xDefaultUrl = base + pathWithLocale(defaultLang, neutralPath);
+const alternates = getAllLocales().map((l) => ({
+  hreflang: l,
+  href: base + pathWithLocale(l, neutralPath),
+}));
+
+const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollow';
+
+const defaultDescription = 'A page on Scholar\'s Astrolabe';
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonicalUrl} />
-    <title>{pageTitle}</title>
 
+    <!-- Canonical and Alternates -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+    {alternates.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+
+    <!-- Basic SEO Defaults -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={defaultDescription} />
+
+    <!-- Open Graph Defaults -->
+    <meta property="og:site_name" content="Scholar's Astrolabe" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content="website" />
+    {alternates.map((alt) => (
+      <meta property="og:locale:alternate" content={alt.hreflang} />
+    ))}
+    <meta property="og:description" content={defaultDescription} />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- PWA/UI -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Optional Policies/Perf -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="robots" content={robotsContent} />
+    {/* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> */}
+    {/* <link rel="preload" as="font" type="font/woff2" href="/fonts/YourFont.woff2" crossorigin> */}
+
+    <!-- Page Specific -->
     <slot name="head" />
+
+    <!-- Auto -->
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to main content</a>

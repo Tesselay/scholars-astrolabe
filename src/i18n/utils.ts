@@ -17,10 +17,13 @@ export function pathWithLocale(lang: keyof typeof ui, path: string): string {
   return ("/" + String(lang) + normalized).replace(/\/+/g, "/");
 }
 
+// Returns all supported locales as defined in the UI dictionary
+export function getAllLocales(): (keyof typeof ui)[] {
+  return Object.keys(ui) as (keyof typeof ui)[];
+}
+
 // Returns the content id without the leading language segment (e.g., "en/foo/bar" -> "foo/bar" or "/en/foo" -> "/foo")
 export function stripLangFromUrlOrId(id: string): string {
-  console.log("original url or id");
-  console.log(id);
   const s = String(id);
   const hasLeadingSlash = s.startsWith("/");
   const parts = s.split("/");
@@ -41,13 +44,9 @@ export function stripLangFromUrlOrId(id: string): string {
     } else {
       normalized = normalized.replace(/^\/+/, "");
     }
-    console.log("normalized");
-    console.log(normalized);
     return normalized;
   }
 
-  console.log("not normalized");
-  console.log(id);
   return id;
 }
 
