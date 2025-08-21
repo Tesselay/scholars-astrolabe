@@ -31,11 +31,6 @@ export default defineConfig(({ mode }) => {
   const site =
     mode === "production" ? `https://${mainDomain}` : `http://${mainDomain}`;
 
-  /*const altDomains = (env.ALT_DOMAINS ?? "")
-    .split(",")
-    .map((d) => d.trim())
-    .filter(Boolean);*/
-
   return {
     site,
     integrations: [

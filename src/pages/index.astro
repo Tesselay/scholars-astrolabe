@@ -2,9 +2,10 @@
 import Layout from '../layouts/Layout.astro'
 import { defaultLang } from '../i18n/ui';
 import { pathWithLocale } from '../i18n/utils';
+import { env } from '../env';
 
 // Only emit this page in non‑production builds, in prod pass redirecting to backend
-export const prerender = import.meta.env.ROOT_REDIRECT_PAGE === 'true';
+export const prerender = env.ROOT_REDIRECT_PAGE;
 
 const pageTitle = 'Redirecting…';
 const target = pathWithLocale(defaultLang, '/'); // e.g., '/en/'
