@@ -8,10 +8,10 @@ const allPosts = await getCollection('blog', (entry) => entry.id.startsWith('en/
 const pageTitle = "Blog";
 const lang = getLangFromUrl(Astro.url);
 
-const defaultDescription = 'The blog index page'
+const description = 'The blog index page'
 ---
 
-<Layout pageTitle={pageTitle} description={defaultDescription} >
+<Layout pageTitle={pageTitle} description={description} >
   <h1>{pageTitle}</h1>
   <ul>
     {allPosts.map((post) => (

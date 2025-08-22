@@ -11,7 +11,7 @@ export const defaultLang = "en";
 export const ui = {
   en: {
     "nav.home": "Home",
-    "nav.about": "About",
+    "nav.portfolio": "Folio",
     "nav.blog": "Blog",
     "nav.contact": "Contact",
   },

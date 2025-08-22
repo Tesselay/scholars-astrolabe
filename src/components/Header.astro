@@ -8,9 +8,14 @@ const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
 
 const homeUrl = pathWithLocale(lang, '/');
+const folioUrl = pathWithLocale(lang, '/folio/');
 const blogUrl = pathWithLocale(lang, '/blog/');
+const contactUrl = pathWithLocale(lang, '/contact/');
+
 const isHome = currentPath === homeUrl;
+const isFolio = currentPath === folioUrl;
 const isBlog = currentPath === blogUrl || currentPath.startsWith(blogUrl);
+const isContact = currentPath === contactUrl;
 ---
 
 <header>
@@ -20,7 +25,13 @@ const isBlog = currentPath === blogUrl || currentPath.startsWith(blogUrl);
         <Navigation title={t('nav.home')} link={homeUrl} isCurrent={isHome} />
       </li>
       <li>
+        <Navigation title={t('nav.portfolio')} link={folioUrl} isCurrent={isFolio} />
+      </li>
+      <li>
         <Navigation title={t('nav.blog')} link={blogUrl} isCurrent={isBlog} />
+      </li>
+      <li>
+        <Navigation title={t('nav.contact')} link={contactUrl} isCurrent={isContact} />
       </li>
     </ul>
   </nav>

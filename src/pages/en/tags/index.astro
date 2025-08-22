@@ -10,10 +10,10 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
 const pageTitle = 'Tag Index';
 const lang = getLangFromUrl(Astro.url);
 
-const defaultDescription = 'The tag index page'
+const description = 'The tag index page'
 ---
 
-<Layout pageTitle={pageTitle} description={defaultDescription} >
+<Layout pageTitle={pageTitle} description={description} >
   <h1>{pageTitle}</h1>
   <nav aria-label="Tags">
     <ul class="tags">
