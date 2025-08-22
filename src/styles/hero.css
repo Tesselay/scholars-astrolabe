@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  color: var(--ink);
+  color: var(--text-primary);
   background: var(--hero-bg);
 }
 

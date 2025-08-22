@@ -1,11 +1,10 @@
 /* base callout container */
 aside.callout {
-  border: 1px solid var(--accents-2, #e5e7eb);
+  border: 1px solid var(--accent-secondary);
   border-left-width: 0.4rem;
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
   margin: 1rem 0;
-  background: var(--callout-bg, #f8fafc);
 }
 
 /* title line (from data-title) */
@@ -18,23 +17,17 @@ aside.callout::before {
 }
 
 /* simple type colors */
-aside.callout.note {
-  border-left-color: #3b82f6;
+aside.callout.info {
+  background: var(--callout-info);
 }
-aside.callout.tip {
-  border-left-color: #22c55e;
+aside.callout.success {
+  background: var(--callout-success);
 }
 aside.callout.warning {
-  border-left-color: #f59e0b;
+  background: var(--callout-warning);
 }
-aside.callout.error {
-  border-left-color: #ef4444;
-}
-aside.callout.check {
-  border-left-color: #10b981;
-}
-aside.callout.todo {
-  border-left-color: #64748b;
+aside.callout.danger {
+  background: var(--callout-danger);
 }
 
 /* collapsed behavior (optional) */

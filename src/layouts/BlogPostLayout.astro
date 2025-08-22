@@ -14,6 +14,9 @@ const description = `A blog entry on ${import.meta.env.SITE_NAME}`;
 ---
 
 <Layout pageTitle={frontmatter.title} description={description} ogType="article" >
+  <Fragment slot="head">
+    <link rel="preload" href="/fonts/JetBrainsMono-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+  </Fragment>
   <article>
     <header>
       <h1>{frontmatter.title}</h1>

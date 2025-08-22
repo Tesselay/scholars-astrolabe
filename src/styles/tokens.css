@@ -1,59 +1,181 @@
 @import "open-props/style";
 
 :root {
-  /* Colors */
-  --night-900: #0a0e19;
-  --night-700: #121831;
-  --night-600: #162e5c;
-  --ink: #e9e6df;
-
-  --ultra-500: #8da6ff; /* links/buttons */
-  --ultra-200: #bbd0ff; /* hover */
-  --ultra-800: #2246a0; /* focus ring */
-
-  --gold-500: #c8a548; /* rules/icons */
-  --gold-400: #d2b279;
-  --copper-800: #70532a; /* decorative only */
-  --copper-500: #9e6941;
-
-  --panel: #101726; /* cards, code */
-  --chip: #141d30; /* inline code */
-
-  /* Hero */
-  /* Neutral placeholder background (dark mode) */
-  --hero-bg: linear-gradient(135deg, var(--night-700), var(--night-600));
-
   /* radius & spacing */
   --radius: var(--radius-2);
   --pad: var(--size-3);
+
+  /* Spacing aliases */
+  --space-1: var(--size-2);
+  --space-2: var(--size-3);
+  --space-3: var(--size-4);
+  --space-4: var(--size-6);
+  --space-5: var(--size-8);
+
+  /* Radii */
+  --radius-sm: var(--radius-1);
+  --radius-md: var(--radius-2);
+  --radius-lg: var(--radius-3);
+
+  /* Shadows (using modern color) */
+  --shadow-1: 0 1px 2px hsl(var(--shadow-color) / 0.2);
+  --shadow-2: 0 2px 8px hsl(var(--shadow-color) / 0.25);
+  --shadow-3: 0 6px 24px hsl(var(--shadow-color) / 0.3);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur-medium: 200ms;
+  --dur-slow: 320ms;
+
+  /* Layers */
+  --z-header: 100;
+  --z-dropdown: 1000;
+  --z-modal: 2000;
+
+  /* Colors */
+  /* Background */
+  --bg-primary: #0a0e19;
+  --bg-secondary: #121831;
+  --bg-tertiary: #162e5c;
+
+  --bg-card: #101726;
+  --bg-code: #141d30;
+
+  /* Text */
+  --text-primary: #e9e6df;
+  --text-secondary: color-mix(
+    in oklab,
+    var(--text-primary) 65%,
+    var(--bg-primary)
+  );
+  --text-link: #8da6ff;
+  --text-link-hover: #bbd0ff;
+  --text-link-focus: #2246a0;
+
+  /* Decorations */
+  --accent-primary: #c8a548;
+  --accent-secondary: #d2b279;
+  --accent-tertiary: #9e6941;
+  --accent-quaternary: #70532a;
+
+  /* Callouts */
+  --callout-success: #57b892;
+  --callout-warning: #d2b279;
+  --callout-danger: #e07a63;
+  --callout-info: #8da6ff;
+
+  /* Hero */
+  /* Placeholder Background */
+  --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+
+  /* Component & state tokens */
+  --focus-ring: #2246a0;
+  --border-color: color-mix(
+    in oklab,
+    var(--text-primary) 15%,
+    var(--bg-primary)
+  );
+  --surface-1: var(--bg-card);
+  --surface-2: var(--bg-secondary);
+  --overlay: color-mix(in oklab, #000 50%, transparent);
+  --shadow-color: 220 3% 15%; /* HSL for layered shadows */
+  --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
+  --scrollbar-thumb: color-mix(
+    in oklab,
+    var(--text-primary) 20%,
+    var(--bg-primary)
+  );
+
+  /* Button semantics */
+  --btn-primary-bg: var(--accent-primary);
+  --btn-primary-fg: #1b1d21;
+  --btn-primary-hover-bg: color-mix(
+    in oklab,
+    var(--accent-primary) 85%,
+    #000 15%
+  );
+  --btn-secondary-bg: var(--bg-tertiary);
+  --btn-secondary-fg: var(--text-primary);
+  --btn-danger-bg: var(--callout-danger);
+  --btn-danger-fg: #1b1d21;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     /* Colors */
-    --paper: #f2e9d6; /* page background             */
-    --paper-700: #e9decb; /* relaxed panels / asides     */
-    --paper-600: #dcd0ba; /* very subtle tinted panels   */
+    /* Background */
+    --bg-primary: #f2e9d6;
+    --bg-secondary: #e9decb;
+    --bg-tertiary: #dcd0ba;
 
-    --ink: #1b1d21; /* primary text                */
-    --panel: #efe6d3; /* cards, code blocks          */
-    --chip: #e8dec7; /* inline-code & badges        */
+    --bg-card: #efe6d3;
+    --bg-code: #e8dec7;
 
-    --ultra-500: #153a77; /* links / primary actions     */
-    --ultra-200: #4771c1; /* hover                       */
-    --ultra-800: #0e2654; /* focus ring / active states  */
+    /* Text */
+    --text-primary: #1b1d21;
+    --text-secondary: color-mix(
+      in oklab,
+      var(--text-primary) 75%,
+      var(--bg-primary)
+    );
+    --text-link: #153a77;
+    --text-link-hover: #4771c1;
+    --text-link-focus: #0e2654;
 
-    --gold-500: #c8a548; /* ornaments / hr / small icons*/
-    --gold-400: #d8be8d;
+    /* Decorations */
+    --accent-primary: #c8a548;
+    --accent-secondary: #d8be8d;
+    --accent-tertiary: #9e6941;
+    --accent-quaternary: #70532a;
 
-    --copper-500: #9e6941; /* decorative only             */
-
-    --success-500: #3d8f70;
-    --warning-500: #b78a44;
-    --danger-500: #c26f5f;
+    /* Callouts */
+    --callout-success: #3d8f70;
+    --callout-warning: #b78a44;
+    --callout-danger: #c26f5f;
+    --callout-info: #153a77;
 
     /* Hero */
-    /* Neutral placeholder background (light mode) */
-    --hero-bg: linear-gradient(135deg, var(--paper-700), var(--paper-600));
+    /* Placeholder Background */
+    --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+
+    /* Component & state tokens */
+    --focus-ring: #2246a0;
+    --border-color: color-mix(
+      in oklab,
+      var(--text-primary) 15%,
+      var(--bg-primary)
+    );
+    --surface-1: var(--bg-card);
+    --surface-2: var(--bg-secondary);
+    --overlay: color-mix(in oklab, #000 50%, transparent);
+    --shadow-color: 220 3% 15%; /* HSL for layered shadows */
+    --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
+    --scrollbar-thumb: color-mix(
+      in oklab,
+      var(--text-primary) 20%,
+      var(--bg-primary)
+    );
+
+    /* Button semantics */
+    --btn-primary-bg: var(--accent-primary);
+    --btn-primary-fg: #1b1d21;
+    --btn-primary-hover-bg: color-mix(
+      in oklab,
+      var(--accent-primary) 85%,
+      #000 15%
+    );
+    --btn-secondary-bg: var(--bg-tertiary);
+    --btn-secondary-fg: var(--text-primary);
+    --btn-danger-bg: var(--callout-danger);
+    --btn-danger-fg: #1b1d21;
   }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }

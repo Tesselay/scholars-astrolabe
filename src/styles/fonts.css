@@ -1,0 +1,91 @@
+/* Cormorant Garamond Variable */
+@font-face {
+  font-family: "Cormorant Garamond Variable";
+  src:
+    local("Cormorant Garamond Variable"),
+    url("/fonts/CormorantGaramond-VariableFont_wght.woff2") format("woff2"),
+    url("/fonts/CormorantGaramond-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond Variable";
+  src:
+    local("Cormorant Garamond Variable Italic"),
+    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2")
+      format("woff2"),
+    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Source Serif 4 Variable */
+@font-face {
+  font-family: "Source Serif 4 Variable";
+  src:
+    local("Source Serif 4 Variable"),
+    url("/fonts/SourceSerif4-VariableFont_opsz,wght.woff2") format("woff2"),
+    url("/fonts/SourceSerif4-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4 Variable";
+  src:
+    local("Source Serif 4 Variable Italic"),
+    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.woff2")
+      format("woff2"),
+    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.ttf")
+      format("truetype");
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter Variable */
+@font-face {
+  font-family: "Inter Variable";
+  src:
+    local("Inter Variable"),
+    url("/fonts/Inter-VariableFont_opsz,wght.woff2") format("woff2"),
+    url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter Variable";
+  src:
+    local("Inter Variable Italic"),
+    url("/fonts/Inter-Italic-VariableFont_opsz,wght.woff2") format("woff2"),
+    url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* JetBrains Mono Variable */
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  src:
+    local("JetBrains Mono Variable"),
+    url("/fonts/JetBrainsMono-VariableFont_wght.woff2") format("woff2"),
+    url("/fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  src:
+    local("JetBrains Mono Variable Italic"),
+    url("/fonts/JetBrainsMono-Italic-VariableFont_wght.woff2") format("woff2"),
+    url("/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}
