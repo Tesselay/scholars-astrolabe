@@ -7,9 +7,11 @@ import { getLangFromUrl, buildBlogPostPath } from '../../../i18n/utils';
 const allPosts = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
 const pageTitle = "Scholar's Astrolabe - Blog"
 const lang = getLangFromUrl(Astro.url);
+
+const defaultDescription = 'The blog index page'
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} description={defaultDescription} >
   <h1>{pageTitle}</h1>
   <ul>
     {allPosts.map((post) => (

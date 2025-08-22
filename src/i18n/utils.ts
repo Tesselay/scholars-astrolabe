@@ -1,4 +1,4 @@
-import { ui, defaultLang } from "./ui";
+import { ui, defaultLang, languages } from "./ui";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
@@ -17,9 +17,14 @@ export function pathWithLocale(lang: keyof typeof ui, path: string): string {
   return ("/" + String(lang) + normalized).replace(/\/+/g, "/");
 }
 
-// Returns all supported locales as defined in the UI dictionary
-export function getAllLocales(): (keyof typeof ui)[] {
-  return Object.keys(ui) as (keyof typeof ui)[];
+// Returns all supported locales as defined in the languages dictionary
+export function getAllLocales(): (keyof typeof languages)[] {
+  return Object.keys(languages) as (keyof typeof languages)[];
+}
+
+export function getAlternateLocales(url: URL): (keyof typeof languages)[] {
+  const currentLocale = getLangFromUrl(url);
+  return getAllLocales().filter((lang) => lang !== currentLocale);
 }
 
 // Returns the content id without the leading language segment (e.g., "en/foo/bar" -> "foo/bar" or "/en/foo" -> "/foo")

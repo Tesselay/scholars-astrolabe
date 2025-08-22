@@ -7,11 +7,13 @@ import { buildTagPath, getLangFromUrl } from '../../../i18n/utils'
 const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
 
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
-const pageTitle = "Tag Index"
+const pageTitle = "Scholar's Astrolabe - Tag Index"
 const lang = getLangFromUrl(Astro.url);
+
+const defaultDescription = 'The tag index page'
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} description={defaultDescription} >
   <h1>{pageTitle}</h1>
   <nav aria-label="Tags">
     <ul class="tags">

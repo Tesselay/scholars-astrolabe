@@ -9,9 +9,11 @@ const created = frontmatter["date-created"] as Date;
 const modified = frontmatter["date-modified"] as Date;
 const formattedDateCreated = created.toLocaleDateString(lang);
 const formattedDateModified = modified.toLocaleDateString(lang);
+
+const defaultDescription = 'A blog entry on Scholar\'s Astrolabe';
 ---
 
-<Layout pageTitle={frontmatter.title}>
+<Layout pageTitle={frontmatter.title} description={defaultDescription} ogType="article" >
   <article>
     <header>
       <h1>{frontmatter.title}</h1>
