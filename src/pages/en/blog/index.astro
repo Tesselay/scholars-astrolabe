@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content'
 import { getLangFromUrl, buildBlogPostPath } from '../../../i18n/utils';
 
 const allPosts = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
-const pageTitle = "Scholar's Astrolabe - Blog"
+const pageTitle = "Blog";
 const lang = getLangFromUrl(Astro.url);
 
 const defaultDescription = 'The blog index page'

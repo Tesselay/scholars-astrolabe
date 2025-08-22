@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 export const GET: APIRoute = () => {
   const manifest = {
-    name: "Scholar's Astrolabe",
+    name: import.meta.env.SITE_NAME,
     short_name: "Astrolabe",
     start_url: "/",
     scope: "/",

@@ -10,7 +10,7 @@ const modified = frontmatter["date-modified"] as Date;
 const formattedDateCreated = created.toLocaleDateString(lang);
 const formattedDateModified = modified.toLocaleDateString(lang);
 
-const description = 'A blog entry on Scholar\'s Astrolabe';
+const description = `A blog entry on ${import.meta.env.SITE_NAME}`;
 ---
 
 <Layout pageTitle={frontmatter.title} description={description} ogType="article" >

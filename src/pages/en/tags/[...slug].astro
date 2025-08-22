@@ -22,7 +22,7 @@ const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blo
 const lang = getLangFromUrl(Astro.url);
 
 const pageTitle = `Posts tagged with ${tag}`;
-const description = `Browse articles tagged “${tag}” on Scholar's Astrolabe.`;
+const description = `Browse articles tagged “${tag}” on ${import.meta.env.SITE_NAME}.`;
 ---
 
 <Layout pageTitle={pageTitle} description={description}>

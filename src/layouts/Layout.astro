@@ -2,13 +2,6 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-const {
-  pageTitle = 'Scholar\'s Astrolabe',
-  description = 'A page on Scholar\'s Astrolabe',
-  ogType = 'website',
-  ogImage,
-} = Astro.props
-
 import {
   getLangFromUrl,
   stripLangFromUrlOrId,
@@ -16,6 +9,17 @@ import {
   getAlternateLocales
 } from "../i18n/utils";
 import { defaultLang, ogLocales } from "../i18n/ui";
+
+const siteName = import.meta.env.SITE_NAME;
+
+const {
+  pageTitle = siteName,
+  description = `A page on ${siteName}`,
+  ogType = 'website',
+  ogImage,
+} = Astro.props
+
+
 
 const lang = getLangFromUrl(Astro.url);
 const base = Astro.site ?? Astro.url.origin;
@@ -30,6 +34,9 @@ const alternates = getAlternateLocales(Astro.url).map((l) => ({
 }));
 
 const ogLocale = ogLocales[lang] ?? ogLocales[defaultLang];
+const fullTitle = pageTitle.includes(siteName) ?
+  pageTitle :
+  `${siteName} - ${pageTitle}`;
 
 const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollow';
 ---
@@ -49,13 +56,13 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
     ))}
 
     <!-- Basic SEO Defaults -->
-    <title>{pageTitle}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph Defaults -->
-    <meta property="og:site_name" content="Scholar's Astrolabe" />
+    <meta property="og:site_name" content={pageTitle} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={pageTitle} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={ogLocale} />
     {alternates.map((alt) => (
