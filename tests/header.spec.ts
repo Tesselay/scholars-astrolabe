@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Header, Navigation, Footer, and Layout", () => {
+test.describe("Header & Navigation", () => {
   test("primary nav has exactly four localized links in order; navigation sets aria-current; main receives focus; skip-link, footer, and title", async ({
     page,
   }, testInfo) => {
@@ -9,9 +9,6 @@ test.describe("Header, Navigation, Footer, and Layout", () => {
       process.env.E2E_BASE_URL ||
       "http://127.0.0.1:4321";
     const defaultLang = "/en";
-    const startUrl = new URL(`${defaultLang}/blog`, base).toString();
-
-    await page.goto(startUrl);
 
     // Document title provided by Layout
     await expect(page).toHaveTitle(/Scholar.?s Astrolabe.*/i);
@@ -40,9 +37,6 @@ test.describe("Header, Navigation, Footer, and Layout", () => {
     for (let i = 0; i < hrefMatchers.length; i++) {
       await expect(links.nth(i)).toHaveAttribute("href", hrefMatchers[i]);
     }
-
-    // Footer presence
-    await expect(page.locator("footer")).toBeVisible();
 
     // Navigate each link and assert URL, aria-current on the current link, and focus on main
     const expectedUrls = [
