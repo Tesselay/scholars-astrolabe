@@ -2,9 +2,25 @@
 interface Props {
   title: string;
   link: string;
-  isCurrent?: boolean;
 }
-const { title, link, isCurrent = false } = Astro.props as Props;
+const { title, link } = Astro.props as Props;
+
+// Normalize both paths using a base (Astro.site if set, else current origin)
+const base = Astro.site ?? Astro.url.origin;
+const linkPath = new URL(link, base).pathname;
+const curPath = Astro.url.pathname;
+
+// Normalize trailing slashes for robust comparison
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
+const nLink = norm(linkPath);
+const nCur = norm(curPath);
+
+// Determine if this is the locale root (e.g., /en/), which should only match exactly
+const segments = nLink.split('/').filter(Boolean);
+const isLocaleRoot = segments.length === 1; // e.g., ["en"]
+
+// Exact match for all; section-style (startsWith) only for non-root sections like /en/blog/
+const isCurrent = nCur === nLink || (!isLocaleRoot && nCur.startsWith(nLink));
 ---
 
 <a href={link} aria-current={isCurrent ? 'page' : undefined}>{title}</a>

@@ -19,8 +19,6 @@ const {
   ogImage,
 } = Astro.props
 
-
-
 const lang = getLangFromUrl(Astro.url);
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
@@ -101,9 +99,16 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
   <body>
     <a href="#main" class="skip">Skip to main content</a>
     <Header />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    const main = document.getElementById('main');
+    if (main instanceof HTMLElement) main.focus();
+  });
+</script>

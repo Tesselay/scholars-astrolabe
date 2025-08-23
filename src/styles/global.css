@@ -91,6 +91,11 @@ img {
   z-index: 1000;
 }
 
+/* Main */
+#main:focus {
+  outline: none;
+}
+
 /* Scrollbar */
 /* Firefox */
 :root {

@@ -5,33 +5,27 @@ import { getLangFromUrl, useTranslations, pathWithLocale } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const currentPath = Astro.url.pathname;
 
 const homeUrl = pathWithLocale(lang, '/');
 const folioUrl = pathWithLocale(lang, '/folio/');
 const blogUrl = pathWithLocale(lang, '/blog/');
 const contactUrl = pathWithLocale(lang, '/contact/');
-
-const isHome = currentPath === homeUrl;
-const isFolio = currentPath === folioUrl;
-const isBlog = currentPath === blogUrl || currentPath.startsWith(blogUrl);
-const isContact = currentPath === contactUrl;
 ---
 
 <header>
   <nav aria-label="Primary">
     <ul class="nav-links">
       <li>
-        <Navigation title={t('nav.home')} link={homeUrl} isCurrent={isHome} />
+        <Navigation title={t('nav.home')} link={homeUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.portfolio')} link={folioUrl} isCurrent={isFolio} />
+        <Navigation title={t('nav.portfolio')} link={folioUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.blog')} link={blogUrl} isCurrent={isBlog} />
+        <Navigation title={t('nav.blog')} link={blogUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.contact')} link={contactUrl} isCurrent={isContact} />
+        <Navigation title={t('nav.contact')} link={contactUrl} />
       </li>
     </ul>
   </nav>
