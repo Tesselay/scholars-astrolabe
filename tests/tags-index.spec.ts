@@ -1,46 +1,51 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
 
 test.describe("Tags index page", () => {
+  test.beforeEach(async ({ page, defaultLang }) => {
+    await page.goto(`/${defaultLang}/tags`);
+  });
+
   test("renders tag container and localized tag links (supports hierarchy)", async ({
     page,
-  }, testInfo) => {
-    const base =
-      testInfo.project.use.baseURL ||
-      process.env.E2E_BASE_URL ||
-      "http://127.0.0.1:4321";
-    const url = new URL("/en/tags", base).toString();
+    defaultLang,
+  }) => {
+    const path = new RegExp(`/${defaultLang}/tags/?$`, "i");
+    await expect(page).toHaveURL(path);
 
-    await page.goto(url);
+    const tagNav = page.getByRole("navigation", { name: "Tags" });
+    await expect(tagNav).toBeVisible();
 
-    // URL should end with /en/tags
-    await expect(page).toHaveURL(/\/en\/tags\/?$/);
+    const tagLinks = tagNav.getByRole("link");
+    await expect(tagLinks.first()).toBeVisible();
 
-    // Tag container is visible
-    const container = page.locator(".tags");
-    await expect(container).toBeVisible();
-
-    // Links inside the tag container (may be empty if no tags yet)
-    const tagLinks = container.locator("a");
     const count = await tagLinks.count();
+    test.fail(count === 0, "No tags available on the tags index page.");
 
-    if (count > 0) {
-      for (let i = 0; i < count; i++) {
-        const link = tagLinks.nth(i);
-        const href = await link.getAttribute("href");
+    for (let i = 0; i < count; i++) {
+      const link = tagLinks.nth(i);
+      await expect(link).toBeVisible();
 
-        // Be null-safe before matching
-        expect(href, "Tag link should have an href").toBeTruthy();
-        expect(href!, "Tag link should point to /en/tags/<path>").toMatch(
-          /^\/en\/tags\/.+$/,
-        );
+      const href = await link.getAttribute("href");
+      const text = (await link.innerText()).trim();
 
-        // Keep the visual name flexible (avoid enforcing exact slug equality)
-        const text = (await link.innerText()).trim();
-        expect(
-          text.length,
-          "Tag link text should not be empty",
-        ).toBeGreaterThan(0);
-      }
+      expect(text.length, "Tag link text should not be empty").toBeGreaterThan(
+        0,
+      );
+      expect(href, "Tag link should have an href").toBeTruthy();
+
+      const encoded = text
+        .replace(/^\/+|\/+$/g, "")
+        .split("/")
+        .map((seg) => encodeURIComponent(seg))
+        .join("/");
+
+      const tagPageRegex = new RegExp(
+        `^/${defaultLang}/tags/${encoded}/?$`,
+        "i",
+      );
+      expect(href!, "Tag link should point to /en/tags/<path>").toMatch(
+        tagPageRegex,
+      );
     }
   });
 });

@@ -1,61 +1,67 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
 
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 test.describe("Tag detail page", () => {
+  test.beforeEach(async ({ page, defaultLang }) => {
+    await page.goto(`/${defaultLang}/tags`);
+  });
+
   test("navigates from tag index and shows posts for a tag (hierarchy supported)", async ({
     page,
-  }, testInfo) => {
-    const base =
-      testInfo.project.use.baseURL ||
-      process.env.E2E_BASE_URL ||
-      "http://127.0.0.1:4321";
-    const url = new URL("/en/tags", base).toString();
+    defaultLang,
+  }) => {
+    const path = new RegExp(`/${defaultLang}/tags/?$`, "i");
+    await expect(page).toHaveURL(path);
 
-    // Discover available tags first
-    await page.goto(url);
-    const tagLinks = page.locator(".tags a");
+    const tagNav = page.getByRole("navigation", { name: "Tags" });
+    await expect(tagNav).toBeVisible();
+
+    const tagLinks = tagNav.getByRole("link");
+    await expect(tagLinks.first()).toBeVisible();
+
     const count = await tagLinks.count();
+    test.fail(count === 0, "No tags available on the tags index page.");
 
-    if (count === 0) {
-      test.skip(true, "No tags available to test tag detail page.");
-    }
-
-    // Go to the first tag page
     const firstLink = tagLinks.first();
     const href = await firstLink.getAttribute("href");
     expect(href, "Tag link should have an href").toBeTruthy();
     await firstLink.click();
 
-    // URL should match /en/tags/<path>
-    await expect(page).toHaveURL(/\/en\/tags\/.+\/?$/);
-
-    // Extract tag path from the URL to validate content (decode each segment and join with '/')
     const urlTagPage = page.url().replace(/\/+$/, "");
-    const after = urlTagPage.split("/en/tags/")[1] || "";
+    const after = urlTagPage.split(path)[1] || "";
     const tagPath = decodeURIComponent(after);
 
-    // Page shows "Posts tagged with {tag}" (case-insensitive, escape tag)
-    await expect(
-      page.getByText(
-        new RegExp(`Posts\\s+tagged\\s+with\\s+${escapeRegExp(tagPath)}`, "i"),
-      ),
-    ).toBeVisible();
+    const h1 = page.getByRole("heading", { level: 1 });
+    await expect(h1).toBeVisible();
+    const text = (await h1.innerText()).trim();
+    expect(text).toMatch(new RegExp(`${escapeRegExp(tagPath)}`));
 
-    // There should be a list for posts (may be empty)
-    const list = page.locator("main ul").first();
-    await expect(list).toBeVisible();
+    const postsNav = page.getByRole("list", { name: "Tagged Posts" });
+    await expect(postsNav).toBeVisible();
 
-    // If there are any post links, ensure they point to /en/blog/...
-    const postLinks = list.locator('a[href^="/en/blog/"]');
+    const postLinks = postsNav.getByRole("link");
     const postCount = await postLinks.count();
-    if (postCount > 0) {
-      for (let i = 0; i < postCount; i++) {
-        const postHref = await postLinks.nth(i).getAttribute("href");
-        expect(postHref, "Post link should point to /en/blog/...").toMatch(
-          /^\/en\/blog\/.+$/,
-        );
-      }
+    test.fail(postCount === 0, "No tags available on the tags index page.");
+
+    for (let i = 0; i < postCount; i++) {
+      const link = postLinks.nth(i);
+      await expect(link).toBeVisible();
+
+      const href = await link.getAttribute("href");
+      const text = (await link.innerText()).trim();
+
+      expect(
+        text.length,
+        "Post link title should not be empty",
+      ).toBeGreaterThan(0);
+      expect(href, "Post link should have an href").toBeTruthy();
+
+      const postNameRegex = new RegExp(`^/${defaultLang}/blog/${text}/?$`, "i");
+      expect(
+        href!,
+        `Post link should point to /${defaultLang}/blog/<path>`,
+      ).toMatch(postNameRegex);
     }
   });
 });

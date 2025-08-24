@@ -17,7 +17,6 @@ export function pathWithLocale(lang: keyof typeof ui, path: string): string {
   return ("/" + String(lang) + normalized).replace(/\/+/g, "/");
 }
 
-// Returns all supported locales as defined in the languages dictionary
 export function getAllLocales(): (keyof typeof languages)[] {
   return Object.keys(languages) as (keyof typeof languages)[];
 }

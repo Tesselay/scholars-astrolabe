@@ -1,44 +1,47 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
 
 test.describe("Blog page", () => {
+  test.beforeEach(async ({ page, defaultLang }) => {
+    await page.goto(`/${defaultLang}/blog`);
+  });
+
   test("renders heading and post links (localized)", async ({
     page,
-  }, testInfo) => {
-    const base =
-      testInfo.project.use.baseURL ||
-      process.env.E2E_BASE_URL ||
-      "http://127.0.0.1:4321";
-    const url = new URL("/en/blog", base).toString();
+    defaultLang,
+  }) => {
+    const path = new RegExp(`/${defaultLang}/blog/?$`, "i");
+    await expect(page).toHaveURL(path);
 
-    await page.goto(url);
-
-    // URL should end with /en/blog
-    await expect(page).toHaveURL(/\/en\/blog\/?$/);
-
-    // Heading is visible
+    await expect(page).toHaveTitle(/Scholar.?s Astrolabe.*/i);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
-    // Scope lists to main content to avoid matching nav lists
-    const main = page.getByRole("main");
-    const postsList = main.getByRole("list").first();
-    await expect(postsList).toBeVisible();
+    const nav = page.getByRole("list", { name: "Blog Posts" });
+    await expect(nav).toBeVisible();
 
-    // Ensure there is at least one list item
-    const items = postsList.getByRole("listitem");
-    const itemCount = await items.count();
-    expect(
-      itemCount,
-      "Blog posts list should have at least one item",
-    ).toBeGreaterThan(0);
+    const postLinks = nav.getByRole("link");
+    await expect(postLinks.first()).toBeVisible();
 
-    // Ensure items link to /en/blog/<slug>
-    for (let i = 0; i < itemCount; i++) {
-      const li = items.nth(i);
-      const link = li.locator('a[href^="/en/blog/"]').first();
-      await expect(
-        link,
-        "Each post item should link to /en/blog/<slug>",
-      ).toBeVisible();
+    const count = await postLinks.count();
+    test.fail(count === 0, "No posts available to test blog page.");
+
+    for (let i = 0; i < count; i++) {
+      const link = postLinks.nth(i);
+      await expect(link).toBeVisible();
+
+      const href = await link.getAttribute("href");
+      const text = (await link.innerText()).trim();
+
+      expect(
+        text.length,
+        "Post link title should not be empty",
+      ).toBeGreaterThan(0);
+      expect(href, "Post link should have an href").toBeTruthy();
+
+      const postNameRegex = new RegExp(`^/${defaultLang}/blog/${text}/?$`, "i");
+      expect(
+        href!,
+        `Post link should point to /${defaultLang}/blog/<path>`,
+      ).toMatch(postNameRegex);
     }
   });
 });

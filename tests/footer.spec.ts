@@ -1,8 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
 
 test.describe("Footer", () => {
+  test.beforeEach(async ({ page, defaultLang }) => {
+    await page.goto(`/${defaultLang}`);
+  });
+
   test("footer exists", async ({ page }) => {
-    // Footer presence
     await expect(page.locator("footer")).toBeVisible();
   });
 });

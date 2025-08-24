@@ -1,24 +1,23 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
 import { toAbs } from "./utils/url";
 
 test.describe("RSS feed", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`/rss.xml`);
+  });
+
   test("GET /rss.xml returns a valid RSS document with optional items", async ({
     request,
-  }, testInfo) => {
-    const base =
-      testInfo.project.use.baseURL ||
-      process.env.E2E_BASE_URL ||
-      "http://127.0.0.1:4321";
-    const url = new URL("/rss.xml", base).toString();
-
-    const res = await request.get(url);
+  }) => {
+    const rssPath = "/rss.xml";
+    const res = await request.get(rssPath);
     const body = await res.text();
 
-    // Content type and status
     expect(
       res.ok(),
-      `GET ${url} -> ${res.status()} ${res.statusText()}\n${body}`,
+      `GET ${rssPath} -> ${res.status()} ${res.statusText()}\n${body}`,
     ).toBeTruthy();
+
     const ct = res.headers()["content-type"] || "";
     expect(ct).toMatch(/(application|text)\/(xml|rss\+xml)/i);
 

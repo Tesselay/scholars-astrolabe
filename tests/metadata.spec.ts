@@ -1,4 +1,5 @@
-import { test, expect, type APIRequestContext } from "@playwright/test";
+import { test, expect } from "./utils/fixtures.ts";
+import type { APIRequestContext } from "@playwright/test";
 
 const pickFirstReachable = async (
   request: APIRequestContext,
@@ -14,26 +15,19 @@ const pickFirstReachable = async (
 test.describe("Metadata endpoints", () => {
   test("robots.txt has correct basics and sitemap line", async ({
     request,
-  }, testInfo) => {
-    const base =
-      testInfo.project.use.baseURL ||
-      process.env.E2E_BASE_URL ||
-      "http://127.0.0.1:4321";
-    const url = new URL("/robots.txt", base).toString();
-
-    const res = await request.get(url);
+    baseURL,
+  }) => {
+    const res = await request.get("/robots.txt");
     expect(res.ok()).toBeTruthy();
-
     expect(res.headers()["content-type"] || "").toContain("text/plain");
 
     const body = await res.text();
     expect(body).toContain("User-agent:");
-    // Sitemap line exists and points to /sitemap-index.xml (host can vary by env)
+
     const m = body.match(/^Sitemap:\s*(\S+)/m);
     expect(m, "Sitemap line should exist").toBeTruthy();
 
-    // Validate URL parses and pathname matches
-    const urlSitemap = new URL(m![1], url);
+    const urlSitemap = new URL(m![1], baseURL);
     expect(urlSitemap.pathname).toBe("/sitemap-index.xml");
   });
 
@@ -54,9 +48,9 @@ test.describe("Metadata endpoints", () => {
     expect(res.headers()["content-type"] || "").toContain("text/plain");
 
     const body = await res.text();
-    // Minimal checks
+
     expect(body).toMatch(/^Contact:\s*(.+)$/m);
-    // Expires should be a valid ISO date in the future
+
     const expires = body.match(/^Expires:\s*([^\n\r]+)$/m)?.[1];
     expect(expires, "Expires is required").toBeTruthy();
     const expiresAt = new Date(expires!);
@@ -83,7 +77,6 @@ test.describe("Metadata endpoints", () => {
     expect(res.headers()["content-type"] || "").toContain("text/plain");
 
     const body = await res.text();
-    // Example: "Last update: 2025-01-01"
     const m = body.match(/^Last update:\s*(\d{4}-\d{2}-\d{2})$/m);
     expect(m, "Last update line should exist with YYYY-MM-DD").toBeTruthy();
   });
