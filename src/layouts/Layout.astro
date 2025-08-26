@@ -9,8 +9,11 @@ import {
   getAlternateLocales
 } from "../i18n/utils";
 import { defaultLang, ogLocales } from "../i18n/ui";
+import { pageExistsForLocale } from "../i18n/routes";
+import { buildContentManifest } from "../i18n/slugManifest.content";
 
 const siteName = import.meta.env.SITE_NAME;
+const manifest = await buildContentManifest();
 
 const {
   pageTitle = siteName,
@@ -19,22 +22,33 @@ const {
   ogImage,
 } = Astro.props
 
+const fullTitle = pageTitle.includes(siteName) ?
+  pageTitle :
+  `${siteName} - ${pageTitle}`;
+
 const lang = getLangFromUrl(Astro.url);
+const ogLocale = ogLocales[lang] ?? ogLocales[defaultLang];
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
 
 const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
 const xDefaultUrl = base + pathWithLocale(defaultLang, neutralPath);
-const alternates = getAlternateLocales(Astro.url).map((l) => ({
+
+const altLocales = getAlternateLocales(Astro.url).filter((l) => {
+  const p = neutralPath.replace(/^\/+|\/+$/g, "");
+  const blogMatch = p.match(/^blog\/(.+)$/);
+
+  if (blogMatch) {
+    return manifest.blogPostExists(l, blogMatch[1]);
+  }
+  return pageExistsForLocale(l, neutralPath)
+}
+);
+const alternates = altLocales.map((l) => ({
   hreflang: l,
   href: base + pathWithLocale(l, neutralPath),
   ogLocale: ogLocales[l],
 }));
-
-const ogLocale = ogLocales[lang] ?? ogLocales[defaultLang];
-const fullTitle = pageTitle.includes(siteName) ?
-  pageTitle :
-  `${siteName} - ${pageTitle}`;
 
 const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollow';
 ---
@@ -75,9 +89,9 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
     <meta name="twitter:description" content={description} />
 
     <!-- Icons -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <!-- <link rel="icon" href="/favicon.ico" sizes="any" /> -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
 
     <!-- PWA/UI -->
     <link rel="manifest" href="/site.webmanifest" />
