@@ -14,6 +14,7 @@ import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
+import rehypeExternalLinks from "rehype-external-links";
 
 import callouts from "./src/markdown/remark-callouts.js";
 import remarkFrontmatter from "remark-frontmatter";
@@ -71,6 +72,10 @@ export default defineConfig(({ mode }) => {
             },
           ],
           rehypeKatex,
+          [
+            rehypeExternalLinks,
+            { target: "_blank", rel: ["noopener", "noreferrer"] },
+          ],
         ],
       }),
     ],
