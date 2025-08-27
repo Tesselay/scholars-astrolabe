@@ -1,8 +1,8 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
-import { ui } from "../i18n/ui";
+import { locales } from "../i18n/locales";
 
-const langs = z.enum(Object.keys(ui) as [keyof typeof ui, ...string[]]);
+const langs = z.enum(locales);
 
 const postsCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog" }),

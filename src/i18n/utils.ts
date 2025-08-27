@@ -1,4 +1,5 @@
-import { ui, defaultLang, languages } from "./ui";
+import { ui, defaultLang } from "./ui";
+import { locales, type Locale } from "./locales";
 
 // --- Path normalization helpers ---
 export function collapseSlashes(s: string): string {
@@ -32,28 +33,28 @@ export function normalizeNeutralPath(p: string): string {
 }
 
 // --- Path helpers ---
-export function getLangFromUrl(url: URL) {
+export function getLangFromUrl(url: URL): Locale {
   const [, lang] = url.pathname.split("/");
-  if (lang in ui) return lang as keyof typeof ui;
+  if ((locales as readonly string[]).includes(lang)) return lang as Locale;
   return defaultLang;
 }
 
-export function useTranslations(lang: keyof typeof ui) {
+export function useTranslations(lang: Locale) {
   return function t(key: keyof (typeof ui)[typeof defaultLang]) {
     return ui[lang][key] || ui[defaultLang][key];
   };
 }
 
-export function pathWithLocale(lang: keyof typeof ui, path: string): string {
+export function pathWithLocale(lang: Locale, path: string): string {
   const normalized = ensureLeadingSlash(path);
   return collapseSlashes("/" + String(lang) + normalized);
 }
 
-export function getAllLocales(): (keyof typeof languages)[] {
-  return Object.keys(languages) as (keyof typeof languages)[];
+export function getAllLocales(): Locale[] {
+  return [...locales] as Locale[];
 }
 
-export function getAlternateLocales(url: URL): (keyof typeof languages)[] {
+export function getAlternateLocales(url: URL): Locale[] {
   const currentLocale = getLangFromUrl(url);
   return getAllLocales().filter((lang) => lang !== currentLocale);
 }
@@ -67,7 +68,7 @@ export function stripLangFromUrlOrId(id: string): string {
   const candidate = parts[langIdx] ?? "";
 
   // Only strip when the first segment is a supported language key
-  if (candidate && candidate in ui) {
+  if (candidate && (locales as readonly string[]).includes(candidate)) {
     const rest = hasLeadingSlash
       ? parts.slice(2).join("/")
       : parts.slice(1).join("/");
@@ -87,10 +88,7 @@ export function stripLangFromUrlOrId(id: string): string {
 }
 
 // Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
-export function buildBlogPostPath(
-  lang: keyof typeof ui,
-  idOrSlug: string,
-): string {
+export function buildBlogPostPath(lang: Locale, idOrSlug: string): string {
   const slug = trimSlashes(stripLangFromUrlOrId(idOrSlug));
   return pathWithLocale(lang, `/blog/${slug}`);
 }
@@ -104,7 +102,7 @@ export function encodeTagPath(tagPath: string): string {
 }
 
 // Builds a localized tag path like "/en/tags/programming/javascript" from a tag path
-export function buildTagPath(lang: keyof typeof ui, tagPath: string): string {
+export function buildTagPath(lang: Locale, tagPath: string): string {
   const encoded = encodeTagPath(tagPath);
   return pathWithLocale(lang, `/tags/${encoded}`);
 }

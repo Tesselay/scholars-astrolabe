@@ -17,6 +17,12 @@ import rehypeKatex from "rehype-katex";
 
 import callouts from "./src/markdown/remark-callouts.js";
 import remarkFrontmatter from "remark-frontmatter";
+import { createRequire } from "node:module";
+
+// Load TypeScript shared locales in an ESM .mjs file using jiti
+const require = createRequire(import.meta.url);
+const jiti = require("jiti")(import.meta.url);
+const { locales, defaultLocale } = jiti("./src/i18n/locales.ts");
 
 const slugify = (s) =>
   s
@@ -69,8 +75,8 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     i18n: {
-      locales: ["en", "de"],
-      defaultLocale: "en",
+      locales,
+      defaultLocale,
     },
   };
 });

@@ -1,22 +1,27 @@
 import { getCollection } from "astro:content";
-import { ui, defaultLang } from "./ui";
 import { trimSlashes } from "./utils";
-export type Lang = keyof typeof ui;
+import { locales, defaultLocale, type Locale } from "./locales";
+export type Lang = Locale;
 
 function deriveLangFromPath(s: string): Lang {
   const first = s.split("/")[0];
-  return first && first in ui ? (first as Lang) : defaultLang;
+  return first && (locales as readonly string[]).includes(first)
+    ? (first as Lang)
+    : defaultLocale;
 }
 
 export async function buildContentManifest() {
   const blogEntries = await getCollection("blog");
 
   const blogSlugsByLang = new Map<Lang, Set<string>>();
-  (Object.keys(ui) as Lang[]).forEach((l) => blogSlugsByLang.set(l, new Set()));
+  (locales as readonly Lang[]).forEach((l) =>
+    blogSlugsByLang.set(l, new Set()),
+  );
 
   for (const entry of blogEntries) {
     const lang =
-      entry.data.language && entry.data.language in ui
+      entry.data.language &&
+      (locales as readonly string[]).includes(entry.data.language as string)
         ? (entry.data.language as Lang)
         : deriveLangFromPath(entry.id);
 

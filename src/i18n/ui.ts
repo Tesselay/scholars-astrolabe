@@ -1,26 +1,33 @@
-export const languages = {
+import { defaultLocale, type Locale } from "./locales";
+
+export const languages: Record<Locale, string> = {
   en: "English",
   de: "Deutsch",
-};
+} as const;
 
-export const ogLocales = {
+export const ogLocales: Record<Locale, string> = {
   en: "en_GB",
   de: "de_DE",
-};
+} as const;
 
-export const defaultLang = "en";
+export const defaultLang: Locale = defaultLocale;
 
-export const ui = {
-  en: {
-    "nav.home": "Home",
-    "nav.portfolio": "Folio",
-    "nav.blog": "Blog",
-    "nav.contact": "Contact",
-  },
+const enUI = {
+  "nav.home": "Home",
+  "nav.portfolio": "Folio",
+  "nav.blog": "Blog",
+  "nav.contact": "Contact",
+} as const;
+
+type TranslationKeys = keyof typeof enUI;
+type Translations = Record<TranslationKeys, string>;
+
+export const ui: Record<Locale, Translations> = {
+  en: enUI,
   de: {
     "nav.home": "Startseite",
     "nav.portfolio": "Portfolio",
     "nav.blog": "Blog",
     "nav.contact": "Kontakt",
   },
-};
+} as const;
