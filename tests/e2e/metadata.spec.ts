@@ -1,4 +1,4 @@
-import { test, expect } from "./utils/fixtures.ts";
+import { test, expect } from "../utils/fixtures.ts";
 import type { APIRequestContext } from "@playwright/test";
 
 const pickFirstReachable = async (

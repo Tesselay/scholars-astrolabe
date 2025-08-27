@@ -1,4 +1,4 @@
-import { test, expect } from "./utils/fixtures.ts";
+import { test, expect } from "../utils/fixtures.ts";
 
 test.describe("Post page (dynamic route) and BlogPostLayout", () => {
   test.beforeEach(async ({ page, to, defaultLang, manifest }) => {

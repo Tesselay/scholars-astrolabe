@@ -115,7 +115,7 @@ jobs:
           path: pa11y-report.json
           if-no-files-found: "ignore"
 
-      # --- Playwright Tests ---
+      # --- E2E Tests ---
       # Cache browsers to save time
       - name: Cache Playwright browsers
         uses: actions/cache@v4
@@ -128,7 +128,7 @@ jobs:
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run e2e tests
         env:
           # Enable GitHub annotations via Playwright config gating (isCI)
           CI: true
@@ -152,3 +152,7 @@ jobs:
             test-results/**/*.trace
           if-no-files-found: "ignore"
           retention-days: 14
+
+      # --- Unit Tests ---
+      - name: Run unit tests
+        run: yarn vitest run tests/unit

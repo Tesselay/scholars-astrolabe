@@ -59,9 +59,8 @@ export function getAlternateLocales(url: URL): Locale[] {
   return getAllLocales().filter((lang) => lang !== currentLocale);
 }
 
-// Returns the content id without the leading language segment (e.g., "en/foo/bar" -> "foo/bar" or "/en/foo" -> "/foo")
 export function stripLangFromUrlOrId(id: string): string {
-  const s = String(id);
+  const s = collapseSlashes(String(id));
   const hasLeadingSlash = s.startsWith("/");
   const parts = s.split("/");
   const langIdx = hasLeadingSlash ? 1 : 0;
@@ -73,7 +72,8 @@ export function stripLangFromUrlOrId(id: string): string {
       ? parts.slice(2).join("/")
       : parts.slice(1).join("/");
 
-    // Normalize duplicate slashes and leading slash presence
+    if (!rest) return "/";
+
     let normalized = rest.replace(/\/+/g, "/");
     if (hasLeadingSlash) {
       normalized = "/" + normalized.replace(/^\/+/, "");

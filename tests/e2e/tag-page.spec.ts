@@ -1,9 +1,9 @@
-import { test, expect } from "./utils/fixtures.ts";
+import { test, expect } from "../utils/fixtures.ts";
 import {
   parseLangAndSlugFromHref,
   escapeRegExp,
   tagPathFromUrl,
-} from "./utils/url.ts";
+} from "../utils/url.ts";
 
 test.describe("Tag detail page", () => {
   test.beforeEach(async ({ page, to }) => {

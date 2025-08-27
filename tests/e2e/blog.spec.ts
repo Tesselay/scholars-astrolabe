@@ -1,5 +1,5 @@
-import { test, expect } from "./utils/fixtures.ts";
-import { parseLangAndSlugFromHref, escapeRegExp } from "./utils/url.ts";
+import { test, expect } from "../utils/fixtures.ts";
+import { parseLangAndSlugFromHref, escapeRegExp } from "../utils/url.ts";
 
 test.describe("Blog page", () => {
   test.beforeEach(async ({ page, to }) => {

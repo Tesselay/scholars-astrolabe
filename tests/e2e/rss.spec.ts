@@ -1,5 +1,5 @@
-import { test, expect } from "./utils/fixtures.ts";
-import { toAbs } from "./utils/url";
+import { test, expect } from "../utils/fixtures.ts";
+import { toAbs } from "../utils/url.ts";
 
 test.describe("RSS feed", () => {
   test.beforeEach(async ({ page, to }) => {

@@ -12,7 +12,7 @@ const hasExternalServer = !!process.env.E2E_BASE_URL;
  * Otherwise, it will run a production-like server via `astro preview`.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: "./tests/e2e",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: isCI ? 2 : 0,

@@ -1,4 +1,4 @@
-import { test, expect } from "./utils/fixtures.ts";
+import { test, expect } from "../utils/fixtures.ts";
 
 test.describe("Tags index page", () => {
   test.beforeEach(async ({ page, to }) => {
