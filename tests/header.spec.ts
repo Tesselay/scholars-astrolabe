@@ -1,8 +1,8 @@
 import { test, expect } from "./utils/fixtures.ts";
 
 test.describe("Header & Navigation", () => {
-  test.beforeEach(async ({ page, defaultLang }) => {
-    await page.goto(`/${defaultLang}`);
+  test.beforeEach(async ({ page, to }) => {
+    await page.goto(to(""));
   });
 
   test("document title, skip link and main focus", async ({ page }) => {

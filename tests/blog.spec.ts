@@ -1,34 +1,15 @@
 import { test, expect } from "./utils/fixtures.ts";
-
-function parseLangAndSlugFromHref(baseUrl: string, href: string) {
-  const url = new URL(href, baseUrl);
-  const parts = url.pathname.replace(/^\/+|\/+$/g, "").split("/");
-  if (parts.length < 3 || parts[1] !== "blog") {
-    throw new Error(`Unexpected blog URL structure: ${url.pathname}`);
-  }
-  return { lang: parts[0], slug: parts.slice(2).join("/") };
-}
-
-type ContentManifest = {
-  blogSlugsByLang: Record<string, string[]>;
-};
-
-let manifest: ContentManifest;
-
-test.beforeAll(async ({ request }) => {
-  const resp = await request.get("/api/content-manifest.json");
-  expect(resp.ok()).toBeTruthy();
-  manifest = await resp.json();
-});
+import { parseLangAndSlugFromHref, escapeRegExp } from "./utils/url.ts";
 
 test.describe("Blog page", () => {
-  test.beforeEach(async ({ page, defaultLang }) => {
-    await page.goto(`/${defaultLang}/blog`);
+  test.beforeEach(async ({ page, to }) => {
+    await page.goto(to("blog"));
   });
 
   test("renders heading and post links (localized)", async ({
     page,
     defaultLang,
+    manifest,
   }) => {
     const path = new RegExp(`/${defaultLang}/blog/?$`, "i");
     await expect(page).toHaveURL(path);
@@ -43,8 +24,12 @@ test.describe("Blog page", () => {
     await expect(postLinks.first()).toBeVisible();
 
     const count = await postLinks.count();
-    test.fail(count === 0, "No posts available to test blog page.");
+    expect(
+      count,
+      "Expected at least one post on the blog page",
+    ).toBeGreaterThan(0);
 
+    // Quick validation for all links
     for (let i = 0; i < count; i++) {
       const link = postLinks.nth(i);
       await expect(link).toBeVisible();
@@ -58,17 +43,37 @@ test.describe("Blog page", () => {
       ).toBeGreaterThan(0);
       expect(href, "Post link should have an href").toBeTruthy();
 
-      const absolute = new URL(href!, page.url()).toString();
-      let resp = await page.request.head(absolute);
-      if (resp.status() === 405) resp = await page.request.get(absolute);
-      expect(resp.ok(), `Link ${href} should resolve with 2xx`).toBeTruthy();
-
+      // Ensure href parses as a blog post URL
       const { lang, slug } = parseLangAndSlugFromHref(page.url(), href!);
+      expect(lang.length).toBeGreaterThan(0);
+      expect(slug.length).toBeGreaterThan(0);
+    }
+
+    // Deep-validate first few links by actual navigation and manifest check
+    const deepCount = Math.min(3, count);
+    for (let i = 0; i < deepCount; i++) {
+      const link = postLinks.nth(i);
+      const href = await link.getAttribute("href");
+      const { lang, slug } = parseLangAndSlugFromHref(page.url(), href!);
+
+      const target = new URL(href!, page.url());
+      const expectedPath = target.pathname.replace(/\/+$/, "");
+      await Promise.all([
+        page.waitForURL(new RegExp(`${escapeRegExp(expectedPath)}\\/?$`)),
+        link.click(),
+      ]);
+
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
       const knownSlugs = manifest.blogSlugsByLang[lang] ?? [];
       expect(
         knownSlugs.includes(slug),
         `Slug not found in manifest for ${lang}/${slug}`,
       ).toBe(true);
+
+      // go back to the blog index
+      await page.goBack();
+      await expect(page).toHaveURL(path);
     }
   });
 });

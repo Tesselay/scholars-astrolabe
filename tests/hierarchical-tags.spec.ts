@@ -1,12 +1,8 @@
 import { test, expect } from "./utils/fixtures.ts";
 
-// This test validates that hierarchical tags like "nested/tags" are linked
-// from the tags index and that their detail pages render and list posts
-// with links to localized blog URLs.
-
 test.describe("Hierarchical tags", () => {
-  test.beforeEach(async ({ page, defaultLang }) => {
-    await page.goto(`/${defaultLang}/tags`);
+  test.beforeEach(async ({ page, to }) => {
+    await page.goto(to("tags"));
   });
 
   test("nested/tags page renders and lists posts", async ({

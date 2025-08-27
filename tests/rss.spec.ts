@@ -2,8 +2,8 @@ import { test, expect } from "./utils/fixtures.ts";
 import { toAbs } from "./utils/url";
 
 test.describe("RSS feed", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(`/rss.xml`);
+  test.beforeEach(async ({ page, to }) => {
+    await page.goto(to("rss.xml"));
   });
 
   test("GET /rss.xml returns a valid RSS document with optional items", async ({
