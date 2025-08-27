@@ -15,6 +15,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
+import compress from "astro-compress";
 
 import callouts from "./src/markdown/remark-callouts.js";
 import remarkFrontmatter from "remark-frontmatter";
@@ -78,6 +79,7 @@ export default defineConfig(({ mode }) => {
           ],
         ],
       }),
+      compress(),
     ],
     i18n: {
       locales,
