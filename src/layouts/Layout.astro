@@ -6,7 +6,8 @@ import {
   getLangFromUrl,
   stripLangFromUrlOrId,
   pathWithLocale,
-  getAlternateLocales
+  getAlternateLocales,
+  trimSlashes,
 } from "../i18n/utils";
 import { defaultLang, ogLocales } from "../i18n/ui";
 import { pageExistsForLocale } from "../i18n/routes";
@@ -35,7 +36,7 @@ const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
 const xDefaultUrl = base + pathWithLocale(defaultLang, neutralPath);
 
 const altLocales = getAlternateLocales(Astro.url).filter((l) => {
-  const p = neutralPath.replace(/^\/+|\/+$/g, "");
+  const p = trimSlashes(neutralPath);
   const blogMatch = p.match(/^blog\/(.+)$/);
 
   if (blogMatch) {

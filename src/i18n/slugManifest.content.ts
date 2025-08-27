@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import { ui, defaultLang } from "./ui";
+import { trimSlashes } from "./utils";
 export type Lang = keyof typeof ui;
 
 function deriveLangFromPath(s: string): Lang {
@@ -26,7 +27,7 @@ export async function buildContentManifest() {
   return {
     blogSlugsByLang,
     blogPostExists(lang: Lang, slug: string) {
-      const normalized = slug.replace(/^\/+|\/+$/g, "");
+      const normalized = trimSlashes(slug);
       return blogSlugsByLang.get(lang)?.has(normalized) ?? false;
     },
   } as const;

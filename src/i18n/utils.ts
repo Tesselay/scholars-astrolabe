@@ -1,5 +1,37 @@
 import { ui, defaultLang, languages } from "./ui";
 
+// --- Path normalization helpers ---
+export function collapseSlashes(s: string): string {
+  return String(s).replace(/\/+/g, "/");
+}
+
+export function trimSlashes(s: string): string {
+  return String(s).replace(/^\/+|\/+$/g, "");
+}
+
+export function ensureLeadingSlash(s: string): string {
+  const collapsed = collapseSlashes(String(s));
+  return collapsed.startsWith("/")
+    ? collapsed
+    : "/" + collapsed.replace(/^\/+/, "");
+}
+
+export function ensureTrailingSlash(s: string): string {
+  return s.endsWith("/") ? s : s + "/";
+}
+
+export function normalizeNeutralPath(p: string): string {
+  let n = stripLangFromUrlOrId(String(p)).trim();
+  n = ensureLeadingSlash(n);
+  n = collapseSlashes(n)
+    .replace(/index\.astro$/, "")
+    .replace(/\.astro$/, "");
+  n = collapseSlashes(n);
+  n = ensureTrailingSlash(n);
+  return collapseSlashes(n);
+}
+
+// --- Path helpers ---
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
   if (lang in ui) return lang as keyof typeof ui;
@@ -13,8 +45,8 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function pathWithLocale(lang: keyof typeof ui, path: string): string {
-  const normalized = ("/" + path).replace(/\/+/g, "/");
-  return ("/" + String(lang) + normalized).replace(/\/+/g, "/");
+  const normalized = ensureLeadingSlash(path);
+  return collapseSlashes("/" + String(lang) + normalized);
 }
 
 export function getAllLocales(): (keyof typeof languages)[] {
@@ -59,14 +91,13 @@ export function buildBlogPostPath(
   lang: keyof typeof ui,
   idOrSlug: string,
 ): string {
-  const slug = stripLangFromUrlOrId(idOrSlug).replace(/^\/+|\/+$/g, "");
+  const slug = trimSlashes(stripLangFromUrlOrId(idOrSlug));
   return pathWithLocale(lang, `/blog/${slug}`);
 }
 
 // Encodes each tag path segment for safe URLs while preserving hierarchy
 export function encodeTagPath(tagPath: string): string {
-  return String(tagPath)
-    .replace(/^\/+|\/+$/g, "")
+  return trimSlashes(String(tagPath))
     .split("/")
     .map((seg) => encodeURIComponent(seg))
     .join("/");
