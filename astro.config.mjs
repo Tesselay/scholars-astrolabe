@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import { loadEnv } from "vite";
 
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 
@@ -41,43 +40,43 @@ export default defineConfig(({ mode }) => {
 
   return {
     site,
+    markdown: {
+      remarkPlugins: [
+        remarkGfm,
+        remarkMath,
+        remarkDirective,
+        remarkFrontmatter,
+        remarkToc,
+        [
+          wikiLinkPlugin,
+          {
+            aliasDivider: "|",
+            pageResolver: (name) => [slugify(name)],
+            hrefTemplate: (permalink) => `/${permalink}`,
+          },
+        ],
+        callouts,
+      ],
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: "wrap",
+            properties: { class: "heading-link" },
+          },
+        ],
+        rehypeKatex,
+        [
+          rehypeExternalLinks,
+          { target: "_blank", rel: ["noopener", "noreferrer"] },
+        ],
+      ],
+    },
     integrations: [
       expressiveCode(),
       sitemap({
         filter: (page) => !page.includes("/test"),
-      }),
-      mdx({
-        remarkPlugins: [
-          remarkGfm,
-          remarkMath,
-          remarkDirective,
-          remarkFrontmatter,
-          remarkToc,
-          [
-            wikiLinkPlugin,
-            {
-              aliasDivider: "|",
-              pageResolver: (name) => [slugify(name)],
-              hrefTemplate: (permalink) => `/${permalink}`,
-            },
-          ],
-          callouts,
-        ],
-        rehypePlugins: [
-          rehypeSlug,
-          [
-            rehypeAutolinkHeadings,
-            {
-              behavior: "wrap",
-              properties: { class: "heading-link" },
-            },
-          ],
-          rehypeKatex,
-          [
-            rehypeExternalLinks,
-            { target: "_blank", rel: ["noopener", "noreferrer"] },
-          ],
-        ],
       }),
       compress(),
     ],
