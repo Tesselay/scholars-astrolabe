@@ -1,5 +1,8 @@
 import { defaultLocale, type Locale } from "./locales";
 
+type TranslationKeys = keyof typeof enUI;
+type Translations = Record<TranslationKeys, string>;
+
 export const languages: Record<Locale, string> = {
   en: "English",
   de: "Deutsch",
@@ -19,15 +22,14 @@ const enUI = {
   "nav.contact": "Contact",
 } as const;
 
-type TranslationKeys = keyof typeof enUI;
-type Translations = Record<TranslationKeys, string>;
+const deUI = {
+  "nav.home": "Startseite",
+  "nav.portfolio": "Portfolio",
+  "nav.blog": "Blog",
+  "nav.contact": "Kontakt",
+} as const;
 
 export const ui: Record<Locale, Translations> = {
   en: enUI,
-  de: {
-    "nav.home": "Startseite",
-    "nav.portfolio": "Portfolio",
-    "nav.blog": "Blog",
-    "nav.contact": "Kontakt",
-  },
+  de: deUI,
 } as const;

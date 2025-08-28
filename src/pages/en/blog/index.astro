@@ -3,16 +3,16 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import { getLangFromUrl, buildBlogPostPath } from '../../../i18n/utils';
+import { getPageMeta } from "../../../i18n/meta";
 
 const allPosts = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
-const pageTitle = "Blog";
 const lang = getLangFromUrl(Astro.url);
+const meta = getPageMeta(lang, "blog");
 
-const description = 'The blog index page'
 ---
 
-<Layout pageTitle={pageTitle} description={description} >
-  <h1>{pageTitle}</h1>
+<Layout pageTitle={meta.title} description={meta.description} >
+  <h1>{meta.title}</h1>
   <ul aria-label="Blog Posts">
     {allPosts.map((post) => (
       <BlogPost

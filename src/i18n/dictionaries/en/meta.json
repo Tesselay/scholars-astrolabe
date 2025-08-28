@@ -1,0 +1,23 @@
+{
+  "site": { "name": "Scholar's Astrolabe" },
+  "home": {
+    "title": "Scholar's Astrolabe",
+    "description": "Welcome to Scholar's Astrolabe"
+  },
+  "folio": {
+    "title": "Folio",
+    "description": "The folio page"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "The blog index page"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "The contact page"
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "The tags index page"
+  }
+}

@@ -1,8 +1,11 @@
 import type { APIRoute } from "astro";
+import { getPageMeta } from "../i18n/meta.ts";
+
+const meta = getPageMeta("en", "home");
 
 export const GET: APIRoute = () => {
   const manifest = {
-    name: import.meta.env.SITE_NAME,
+    name: meta.siteName,
     short_name: "Astrolabe",
     start_url: "/",
     scope: "/",

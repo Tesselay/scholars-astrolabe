@@ -1,9 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getPageMeta } from "../../i18n/meta";
+import { getLangFromUrl } from "../../i18n/utils";
 
-const pageTitle = import.meta.env.SITE_NAME;
+const lang = getLangFromUrl(Astro.url);
+const meta = getPageMeta(lang, "home");
 ---
 
-<Layout pageTitle={pageTitle}>
-  <h1>Welcome</h1>
+<Layout pageTitle={meta.title} description={meta.description}>
+  <h1>{meta.title}</h1>
 </Layout>

@@ -14,7 +14,7 @@ test.describe("Blog page", () => {
     const path = new RegExp(`/${defaultLang}/blog/?$`, "i");
     await expect(page).toHaveURL(path);
 
-    await expect(page).toHaveTitle(/Scholar.?s Astrolabe.*/i);
+    await expect(page).toHaveTitle(/Blog/i);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     const nav = page.getByRole("list", { name: "Blog Posts" });
