@@ -12,8 +12,11 @@ import {
 import { defaultLang, ogLocales } from "../i18n/ui";
 import { pageExistsForLocale } from "../i18n/routes";
 import { buildContentManifest } from "../i18n/slugManifest.content";
+import { getPageMeta } from "../i18n/meta";
 
-const siteName = import.meta.env.SITE_NAME;
+const lang = getLangFromUrl(Astro.url);
+const meta = getPageMeta(lang, "home");
+const siteName = meta.siteName;
 const manifest = await buildContentManifest();
 
 const {
@@ -27,7 +30,6 @@ const fullTitle = pageTitle.includes(siteName) ?
   pageTitle :
   `${siteName} - ${pageTitle}`;
 
-const lang = getLangFromUrl(Astro.url);
 const ogLocale = ogLocales[lang] ?? ogLocales[defaultLang];
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);

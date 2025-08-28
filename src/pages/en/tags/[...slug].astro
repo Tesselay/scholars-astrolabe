@@ -4,6 +4,7 @@ import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { buildBlogPostPath, getLangFromUrl, encodeTagPath } from '../../../i18n/utils'
+import { getPageMeta } from "../../../i18n/meta";
 
 export async function getStaticPaths() {
   const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
@@ -20,12 +21,10 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blog'>[] }
 const lang = getLangFromUrl(Astro.url);
-
-const pageTitle = `Posts tagged with ${tag}`;
-const description = `Browse articles tagged “${tag}” on ${import.meta.env.SITE_NAME}.`;
+const meta = getPageMeta(lang, "tags");
 ---
 
-<Layout pageTitle={pageTitle} description={description}>
+<Layout pageTitle={meta.title} description={meta.description}>
   <h1>Posts tagged with {tag}</h1>
   <ul aria-label="Tagged Posts">
     {posts.map((post) => <BlogPost url={buildBlogPostPath(lang, post.id)} title={post.data.title} />)}
