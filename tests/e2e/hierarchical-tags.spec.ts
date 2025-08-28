@@ -24,7 +24,7 @@ test.describe("Hierarchical tags", () => {
 
     const firstTag = nestedTag.first();
     const tagText = (await firstTag.innerText()).trim();
-    const plainTag = tagText.replace(/^#\s*/, "");
+    const plainTag = tagText.replace(/^#\s*/, "").replace(/(\s*)\(\d+\)/g, "");
 
     await firstTag.click();
 

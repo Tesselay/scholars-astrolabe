@@ -35,6 +35,7 @@ test.describe("Tags index page", () => {
 
       const encoded = text
         .replace(/^\/+|\/+$/g, "")
+        .replace(/(\s*)\(\d+\)/g, "")
         .split("/")
         .map((seg) => encodeURIComponent(seg))
         .join("/");
