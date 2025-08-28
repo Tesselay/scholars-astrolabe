@@ -37,16 +37,20 @@ const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
 const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
 const xDefaultUrl = base + pathWithLocale(defaultLang, neutralPath);
 
-const altLocales = getAlternateLocales(Astro.url).filter((l) => {
-  const p = trimSlashes(neutralPath);
-  const blogMatch = p.match(/^blog\/(.+)$/);
+const isBlogPostPath = (p: string) => {
+  const clean = trimSlashes(p);
+  const m = clean.match(/^blog\/(.+)$/);
+  return m ? m[1] : null;
+};
 
-  if (blogMatch) {
-    return manifest.blogPostExists(l, blogMatch[1]);
+const altLocales = getAlternateLocales(Astro.url).filter((l) => {
+  const maybeBlogSlug = isBlogPostPath(neutralPath);
+  if (maybeBlogSlug) {
+    return manifest.blogPostExists(l, maybeBlogSlug);
   }
-  return pageExistsForLocale(l, neutralPath)
-}
-);
+  return pageExistsForLocale(l, neutralPath);
+});
+
 const alternates = altLocales.map((l) => ({
   hreflang: l,
   href: base + pathWithLocale(l, neutralPath),
