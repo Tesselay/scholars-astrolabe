@@ -6,6 +6,7 @@ import type { CollectionEntry } from 'astro:content'
 import { buildBlogPostPath, encodeTagPath } from '../../../i18n/utils'
 import { getPageMeta } from "../../../i18n/meta";
 import { locales, type Locale, isLocale } from "../../../i18n/locales";
+import { filterEntriesByLang } from "../../../i18n/content";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
   }> = [];
 
   for (const lang of locales as readonly Locale[]) {
-    const langPosts = allPosts.filter((p) => p.id.startsWith(`${lang}/`));
+    const langPosts = filterEntriesByLang(allPosts, lang)
     const tags = tagsByLang.get(lang);
     if (!tags) continue;
 
