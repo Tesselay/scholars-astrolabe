@@ -1,7 +1,7 @@
-import { buildContentManifest } from "../../i18n/slugManifest.content";
+import { getContentManifest } from "../../i18n/slugManifest.content";
 
 export const GET = async () => {
-  const manifest = await buildContentManifest();
+  const manifest = await getContentManifest();
 
   const blogSlugsByLang = Object.fromEntries(
     Array.from(manifest.blogSlugsByLang.entries()).map(([lang, set]) => [

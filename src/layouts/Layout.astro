@@ -11,13 +11,13 @@ import {
 } from "../i18n/utils";
 import { defaultLang, ogLocales } from "../i18n/ui";
 import { pageExistsForLocale } from "../i18n/routes";
-import { buildContentManifest } from "../i18n/slugManifest.content";
+import { getContentManifest } from "../i18n/slugManifest.content";
 import { getPageMeta } from "../i18n/meta";
 
 const lang = getLangFromUrl(Astro.url);
 const meta = getPageMeta(lang, "home");
 const siteName = meta.siteName;
-const manifest = await buildContentManifest();
+const manifest = await getContentManifest();
 
 const {
   pageTitle = siteName,

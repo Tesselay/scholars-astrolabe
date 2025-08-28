@@ -8,6 +8,12 @@ function deriveLangFromPath(s: string): Lang {
   return first && isLocale(first) ? first : defaultLocale;
 }
 
+export type ContentManifest = Awaited<ReturnType<typeof buildContentManifest>>;
+let cachedContentManifest: Promise<ContentManifest> | undefined;
+export function getContentManifest(): Promise<ContentManifest> {
+  return (cachedContentManifest ??= buildContentManifest());
+}
+
 export async function buildContentManifest() {
   const blogEntries = await getCollection("blog");
 
