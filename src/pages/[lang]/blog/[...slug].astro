@@ -1,17 +1,19 @@
 ---
 import { getCollection, render } from 'astro:content'
 import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
+import { isLocale } from "../../../i18n/locales";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
 
   return posts.map((post) => {
     const [lang, ...slugParts] = post.id.split('/');
+    if (!isLocale(lang)) return null;
     return {
       params: { lang, slug: slugParts.join('/') || undefined },
       props: post,
     };
-  });
+  }).filter(Boolean);
 }
 
 const post = Astro.props;
