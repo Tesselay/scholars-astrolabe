@@ -1,13 +1,11 @@
 import { getCollection } from "astro:content";
 import { trimSlashes } from "./utils";
-import { locales, defaultLocale, type Locale } from "./locales";
+import { locales, defaultLocale, type Locale, isLocale } from "./locales";
 export type Lang = Locale;
 
 function deriveLangFromPath(s: string): Lang {
   const first = s.split("/")[0];
-  return first && (locales as readonly string[]).includes(first)
-    ? (first as Lang)
-    : defaultLocale;
+  return first && isLocale(first) ? first : defaultLocale;
 }
 
 export async function buildContentManifest() {
@@ -20,8 +18,7 @@ export async function buildContentManifest() {
 
   for (const entry of blogEntries) {
     const lang =
-      entry.data.language &&
-      (locales as readonly string[]).includes(entry.data.language as string)
+      entry.data.language && isLocale(entry.data.language as string)
         ? (entry.data.language as Lang)
         : deriveLangFromPath(entry.id);
 

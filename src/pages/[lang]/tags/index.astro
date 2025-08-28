@@ -1,14 +1,25 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
-import { buildTagPath, getLangFromUrl } from '../../../i18n/utils'
+import { buildTagPath } from '../../../i18n/utils'
 import { getPageMeta } from "../../../i18n/meta";
+import { type Locale, locales } from "../../../i18n/locales";
 
-const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog', (entry) => entry.id.startsWith('en/'))
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
 
-const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.params.lang as Locale;
+
+const allPosts = await getCollection('blog', (entry) => entry.id.startsWith(`${lang}/`));
+
+const tags = Array.from(
+  new Set(
+    allPosts
+      .flatMap((post) => (Array.isArray(post.data.tags) ? post.data.tags : []))
+  )
+);
+
 const meta = getPageMeta(lang, "tags");
 
 ---

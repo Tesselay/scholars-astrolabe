@@ -1,0 +1,63 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import BlogPost from '../../../components/BlogPost.astro'
+import { getCollection } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+import { buildBlogPostPath, encodeTagPath } from '../../../i18n/utils'
+import { getPageMeta } from "../../../i18n/meta";
+import { locales, type Locale, isLocale } from "../../../i18n/locales";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+
+  const tagsByLang = new Map<Locale, Set<string>>();
+  (locales as readonly Locale[]).forEach((l) => tagsByLang.set(l, new Set()));
+
+  for (const post of allPosts) {
+    const [candidate] = post.id.split('/');
+    if (!isLocale(candidate)) continue;
+    const lang: Locale = candidate;
+
+    const tags = Array.isArray(post.data.tags) ? post.data.tags : [];
+    for (const t of tags) tagsByLang.get(lang)!.add(t);
+  }
+
+  const paths: Array<{
+    params: { lang: Locale; slug: string };
+    props: { posts: CollectionEntry<'blog'>[]; tag: string };
+  }> = [];
+
+  for (const lang of locales as readonly Locale[]) {
+    const langPosts = allPosts.filter((p) => p.id.startsWith(`${lang}/`));
+    const tags = tagsByLang.get(lang);
+    if (!tags) continue;
+
+    for (const tag of tags) {
+      const filteredPosts = langPosts.filter(
+        (p) => Array.isArray(p.data.tags) && p.data.tags.includes(tag)
+      );
+      if (filteredPosts.length === 0) continue;
+
+      paths.push({
+        params: { lang, slug: encodeTagPath(tag) },
+        props: { posts: filteredPosts, tag },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang } = Astro.params;
+const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blog'>[] }
+const meta = getPageMeta(lang as Locale, "tags");
+---
+
+<Layout pageTitle={meta.title} description={meta.description}>
+  <h1>Posts tagged with {tag}</h1>
+  <ul aria-label="Tagged Posts">
+    {posts.map((post) => (
+      <BlogPost url={buildBlogPostPath(lang as Locale, post.id)} title={post.data.title} />
+    ))}
+  </ul>
+</Layout>

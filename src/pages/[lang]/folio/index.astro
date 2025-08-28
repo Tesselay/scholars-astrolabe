@@ -1,9 +1,13 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import { getLangFromUrl } from "../../../i18n/utils";
 import { getPageMeta } from "../../../i18n/meta";
+import { locales } from "../../../i18n/locales";
 
-const lang = getLangFromUrl(Astro.url);
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang;
 const meta = getPageMeta(lang, "folio");
 ---
 
