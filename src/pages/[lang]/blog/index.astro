@@ -2,13 +2,13 @@
 import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
-import { buildBlogPostPath } from '../../../i18n/utils';
+import { buildBlogPostPath, pathsForAllLocales } from "../../../i18n/utils";
 import { getPageMeta } from "../../../i18n/meta";
-import { type Locale, locales } from "../../../i18n/locales";
+import { type Locale } from "../../../i18n/locales";
 import { byLang } from "../../../i18n/content";
 
 export function getStaticPaths() {
-  return locales.map((lang) => ({ params: { lang } }));
+  return pathsForAllLocales();
 }
 
 const lang = Astro.params.lang as Locale;

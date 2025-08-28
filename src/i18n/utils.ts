@@ -33,6 +33,10 @@ export function normalizeNeutralPath(p: string): string {
 }
 
 // --- Path helpers ---
+export function pathsForAllLocales(): { params: { lang: Locale } }[] {
+  return (locales as readonly Locale[]).map((lang) => ({ params: { lang } }));
+}
+
 export function getLangFromUrl(url: URL): Locale {
   const [, lang] = url.pathname.split("/");
   if ((locales as readonly string[]).includes(lang)) return lang as Locale;
