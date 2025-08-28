@@ -1,5 +1,4 @@
 interface ImportMetaEnv {
-  readonly SITE_NAME: string;
   readonly MAIN_DOMAIN: string;
   readonly ROOT_REDIRECT_PAGE: "true" | "false";
 }
