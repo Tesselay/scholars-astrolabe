@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { getPageMeta } from "../i18n/meta.ts";
+
+import { getPageMeta } from "../i18n/loaders/meta.ts";
 
 const meta = getPageMeta("en", "home");
 

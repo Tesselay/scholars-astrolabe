@@ -2,17 +2,13 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import {
-  getLangFromUrl,
-  stripLangFromUrlOrId,
-  pathWithLocale,
-  getAlternateLocales,
-  trimSlashes,
-} from "../i18n/utils";
-import { defaultLang, ogLocales } from "../i18n/ui";
-import { pageExistsForLocale } from "../i18n/routes";
-import { getContentManifest } from "../i18n/slugManifest.content";
-import { getPageMeta } from "../i18n/meta";
+import { pageExistsForLocale } from "../i18n/routing/routes";
+import { getContentManifest } from "../i18n/manifests/content";
+import { pathWithLocale, stripLangFromUrlOrId, trimSlashes } from "../i18n/utils/path";
+import { getAlternateLocales, getLangFromUrl } from "../i18n/utils/locale";
+import { getPageMeta } from "../i18n/loaders/meta";
+import { ogLocales } from "../i18n/constants/languages";
+import { defaultLocale } from "../i18n/locales";
 
 const lang = getLangFromUrl(Astro.url);
 const meta = getPageMeta(lang, "home");
@@ -30,12 +26,12 @@ const fullTitle = pageTitle.includes(siteName) ?
   pageTitle :
   `${siteName} - ${pageTitle}`;
 
-const ogLocale = ogLocales[lang] ?? ogLocales[defaultLang];
+const ogLocale = ogLocales[lang] ?? ogLocales[defaultLocale];
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
 
 const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
-const xDefaultUrl = base + pathWithLocale(defaultLang, neutralPath);
+const xDefaultUrl = base + pathWithLocale(defaultLocale, neutralPath);
 
 const isBlogPostPath = (p: string) => {
   const clean = trimSlashes(p);

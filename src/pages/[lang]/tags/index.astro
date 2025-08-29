@@ -1,10 +1,11 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import { buildTagPath, pathsForAllLocales } from "../../../i18n/utils";
-import { getPageMeta } from "../../../i18n/meta";
 import { type Locale } from "../../../i18n/locales";
-import { byLang } from "../../../i18n/content";
+import { byLang } from "../../../i18n/utils/content";
+import { buildTagPath } from "../../../i18n/utils/urlBuilders";
+import { pathsForAllLocales } from "../../../i18n/utils/path";
+import { getPageMeta } from "../../../i18n/loaders/meta";
 
 export function getStaticPaths() {
   return pathsForAllLocales();
@@ -21,7 +22,7 @@ for (const post of allPosts) {
 }
 const tags = [...tagsWithCounts.entries()].sort(([a],[b]) => a.localeCompare(b));
 
-const meta = getPageMeta(lang, "tags");
+const meta = getPageMeta(lang, "tags:index");
 
 ---
 

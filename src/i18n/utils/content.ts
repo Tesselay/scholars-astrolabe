@@ -1,4 +1,4 @@
-import { type Locale } from "./locales";
+import { type Locale } from "../locales.ts";
 
 export function filterEntriesByLang<T extends { id: string }>(
   entries: readonly T[],

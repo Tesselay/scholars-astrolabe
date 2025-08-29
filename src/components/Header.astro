@@ -1,7 +1,10 @@
 ---
 import Navigation from './Navigation.astro'
 
-import { getLangFromUrl, useTranslations, pathWithLocale } from '../i18n/utils';
+import { useTranslations } from '../i18n/t';
+import { getLangFromUrl } from "../i18n/utils/locale";
+
+import { pathWithLocale } from "../i18n/utils/path";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

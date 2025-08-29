@@ -8,16 +8,24 @@
     "title": "Folio",
     "description": "The folio page"
   },
-  "blog": {
-    "title": "Blog",
+  "blog:index": {
+    "title": "Blog Index",
     "description": "The blog index page"
+  },
+  "blog:page": {
+    "title": "Blog Entry",
+    "description": "An entry for the blog"
   },
   "contact": {
     "title": "Contact",
     "description": "The contact page"
   },
-  "tags": {
-    "title": "Tags",
+  "tags:index": {
+    "title": "Tags Index",
     "description": "The tags index page"
+  },
+  "tags:page": {
+    "title": "Tagged Posts",
+    "description": "A list of posts with specific tags"
   }
 }

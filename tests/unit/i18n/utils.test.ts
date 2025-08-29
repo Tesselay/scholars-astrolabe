@@ -1,20 +1,24 @@
 import { describe, it, expect } from "vitest";
+import { locales, defaultLocale, type Locale } from "../../../src/i18n/locales";
 import {
   collapseSlashes,
-  trimSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
   normalizeNeutralPath,
-  getLangFromUrl,
+  pathWithLocale,
+  stripLangFromUrlOrId,
+  trimSlashes,
+} from "../../../src/i18n/utils/path.ts";
+import {
   getAllLocales,
   getAlternateLocales,
-  stripLangFromUrlOrId,
+  getLangFromUrl,
+} from "../../../src/i18n/utils/locale.ts";
+import {
   buildBlogPostPath,
-  encodeTagPath,
   buildTagPath,
-  pathWithLocale,
-} from "../../../src/i18n/utils";
-import { locales, defaultLocale, type Locale } from "../../../src/i18n/locales";
+  encodeTagPath,
+} from "../../../src/i18n/utils/urlBuilders.ts";
 
 describe("i18n utils - path normalization", () => {
   it("collapseSlashes should collapse duplicate slashes", () => {

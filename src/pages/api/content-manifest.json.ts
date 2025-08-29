@@ -1,4 +1,4 @@
-import { getContentManifest } from "../../i18n/slugManifest.content";
+import { getContentManifest } from "../../i18n/manifests/content.ts";
 
 export const GET = async () => {
   const manifest = await getContentManifest();

@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
-import { trimSlashes } from "./utils";
-import { locales, defaultLocale, type Locale, isLocale } from "./locales";
+import { locales, defaultLocale, type Locale, isLocale } from "../locales.ts";
+import { trimSlashes } from "../utils/path.ts";
 export type Lang = Locale;
 
 function deriveLangFromPath(s: string): Lang {

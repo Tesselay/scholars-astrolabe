@@ -1,10 +1,10 @@
-import { locales, type Locale } from "./locales";
+import { locales, type Locale } from "../locales.ts";
 import {
-  normalizeNeutralPath,
+  collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
-  collapseSlashes,
-} from "./utils";
+  normalizeNeutralPath,
+} from "../utils/path.ts";
 
 const pageModules = import.meta.glob("/src/pages/**/*.astro", { eager: true });
 

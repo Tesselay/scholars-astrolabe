@@ -1,8 +1,9 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import { getPageMeta } from "../../../i18n/meta";
-import { pathsForAllLocales } from "../../../i18n/utils";
 import { Locale } from "../../../i18n/locales";
+
+import { pathsForAllLocales } from "../../../i18n/utils/path";
+import { getPageMeta } from "../../../i18n/loaders/meta";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

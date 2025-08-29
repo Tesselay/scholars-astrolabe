@@ -8,16 +8,24 @@
     "title": "Folio",
     "description": "Das Portfolio"
   },
-  "blog": {
-    "title": "Blog",
+  "blog:index": {
+    "title": "Blog Index",
     "description": "Die Blog-Übersichtsseite"
+  },
+  "blog:page": {
+    "title": "Blog Eintrag",
+    "description": "Ein Eintrag im Blog"
   },
   "contact": {
     "title": "Kontakt",
     "description": "Die Kontaktseite"
   },
-  "tags": {
-    "title": "Tags",
+  "tags:index": {
+    "title": "Tags Index",
     "description": "Die Tags-Übersichtsseite"
+  },
+  "tags:page": {
+    "title": "Tagged Einträge",
+    "description": "Eine Liste mit Posts mit spezifischen Tags"
   }
 }
