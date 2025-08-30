@@ -7,6 +7,7 @@
     "paths": {
       "@/*": ["*"],
       "@/i18n": ["i18n"]
-    }
+    },
+    "types": ["vite/client", "vitest"]
   }
 }

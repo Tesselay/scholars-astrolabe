@@ -1,5 +1,10 @@
 import { type Locale } from "../locales.ts";
-import { pathWithLocale, stripLangFromUrlOrId, trimSlashes } from "./path.ts";
+import {
+  pathWithLocale,
+  stripLangFromUrlOrId,
+  trimSlashes,
+  collapseSlashes,
+} from "./path.ts";
 
 // Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
 export function buildBlogPostPath(lang: Locale, idOrSlug: string): string {
@@ -9,7 +14,8 @@ export function buildBlogPostPath(lang: Locale, idOrSlug: string): string {
 
 // Encodes each tag path segment for safe URLs while preserving hierarchy
 export function encodeTagPath(tagPath: string): string {
-  return trimSlashes(String(tagPath))
+  const cleaned = trimSlashes(collapseSlashes("/" + String(tagPath)));
+  return cleaned
     .split("/")
     .map((seg) => encodeURIComponent(seg))
     .join("/");

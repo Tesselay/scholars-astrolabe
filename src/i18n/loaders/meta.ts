@@ -5,8 +5,8 @@ import {
   type PageId,
   type PageMeta,
 } from "../schemas/meta.ts";
-import deJson from "../dictionaries/de/meta.json";
-import enJson from "../dictionaries/en/meta.json";
+import deJson from "@/i18n/dictionaries/de/meta.json";
+import enJson from "@/i18n/dictionaries/en/meta.json";
 
 const en: MetaDictionary = MetaDictionarySchema.parse(enJson);
 const de: MetaDictionary = MetaDictionarySchema.parse(deJson);
