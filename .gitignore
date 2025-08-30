@@ -30,3 +30,6 @@ src/content/blog/*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Vitest
+/coverage/
