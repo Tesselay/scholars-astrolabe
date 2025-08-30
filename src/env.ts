@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 const ModeSchema = z.enum(["development", "test", "production"]);
+export type Mode = z.infer<typeof ModeSchema>;
 
 const EnvSchema = z.object({
   MODE: ModeSchema.default("development"),

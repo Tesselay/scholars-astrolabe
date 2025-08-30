@@ -17,12 +17,13 @@ vi.mock("@/i18n/loaders/ui", () => {
 });
 
 import { useTranslations, defaultLocale } from "@/i18n";
+import type { Mode } from "@/env";
 
 describe("useTranslations()", () => {
-  const originalEnv = import.meta.env?.MODE;
+  const originalEnv = import.meta.env?.MODE as Mode;
 
   afterEach(() => {
-    const meta = import.meta as { env: { MODE: Mode } };
+    const meta = import.meta as { env: { MODE?: Mode } };
     if (originalEnv === undefined) {
       if ("MODE" in meta.env) delete meta.env.MODE;
     } else {
@@ -42,7 +43,7 @@ describe("useTranslations()", () => {
   });
 
   it("logs a warning in non-production when falling back", () => {
-    const meta = import.meta as { env: { MODE: Mode } };
+    const meta = import.meta as { env: { MODE?: Mode } };
     meta.env.MODE = "development";
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const t = useTranslations("de");
@@ -57,7 +58,7 @@ describe("useTranslations()", () => {
   });
 
   it("does not log a warning in production", () => {
-    const meta = import.meta as { env: { MODE: Mode } };
+    const meta = import.meta as { env: { MODE?: Mode } };
     meta.env.MODE = "production";
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const t = useTranslations("de");

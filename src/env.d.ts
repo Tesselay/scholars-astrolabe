@@ -3,7 +3,7 @@ declare global {
   type Mode = "development" | "test" | "production";
 
   interface ImportMetaEnv {
-    /** Vite built-ins (we narrow it for type safety) */
+    /** Vite built-ins (narrow it for type safety) */
     readonly MODE: Mode;
 
     /** Vite built-ins (kept for completeness) */
