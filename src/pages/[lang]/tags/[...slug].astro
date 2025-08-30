@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blog'>[] }
-const meta = getPageMeta(lang as Locale, "tags");
+const meta = getPageMeta(lang as Locale, "tags:page");
 ---
 
 <Layout pageTitle={meta.title} description={meta.description}>

@@ -13,6 +13,7 @@ export type { PageId, PageMeta, MetaDictionary } from "./schemas/meta";
 export { languages, ogLocales } from "./constants/languages";
 
 // Utilities
+export { filterEntriesByLang, byLang } from "./utils/content";
 export {
   getLangFromUrl,
   getAllLocales,
@@ -28,7 +29,6 @@ export {
   ensureTrailingSlash,
   normalizeNeutralPath,
 } from "./utils/path";
-
 export {
   buildBlogPostPath,
   buildTagPath,
