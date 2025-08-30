@@ -1,4 +1,4 @@
-import { getContentManifest } from "../../i18n/manifests/content.ts";
+import { getContentManifest } from "@/i18n";
 
 export const GET = async () => {
   const manifest = await getContentManifest();

@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { pathWithLocale } from "../i18n/utils/path";
-import { defaultLocale } from "../i18n/locales";
+import { pathWithLocale, defaultLocale } from "@/i18n";
 
 // Only emit this page in non‑production builds, in prod pass redirecting to backend
 export const prerender = import.meta.env.ROOT_REDIRECT_PAGE;

@@ -3,10 +3,7 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { locales, type Locale, isLocale } from "../../../i18n/locales";
-import { filterEntriesByLang } from "../../../i18n/utils/content";
-import { buildBlogPostPath, encodeTagPath } from "../../../i18n/utils/urlBuilders";
-import { getPageMeta } from "../../../i18n/loaders/meta";
+import { locales, type Locale, isLocale, filterEntriesByLang, buildBlogPostPath, encodeTagPath, getPageMeta } from "@/i18n";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');

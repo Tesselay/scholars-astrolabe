@@ -1,6 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
-import { locales } from "../i18n/locales";
+import { locales } from "@/i18n";
 
 const langs = z.enum(locales);
 

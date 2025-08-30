@@ -84,5 +84,9 @@ export default defineConfig(({ mode }) => {
       locales,
       defaultLocale,
     },
+    alias: {
+      "@": "./src",
+      "@/i18n": "./src/i18n",
+    },
   };
 });

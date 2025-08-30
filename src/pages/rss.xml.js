@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 
-import { buildBlogPostPath } from "../i18n/utils/urlBuilders.js";
+import { buildBlogPostPath } from "@/i18n";
 
 export async function GET(context) {
   // Fallback to the request origin if context.site isn't available
