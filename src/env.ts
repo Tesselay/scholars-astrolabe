@@ -9,8 +9,11 @@ const EnvSchema = z.object({
   ROOT_REDIRECT_PAGE: z.coerce.boolean().default(false),
 });
 
-const parsed = EnvSchema.parse(import.meta.env);
+export function parseEnvLike(obj: unknown) {
+  return EnvSchema.parse(obj);
+}
 
+const parsed = EnvSchema.parse(import.meta.env);
 export const env = {
   MODE: parsed.MODE,
   MAIN_DOMAIN: parsed.MAIN_DOMAIN,
