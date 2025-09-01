@@ -52,7 +52,7 @@ describe("content filters: byLang and filterEntriesByLang", () => {
       { id: "en/p2", data: {} },
     ] satisfies TestEntry[];
 
-    const paths = buildTagPaths(posts as CollectionEntry<"blog">[]);
+    const paths = buildTagPaths(posts as unknown as CollectionEntry<"blog">[]);
     expect(paths).toEqual([]);
   });
 

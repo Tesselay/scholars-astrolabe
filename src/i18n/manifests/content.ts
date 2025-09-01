@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import { locales, defaultLocale, type Locale, isLocale } from "../locales.ts";
-import { trimSlashes } from "../utils/path.ts";
+import { trimSlashes, collapseSlashes } from "../utils/path.ts";
 export type Lang = Locale;
 
 function deriveLangFromPath(s: string): Lang {
@@ -35,7 +35,7 @@ export async function buildContentManifest() {
   return {
     blogSlugsByLang,
     blogPostExists(lang: Lang, slug: string) {
-      const normalized = trimSlashes(slug);
+      const normalized = trimSlashes(collapseSlashes(slug));
       return blogSlugsByLang.get(lang)?.has(normalized) ?? false;
     },
   } as const;
