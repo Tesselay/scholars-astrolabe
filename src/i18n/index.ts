@@ -33,6 +33,7 @@ export {
   buildBlogPostPath,
   buildTagPath,
   encodeTagPath,
+  buildTagPaths,
 } from "./utils/urlBuilders";
 
 // Routing

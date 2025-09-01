@@ -3,47 +3,11 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { locales, type Locale, isLocale, filterEntriesByLang, buildBlogPostPath, encodeTagPath, getPageMeta } from "@/i18n";
+import { buildTagPaths, buildBlogPostPath, getPageMeta, type Locale } from "@/i18n";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
-
-  const tagsByLang = new Map<Locale, Set<string>>();
-  (locales as readonly Locale[]).forEach((l) => tagsByLang.set(l, new Set()));
-
-  for (const post of allPosts) {
-    const [candidate] = post.id.split('/');
-    if (!isLocale(candidate)) continue;
-    const lang: Locale = candidate;
-
-    const tags = Array.isArray(post.data.tags) ? post.data.tags : [];
-    for (const t of tags) tagsByLang.get(lang)!.add(t);
-  }
-
-  const paths: Array<{
-    params: { lang: Locale; slug: string };
-    props: { posts: CollectionEntry<'blog'>[]; tag: string };
-  }> = [];
-
-  for (const lang of locales as readonly Locale[]) {
-    const langPosts = filterEntriesByLang(allPosts, lang)
-    const tags = tagsByLang.get(lang);
-    if (!tags) continue;
-
-    for (const tag of tags) {
-      const filteredPosts = langPosts.filter(
-        (p) => Array.isArray(p.data.tags) && p.data.tags.includes(tag)
-      );
-      if (filteredPosts.length === 0) continue;
-
-      paths.push({
-        params: { lang, slug: encodeTagPath(tag) },
-        props: { posts: filteredPosts, tag },
-      });
-    }
-  }
-
-  return paths;
+  return buildTagPaths(allPosts);
 }
 
 const { lang } = Astro.params;
