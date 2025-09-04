@@ -1,12 +1,10 @@
 import { getCollection } from "astro:content";
-import { locales, defaultLocale, type Locale, isLocale } from "../locales.ts";
-import { trimSlashes, collapseSlashes } from "../utils/path.ts";
-export type Lang = Locale;
-
-function deriveLangFromPath(s: string): Lang {
-  const first = s.split("/")[0];
-  return first && isLocale(first) ? first : defaultLocale;
-}
+import { locales, type Locale, isLocale } from "../locales.ts";
+import {
+  trimSlashes,
+  collapseSlashes,
+  stripLangFromUrlOrId,
+} from "../utils/path.ts";
 
 export type ContentManifest = Awaited<ReturnType<typeof buildContentManifest>>;
 let cachedContentManifest: Promise<ContentManifest> | undefined;
@@ -17,16 +15,16 @@ export function getContentManifest(): Promise<ContentManifest> {
 export async function buildContentManifest() {
   const blogEntries = await getCollection("blog");
 
-  const blogSlugsByLang = new Map<Lang, Set<string>>();
-  (locales as readonly Lang[]).forEach((l) =>
+  const blogSlugsByLang = new Map<Locale, Set<string>>();
+  (locales as readonly Locale[]).forEach((l) =>
     blogSlugsByLang.set(l, new Set()),
   );
 
   for (const entry of blogEntries) {
     const lang =
       entry.data.language && isLocale(entry.data.language as string)
-        ? (entry.data.language as Lang)
-        : deriveLangFromPath(entry.id);
+        ? (entry.data.language as Locale)
+        : (stripLangFromUrlOrId(entry.id) as Locale);
 
     const slug = entry.id.replace(/^[^/]+\//, "");
     blogSlugsByLang.get(lang)!.add(slug);
@@ -34,7 +32,7 @@ export async function buildContentManifest() {
 
   return {
     blogSlugsByLang,
-    blogPostExists(lang: Lang, slug: string) {
+    blogPostExists(lang: Locale, slug: string) {
       const normalized = trimSlashes(collapseSlashes(slug));
       return blogSlugsByLang.get(lang)?.has(normalized) ?? false;
     },

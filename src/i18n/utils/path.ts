@@ -19,7 +19,7 @@ export function ensureTrailingSlash(s: string): string {
   return s.endsWith("/") ? s : s + "/";
 }
 
-export function stripLangFromUrlOrId(id: string): string {
+export function stripLangFromUrlOrId(id: string): Locale | string {
   const s = collapseSlashes(String(id));
   const hasLeadingSlash = s.startsWith("/");
   const parts = s.split("/");
@@ -41,10 +41,10 @@ export function stripLangFromUrlOrId(id: string): string {
     } else {
       normalized = normalized.replace(/^\/+/, "");
     }
-    return normalized;
+    return normalized as Locale;
   }
 
-  return id;
+  return id as Locale;
 }
 
 export function pathsForAllLocales(): { params: { lang: Locale } }[] {
@@ -59,10 +59,16 @@ export function pathWithLocale(lang: Locale, path: string): string {
 export function normalizeNeutralPath(p: string): string {
   let n = stripLangFromUrlOrId(String(p)).trim();
   n = ensureLeadingSlash(n);
-  n = collapseSlashes(n)
-    .replace(/index\.astro$/, "")
-    .replace(/\.astro$/, "");
-  n = collapseSlashes(n);
+  n = n.replace(/(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i, "$2");
   n = ensureTrailingSlash(n);
   return collapseSlashes(n);
+}
+
+export function convertLocalPathToSlug(p: string): string {
+  const slug = normalizeNeutralPath(p)
+    .replace(/^\/src\/pages/, "")
+    .replace(/\/\[lang\]/, "")
+    .replace(/\[(?:\.\.\.)?slug\]/, "");
+
+  return ensureTrailingSlash(collapseSlashes(slug));
 }

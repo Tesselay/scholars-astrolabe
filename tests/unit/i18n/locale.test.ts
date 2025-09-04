@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   getLangFromUrl,
   getAllLocales,
-  getAlternateLocales,
+  getAlternateLocalesByURL,
   defaultLocale,
   locales,
 } from "@/i18n";
@@ -30,14 +30,14 @@ describe("locale utils", () => {
     expect(getAllLocales()).toEqual(locales);
   });
 
-  it("getAlternateLocales excludes current locale", () => {
-    expect(getAlternateLocales(new URL("https://thaum.de/en/"))).toEqual(
+  it("getAlternateLocalesByURL excludes current locale", () => {
+    expect(getAlternateLocalesByURL(new URL("https://thaum.de/en/"))).toEqual(
       locales.filter((l) => l !== "en"),
     );
-    expect(getAlternateLocales(new URL("https://thaum.de/de/"))).toEqual(
+    expect(getAlternateLocalesByURL(new URL("https://thaum.de/de/"))).toEqual(
       locales.filter((l) => l !== "de"),
     );
-    expect(getAlternateLocales(new URL("https://thaum.de/"))).toEqual(
+    expect(getAlternateLocalesByURL(new URL("https://thaum.de/"))).toEqual(
       locales.filter((l) => l !== "en"),
     );
   });

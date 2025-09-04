@@ -11,13 +11,14 @@ export type { PageId, PageMeta, MetaDictionary } from "./schemas/meta";
 
 // Constants
 export { languages, ogLocales } from "./constants/languages";
+export { pages, nonLocalizedPages } from "./constants/routes";
 
 // Utilities
 export { filterEntriesByLang, byLang } from "./utils/content";
 export {
   getLangFromUrl,
   getAllLocales,
-  getAlternateLocales,
+  getAlternateLocalesByURL,
 } from "./utils/locale";
 export {
   pathWithLocale,
@@ -37,7 +38,7 @@ export {
 } from "./utils/urlBuilders";
 
 // Routing
-export { pageExistsForLocale } from "./routing/routes";
+export { pageExistsForLocale, altLocalesFor } from "./routing/routes";
 
 // Manifests
 export { getContentManifest } from "./manifests/content";
