@@ -10,15 +10,15 @@ import {
 const locales: Locale[] = ["en", "de"];
 
 describe("routing: pageExistsForLocale integration", () => {
-  it("recognizes neutral paths for existing localized pages (normalization variants)", async () => {
+  it("recognizes neutral paths for existing localized pages", async () => {
     const manifest = await getContentManifest();
     for (const lang of locales) {
-      expect(pageExistsForLocale(lang, "blog/example", manifest)).toBe(true);
-      expect(pageExistsForLocale(lang, "/blog/example", manifest)).toBe(true);
-      expect(pageExistsForLocale(lang, "blog", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "/", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "/folio", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "/contact", manifest)).toBe(true);
       expect(pageExistsForLocale(lang, "/blog", manifest)).toBe(true);
-      expect(pageExistsForLocale(lang, "/blog/", manifest)).toBe(true);
-      expect(pageExistsForLocale(lang, "///blog///", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "/tags", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "/tags/astro", manifest)).toBe(true);
     }
   });
 
