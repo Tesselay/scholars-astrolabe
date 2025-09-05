@@ -94,3 +94,31 @@ describe("routing: altLocalesFor integration", () => {
     expect(altLocalesFor("en", "/index.astro", manifest)).toStrictEqual(["de"]); // Exists as a static redirect and as localized indexes
   });
 });
+
+describe("routing: mDynamicBases fallback integration", () => {
+  it("accepts nested dynamic segments under a dynamic base (e.g., /tags/[...slug])", async () => {
+    const manifest = await getContentManifest();
+    for (const lang of locales) {
+      expect(pageExistsForLocale(lang, "/tags/astro/js", manifest)).toBe(true);
+      expect(pageExistsForLocale(lang, "tags/astro/js", manifest)).toBe(true);
+    }
+  });
+
+  it("does not leak to static routes (no unintended children)", async () => {
+    const manifest = await getContentManifest();
+    for (const lang of locales) {
+      expect(pageExistsForLocale(lang, "/contact/team", manifest)).toBe(false);
+      expect(pageExistsForLocale(lang, "contact/team", manifest)).toBe(false);
+    }
+  });
+
+  it("offers all other locales for nested dynamic pages (non content-driven)", async () => {
+    const manifest = await getContentManifest();
+    expect(altLocalesFor("en", "/tags/astro/js", manifest)).toStrictEqual([
+      "de",
+    ]);
+    expect(altLocalesFor("de", "/tags/astro/js", manifest)).toStrictEqual([
+      "en",
+    ]);
+  });
+});
