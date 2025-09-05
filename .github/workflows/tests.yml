@@ -156,4 +156,4 @@ jobs:
 
       # --- Unit Tests ---
       - name: Run unit tests
-        run: yarn vitest run tests/unit
+        run: yarn vitest run tests/unit tests/integration
