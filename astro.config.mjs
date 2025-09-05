@@ -31,62 +31,69 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+const MODE =
+  process.env.NODE_ENV === "production"
+    ? "production"
+    : process.env.NODE_ENV === "test"
+      ? "test"
+      : "development";
+const env = loadEnv(MODE, process.cwd(), "");
 
-  const mainDomain = env.MAIN_DOMAIN;
-  const site =
-    mode === "production" ? `https://${mainDomain}` : `http://${mainDomain}`;
+const rawDomain = (env.MAIN_DOMAIN ?? "").trim();
+const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
+  .replace(/^https?:\/\//, "")
+  .replace(/\/+$/, "");
+const scheme = MODE === "production" ? "https" : "http";
+const siteString = `${scheme}://${normalizedDomain}/`;
 
-  return {
-    site,
-    markdown: {
-      remarkPlugins: [
-        remarkGfm,
-        remarkMath,
-        remarkDirective,
-        remarkFrontmatter,
-        remarkToc,
-        [
-          wikiLinkPlugin,
-          {
-            aliasDivider: "|",
-            pageResolver: (name) => [slugify(name)],
-            hrefTemplate: (permalink) => `/${permalink}`,
-          },
-        ],
-        callouts,
+export default defineConfig({
+  site: siteString,
+  markdown: {
+    remarkPlugins: [
+      remarkGfm,
+      remarkMath,
+      remarkDirective,
+      remarkFrontmatter,
+      remarkToc,
+      [
+        wikiLinkPlugin,
+        {
+          aliasDivider: "|",
+          pageResolver: (name) => [slugify(name)],
+          hrefTemplate: (permalink) => `/${permalink}`,
+        },
       ],
-      rehypePlugins: [
-        rehypeSlug,
-        [
-          rehypeAutolinkHeadings,
-          {
-            behavior: "wrap",
-            properties: { class: "heading-link" },
-          },
-        ],
-        rehypeKatex,
-        [
-          rehypeExternalLinks,
-          { target: "_blank", rel: ["noopener", "noreferrer"] },
-        ],
-      ],
-    },
-    integrations: [
-      expressiveCode(),
-      sitemap({
-        filter: (page) => !page.includes("/test"),
-      }),
-      compress(),
+      callouts,
     ],
-    i18n: {
-      locales,
-      defaultLocale,
-    },
-    alias: {
-      "@": "./src",
-      "@/i18n": "./src/i18n",
-    },
-  };
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          properties: { class: "heading-link" },
+        },
+      ],
+      rehypeKatex,
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: ["noopener", "noreferrer"] },
+      ],
+    ],
+  },
+  integrations: [
+    expressiveCode(),
+    sitemap({
+      filter: (page) => !page.includes("/test"),
+    }),
+    compress(),
+  ],
+  i18n: {
+    locales,
+    defaultLocale,
+  },
+  alias: {
+    "@": "./src",
+    "@/i18n": "./src/i18n",
+  },
 });

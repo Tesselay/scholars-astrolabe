@@ -8,8 +8,17 @@ Sitemap: ${sitemapURL.href}
 
 `;
 
+import { env as appEnv } from "@/env";
+
 export const GET: APIRoute = ({ site, request }) => {
-  const origin = site?.origin ?? new URL(request.url).origin;
+  // Prefer configured site origin; otherwise fall back to env-based origin.
+  const fallbackScheme = import.meta.env.PROD ? "https" : "http";
+  const rawDomain = appEnv.MAIN_DOMAIN?.trim() || "localhost:4321";
+  const normalizedDomain = rawDomain
+    .replace(/^https?:\/\//, "")
+    .replace(/\/+$/, "");
+  const envOrigin = `${fallbackScheme}://${normalizedDomain}`;
+  const origin = site?.origin ?? envOrigin ?? new URL(request.url).origin;
 
   const sitemapURL = new URL("sitemap-index.xml", origin);
   return new Response(getRobotsTxt(sitemapURL), {
