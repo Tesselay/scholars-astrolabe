@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { locales } from "@/i18n";
+import { locales } from "../i18n/locales"; // No alias because won't evaluate on time
 
 export const LanguageEnum = z.enum(locales);
 
