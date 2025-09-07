@@ -17,6 +17,7 @@ jobs:
     timeout-minutes: 30
 
     env:
+      FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
       E2E_BASE_URL: "http://127.0.0.1:4321"
       # Use a deterministic Puppeteer cache path inside the workspace

@@ -12,7 +12,12 @@ import { env as appEnv } from "@/env";
 
 export const GET: APIRoute = ({ site, request }) => {
   // Prefer configured site origin; otherwise fall back to env-based origin.
-  const fallbackScheme = import.meta.env.PROD ? "https" : "http";
+  const forceHttp = import.meta.env.FORCE_HTTP === true;
+  const fallbackScheme = forceHttp
+    ? "http"
+    : import.meta.env.PROD
+      ? "https"
+      : "http";
   const rawDomain = appEnv.MAIN_DOMAIN?.trim() || "localhost:4321";
   const normalizedDomain = rawDomain
     .replace(/^https?:\/\//, "")

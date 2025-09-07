@@ -43,7 +43,8 @@ const rawDomain = (env.MAIN_DOMAIN ?? "").trim();
 const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
   .replace(/^https?:\/\//, "")
   .replace(/\/+$/, "");
-const scheme = MODE === "production" ? "https" : "http";
+const forceHttp = (env.FORCE_HTTP ?? process.env.FORCE_HTTP) === true;
+const scheme = forceHttp ? "http" : MODE === "production" ? "https" : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
 export default defineConfig({
