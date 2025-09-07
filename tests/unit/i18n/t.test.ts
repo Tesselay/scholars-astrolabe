@@ -17,7 +17,7 @@ vi.mock("@/i18n/loaders/ui", () => {
 });
 
 import { useTranslations, defaultLocale } from "@/i18n";
-import type { Mode } from "@/env";
+import type { Mode } from "@/env/parse.ts";
 
 describe("useTranslations()", () => {
   const originalEnv = import.meta.env?.MODE as Mode;

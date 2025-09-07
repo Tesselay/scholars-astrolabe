@@ -15,6 +15,15 @@ declare global {
     /** App specific variables */
     readonly MAIN_DOMAIN: string;
     readonly ROOT_REDIRECT_PAGE: "true" | "false";
+    readonly FORCE_HTTP?:
+      | "true"
+      | "false"
+      | "1"
+      | "0"
+      | "yes"
+      | "no"
+      | "on"
+      | "off";
   }
 
   interface ImportMeta {
