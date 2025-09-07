@@ -22,6 +22,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "prepare": "husky",
+    "pretest": "astro sync",
     "test": "vitest run tests/unit tests/integration",
     "test:cov": "vitest run tests/unit tests/integration --coverage",
     "test:unit": "vitest run tests/unit",
