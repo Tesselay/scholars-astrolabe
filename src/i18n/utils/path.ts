@@ -19,7 +19,7 @@ export function ensureTrailingSlash(s: string): string {
   return s.endsWith("/") ? s : s + "/";
 }
 
-export function stripLangFromUrlOrId(id: string): Locale | string {
+export function stripLangFromUrlOrId(id: string): string {
   const s = collapseSlashes(String(id));
   const hasLeadingSlash = s.startsWith("/");
   const parts = s.split("/");
@@ -41,10 +41,10 @@ export function stripLangFromUrlOrId(id: string): Locale | string {
     } else {
       normalized = normalized.replace(/^\/+/, "");
     }
-    return normalized as Locale;
+    return normalized;
   }
 
-  return id as Locale;
+  return id;
 }
 
 export function pathsForAllLocales(): { params: { lang: Locale } }[] {
