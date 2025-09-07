@@ -54,10 +54,6 @@ function parseContentPath(
   const tagMatch = path.match(/^\/tags\/(.+?)\/$/);
   if (tagMatch) {
     const slug = tagMatch[1];
-    // Treat nested tag paths (with subsegments) as generic dynamic pages for routing purposes
-    if (slug.includes("/")) {
-      return { kind: "page" };
-    }
     return { kind: "tag", slug };
   }
   if (dynamicPageExists(neutralPath)) {
