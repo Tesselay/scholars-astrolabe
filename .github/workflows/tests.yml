@@ -71,7 +71,7 @@ jobs:
             --verbose
             --max-retries 2
             --max-concurrency 10
-            --base "http://127.0.0.1:4321"
+            --base-url "http://127.0.0.1:4321"
             --exclude "http://localhost:4321/[a-z]{2}/test/?$"
             "dist/**/*.html"
           fail: true
