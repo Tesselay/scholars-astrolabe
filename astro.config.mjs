@@ -20,10 +20,20 @@ import callouts from "./src/markdown/remark-callouts.js";
 import remarkFrontmatter from "remark-frontmatter";
 import { createRequire } from "node:module";
 
-// Load TypeScript shared locales in an ESM .mjs file using jiti
+const MODE =
+  process.env.NODE_ENV === "production"
+    ? "production"
+    : process.env.NODE_ENV === "test"
+      ? "test"
+      : "development";
+const envObj = { ...process.env, ...loadEnv(MODE, process.cwd(), "") };
+
 const require = createRequire(import.meta.url);
 const jiti = require("jiti")(import.meta.url);
 const { locales, defaultLocale } = jiti("./src/i18n/locales.ts");
+const { parseEnvLike } = jiti("./src/env/parse.ts");
+
+const parsed = parseEnvLike(envObj);
 
 const slugify = (s) =>
   s
@@ -31,20 +41,15 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-const MODE =
-  process.env.NODE_ENV === "production"
-    ? "production"
-    : process.env.NODE_ENV === "test"
-      ? "test"
-      : "development";
-const env = loadEnv(MODE, process.cwd(), "");
-
-const rawDomain = (env.MAIN_DOMAIN ?? "").trim();
+const rawDomain = (parsed.MAIN_DOMAIN ?? "").trim();
 const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
   .replace(/^https?:\/\//, "")
   .replace(/\/+$/, "");
-const forceHttp = (env.FORCE_HTTP ?? process.env.FORCE_HTTP) === true;
-const scheme = forceHttp ? "http" : MODE === "production" ? "https" : "http";
+const scheme = parsed.FORCE_HTTP
+  ? "http"
+  : MODE === "production"
+    ? "https"
+    : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
 export default defineConfig({

@@ -8,11 +8,11 @@ Sitemap: ${sitemapURL.href}
 
 `;
 
-import { env as appEnv } from "@/env";
+import { env as appEnv } from "@/env/env.ts";
 
 export const GET: APIRoute = ({ site, request }) => {
   // Prefer configured site origin; otherwise fall back to env-based origin.
-  const forceHttp = import.meta.env.FORCE_HTTP === true;
+  const forceHttp = appEnv.FORCE_HTTP;
   const fallbackScheme = forceHttp
     ? "http"
     : import.meta.env.PROD
