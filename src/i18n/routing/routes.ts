@@ -42,6 +42,7 @@ function parseContentPath(
   neutralPath: string,
 ):
   | { kind: "blog-post"; slug: string }
+  | { kind: "tag"; slug: string }
   | { kind: "page" }
   | { kind: "static-page" }
   | { kind: "not-found" } {
@@ -49,9 +50,20 @@ function parseContentPath(
   const blogMatch = path.match(/^\/blog\/(.+?)\/$/);
   if (blogMatch) {
     return { kind: "blog-post", slug: blogMatch[1] };
-  } else if (dynamicPageExists(neutralPath)) {
+  }
+  const tagMatch = path.match(/^\/tags\/(.+?)\/$/);
+  if (tagMatch) {
+    const slug = tagMatch[1];
+    // Treat nested tag paths (with subsegments) as generic dynamic pages for routing purposes
+    if (slug.includes("/")) {
+      return { kind: "page" };
+    }
+    return { kind: "tag", slug };
+  }
+  if (dynamicPageExists(neutralPath)) {
     return { kind: "page" };
-  } else if (staticPageExists(neutralPath)) {
+  }
+  if (staticPageExists(neutralPath)) {
     return { kind: "static-page" };
   }
 
@@ -66,7 +78,11 @@ export function pageExistsForLocale(
   const parsed = parseContentPath(neutralPath);
   if (parsed.kind === "blog-post") {
     return manifest.blogPostExists(locale, parsed.slug);
-  } else if (parsed.kind === "page") {
+  }
+  if (parsed.kind === "tag") {
+    return !!manifest.tagExists?.(locale, parsed.slug);
+  }
+  if (parsed.kind === "page") {
     return true;
   }
   return false;
@@ -82,6 +98,9 @@ export function altLocalesFor(
 
   if (parsed.kind === "blog-post") {
     return candidates.filter((l) => manifest.blogPostExists(l, parsed.slug));
+  }
+  if (parsed.kind === "tag") {
+    return candidates.filter((l) => manifest.tagExists?.(l, parsed.slug));
   }
   if (parsed.kind === "page") {
     return candidates;
