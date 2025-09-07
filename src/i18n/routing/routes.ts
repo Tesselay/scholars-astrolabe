@@ -51,11 +51,11 @@ function parseContentPath(
   if (blogMatch) {
     return { kind: "blog-post", slug: blogMatch[1] };
   }
-  /*const tagMatch = path.match(/^\/tags\/(.+?)\/$/);
+  const tagMatch = path.match(/^\/tags\/(.+?)\/$/);
   if (tagMatch) {
     const slug = tagMatch[1];
     return { kind: "tag", slug };
-  }*/
+  }
   if (dynamicPageExists(neutralPath)) {
     return { kind: "page" };
   }
@@ -75,9 +75,9 @@ export function pageExistsForLocale(
   if (parsed.kind === "blog-post") {
     return manifest.blogPostExists(locale, parsed.slug);
   }
-  /*  if (parsed.kind === "tag") {
+  if (parsed.kind === "tag") {
     return !!manifest.tagExists?.(locale, parsed.slug);
-  }*/
+  }
   if (parsed.kind === "page") {
     return true;
   }
@@ -95,9 +95,9 @@ export function altLocalesFor(
   if (parsed.kind === "blog-post") {
     return candidates.filter((l) => manifest.blogPostExists(l, parsed.slug));
   }
-  /*  if (parsed.kind === "tag") {
+  if (parsed.kind === "tag") {
     return candidates.filter((l) => manifest.tagExists?.(l, parsed.slug));
-  }*/
+  }
   if (parsed.kind === "page") {
     return candidates;
   }

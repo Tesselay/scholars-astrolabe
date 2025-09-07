@@ -2,9 +2,7 @@ import { getCollection } from "astro:content";
 import { locales, type Locale, isLocale } from "../locales.ts";
 import { trimSlashes, collapseSlashes } from "../utils/path.ts";
 import { getLangFromId } from "../utils/locale.ts";
-/*
 import { encodeTagPath } from "../utils/urlBuilders.ts";
-*/
 
 export type ContentManifest = Awaited<ReturnType<typeof buildContentManifest>>;
 let cachedContentManifest: Promise<ContentManifest> | undefined;
@@ -16,10 +14,10 @@ export async function buildContentManifest() {
   const blogEntries = await getCollection("blog");
 
   const blogSlugsByLang = new Map<Locale, Set<string>>();
-  /*const tagsByLang = new Map<Locale, Set<string>>();*/
+  const tagsByLang = new Map<Locale, Set<string>>();
   (locales as readonly Locale[]).forEach((l) => {
     blogSlugsByLang.set(l, new Set());
-    /*tagsByLang.set(l, new Set());*/
+    tagsByLang.set(l, new Set());
   });
 
   for (const entry of blogEntries) {
@@ -32,21 +30,21 @@ export async function buildContentManifest() {
     blogSlugsByLang.get(lang)!.add(slug);
 
     // Collect encoded tag slugs for this locale (preserve original case in paths)
-    /*    const tags = Array.isArray(entry.data.tags) ? entry.data.tags : [];
+    const tags = Array.isArray(entry.data.tags) ? entry.data.tags : [];
     const set = tagsByLang.get(lang)!;
-    for (const t of tags) set.add(trimSlashes(encodeTagPath(t)));*/
+    for (const t of tags) set.add(trimSlashes(encodeTagPath(t)));
   }
 
   return {
     blogSlugsByLang,
-    /*tagsByLang,*/
+    tagsByLang,
     blogPostExists(lang: Locale, slug: string) {
       const normalized = trimSlashes(collapseSlashes(slug));
       return blogSlugsByLang.get(lang)?.has(normalized) ?? false;
     },
-    /*    tagExists(lang: Locale, tagSlug: string) {
+    tagExists(lang: Locale, tagSlug: string) {
       const normalized = trimSlashes(collapseSlashes(tagSlug));
       return tagsByLang.get(lang)?.has(normalized) ?? false;
-    },*/
+    },
   } as const;
 }
