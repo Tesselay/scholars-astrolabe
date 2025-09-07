@@ -17,10 +17,10 @@ jobs:
     timeout-minutes: 30
 
     env:
+      NODE_ENV: test
       FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
       E2E_BASE_URL: "http://127.0.0.1:4321"
-      # Use a deterministic Puppeteer cache path inside the workspace
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
       SITE_NAME: "Scholar's Astrolabe"
 
