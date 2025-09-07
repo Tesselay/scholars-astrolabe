@@ -25,12 +25,12 @@ const base = Astro.site ?? Astro.url.origin;
 const neutralPath = stripLangFromUrlOrId(Astro.url.pathname);
 
 const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
-const xDefaultUrl = base + pathWithLocale(defaultLocale, neutralPath);
+const xDefaultUrl = new URL(pathWithLocale(defaultLocale, neutralPath), base).href;
 
 const altLocales = altLocalesFor(lang, neutralPath, manifest);
 const alternates = altLocales.map((l) => ({
   hreflang: l,
-  href: base + pathWithLocale(l, neutralPath),
+  href: new URL(pathWithLocale(l, neutralPath), base).href,
   ogLocale: ogLocales[l],
 }));
 
