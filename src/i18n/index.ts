@@ -17,6 +17,7 @@ export { pages, nonLocalizedPages } from "./constants/routes";
 export { filterEntriesByLang, byLang } from "./utils/content";
 export {
   getLangFromUrl,
+  getLangFromId,
   getAllLocales,
   getAlternateLocalesByURL,
 } from "./utils/locale";
