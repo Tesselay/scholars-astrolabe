@@ -11,6 +11,7 @@ export const EnvSchema = z.object({
   MODE: ModeSchema.default("development"),
   MAIN_DOMAIN: z.string().default("127.0.0.1:4321"),
   ROOT_REDIRECT_PAGE: z.union([z.coerce.boolean(), truthy]).default(false),
+  TEST_PAGE: z.union([z.coerce.boolean(), truthy]).default(false),
   FORCE_HTTP: z.union([z.coerce.boolean(), truthy]).default(false),
 });
 

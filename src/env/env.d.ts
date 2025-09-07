@@ -1,6 +1,7 @@
 // declare global to merge with vite's declarations
 declare global {
   type Mode = "development" | "test" | "production";
+  type booleanish = "true" | "false" | "1" | "0" | "yes" | "no" | "on" | "off";
 
   interface ImportMetaEnv {
     /** Vite built-ins (narrowed for type safety) */
@@ -14,16 +15,9 @@ declare global {
 
     /** App specific variables */
     readonly MAIN_DOMAIN: string;
-    readonly ROOT_REDIRECT_PAGE: "true" | "false";
-    readonly FORCE_HTTP?:
-      | "true"
-      | "false"
-      | "1"
-      | "0"
-      | "yes"
-      | "no"
-      | "on"
-      | "off";
+    readonly ROOT_REDIRECT_PAGE: booleanish;
+    readonly TEST_PAGE: booleanish;
+    readonly FORCE_HTTP?: booleanish;
   }
 
   interface ImportMeta {
