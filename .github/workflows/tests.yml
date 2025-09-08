@@ -56,13 +56,10 @@ jobs:
         run: yarn build
 
       - name: Serve dist
-        run: yarn astro preview --host 127.0.0.1 --port 4321 &
+        run: yarn astro preview --site ${{ E2E_BASE_URL }} &
 
       - name: Wait for server
-        run: yarn wait-on -t 5m http://127.0.0.1:4321
-
-      - name: Astro content sync
-        run: yarn astro sync
+        run: yarn wait-on -t 5m ${{ E2E_BASE_URL }}
 
       # --- Link checker on the built HTML ---
       - name: Link checker
@@ -75,8 +72,8 @@ jobs:
             --verbose
             --max-retries 2
             --max-concurrency 10
-            --base-url "http://127.0.0.1:4321"
-            --exclude "http://127.0.0.1:4321/[a-z]{2}/test/?$"
+            --base-url $E2E_BASE_URL
+            --exclude "$E2E_BASE_URL/[a-z]{2}/test/?$"
             "dist/**/*.html"
           fail: true
 
@@ -110,7 +107,7 @@ jobs:
           echo "PUPPETEER_EXECUTABLE_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
           echo "Using Chrome at: $CHROME_PATH"
       - name: A11y smoke
-        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json http://127.0.0.1:4321/ > pa11y-report.json
+        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json ${{ E2E_BASE_URL }} > pa11y-report.json
 
       - name: Upload a11y report
         if: ${{ always() && hashFiles('pa11y-report.json') != '' }}
@@ -137,7 +134,7 @@ jobs:
         env:
           # Enable GitHub annotations via Playwright config gating (isCI)
           CI: true
-        run: yarn playwright test
+        run: yarn e2e
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
@@ -160,4 +157,4 @@ jobs:
 
       # --- Unit Tests ---
       - name: Run unit tests
-        run: yarn vitest run tests/unit tests/integration
+        run: yarn test
