@@ -3,7 +3,7 @@ import { defineCollection } from "astro:content";
 import { BlogPostSchema } from "./content/schema.ts";
 
 const postsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./content/blog" }),
   schema: BlogPostSchema,
 });
 
