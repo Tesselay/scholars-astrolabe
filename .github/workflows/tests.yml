@@ -65,6 +65,17 @@ jobs:
       - name: Wait for server
         run: yarn wait-on -t 5m "$E2E_BASE_URL"
 
+
+      - name: Show content tree (debug)
+        run: |
+          echo "::group::content"
+          ls -la src/content || true
+          find src/content -maxdepth 3 -type f | sort | head -n 200 || true
+          echo "::endgroup::"
+
+      - name: astro sync in test mode (debug)
+        run: yarn astro sync --mode test --verbose
+
       # --- Link checker on the built HTML ---
       - name: Link checker
         uses: lycheeverse/lychee-action@v2
