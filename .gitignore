@@ -12,10 +12,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# blog posts
-src/content/blog/*
-!src/content/blog/en/Example.md
-
 # environment variables
 .env.*
 
