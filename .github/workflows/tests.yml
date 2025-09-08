@@ -22,11 +22,13 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: 1
       HOST: "127.0.0.1"
       PORT: "4321"
-      E2E_BASE_URL: "http://${{ env.HOST }}:${{ env.PORT }}"
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
       SITE_NAME: "Scholar's Astrolabe"
 
     steps:
+      - name: Derive E2E_BASE_URL
+        run: echo "E2E_BASE_URL=http://$HOST:$PORT" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
