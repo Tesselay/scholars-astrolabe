@@ -9,6 +9,6 @@ export const BlogPostSchema = z.object({
   summary: z.string(),
   sources: z.array(z.string()),
   language: LanguageEnum.optional(),
-  "date-created": z.date(),
-  "date-modified": z.date(),
+  "date-created": z.coerce.date(),
+  "date-modified": z.coerce.date(),
 });
