@@ -2,26 +2,6 @@ import { describe, it, expect } from "vitest";
 import { getCollection } from "astro:content";
 
 describe("content collection integration (project content)", () => {
-  it("debug: vitest sees blog collection", async () => {
-    try {
-      const posts = await getCollection("blog");
-      console.log("[astro:content] post count:", posts.length);
-    } catch (err) {
-      console.error("[astro:content] thrown error:", err);
-    }
-  });
-
-  it("debug: show blog entries", async () => {
-    const posts = await getCollection("blog");
-    console.log(
-      "blog count:",
-      posts.length,
-      "ids:",
-      posts.map((p) => p.id),
-    );
-    expect(posts.length).toBeGreaterThan(0);
-  });
-
   it("loads blog entries, coerces schema types, and excludes underscored files", async () => {
     const posts = await getCollection("blog");
 

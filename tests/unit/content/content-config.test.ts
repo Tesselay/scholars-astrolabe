@@ -1,20 +1,47 @@
 import { describe, it, expect } from "vitest";
 import { globby } from "globby";
+import { getCollection, getEntry } from "astro:content";
 
 import * as cfg from "../../../src/content.config";
 
-describe("content config debug", () => {
+describe("Blog content collections exist", () => {
   it("shows registered collections", () => {
     expect(cfg.collections.blog).toBeTypeOf("object");
     console.log("content collections =>", Object.keys(cfg.collections));
     expect(Object.keys(cfg.collections)).toContain("blog");
   });
-});
 
-describe("glob path debug", () => {
   it("sees markdown files under blog", async () => {
     const files = await globby("src/content/blog/**/[^_]*.md");
     console.log("blog md files =>", files);
     expect(files.length).toBeGreaterThan(0);
+  });
+});
+
+describe("Astro can load blog content collection", () => {
+  it("can load a specific entry", async () => {
+    const entry = await getEntry("blog", "en/example");
+    console.log("[getEntry] en/example =>", entry ? "FOUND" : "NULL");
+    expect(entry).toBeTruthy();
+  });
+
+  it("debug: vitest sees blog collection", async () => {
+    try {
+      const posts = await getCollection("blog");
+      console.log("[astro:content] post count:", posts.length);
+    } catch (err) {
+      console.error("[astro:content] thrown error:", err);
+    }
+  });
+
+  it("debug: show blog entries", async () => {
+    const posts = await getCollection("blog");
+    console.log(
+      "blog count:",
+      posts.length,
+      "ids:",
+      posts.map((p) => p.id),
+    );
+    expect(posts.length).toBeGreaterThan(0);
   });
 });
