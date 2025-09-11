@@ -15,6 +15,10 @@ export default defineConfig(async () => {
   const vitestOnly: InlineConfig = {
     test: {
       environment: "node",
+      // Ensure no race condition trips up CI
+      pool: "threads",
+      maxWorkers: 1,
+      setupFiles: ["./tests/setup/preload-astro-content.ts"],
     },
   };
 
