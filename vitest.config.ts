@@ -3,11 +3,11 @@ import { getViteConfig } from "astro/config";
 import { mergeConfig, type InlineConfig } from "vite";
 
 export default defineConfig(async () => {
-  let base = getViteConfig({ mode: "test" });
+  let base = getViteConfig({ mode: "development" });
 
   if (typeof base === "function") {
     // @ts-expect-error irrelevant type mismatch
-    base = await base({ command: "serve", mode: "test" });
+    base = await base({ command: "serve", mode: "development" });
   }
 
   const astroVite = base as InlineConfig;
