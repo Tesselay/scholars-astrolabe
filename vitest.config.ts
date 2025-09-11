@@ -13,6 +13,9 @@ export default defineConfig(async () => {
   const astroVite = base as InlineConfig;
 
   const vitestOnly: InlineConfig = {
+    ssr: {
+      noExternal: ["astro", "@astrojs/*", "astro/loaders"],
+    },
     test: {
       environment: "node",
       // Ensure no race condition trips up CI
