@@ -23,7 +23,7 @@
     "format": "prettier . --write",
     "prepare": "husky",
     "pretest": "astro sync --mode test",
-    "test": "vitest run tests/unit tests/integration",
+    "test": "vitest run tests/unit tests/integration --pool=threads --maxWorkers=1",
     "test:cov": "vitest run tests/unit tests/integration --coverage",
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
