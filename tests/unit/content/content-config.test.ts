@@ -28,9 +28,16 @@ describe("Astro can load blog content collection", () => {
   it("debug: vitest sees blog collection", async () => {
     try {
       const posts = await getCollection("blog");
-      console.log("[astro:content] post count:", posts.length);
-    } catch (err) {
-      console.error("[astro:content] thrown error:", err);
+      console.log(
+        "[debug] posts.len=",
+        posts.length,
+        posts.map((p) => p.id),
+      );
+      const one = await getEntry("blog", "en/example");
+      console.log("[debug] getEntry(en/example)=", !!one, one?.data);
+      expect(Array.isArray(posts)).toBe(true);
+    } catch (e) {
+      console.error("[debug] astro:content threw:", e);
     }
   });
 
