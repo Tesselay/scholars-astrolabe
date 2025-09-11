@@ -22,6 +22,13 @@ export default defineConfig(async () => {
       pool: "threads",
       maxWorkers: 1,
       setupFiles: ["./tests/setup/preload-astro-content.ts"],
+      deps: {
+        optimizer: {
+          ssr: {
+            include: ["astro", "astro/loaders", "@astrojs/content"],
+          },
+        },
+      },
     },
   };
 
