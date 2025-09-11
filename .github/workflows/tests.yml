@@ -20,7 +20,7 @@ jobs:
       NODE_ENV: test
       FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
-      HOST: "127.0.0.1"
+      HOST: "localhost"
       PORT: "4321"
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
       SITE_NAME: "Scholar's Astrolabe"

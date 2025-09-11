@@ -5,7 +5,7 @@ describe("Env schema", () => {
   it("applies defaults when values are missing", () => {
     const parsed = parseEnvLike({});
     expect(parsed.MODE).toBe("development");
-    expect(parsed.MAIN_DOMAIN).toBe("127.0.0.1:4321");
+    expect(parsed.MAIN_DOMAIN).toBe("localhost:4321");
     expect(parsed.ROOT_REDIRECT_PAGE).toBe(false);
   });
 
