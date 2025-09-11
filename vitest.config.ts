@@ -1,6 +1,6 @@
 import { defineConfig } from "vitest/config";
 import { getViteConfig } from "astro/config";
-import { mergeConfig, type InlineConfig } from "vite";
+import { mergeConfig, type InlineConfig, type PluginOption } from "vite";
 
 export default defineConfig(async () => {
   let base = getViteConfig({ mode: "development" });
@@ -11,6 +11,18 @@ export default defineConfig(async () => {
   }
 
   const astroVite = base as InlineConfig;
+
+  const diagnosticGraph: PluginOption = {
+    name: "diagnostic-graph",
+    configResolved(cfg) {
+      console.log("[diagnostic] root=", cfg.root);
+      console.log("[diagnostic] ssr.noExternal=", cfg.ssr?.noExternal);
+      console.log(
+        "[diagnostic] optimizeDeps.ssr.include=",
+        cfg.optimizeDeps?.include,
+      );
+    },
+  };
 
   const vitestOnly: InlineConfig = {
     root: process.cwd(),
@@ -47,6 +59,7 @@ export default defineConfig(async () => {
       "import.meta.env.MODE": '"development"',
       "process.env.NODE_ENV": '"development"',
     },
+    plugins: [diagnosticGraph],
   };
 
   return mergeConfig(astroVite, vitestOnly);
