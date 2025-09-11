@@ -170,5 +170,8 @@ jobs:
           retention-days: 14
 
       # --- Unit Tests ---
+      - name: DEBUG verbose check
+        run: yarn astro check --verbose
+
       - name: Run unit tests
         run: yarn test
