@@ -24,6 +24,8 @@ jobs:
       PORT: "4321"
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
       SITE_NAME: "Scholar's Astrolabe"
+      ASTRO_LOG_LEVEL: debug
+      VITE_DEBUG: true
 
     steps:
       - name: Derive E2E_BASE_URL
@@ -174,4 +176,4 @@ jobs:
         run: yarn astro check --verbose
 
       - name: Run unit tests
-        run: yarn test
+        run: yarn test:debug
