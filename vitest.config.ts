@@ -13,22 +13,39 @@ export default defineConfig(async () => {
   const astroVite = base as InlineConfig;
 
   const vitestOnly: InlineConfig = {
+    root: process.cwd(),
+    resolve: {
+      preserveSymlinks: true,
+    },
     ssr: {
       noExternal: ["astro", "@astrojs/*", "astro/loaders"],
     },
     test: {
       environment: "node",
       // Ensure no race condition trips up CI
-      pool: "threads",
+      pool: "forks",
       maxWorkers: 1,
+      isolate: false,
       setupFiles: ["./tests/setup/preload-astro-content.ts"],
       deps: {
         optimizer: {
           ssr: {
-            include: ["astro", "astro/loaders", "@astrojs/content"],
+            include: [
+              "astro",
+              "astro/loaders",
+              "@astrojs/check",
+              "@astrojs/rss",
+              "@astrojs/sitemap",
+            ],
           },
         },
       },
+    },
+    define: {
+      "import.meta.env.DEV": "true",
+      "import.meta.env.PROD": "false",
+      "import.meta.env.MODE": '"development"',
+      "process.env.NODE_ENV": '"development"',
     },
   };
 
