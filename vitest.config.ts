@@ -3,11 +3,11 @@ import { getViteConfig } from "astro/config";
 import { mergeConfig, type InlineConfig, type PluginOption } from "vite";
 
 export default defineConfig(async () => {
-  let base = getViteConfig({ mode: "development" });
+  let base = getViteConfig({ mode: "test" });
 
   if (typeof base === "function") {
     // @ts-expect-error irrelevant type mismatch
-    base = await base({ command: "serve", mode: "development" });
+    base = await base({ command: "serve", mode: "test" });
   }
 
   const astroVite = base as InlineConfig;
@@ -54,10 +54,10 @@ export default defineConfig(async () => {
       },
     },
     define: {
-      "import.meta.env.DEV": "true",
+      "import.meta.env.MODE": JSON.stringify("test"),
+      "import.meta.env.DEV": "false",
       "import.meta.env.PROD": "false",
-      "import.meta.env.MODE": '"development"',
-      "process.env.NODE_ENV": '"development"',
+      "process.env.NODE_ENV": JSON.stringify("test"),
     },
     plugins: [diagnosticGraph],
   };
