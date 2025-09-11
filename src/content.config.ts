@@ -1,21 +1,24 @@
 import { glob } from "astro/loaders";
 import { defineCollection } from "astro:content";
 import { BlogPostSchema } from "./content/schema.ts";
-import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
-import fs from "node:fs";
+import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
 
-const blogBase = pathToFileURL(resolve(process.cwd(), "src/content/blog"));
+const blogBaseUrl = new URL(
+  "./src/content/blog/",
+  new URL(`file://${process.cwd()}/`),
+);
+const blogBasePath = fileURLToPath(blogBaseUrl);
 
 console.log(
-  "[content.config] blogBase:",
-  blogBase.href,
+  "[content.config] blogBaseUrl=",
+  blogBaseUrl.href,
   "exists?",
-  fs.existsSync(blogBase),
+  existsSync(blogBasePath),
 );
 
 const postsCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: blogBase }),
+  loader: glob({ pattern: "**/[^_]*.md", base: blogBaseUrl }),
   schema: BlogPostSchema,
 });
 
