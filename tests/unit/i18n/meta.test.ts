@@ -1,95 +1,41 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-
-const modulePath = "@/i18n/loaders/meta";
-const enJsonPath = "@/i18n/dictionaries/en/meta.json";
-const deJsonPath = "@/i18n/dictionaries/de/meta.json";
-
-async function importFresh() {
-  vi.resetModules();
-  return await import(modulePath);
-}
+import {
+  __resetMeta,
+  getPageMetaAsync,
+  initMeta,
+} from "@/i18n/loaders/meta.ts";
+import { fakeGlob } from "../../utils/fake-glob.ts";
+import {
+  badMockEmpty,
+  badMockInvalid,
+  mockDE,
+  mockEN,
+} from "../../utils/mocks.ts";
 
 describe("Meta loader", () => {
   beforeEach(() => {
+    __resetMeta();
     vi.resetModules();
+    vi.clearAllMocks();
   });
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
-    vi.doMock(enJsonPath, () => ({
-      default: {
-        site: { name: "Site EN" },
-        home: { title: "Home EN", description: "Desc EN" },
-        folio: { title: "Folio EN" },
-        "blog:index": { title: "Blog Index EN" },
-        "blog:page": { title: "Blog Page EN" },
-        contact: { title: "Contact EN" },
-        "tags:index": { title: "Tags Index EN" },
-        "tags:page": { title: "Tags Page EN" },
-      },
-    }));
-
-    vi.doMock(deJsonPath, () => ({
-      default: {
-        site: { name: "Site DE" },
-        home: { title: "Home DE" },
-        folio: { title: "Folio DE" },
-        "blog:index": { title: "Blog Index DE" },
-        "blog:page": { title: "Blog Page DE" },
-        contact: { title: "Contact DE" },
-        "tags:index": { title: "Tags Index DE" },
-        "tags:page": { title: "Tags Page DE" },
-      },
-    }));
-
-    const { getPageMeta } = await importFresh();
-    const m = getPageMeta("de", "home");
+    await initMeta(fakeGlob(mockEN, mockDE));
+    const m = await getPageMetaAsync("de", "home");
     expect(m.title).toBe("Home DE");
     expect(m.siteName).toBe("Site DE");
   });
 
   it("handles optional fields and returns siteName from selected locale", async () => {
-    vi.doMock(enJsonPath, () => ({
-      default: {
-        site: { name: "Site EN" },
-        home: { title: "Home EN", description: "Desc EN" },
-        folio: { title: "Folio EN" },
-        "blog:index": { title: "Blog Index EN" },
-        "blog:page": { title: "Blog Page EN" },
-        contact: { title: "Contact EN" },
-        "tags:index": { title: "Tags Index EN" },
-        "tags:page": { title: "Tags Page EN" },
-      },
-    }));
-
-    vi.doMock(deJsonPath, () => ({
-      default: {
-        site: { name: "Site DE" },
-        home: { title: "Home DE" }, // description optional
-        folio: { title: "Folio DE" },
-        "blog:index": { title: "Blog Index DE" },
-        "blog:page": { title: "Blog Page DE" },
-        contact: { title: "Contact DE" },
-        "tags:index": { title: "Tags Index DE" },
-        "tags:page": { title: "Tags Page DE" },
-      },
-    }));
-
-    const { getPageMeta } = await importFresh();
-    const m = getPageMeta("de", "home");
+    await initMeta(fakeGlob(mockEN, mockDE));
+    const m = await getPageMetaAsync("de", "home");
     expect(m.title).toBe("Home DE");
     expect(m.siteName).toBe("Site DE");
   });
 
   it("throws when dictionaries are invalid against strict schema", async () => {
-    vi.doMock(enJsonPath, () => ({
-      default: {
-        site: { name: "Site EN" },
-        home: { title: 42 }, // invalid type
-      },
-    }));
-
-    vi.doMock(deJsonPath, () => ({ default: {} }));
-
-    await expect(importFresh()).rejects.toThrowError();
+    await expect(
+      initMeta(fakeGlob(badMockInvalid, badMockEmpty)),
+    ).rejects.toThrow("Expected string, received number");
   });
 });
