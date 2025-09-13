@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 
-import { getPageMeta } from "@/i18n";
+import { getPageMetaAsync } from "@/i18n";
 
-const meta = getPageMeta("en", "home");
+const meta = await getPageMetaAsync("en", "home");
 
 export const GET: APIRoute = () => {
   const manifest = {

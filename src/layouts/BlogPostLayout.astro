@@ -1,6 +1,6 @@
 ---
 import Layout from './Layout.astro'
-import { getLangFromUrl, buildTagPath, getPageMeta } from "@/i18n";
+import { getLangFromUrl, buildTagPath, getPageMetaAsync } from "@/i18n";
 
 const { frontmatter } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -10,7 +10,7 @@ const modified = frontmatter["date-modified"] as Date;
 const formattedDateCreated = created.toLocaleDateString(lang);
 const formattedDateModified = modified.toLocaleDateString(lang);
 
-const meta = getPageMeta(lang, "blog:page")
+const meta = await getPageMetaAsync(lang, "blog:page")
 const description = `A blog entry on ${meta.siteName}`;
 ---
 
