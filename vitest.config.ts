@@ -53,12 +53,6 @@ export default defineConfig(async () => {
         },
       },
     },
-    define: {
-      "import.meta.env.MODE": JSON.stringify("test"),
-      "import.meta.env.DEV": "false",
-      "import.meta.env.PROD": "false",
-      "process.env.NODE_ENV": JSON.stringify("test"),
-    },
     plugins: [diagnosticGraph],
   };
 
