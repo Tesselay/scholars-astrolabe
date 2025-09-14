@@ -1,20 +1,29 @@
-import { getCollection } from "astro:content";
+import { getCollection as realGetCollection } from "astro:content";
 import { locales, type Locale, isLocale } from "../locales.ts";
 import { trimSlashes, collapseSlashes } from "../utils/path.ts";
 import { getLangFromId } from "../utils/locale.ts";
 import { encodeTagPath } from "../utils/urlBuilders.ts";
 
+export type GetCollection = typeof realGetCollection;
 export type ContentManifest = Awaited<ReturnType<typeof buildContentManifest>>;
+
 let cachedContentManifest: Promise<ContentManifest> | undefined;
-export function getContentManifest(): Promise<ContentManifest> {
-  return (cachedContentManifest ??= buildContentManifest());
+
+export function getContentManifest(getCollection?: GetCollection) {
+  return (cachedContentManifest ??= buildContentManifest(getCollection));
 }
 
-export async function buildContentManifest() {
-  const blogEntries = await getCollection("blog");
+export function __resetContentManifest() {
+  cachedContentManifest = undefined;
+}
 
+export async function buildContentManifest(
+  getCollection: GetCollection = realGetCollection,
+) {
+  const blogEntries = await getCollection("blog");
   const blogSlugsByLang = new Map<Locale, Set<string>>();
   const tagsByLang = new Map<Locale, Set<string>>();
+
   (locales as readonly Locale[]).forEach((l) => {
     blogSlugsByLang.set(l, new Set());
     tagsByLang.set(l, new Set());
