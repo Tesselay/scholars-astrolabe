@@ -21,9 +21,9 @@ describe("Meta loader", () => {
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
     await initMeta(fakeGlob(mockEN, mockDE));
-    const m = await getPageMetaAsync("de", "home");
-    expect(m.title).toBe("Home DE");
-    expect(m.siteName).toBe("Site DE");
+    const m = await getPageMetaAsync("en", "folio");
+    expect(m.title).toBe("Folio EN");
+    expect(m.siteName).toBe("Site EN");
   });
 
   it("handles optional fields and returns siteName from selected locale", async () => {
