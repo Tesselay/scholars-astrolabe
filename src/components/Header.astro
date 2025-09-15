@@ -1,10 +1,11 @@
 ---
 import Navigation from './Navigation.astro'
 
-import { useTranslations, getLangFromUrl, pathWithLocale } from "@/i18n";
+import { getLangFromUrl, pathWithLocale } from "@/i18n";
+import { getUiAsync } from "../i18n/loaders/ui";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const ui = await getUiAsync(lang);
 
 const homeUrl = pathWithLocale(lang, '/');
 const folioUrl = pathWithLocale(lang, '/folio/');
@@ -16,16 +17,16 @@ const contactUrl = pathWithLocale(lang, '/contact/');
   <nav aria-label="Primary">
     <ul class="nav-links">
       <li>
-        <Navigation title={t('nav.home')} link={homeUrl} />
+        <Navigation title={ui.nav.home} link={homeUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.portfolio')} link={folioUrl} />
+        <Navigation title={ui.nav.portfolio} link={folioUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.blog')} link={blogUrl} />
+        <Navigation title={ui.nav.blog} link={blogUrl} />
       </li>
       <li>
-        <Navigation title={t('nav.contact')} link={contactUrl} />
+        <Navigation title={ui.nav.contact} link={contactUrl} />
       </li>
     </ul>
   </nav>

@@ -2,9 +2,6 @@
 export { locales, defaultLocale, isLocale } from "./locales";
 export type { Locale } from "./locales";
 
-// Public Translation API
-export { useTranslations } from "./t";
-
 // Meta API
 export { getPageMeta, getPageMetaAsync } from "./loaders/meta";
 export type { PageId, PageMeta, MetaDictionary } from "./schemas/meta";
