@@ -1,4 +1,4 @@
-export const mockEN = {
+export const mockMetaEN = {
   default: {
     site: { name: "Site EN" },
     home: { title: "Home EN", description: "Desc EN" },
@@ -11,7 +11,7 @@ export const mockEN = {
   },
 };
 
-export const mockDE = {
+export const mockMetaDE = {
   default: {
     site: { name: "Site DE" },
     home: { title: "Home DE" },
@@ -24,7 +24,7 @@ export const mockDE = {
   },
 };
 
-export const badMockInvalid = {
+export const mockMetaInvalid = {
   default: {
     site: { name: "Site DE" },
     home: { title: 42 },
@@ -37,6 +37,55 @@ export const badMockInvalid = {
   },
 };
 
-export const badMockEmpty = {
+export const mockMetaEmpty = {
   default: {},
+};
+
+export const mockUiEN = {
+  default: {
+    nav: {
+      home: "Home EN",
+      portfolio: "Portfolio EN",
+      blog: "Blog EN",
+      contact: "Contact EN",
+    },
+  },
+};
+
+export const mockUiDE = {
+  default: {
+    nav: {
+      home: "Startseite DE",
+      portfolio: "Portfolio DE",
+      blog: "Blog DE",
+      contact: "Kontakt DE",
+    },
+  },
+};
+
+export const mockUiInvalid = {
+  default: {
+    nav: {
+      home: 42,
+      portfolio: "Portfolio",
+      blog: "Blog",
+      contact: "Contact",
+    },
+  },
+};
+
+export const mockUiEmpty = {
+  default: {},
+};
+
+export const mockUiExtra = {
+  default: {
+    nav: {
+      home: "Home",
+      portfolio: "Portfolio",
+      blog: "Blog",
+      contact: "Contact",
+      extra: "Extra",
+    },
+  },
 };

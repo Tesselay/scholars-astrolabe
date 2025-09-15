@@ -1,11 +1,16 @@
-import type { MetaGlob } from "@/i18n/loaders/meta.ts";
+import type { DictGlob } from "@/i18n/utils/internals.ts";
 
 export function fakeGlob(
   en: { default: unknown },
   de: { default: unknown },
-): MetaGlob {
+  filename: string,
+): DictGlob {
   return {
-    "/virtual/i18n/dictionaries/en/meta.json": en as { default: unknown },
-    "/virtual/i18n/dictionaries/de/meta.json": de as { default: unknown },
+    [`/virtual/i18n/dictionaries/en/${filename}.json`]: en as {
+      default: unknown;
+    },
+    [`/virtual/i18n/dictionaries/de/${filename}.json`]: de as {
+      default: unknown;
+    },
   };
 }

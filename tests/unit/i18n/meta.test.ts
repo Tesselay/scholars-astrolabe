@@ -6,10 +6,10 @@ import {
 } from "@/i18n/loaders/meta.ts";
 import { fakeGlob } from "../../utils/fake-glob.ts";
 import {
-  badMockEmpty,
-  badMockInvalid,
-  mockDE,
-  mockEN,
+  mockMetaEmpty,
+  mockMetaInvalid,
+  mockMetaDE,
+  mockMetaEN,
 } from "../../utils/mocks.ts";
 
 describe("Meta loader", () => {
@@ -20,14 +20,14 @@ describe("Meta loader", () => {
   });
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
-    await initMeta(fakeGlob(mockEN, mockDE));
+    await initMeta(fakeGlob(mockMetaEN, mockMetaDE, "meta"));
     const m = await getPageMetaAsync("en", "folio");
     expect(m.title).toBe("Folio EN");
     expect(m.siteName).toBe("Site EN");
   });
 
   it("handles optional fields and returns siteName from selected locale", async () => {
-    await initMeta(fakeGlob(mockEN, mockDE));
+    await initMeta(fakeGlob(mockMetaEN, mockMetaDE, "meta"));
     const m = await getPageMetaAsync("de", "home");
     expect(m.title).toBe("Home DE");
     expect(m.siteName).toBe("Site DE");
@@ -35,7 +35,7 @@ describe("Meta loader", () => {
 
   it("throws when dictionaries are invalid against strict schema", async () => {
     await expect(
-      initMeta(fakeGlob(badMockInvalid, badMockEmpty)),
+      initMeta(fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")),
     ).rejects.toThrow("Expected string, received number");
   });
 });

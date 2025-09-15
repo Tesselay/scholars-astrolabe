@@ -5,17 +5,11 @@ import {
   type PageId,
   type PageMeta,
 } from "../schemas/meta";
-
-export type MetaGlob = Record<string, { default: unknown }>;
-
-// factory kept separate so tests can stub it
-export function loadMetaFiles(): MetaGlob {
-  return import.meta.glob("@/i18n/dictionaries/*/meta.json", { eager: true });
-}
+import { type DictGlob, loadDictFiles } from "../utils/internals.ts";
 
 let META: Readonly<Record<Locale, MetaDictionary>> | null = null;
 
-export async function initMeta(files: MetaGlob = loadMetaFiles()) {
+export async function initMeta(files: DictGlob = loadDictFiles("meta")) {
   const parsed: Partial<Record<Locale, MetaDictionary>> = {};
   for (const [path, mod] of Object.entries(files)) {
     const lang = path.split("/").at(-2) as Locale | undefined;
