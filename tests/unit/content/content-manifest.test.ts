@@ -1,20 +1,19 @@
-import { describe, it, expect } from "vitest";
-import { buildContentManifest } from "@/i18n/manifests/content";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import {
+  __resetContentManifest,
+  buildContentManifest,
+} from "@/i18n/manifests/content";
+import { mockBlog } from "../../utils/mocks.ts";
 
 describe("buildContentManifest", () => {
+  beforeEach(() => {
+    __resetContentManifest();
+    vi.resetModules();
+    vi.clearAllMocks();
+  });
+
   it("derives languages, strips slugs, de-duplicates and checks existence", async () => {
-    const fakeEntries = [
-      { id: "en/p1", data: {} },
-      { id: "de/p2", data: {} },
-      { id: "en/blog/p3", data: { language: "de" } },
-      { id: "de/x1", data: { language: "xx" } },
-      { id: "misc/other", data: {} },
-      { id: "de/dup", data: {} },
-      { id: "de/dup", data: {} },
-    ];
-
-    const fakeGetCollection = async () => fakeEntries;
-
+    const fakeGetCollection = async () => mockBlog;
     const manifest = await buildContentManifest(fakeGetCollection);
 
     const enSlugs = Array.from(manifest.blogSlugsByLang.get("en") ?? []).sort();
