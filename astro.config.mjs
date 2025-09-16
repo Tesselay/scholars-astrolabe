@@ -150,7 +150,10 @@ function diagnosticGraph() {
 
     // 6) Build-time graph
     buildStart() {
-      console.log("[buildStart] building with", this.meta.watchMode ? "watch" : "once");
+      console.log(
+        "[buildStart] building with",
+        this.meta.watchMode ? "watch" : "once",
+      );
     },
     moduleParsed(info) {
       console.log("[parsed]", info.id);
@@ -166,7 +169,7 @@ function diagnosticGraph() {
           console.log("  modules:", Object.keys(chunk.modules).slice(0, 5));
         }
       }
-    }
+    },
   };
 }
 
