@@ -176,4 +176,7 @@ jobs:
         run: yarn astro check --verbose
 
       - name: Run unit tests
-        run: yarn test:debug
+        run: yarn test:unit
+
+      - name: Run integration tests
+        run: yarn test:integration
