@@ -1,38 +1,42 @@
-import "astro:content";
-import { fileURLToPath } from "node:url";
-import { statSync } from "node:fs";
-import { getCollection } from "astro:content";
+// @vitest-environment node
 import { dev } from "astro";
 
 let server: Awaited<ReturnType<typeof dev>> | undefined;
 
+async function waitForContentLayer() {
+  // Import inside the function so it resolves after Astro dev is up
+  const { getCollection } = await import("astro:content");
+
+  const deadline = Date.now() + 10_000; // 10s max
+  let lastErr: unknown;
+
+  while (Date.now() < deadline) {
+    try {
+      await getCollection("blog");
+      return;
+    } catch (e) {
+      lastErr = e;
+      await new Promise((r) => setTimeout(r, 200));
+    }
+  }
+
+  throw new Error(
+    "Content layer never initialized for 'blog'. Last error: " +
+      (lastErr instanceof Error ? lastErr.message : String(lastErr)),
+  );
+}
+
 export async function setup() {
+  console.log("[global-setup] starting Astro dev… cwd=", process.cwd());
   server = await dev({
     root: process.cwd(),
     logLevel: "silent",
   });
-
-  await new Promise((r) => setTimeout(r, 200));
+  await waitForContentLayer();
+  console.log("[global-setup] content layer ready");
 }
 
 export async function teardown() {
+  console.log("[global-setup] stopping Astro dev…");
   await server?.stop();
 }
-
-const root = fileURLToPath(new URL(".", import.meta.url));
-console.log("[preload] cwd=", process.cwd(), "setup root=", root);
-
-try {
-  const exists = !!statSync("src/content/blog"); // relative to cwd
-  console.log("[preload] src/content/blog exists?", exists);
-} catch {
-  console.log("[preload] src/content/blog exists? false");
-}
-
-getCollection("blog")
-  .then((list) => {
-    console.log("[preload] initial blog count =", list.length);
-  })
-  .catch((e) => {
-    console.log("[preload] initial getCollection error:", e?.message);
-  });
