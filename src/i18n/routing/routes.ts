@@ -76,7 +76,7 @@ export function pageExistsForLocale(
     return manifest.blogPostExists(locale, parsed.slug);
   }
   if (parsed.kind === "tag") {
-    return !!manifest.tagExists?.(locale, parsed.slug);
+    return manifest.tagExists?.(locale, parsed.slug);
   }
   if (parsed.kind === "page") {
     return true;

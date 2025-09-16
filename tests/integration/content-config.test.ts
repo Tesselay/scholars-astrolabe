@@ -1,9 +1,8 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { globby } from "globby";
 import { getCollection, getEntry } from "astro:content";
 
 import * as cfg from "@/content.config.ts";
-import { getContentManifest } from "@/i18n";
 
 describe("Blog content collections exist", () => {
   it("shows registered collections", () => {
@@ -20,10 +19,6 @@ describe("Blog content collections exist", () => {
 });
 
 describe("Astro can load blog content collection", () => {
-  beforeEach(() => {
-    getContentManifest();
-  });
-
   it("can load a specific entry", async () => {
     const entry = await getEntry("blog", "en/example");
     console.log("[getEntry] en/example =>", entry ? "FOUND" : "NULL");

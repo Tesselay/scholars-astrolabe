@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const isCI = !!process.env.CI;
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "localhost";
 const PORT = Number(process.env.PORT || 4321);
 const DEFAULT_URL = `http://${HOST}:${PORT}`;
 const hasExternalServer = !!process.env.E2E_BASE_URL;
