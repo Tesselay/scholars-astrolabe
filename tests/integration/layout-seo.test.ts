@@ -6,22 +6,10 @@ import {
   altLocalesFor,
   getContentManifest,
 } from "@/i18n";
-import { getCollection } from "astro:content";
 
 const base = "https://example.com";
 
 describe("Layout SEO links: canonical edge cases", () => {
-  it("debug: show blog entries", async () => {
-    const posts = await getCollection("blog");
-    console.log(
-      "blog count:",
-      posts.length,
-      "ids:",
-      posts.map((p) => p.id),
-    );
-    expect(posts.length).toBeGreaterThan(0);
-  });
-
   it("builds canonical from lang + normalized neutralPath (trailing slash kept)", async () => {
     const lang: Locale = "en";
     const messy = "///en////blog//example";

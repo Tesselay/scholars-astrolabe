@@ -5,21 +5,10 @@ import {
   getContentManifest,
   altLocalesFor,
 } from "@/i18n";
-import { getCollection } from "astro:content";
+
 const locales: Locale[] = ["en", "de"];
 
 describe("routing: pageExistsForLocale integration", () => {
-  it("debug: show blog entries", async () => {
-    const posts = await getCollection("blog");
-    console.log(
-      "blog count:",
-      posts.length,
-      "ids:",
-      posts.map((p) => p.id),
-    );
-    expect(posts.length).toBeGreaterThan(0);
-  });
-
   it("recognizes neutral paths for existing localized pages", async () => {
     const manifest = await getContentManifest();
     for (const lang of locales) {
