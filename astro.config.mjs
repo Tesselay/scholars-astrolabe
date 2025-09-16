@@ -52,6 +52,21 @@ const scheme = parsed.FORCE_HTTP
     : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
+function diagnosticGraph() {
+  return {
+    name: "diagnostic-graph",
+    configResolved(cfg) {
+      console.log("[diagnostic] root=", cfg.root);
+      console.log("[diagnostic] ssr.noExternal=", cfg.ssr?.noExternal);
+      console.log(
+        "[diagnostic] optimizeDeps.ssr.include=",
+        cfg.optimizeDeps?.include,
+      );
+      console.log("[diagnostic] aliases=", cfg.resolve?.alias);
+    },
+  };
+}
+
 export default defineConfig({
   site: siteString,
   markdown: {
@@ -101,5 +116,8 @@ export default defineConfig({
   alias: {
     "@": "./src",
     "@/i18n": "./src/i18n",
+  },
+  vite: {
+    plugins: [diagnosticGraph()],
   },
 });

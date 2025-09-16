@@ -1,60 +1,30 @@
-import { defineConfig } from "vitest/config";
 import { getViteConfig } from "astro/config";
-import { mergeConfig, type InlineConfig, type PluginOption } from "vite";
 
-export default defineConfig(async () => {
-  let base = getViteConfig({ mode: "test" });
-
-  if (typeof base === "function") {
-    // @ts-expect-error irrelevant type mismatch
-    base = await base({ command: "serve", mode: "test" });
-  }
-
-  const astroVite = base as InlineConfig;
-
-  const diagnosticGraph: PluginOption = {
-    name: "diagnostic-graph",
-    configResolved(cfg) {
-      console.log("[diagnostic] root=", cfg.root);
-      console.log("[diagnostic] ssr.noExternal=", cfg.ssr?.noExternal);
-      console.log(
-        "[diagnostic] optimizeDeps.ssr.include=",
-        cfg.optimizeDeps?.include,
-      );
-    },
-  };
-
-  const vitestOnly: InlineConfig = {
-    root: process.cwd(),
-    resolve: {
-      preserveSymlinks: true,
-    },
-    ssr: {
-      noExternal: ["astro", "@astrojs/*", "astro/loaders"],
-    },
-    test: {
-      environment: "node",
-      // Ensure no race condition trips up CI
-      pool: "forks",
-      maxWorkers: 1,
-      isolate: false,
-      globalSetup: "./tests/setup/global.ts",
-      deps: {
-        optimizer: {
-          ssr: {
-            include: [
-              "astro",
-              "astro/loaders",
-              "@astrojs/check",
-              "@astrojs/rss",
-              "@astrojs/sitemap",
-            ],
-          },
+export default getViteConfig({
+  // @ts-expect-error: TS complains wrongly about test not existing for UserConfig
+  test: {
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: { label: "unit", color: "cyan" },
+          environment: "node",
+          dir: "tests/unit",
+          include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],
         },
       },
-    },
-    plugins: [diagnosticGraph],
-  };
-
-  return mergeConfig(astroVite, vitestOnly);
+      {
+        extends: true,
+        test: {
+          name: { label: "integration", color: "magenta" },
+          environment: "node",
+          dir: "tests/integration",
+          include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],
+          globalSetup: ["tests/setup/astro-content-server.ts"],
+          pool: "forks",
+          isolate: false,
+        },
+      },
+    ],
+  },
 });
