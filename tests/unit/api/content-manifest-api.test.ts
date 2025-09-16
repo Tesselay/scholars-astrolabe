@@ -8,7 +8,7 @@ vi.mock("@/i18n", () => ({
 describe("API: /api/content-manifest.json GET", () => {
   it("returns application/json and flattens Map<Lang, Set<string>> to plain object of arrays", async () => {
     const blogSlugsByLang = new Map<string, Set<string>>([
-      ["en", new Set(["p1", "blog/p3"])],
+      ["en", new Set(["p1", "p3"])],
       ["de", new Set(["p2"])],
     ]);
 
@@ -35,7 +35,7 @@ describe("API: /api/content-manifest.json GET", () => {
     );
 
     const expected = {
-      en: ["blog/p3", "p1"].sort(),
+      en: ["p3", "p1"].sort(),
       de: ["p2"].sort(),
     } as const;
 

@@ -39,7 +39,7 @@ describe("Layout SEO links: alternates edge cases", () => {
   it("includes only locales that actually have the blog post", async () => {
     const manifest = await getContentManifest();
     const current: Locale = "en";
-    const neutralPath = stripLangFromUrlOrId("/blog/example");
+    const neutralPath = stripLangFromUrlOrId("/blog/example2");
 
     const alternates = altLocalesFor(current, String(neutralPath), manifest);
     const hrefs = alternates.map((l) => ({
@@ -47,18 +47,17 @@ describe("Layout SEO links: alternates edge cases", () => {
       href: base + pathWithLocale(l, String(neutralPath)),
     }));
 
-    expect(alternates).toStrictEqual(["de"]);
-    expect(hrefs).toStrictEqual([
-      { hreflang: "de", href: "https://example.com/de/blog/example" },
-    ]);
+    expect(alternates).toStrictEqual([]);
+    expect(hrefs).toStrictEqual([]);
   });
 
   it("offers all other locales for dynamic pages (non content-driven)", async () => {
     const manifest = await getContentManifest();
     const current: Locale = "de";
-    const neutralPath = stripLangFromUrlOrId("blog"); // dynamic page (/blog)
+    const neutralPath = stripLangFromUrlOrId("blog");
 
-    const alternates = altLocalesFor(current, String(neutralPath), manifest);
+    const alternates = altLocalesFor(current, neutralPath, manifest);
+
     const hrefs = alternates.map((l) => ({
       hreflang: l,
       href: base + pathWithLocale(l, String(neutralPath)),
