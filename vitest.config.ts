@@ -38,7 +38,7 @@ export default defineConfig(async () => {
       pool: "forks",
       maxWorkers: 1,
       isolate: false,
-      setupFiles: ["./tests/setup/preload-astro-content.ts"],
+      globalSetup: "./tests/setup/global.ts",
       deps: {
         optimizer: {
           ssr: {
