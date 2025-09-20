@@ -36,6 +36,7 @@ jobs:
         with:
           node-version: 20
 
+      # --- Package Manager ---
       - name: Enable Yarn
         run: corepack enable
 
@@ -55,6 +56,16 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
+
+      # --- Build + Serve dist ---
+      - name: Build site
+        run: yarn build
+
+      - name: Serve dist
+        run: yarn astro preview --host ${{ env.HOST }} --port ${{ env.PORT }} "$E2E_BASE_URL" &
+
+      - name: Wait for server
+        run: yarn wait-on -t 5m "$E2E_BASE_URL"
 
       # --- E2E Tests ---
       # Cache browsers to save time

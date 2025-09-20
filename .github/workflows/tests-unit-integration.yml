@@ -31,6 +31,7 @@ jobs:
         with:
           node-version: 20
 
+      # --- Package Manager ---
       - name: Enable Yarn
         run: corepack enable
 
@@ -50,6 +51,17 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
+
+      # --- Content Tests ---
+      - name: Show content tree (debug)
+        run: |
+          echo "::group::content"
+          ls -la src/content || true
+          find src/content -maxdepth 3 -type f | sort | head -n 200 || true
+          echo "::endgroup::"
+
+      - name: astro sync in test mode (debug)
+        run: yarn astro sync --mode test --verbose
 
       # --- Unit Tests ---
       - name: DEBUG verbose check
