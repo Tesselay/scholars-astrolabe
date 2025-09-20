@@ -1,0 +1,63 @@
+name: Unit & Integration Tests
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      NODE_ENV: test
+      FORCE_HTTP: true
+      ASTRO_TELEMETRY_DISABLED: 1
+      SITE_NAME: "Scholar's Astrolabe"
+      ASTRO_LOG_LEVEL: debug
+      VITE_DEBUG: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable Yarn
+        run: corepack enable
+
+      # Cache Yarn artifacts (Yarn Berry)
+      - name: Cache Yarn
+        uses: actions/cache@v4
+        with:
+          path: |
+            .yarn/cache
+            .yarn/install-state.gz
+            .yarn/unplugged
+            .yarn/build-state.yml
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      # --- Unit Tests ---
+      - name: DEBUG verbose check
+        run: yarn astro check --verbose
+
+      - name: Run unit tests
+        run: yarn test:unit
+
+      # --- Integration Tests ---
+      - name: Run integration tests
+        run: yarn test:integration
