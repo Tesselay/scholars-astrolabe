@@ -18,6 +18,7 @@ jobs:
 
     env:
       CI: true
+      TZ: UTC
       FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
       SITE_NAME: "Scholar's Astrolabe"
@@ -49,20 +50,18 @@ jobs:
         run: yarn install --immutable --inline-builds
 
       # --- Content Tests ---
-      - name: Show content tree (debug)
+      - name: astro sync in test mode
+        run: yarn astro sync
+
+      - name: Show content tree
+        if: ${{ failure() }}
         run: |
           echo "::group::content"
           ls -la src/content || true
           find src/content -maxdepth 3 -type f | sort | head -n 200 || true
           echo "::endgroup::"
 
-      - name: astro sync in test mode (debug)
-        run: yarn astro sync --mode test --verbose
-
       # --- Unit Tests ---
-      - name: DEBUG verbose check
-        run: yarn astro check --verbose
-
       - name: Run unit tests
         run: yarn test:unit
 
