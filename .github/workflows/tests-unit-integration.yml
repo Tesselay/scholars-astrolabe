@@ -17,12 +17,9 @@ jobs:
     timeout-minutes: 30
 
     env:
-      NODE_ENV: test
       FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
       SITE_NAME: "Scholar's Astrolabe"
-      ASTRO_LOG_LEVEL: debug
-      VITE_DEBUG: true
 
     steps:
       - uses: actions/checkout@v4
@@ -35,22 +32,19 @@ jobs:
       - name: Enable Yarn
         run: corepack enable
 
-      # Cache Yarn artifacts (Yarn Berry)
-      - name: Cache Yarn
+      # Cache Yarn artifacts
+      - name: Cache Yarn (Berry)
         uses: actions/cache@v4
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
-            .yarn/unplugged
-            .yarn/build-state.yml
-            node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node${{ steps.node.outputs.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node${{ steps.node.outputs.node-version }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --immutable --inline-builds
 
       # --- Content Tests ---
       - name: Show content tree (debug)
