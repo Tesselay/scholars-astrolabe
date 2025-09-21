@@ -30,21 +30,18 @@ jobs:
       - name: Enable Corepack (Yarn)
         run: corepack enable
 
-      - name: Cache Yarn
+      - name: Cache Yarn (Berry)
         uses: actions/cache@v4
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
-            .yarn/unplugged
-            .yarn/build-state.yml
-            node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node${{ steps.node.outputs.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node${{ steps.node.outputs.node-version }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --immutable --inline-builds
 
       # --- Lint / Format  ---
       - name: Prettier (format check)
