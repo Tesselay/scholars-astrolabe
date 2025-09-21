@@ -77,9 +77,6 @@ jobs:
         run: yarn playwright install --with-deps
 
       - name: Run e2e tests
-        env:
-          # Enable GitHub annotations via Playwright config gating (isCI)
-          CI: true
         run: yarn e2e
 
       - name: Upload Playwright report

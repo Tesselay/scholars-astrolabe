@@ -32,11 +32,9 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
 
-  // Start a server only when we don't have an external one (e.g., local runs).
   webServer: hasExternalServer
     ? undefined
     : {
-        // Production-like: build once, then preview (serves dist/)
         command: `npx astro build && npx astro preview --host ${HOST} --port ${PORT}`,
         url: DEFAULT_URL,
         reuseExistingServer: !isCI,
