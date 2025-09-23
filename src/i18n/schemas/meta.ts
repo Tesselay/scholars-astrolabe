@@ -1,36 +1,37 @@
 import { z } from "zod";
+import enMETA from "../dictionaries/en/meta.json";
 
-export const pageIds = [
-  "home",
-  "folio",
-  "blog:index",
-  "blog:page",
-  "contact",
-  "tags:index",
-  "tags:page",
-] as const;
-export type PageId = (typeof pageIds)[number];
-export type PageMeta = {
-  title: string;
-  description?: string;
-};
-export type MetaDictionary = Record<PageId, PageMeta> & {
-  site: {
-    name: string;
-  };
-};
-const PageMetaSchema = z.object({
-  title: z.string(),
-  description: z.string().optional(),
-});
-const PagesSchema = z
-  .object(
-    Object.fromEntries(pageIds.map((k) => [k, PageMetaSchema])) as Record<
-      PageId,
-      typeof PageMetaSchema
-    >,
-  )
-  .strict();
-export const MetaDictionarySchema = PagesSchema.extend({
-  site: z.object({ name: z.string() }).strict(),
-}).strict();
+type StringLeaves<T> = T extends string
+  ? string
+  : T extends Record<string, unknown>
+    ? { [K in keyof T]: StringLeaves<T[K]> }
+    : never;
+
+type SchemaOf<T> = T extends string
+  ? z.ZodString
+  : T extends Record<string, unknown>
+    ? z.ZodObject<{ [K in keyof T]: SchemaOf<T[K]> }, "strict">
+    : never;
+
+function buildStrictSchema<T>(obj: T): SchemaOf<T> {
+  if (typeof obj === "string") {
+    return z.string() as unknown as SchemaOf<T>;
+  }
+
+  if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+    const shape: Record<string, z.ZodType<unknown>> = {};
+    for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
+      shape[key] = buildStrictSchema(
+        value as unknown,
+      ) as unknown as z.ZodType<unknown>;
+    }
+
+    return z.object(shape).strict() as unknown as SchemaOf<T>;
+  }
+
+  return z.never() as unknown as SchemaOf<T>;
+}
+
+export const MetaSchema = buildStrictSchema(enMETA);
+
+export type Meta = StringLeaves<typeof enMETA>;

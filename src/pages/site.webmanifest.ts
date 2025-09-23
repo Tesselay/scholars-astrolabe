@@ -1,12 +1,12 @@
 import type { APIRoute } from "astro";
 
-import { getPageMetaAsync } from "@/i18n";
+import { getMetaAsync } from "@/i18n";
 
-const meta = await getPageMetaAsync("en", "home");
+const meta = await getMetaAsync("en");
 
 export const GET: APIRoute = () => {
   const manifest = {
-    name: meta.siteName,
+    name: meta.site.name,
     short_name: "Astrolabe",
     start_url: "/",
     scope: "/",

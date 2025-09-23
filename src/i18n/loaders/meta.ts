@@ -1,47 +1,45 @@
-import { defaultLocale, type Locale, locales } from "../locales";
-import {
-  MetaDictionarySchema,
-  type MetaDictionary,
-  type PageId,
-  type PageMeta,
-} from "../schemas/meta";
+import { type Locale, locales } from "../locales";
+import { MetaSchema, type Meta } from "../schemas/meta";
 import { type DictGlob, loadDictFiles } from "../utils/internals.ts";
 
-let META: Readonly<Record<Locale, MetaDictionary>> | null = null;
+let META: Readonly<Record<Locale, Meta>> | null = null;
 
-export async function initMeta(files: DictGlob = loadDictFiles("meta")) {
-  const parsed: Partial<Record<Locale, MetaDictionary>> = {};
+function validate(locale: Locale, data: unknown): Meta {
+  const parsed = MetaSchema.safeParse(data);
+  if (!parsed.success) {
+    console.error(
+      `[i18n:UI] Invalid META dictionary for ${locale}:`,
+      parsed.error.format(),
+    );
+    throw new Error(`Invalid META dictionary for ${locale}`);
+  }
+  return parsed.data;
+}
+
+export async function initMeta(
+  files: DictGlob = loadDictFiles("meta"),
+): Promise<void> {
+  const acc: Partial<Record<Locale, Meta>> = {};
   for (const [path, mod] of Object.entries(files)) {
     const lang = path.split("/").at(-2) as Locale | undefined;
     if (!lang || !locales.includes(lang)) continue;
-    parsed[lang] = MetaDictionarySchema.parse(mod.default);
+    acc[lang] = validate(lang, mod.default);
   }
-  META = Object.freeze(parsed) as Readonly<Record<Locale, MetaDictionary>>;
+  META = Object.freeze(acc) as Readonly<Record<Locale, Meta>>;
 }
 
-export function getPageMeta(
-  lang: Locale,
-  page: PageId,
-): PageMeta & { siteName: string } {
+export function getMeta(locale: Locale): Meta {
   if (!META) {
     throw new Error(
-      "[i18n:meta] getPageMeta() called before dictionaries were loaded. Use getPageMetaAsync() or call initMeta() in setup.",
+      "[i18n:meta] getMeta() called before dictionaries were loaded. Use getMetaAsync() or call initMeta() in setup.",
     );
   }
-  const dict: MetaDictionary = META[lang] ?? META[defaultLocale];
-  const fallback: MetaDictionary = META[defaultLocale];
-  const m = dict[page] ?? fallback[page];
-  if (!m) {
-    throw new Error(
-      `[i18n:meta] Page id "${page}" missing for ${lang} and default locale.`,
-    );
-  }
-  return { ...m, siteName: dict?.site.name ?? fallback!.site.name };
+  return META[locale];
 }
 
-export async function getPageMetaAsync(lang: Locale, page: PageId) {
-  if (!META) await initMeta(); // lazy-init in prod/tests unless setup ran
-  return getPageMeta(lang, page);
+export async function getMetaAsync(locale: Locale) {
+  if (!META) await initMeta();
+  return getMeta(locale);
 }
 
 export function __resetMeta() {

@@ -2,11 +2,11 @@
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import { normalizeNeutralPath, getContentManifest, altLocalesFor, pathWithLocale, stripLangFromUrlOrId, getLangFromUrl, getPageMetaAsync, ogLocales, defaultLocale } from "@/i18n";
+import { normalizeNeutralPath, getContentManifest, altLocalesFor, pathWithLocale, stripLangFromUrlOrId, getLangFromUrl, getMetaAsync, ogLocales, defaultLocale } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
-const meta = await getPageMetaAsync(lang, "home");
-const siteName = meta.siteName;
+const meta = await getMetaAsync(lang);
+const siteName = meta.home.title;
 const manifest = await getContentManifest();
 
 const {

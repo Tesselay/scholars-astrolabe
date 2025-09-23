@@ -3,7 +3,7 @@ import Layout from '../../../layouts/Layout.astro'
 import BlogPost from '../../../components/BlogPost.astro'
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { buildTagPaths, buildBlogPostPath, getPageMetaAsync, type Locale } from "@/i18n";
+import { buildTagPaths, buildBlogPostPath, getMetaAsync, type Locale } from "@/i18n";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -12,10 +12,12 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const { tag, posts } = Astro.props as { tag: string; posts: CollectionEntry<'blog'>[] }
-const meta = await getPageMetaAsync(lang as Locale, "tags:page");
+const meta = await getMetaAsync(lang);
+const title = meta['tags:page'].title;
+const description = meta['tags:page'].description;
 ---
 
-<Layout pageTitle={meta.title} description={meta.description}>
+<Layout pageTitle={title} description={description}>
   <h1>Posts tagged with {tag}</h1>
   <ul aria-label="Tagged Posts">
     {posts.map((post) => (

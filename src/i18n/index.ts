@@ -3,8 +3,7 @@ export { locales, defaultLocale, isLocale } from "./locales";
 export type { Locale } from "./locales";
 
 // Meta API
-export { getPageMeta, getPageMetaAsync } from "./loaders/meta";
-export type { PageId, PageMeta, MetaDictionary } from "./schemas/meta";
+export { getMeta, getMetaAsync } from "./loaders/meta";
 
 // Constants
 export { languages, ogLocales } from "./constants/languages";

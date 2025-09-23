@@ -1,26 +1,26 @@
 export const mockMetaEN = {
   default: {
     site: { name: "Site EN" },
-    home: { title: "Home EN", description: "Desc EN" },
-    folio: { title: "Folio EN" },
-    "blog:index": { title: "Blog Index EN" },
-    "blog:page": { title: "Blog Page EN" },
-    contact: { title: "Contact EN" },
-    "tags:index": { title: "Tags Index EN" },
-    "tags:page": { title: "Tags Page EN" },
+    home: { title: "Home EN", description: "Home Desc EN" },
+    folio: { title: "Folio EN", description: "Folio Desc EN" },
+    "blog:index": { title: "Blog Index EN", description: "Blog Index Desc EN" },
+    "blog:page": { title: "Blog Page EN", description: "Blog Page Desc EN" },
+    contact: { title: "Contact EN", description: "Contact Desc EN" },
+    "tags:index": { title: "Tags Index EN", description: "Tags Index Desc EN" },
+    "tags:page": { title: "Tags Page EN", description: "Tags Page Desc EN" },
   },
 };
 
 export const mockMetaDE = {
   default: {
     site: { name: "Site DE" },
-    home: { title: "Home DE" },
-    folio: { title: "Folio DE" },
-    "blog:index": { title: "Blog Index DE" },
-    "blog:page": { title: "Blog Page DE" },
-    contact: { title: "Contact DE" },
-    "tags:index": { title: "Tags Index DE" },
-    "tags:page": { title: "Tags Page DE" },
+    home: { title: "Home DE", description: "Home Desc DE" },
+    folio: { title: "Folio DE", description: "Folio Desc DE" },
+    "blog:index": { title: "Blog Index DE", description: "Blog Index Desc DE" },
+    "blog:page": { title: "Blog Page DE", description: "Blog Page Desc DE" },
+    contact: { title: "Contact DE", description: "Contact Desc DE" },
+    "tags:index": { title: "Tags Index DE", description: "Tags Index Desc DE" },
+    "tags:page": { title: "Tags Page DE", description: "Tags Page Desc DE" },
   },
 };
 

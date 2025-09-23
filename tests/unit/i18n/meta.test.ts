@@ -1,9 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import {
-  __resetMeta,
-  getPageMetaAsync,
-  initMeta,
-} from "@/i18n/loaders/meta.ts";
+import { __resetMeta, getMetaAsync, initMeta } from "@/i18n/loaders/meta.ts";
 import { fakeGlob } from "../../utils/fake-glob.ts";
 import {
   mockMetaEmpty,
@@ -21,21 +17,14 @@ describe("Meta loader", () => {
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
     await initMeta(fakeGlob(mockMetaEN, mockMetaDE, "meta"));
-    const m = await getPageMetaAsync("en", "folio");
-    expect(m.title).toBe("Folio EN");
-    expect(m.siteName).toBe("Site EN");
-  });
-
-  it("handles optional fields and returns siteName from selected locale", async () => {
-    await initMeta(fakeGlob(mockMetaEN, mockMetaDE, "meta"));
-    const m = await getPageMetaAsync("de", "home");
-    expect(m.title).toBe("Home DE");
-    expect(m.siteName).toBe("Site DE");
+    const m = await getMetaAsync("en");
+    expect(m.folio.title).toBe("Folio EN");
+    expect(m.site.name).toBe("Site EN");
   });
 
   it("throws when dictionaries are invalid against strict schema", async () => {
     await expect(
       initMeta(fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")),
-    ).rejects.toThrow("Expected string, received number");
+    ).rejects.toThrow("Invalid META dictionary");
   });
 });
