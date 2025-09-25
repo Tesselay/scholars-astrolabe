@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import { type Locale, byLang, buildTagPath, pathsForAllLocales, getMetaAsync } from "@/i18n";
+import { type Locale, byLang, buildTagPath, pathsForAllLocales, metaLoader } from "@/i18n";
 
 export function getStaticPaths() {
   return pathsForAllLocales();
@@ -18,7 +18,7 @@ for (const post of allPosts) {
 }
 const tags = [...tagsWithCounts.entries()].sort(([a],[b]) => a.localeCompare(b));
 
-const meta = await getMetaAsync(lang);
+const meta = await metaLoader.getAsync(lang);
 const title = meta["tags:index"].title;
 const description = meta["tags:index"].description;
 ---

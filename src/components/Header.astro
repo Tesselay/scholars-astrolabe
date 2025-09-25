@@ -1,11 +1,10 @@
 ---
 import Navigation from './Navigation.astro'
 
-import { getLangFromUrl, pathWithLocale } from "@/i18n";
-import { getUiAsync } from "../i18n/loaders/ui";
+import { getLangFromUrl, pathWithLocale, uiLoader } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
-const ui = await getUiAsync(lang);
+const ui = await uiLoader.getAsync(lang);
 
 const homeUrl = pathWithLocale(lang, '/');
 const folioUrl = pathWithLocale(lang, '/folio/');

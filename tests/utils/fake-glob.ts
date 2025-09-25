@@ -1,16 +1,8 @@
-import type { DictGlob } from "@/i18n/utils/internals.ts";
+import type { DictGlob } from "@/i18n";
 
-export function fakeGlob(
-  en: { default: unknown },
-  de: { default: unknown },
-  filename: string,
-): DictGlob {
+export function fakeGlob(en: unknown, de: unknown, filename: string): DictGlob {
   return {
-    [`/virtual/i18n/dictionaries/en/${filename}.json`]: en as {
-      default: unknown;
-    },
-    [`/virtual/i18n/dictionaries/de/${filename}.json`]: de as {
-      default: unknown;
-    },
+    [`/virtual/i18n/dictionaries/en/${filename}.json`]: { default: en },
+    [`/virtual/i18n/dictionaries/de/${filename}.json`]: { default: de },
   };
 }

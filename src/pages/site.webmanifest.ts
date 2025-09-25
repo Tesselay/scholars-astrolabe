@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 
-import { getMetaAsync } from "@/i18n";
+import { metaLoader } from "@/i18n";
 
-const meta = await getMetaAsync("en");
+const meta = await metaLoader.getAsync("en");
 
 export const GET: APIRoute = () => {
   const manifest = {

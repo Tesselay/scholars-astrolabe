@@ -2,8 +2,10 @@
 export { locales, defaultLocale, isLocale } from "./locales";
 export type { Locale } from "./locales";
 
-// Meta API
-export { getMeta, getMetaAsync } from "./loaders/meta";
+// Dict API
+export { uiLoader, metaLoader } from "./dictBuilder.ts";
+export { type StringLeaves, buildStrictSchema } from "./utils/schemaBuilder.ts";
+export { GenericLoader, type DictGlob } from "./utils/genericLoader.ts";
 
 // Constants
 export { languages, ogLocales } from "./constants/languages";

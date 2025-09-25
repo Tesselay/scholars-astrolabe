@@ -1,7 +1,6 @@
 import { z } from "zod";
-import enUI from "../dictionaries/en/ui.json";
 
-type StringLeaves<T> = T extends string
+export type StringLeaves<T> = T extends string
   ? string
   : T extends Record<string, unknown>
     ? { [K in keyof T]: StringLeaves<T[K]> }
@@ -13,7 +12,7 @@ type SchemaOf<T> = T extends string
     ? z.ZodObject<{ [K in keyof T]: SchemaOf<T[K]> }, "strict">
     : never;
 
-function buildStrictSchema<T>(obj: T): SchemaOf<T> {
+export function buildStrictSchema<T>(obj: T): SchemaOf<T> {
   if (typeof obj === "string") {
     return z.string() as unknown as SchemaOf<T>;
   }
@@ -31,7 +30,3 @@ function buildStrictSchema<T>(obj: T): SchemaOf<T> {
 
   return z.never() as unknown as SchemaOf<T>;
 }
-
-export const UiSchema = buildStrictSchema(enUI);
-
-export type Ui = StringLeaves<typeof enUI>;

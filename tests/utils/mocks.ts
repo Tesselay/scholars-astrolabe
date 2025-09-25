@@ -1,92 +1,74 @@
 export const mockMetaEN = {
-  default: {
-    site: { name: "Site EN" },
-    home: { title: "Home EN", description: "Home Desc EN" },
-    folio: { title: "Folio EN", description: "Folio Desc EN" },
-    "blog:index": { title: "Blog Index EN", description: "Blog Index Desc EN" },
-    "blog:page": { title: "Blog Page EN", description: "Blog Page Desc EN" },
-    contact: { title: "Contact EN", description: "Contact Desc EN" },
-    "tags:index": { title: "Tags Index EN", description: "Tags Index Desc EN" },
-    "tags:page": { title: "Tags Page EN", description: "Tags Page Desc EN" },
-  },
+  site: { name: "Site EN" },
+  home: { title: "Home EN", description: "Home Desc EN" },
+  folio: { title: "Folio EN", description: "Folio Desc EN" },
+  "blog:index": { title: "Blog Index EN", description: "Blog Index Desc EN" },
+  "blog:page": { title: "Blog Page EN", description: "Blog Page Desc EN" },
+  contact: { title: "Contact EN", description: "Contact Desc EN" },
+  "tags:index": { title: "Tags Index EN", description: "Tags Index Desc EN" },
+  "tags:page": { title: "Tags Page EN", description: "Tags Page Desc EN" },
 };
 
 export const mockMetaDE = {
-  default: {
-    site: { name: "Site DE" },
-    home: { title: "Home DE", description: "Home Desc DE" },
-    folio: { title: "Folio DE", description: "Folio Desc DE" },
-    "blog:index": { title: "Blog Index DE", description: "Blog Index Desc DE" },
-    "blog:page": { title: "Blog Page DE", description: "Blog Page Desc DE" },
-    contact: { title: "Contact DE", description: "Contact Desc DE" },
-    "tags:index": { title: "Tags Index DE", description: "Tags Index Desc DE" },
-    "tags:page": { title: "Tags Page DE", description: "Tags Page Desc DE" },
-  },
+  site: { name: "Site DE" },
+  home: { title: "Home DE", description: "Home Desc DE" },
+  folio: { title: "Folio DE", description: "Folio Desc DE" },
+  "blog:index": { title: "Blog Index DE", description: "Blog Index Desc DE" },
+  "blog:page": { title: "Blog Page DE", description: "Blog Page Desc DE" },
+  contact: { title: "Contact DE", description: "Contact Desc DE" },
+  "tags:index": { title: "Tags Index DE", description: "Tags Index Desc DE" },
+  "tags:page": { title: "Tags Page DE", description: "Tags Page Desc DE" },
 };
 
 export const mockMetaInvalid = {
-  default: {
-    site: { name: "Site DE" },
-    home: { title: 42 },
-    folio: { title: "Folio DE" },
-    "blog:index": { title: "Blog Index DE" },
-    "blog:page": { title: "Blog Page DE" },
-    contact: { title: "Contact DE" },
-    "tags:index": { title: "Tags Index DE" },
-    "tags:page": { title: "Tags Page DE" },
-  },
+  site: { name: "Site DE" },
+  home: { title: 42 },
+  folio: { title: "Folio DE" },
+  "blog:index": { title: "Blog Index DE" },
+  "blog:page": { title: "Blog Page DE" },
+  contact: { title: "Contact DE" },
+  "tags:index": { title: "Tags Index DE" },
+  "tags:page": { title: "Tags Page DE" },
 };
 
-export const mockMetaEmpty = {
-  default: {},
-};
+export const mockMetaEmpty = {};
 
 export const mockUiEN = {
-  default: {
-    nav: {
-      home: "Home EN",
-      portfolio: "Portfolio EN",
-      blog: "Blog EN",
-      contact: "Contact EN",
-    },
+  nav: {
+    home: "Home EN",
+    portfolio: "Portfolio EN",
+    blog: "Blog EN",
+    contact: "Contact EN",
   },
 };
 
 export const mockUiDE = {
-  default: {
-    nav: {
-      home: "Startseite DE",
-      portfolio: "Portfolio DE",
-      blog: "Blog DE",
-      contact: "Kontakt DE",
-    },
+  nav: {
+    home: "Startseite DE",
+    portfolio: "Portfolio DE",
+    blog: "Blog DE",
+    contact: "Kontakt DE",
   },
 };
 
 export const mockUiInvalid = {
-  default: {
-    nav: {
-      home: 42,
-      portfolio: "Portfolio",
-      blog: "Blog",
-      contact: "Contact",
-    },
+  nav: {
+    home: 42,
+    portfolio: "Portfolio",
+    blog: "Blog",
+    contact: "Contact",
   },
 };
 
-export const mockUiEmpty = {
-  default: {},
-};
+export const mockUiEmpty = {};
 
 export const mockUiExtra = {
-  default: {
-    nav: {
-      home: "Home",
-      portfolio: "Portfolio",
-      blog: "Blog",
-      contact: "Contact",
-      extra: "Extra",
-    },
+  nav: {
+    home: "Home",
+    portfolio: "Portfolio",
+    blog: "Blog",
+    contact: "Contact",
+    extra: "Extra",
   },
 };
 
