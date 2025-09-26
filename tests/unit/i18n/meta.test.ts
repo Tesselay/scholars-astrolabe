@@ -8,8 +8,6 @@ import {
   mockMetaEN,
 } from "../../utils/mocks.ts";
 
-// SCHAPE MISMATCH => { default: { site: ... } } vs (wanted) { site: ... }
-
 describe("Meta loader", () => {
   const MetaSchema = buildStrictSchema(mockMetaEN);
   type Meta = StringLeaves<typeof mockMetaEN>;
