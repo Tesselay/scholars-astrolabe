@@ -53,6 +53,8 @@ const scheme = parsed.FORCE_HTTP
     : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
+const vitePlugins = envObj.MODE === "production" ? [] : [diagnosticGraph()];
+
 export default defineConfig({
   site: siteString,
   markdown: {
@@ -104,6 +106,6 @@ export default defineConfig({
     "@/i18n": "./src/i18n",
   },
   vite: {
-    plugins: [diagnosticGraph()],
+    plugins: vitePlugins,
   },
 });
