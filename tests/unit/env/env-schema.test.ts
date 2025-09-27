@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseEnvLike } from "@/env/parse.ts";
+import { parseEnvLike } from "@/types/parse.ts";
 
 describe("Env schema", () => {
   it("applies defaults when values are missing", () => {

@@ -1,0 +1,25 @@
+---
+interface Props {
+    rawSvg: string;
+    title?: string;
+    class?: string;
+    style?: string;
+    width?: string | number;
+    height?: string | number;
+    role?: string;
+}
+const { rawSvg, title, class: className, style, width, height, role = "graphics-symbol img" } = Astro.props as Props;
+
+if (typeof rawSvg !== "string") {
+    throw new TypeError("Icon: rawSvg must be a raw SVG string (use ?raw).");
+}
+
+const aria = title ? ` role="${role}" aria-label="${title}"` : `role="${role}" aria-hidden="true"`;
+const sizeAttrs = (width ? ` width="${width}"` : "") + (height ? ` height="${height}"` : "");
+const patched = rawSvg.replace(
+    '<svg',
+    `<svg${aria}${sizeAttrs}`
+)
+---
+
+<div class={className} style={style} set:html={patched}/>

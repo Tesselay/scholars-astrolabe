@@ -8,7 +8,7 @@ Sitemap: ${sitemapURL.href}
 
 `;
 
-import { env as appEnv } from "@/env/env.ts";
+import { env as appEnv } from "@/types/env.ts";
 
 export const GET: APIRoute = ({ site, request }) => {
   // Prefer configured site origin; otherwise fall back to env-based origin.

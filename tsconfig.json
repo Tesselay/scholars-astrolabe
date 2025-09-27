@@ -8,6 +8,6 @@
       "@/*": ["*"],
       "@/i18n": ["i18n"]
     },
-    "types": ["vite/client", "vitest"]
+    "types": ["astro/client", "vite/client", "vitest"]
   }
 }
