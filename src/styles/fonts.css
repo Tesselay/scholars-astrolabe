@@ -13,10 +13,8 @@
   font-family: "Cormorant Garamond Variable";
   src:
     local("Cormorant Garamond Variable Italic"),
-    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2")
-      format("woff2"),
-    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.ttf")
-      format("truetype");
+    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2") format("woff2"),
+    url("/fonts/CormorantGaramond-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 700;
   font-style: italic;
   font-display: swap;
@@ -37,10 +35,8 @@
   font-family: "Source Serif 4 Variable";
   src:
     local("Source Serif 4 Variable Italic"),
-    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.woff2")
-      format("woff2"),
-    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.ttf")
-      format("truetype");
+    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.woff2") format("woff2"),
+    url("/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.ttf") format("truetype");
   font-weight: 200 900;
   font-style: italic;
   font-display: swap;

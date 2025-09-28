@@ -1,21 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import '../styles/global.css'
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
 import { env } from "@/types/env.ts";
 import Icon from "@/components/Icon.astro";
-import heartSvg from '@phosphor-icons/core/assets/regular/heart.svg?raw';
+import heartSvg from "@phosphor-icons/core/assets/regular/heart.svg?raw";
 
 export const prerender = env.TEST_PAGE;
 
-const pageTitle = 'Test Page'
+const pageTitle = "Test Page";
 ---
 
 <Layout pageTitle={pageTitle}>
-    <Icon rawSvg={heartSvg} class="astro-icon" title="Favorites" width="48" height="48" />
+  <Icon rawSvg={heartSvg} class="astro-icon" title="Favorites" width="48" height="48" />
 </Layout>
 
 <style>
-    :global(.astro-icon) {
-        color: red;
-    }
+  :global(.astro-icon) {
+    color: red;
+  }
 </style>

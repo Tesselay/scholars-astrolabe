@@ -5,9 +5,7 @@ import { buildBlogPostPath } from "@/i18n";
 
 export async function GET(context) {
   // Fallback to the request origin if context.site isn't available
-  const site =
-    (context.site && String(context.site)) ||
-    new URL(context.request.url).origin;
+  const site = (context.site && String(context.site)) || new URL(context.request.url).origin;
 
   const posts = await getCollection("blog");
   return rss({
@@ -19,8 +17,8 @@ export async function GET(context) {
       tags: post.data.tags,
       dateCreated: post.data["date-created"],
       dateModified: post.data["date-modified"],
-      link: buildBlogPostPath("en", post.id),
+      link: buildBlogPostPath("en", post.id)
     })),
-    customData: `<language>en-us</language>`,
+    customData: `<language>en-us</language>`
   });
 }

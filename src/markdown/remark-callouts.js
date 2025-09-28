@@ -15,7 +15,7 @@ const TYPE_ALIASES = {
   tip: "tip",
   todo: "todo",
   warning: "warning",
-  caution: "warning",
+  caution: "warning"
 };
 
 function capitalize(s) {
@@ -26,19 +26,11 @@ export default function remarkCallouts() {
   return (tree) => {
     visit(tree, "blockquote", (node) => {
       const first = node.children && node.children[0];
-      if (
-        !first ||
-        first.type !== "paragraph" ||
-        !first.children ||
-        !first.children.length
-      )
-        return;
+      if (!first || first.type !== "paragraph" || !first.children || !first.children.length) return;
 
       // Build a raw string from the first paragraph's inline nodes
       const raw = first.children
-        .map((c) =>
-          c.type === "text" ? c.value : c.children?.[0]?.value || "",
-        )
+        .map((c) => (c.type === "text" ? c.value : c.children?.[0]?.value || ""))
         .join("");
 
       const m = raw && raw.match(CALLOUT);
@@ -54,9 +46,7 @@ export default function remarkCallouts() {
       // Remove the marker from ONLY the first text node
       const firstInline = first.children[0];
       if (firstInline && firstInline.type === "text") {
-        firstInline.value = firstInline.value
-          .replace(CALLOUT, "")
-          .replace(/^\s+/, "");
+        firstInline.value = firstInline.value.replace(CALLOUT, "").replace(/^\s+/, "");
       }
 
       // Tell remark-rehype to output <aside ...>...</aside>
@@ -68,8 +58,8 @@ export default function remarkCallouts() {
         "data-title": title,
         ...(collapse && {
           "data-collapsible": "true",
-          "data-collapsed": collapse === "-" ? "true" : "false",
-        }),
+          "data-collapsed": collapse === "-" ? "true" : "false"
+        })
       };
     });
   };

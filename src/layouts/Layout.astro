@@ -1,8 +1,18 @@
 ---
-import '../styles/global.css'
-import Header from '../compositions/Header.astro'
-import Footer from '../compositions/Footer.astro'
-import { normalizeNeutralPath, getContentManifest, altLocalesFor, pathWithLocale, stripLangFromUrlOrId, getLangFromUrl, metaLoader, ogLocales, defaultLocale } from "@/i18n";
+import "../styles/global.css";
+import Header from "../compositions/Header.astro";
+import Footer from "../compositions/Footer.astro";
+import {
+  normalizeNeutralPath,
+  getContentManifest,
+  altLocalesFor,
+  pathWithLocale,
+  stripLangFromUrlOrId,
+  getLangFromUrl,
+  metaLoader,
+  ogLocales,
+  defaultLocale
+} from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const meta = await metaLoader.getAsync(lang);
@@ -12,13 +22,11 @@ const manifest = await getContentManifest();
 const {
   pageTitle = siteName,
   description = `A page on ${siteName}`,
-  ogType = 'website',
-  ogImage,
-} = Astro.props
+  ogType = "website",
+  ogImage
+} = Astro.props;
 
-const fullTitle = pageTitle.includes(siteName) ?
-  pageTitle :
-  `${siteName} - ${pageTitle}`;
+const fullTitle = pageTitle.includes(siteName) ? pageTitle : `${siteName} - ${pageTitle}`;
 
 const ogLocale = ogLocales[lang] ?? ogLocales[defaultLocale];
 const base = Astro.site ?? Astro.url.origin;
@@ -32,10 +40,10 @@ const altLocales = altLocalesFor(lang, neutralPath, manifest);
 const alternates = altLocales.map((l) => ({
   hreflang: l,
   href: new URL(pathWithLocale(l, neutralPath), base).href,
-  ogLocale: ogLocales[l],
+  ogLocale: ogLocales[l]
 }));
 
-const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollow';
+const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";
 ---
 
 <!doctype html>
@@ -48,9 +56,7 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
     <!-- Canonical and Alternates -->
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
-    {alternates.map((alt) => (
-      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
-    ))}
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
 
     <!-- Basic SEO Defaults -->
     <title>{fullTitle}</title>
@@ -63,9 +69,7 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
     <meta property="og:title" content={fullTitle} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={ogLocale} />
-    {alternates.map((alt) => (
-      <meta property="og:locale:alternate" content={alt.ogLocale} />
-    ))}
+    {alternates.map((alt) => <meta property="og:locale:alternate" content={alt.ogLocale} />)}
     <meta property="og:description" content={description} />
     {ogImage && <meta property="og:image" content={ogImage} />}
 
@@ -81,15 +85,27 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
 
     <!-- PWA/UI -->
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2e9d6">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0a0e19">
-    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2e9d6" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0e19" />
+    <meta name="color-scheme" content="dark light" />
 
     <!-- Optional Policies/Perf -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="robots" content={robotsContent} />
-    <link rel="preload" href="/fonts/CormorantGaramond-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/SourceSerif4-VariableFont_opsz,wght.woff2" as="font" type="font/woff2" crossorigin>
+    <link
+      rel="preload"
+      href="/fonts/CormorantGaramond-VariableFont_wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/SourceSerif4-VariableFont_opsz,wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- Page Specific -->
     <slot name="head" />
@@ -107,8 +123,8 @@ const robotsContent = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollo
 </html>
 
 <script is:inline>
-  window.addEventListener('DOMContentLoaded', () => {
-    const main = document.getElementById('main');
+  window.addEventListener("DOMContentLoaded", () => {
+    const main = document.getElementById("main");
     if (main instanceof HTMLElement) main.focus();
   });
 </script>

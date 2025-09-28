@@ -9,7 +9,7 @@ import {
   pathWithLocale,
   normalizeNeutralPath,
   locales,
-  type Locale,
+  type Locale
 } from "@/i18n";
 
 describe("path utils", () => {
@@ -95,9 +95,7 @@ describe("path utils", () => {
     });
 
     it("collapses repeated slashes", () => {
-      expect(normalizeNeutralPath("///en////about//index.astro")).toBe(
-        "/about/",
-      );
+      expect(normalizeNeutralPath("///en////about//index.astro")).toBe("/about/");
     });
   });
 });

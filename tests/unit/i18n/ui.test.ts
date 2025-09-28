@@ -1,12 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { buildStrictSchema, GenericLoader, type StringLeaves } from "@/i18n";
 import { fakeGlob } from "../../utils/fake-glob.ts";
-import {
-  mockUiEN,
-  mockUiDE,
-  mockUiInvalid,
-  mockUiEmpty,
-} from "../../utils/mocks.ts";
+import { mockUiEN, mockUiDE, mockUiInvalid, mockUiEmpty } from "../../utils/mocks.ts";
 
 describe("UI loader validation", () => {
   const UiSchema = buildStrictSchema(mockUiEN);
@@ -18,11 +13,7 @@ describe("UI loader validation", () => {
   });
 
   it("loads and validates, with default-locale strict", async () => {
-    const uiLoader = new GenericLoader<Ui>(
-      "ui",
-      UiSchema,
-      fakeGlob(mockUiEN, mockUiDE, "ui"),
-    );
+    const uiLoader = new GenericLoader<Ui>("ui", UiSchema, fakeGlob(mockUiEN, mockUiDE, "ui"));
     const enUi = await uiLoader.getAsync("en");
     expect(enUi.nav.blog).toBe("Blog EN");
   });
@@ -31,7 +22,7 @@ describe("UI loader validation", () => {
     const uiLoader = new GenericLoader<Ui>(
       "ui",
       UiSchema,
-      fakeGlob(mockUiInvalid, mockUiEmpty, "ui"),
+      fakeGlob(mockUiInvalid, mockUiEmpty, "ui")
     );
 
     await expect(uiLoader.init()).rejects.toThrow("Invalid dictionary for en");

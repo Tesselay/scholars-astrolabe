@@ -17,9 +17,7 @@ export function __resetContentManifest() {
   cachedContentManifest = undefined;
 }
 
-export async function buildContentManifest(
-  getCollection: GetCollection = realGetCollection,
-) {
+export async function buildContentManifest(getCollection: GetCollection = realGetCollection) {
   const blogEntries = await getCollection("blog");
   const blogSlugsByLang = new Map<Locale, Set<string>>();
   const tagsByLang = new Map<Locale, Set<string>>();
@@ -54,6 +52,6 @@ export async function buildContentManifest(
     tagExists(lang: Locale, tagSlug: string) {
       const normalized = trimSlashes(collapseSlashes(tagSlug));
       return tagsByLang.get(lang)?.has(normalized) ?? false;
-    },
+    }
   } as const;
 }

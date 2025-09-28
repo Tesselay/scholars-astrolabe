@@ -9,7 +9,7 @@ export const GET: APIRoute = () => {
       "From: Bremen, Germany",
       "",
       "/* SITE */",
-      `Last update: ${new Date().toISOString().slice(0, 10)}`,
+      `Last update: ${new Date().toISOString().slice(0, 10)}`
       //'Standards: HTML5, CSS3, ES2025',
       //'Software: Astro, TypeScript'
     ].join("\n") + "\n";
@@ -17,7 +17,7 @@ export const GET: APIRoute = () => {
   return new Response(body, {
     headers: {
       "content-type": "text/plain; charset=utf-8",
-      "cache-control": "public, max-age=86400",
-    },
+      "cache-control": "public, max-age=86400"
+    }
   });
 };

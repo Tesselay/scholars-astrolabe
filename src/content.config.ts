@@ -2,10 +2,7 @@ import { glob } from "astro/loaders";
 import { defineCollection } from "astro:content";
 import { BlogPostSchema } from "./content/schema.ts";
 
-const blogBaseUrl = new URL(
-  "./src/content/blog/",
-  new URL(`file://${process.cwd()}/`),
-);
+const blogBaseUrl = new URL("./src/content/blog/", new URL(`file://${process.cwd()}/`));
 
 /*const blogBasePath = fileURLToPath(blogBaseUrl);
 console.log(
@@ -17,7 +14,7 @@ console.log(
 
 const postsCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: blogBaseUrl }),
-  schema: BlogPostSchema,
+  schema: BlogPostSchema
 });
 
 export const collections = { blog: postsCollection };

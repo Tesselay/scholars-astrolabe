@@ -17,7 +17,7 @@ export {
   getLangFromUrl,
   getLangFromId,
   getAllLocales,
-  getAlternateLocalesByURL,
+  getAlternateLocalesByURL
 } from "./utils/locale";
 export {
   pathWithLocale,
@@ -27,14 +27,9 @@ export {
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
-  normalizeNeutralPath,
+  normalizeNeutralPath
 } from "./utils/path";
-export {
-  buildBlogPostPath,
-  buildTagPath,
-  encodeTagPath,
-  buildTagPaths,
-} from "./utils/urlBuilders";
+export { buildBlogPostPath, buildTagPath, encodeTagPath, buildTagPaths } from "./utils/urlBuilders";
 
 // Routing
 export { pageExistsForLocale, altLocalesFor } from "./routing/routes";

@@ -1,9 +1,5 @@
 import { test, expect } from "../utils/fixtures.ts";
-import {
-  parseLangAndSlugFromHref,
-  escapeRegExp,
-  tagPathFromUrl,
-} from "../utils/url.ts";
+import { parseLangAndSlugFromHref, escapeRegExp, tagPathFromUrl } from "../utils/url.ts";
 
 test.describe("Tag detail page", () => {
   test.beforeEach(async ({ page, to }) => {
@@ -13,7 +9,7 @@ test.describe("Tag detail page", () => {
   test("navigates from tag index and shows posts for a tag (hierarchy supported)", async ({
     page,
     defaultLang,
-    manifest,
+    manifest
   }) => {
     const indexPath = new RegExp(`/${defaultLang}/tags/?$`, "i");
     await expect(page).toHaveURL(indexPath);
@@ -23,10 +19,7 @@ test.describe("Tag detail page", () => {
 
     const tagLinks = tagNav.getByRole("link");
     const tagCount = await tagLinks.count();
-    expect(
-      tagCount,
-      "Expected at least one tag on the tags index page",
-    ).toBeGreaterThan(0);
+    expect(tagCount, "Expected at least one tag on the tags index page").toBeGreaterThan(0);
 
     const firstLink = tagLinks.first();
     const href = await firstLink.getAttribute("href");
@@ -46,10 +39,7 @@ test.describe("Tag detail page", () => {
 
     const postLinks = postsNav.getByRole("link");
     const postCount = await postLinks.count();
-    expect(
-      postCount,
-      "Expected at least one post listed for the tag",
-    ).toBeGreaterThan(0);
+    expect(postCount, "Expected at least one post listed for the tag").toBeGreaterThan(0);
 
     // Quick validation for all listed post links
     for (let i = 0; i < postCount; i++) {
@@ -57,10 +47,7 @@ test.describe("Tag detail page", () => {
       await expect(link).toBeVisible();
       const postHref = await link.getAttribute("href");
       const text = (await link.innerText()).trim();
-      expect(
-        text.length,
-        "Post link title should not be empty",
-      ).toBeGreaterThan(0);
+      expect(text.length, "Post link title should not be empty").toBeGreaterThan(0);
       expect(postHref, "Post link should have an href").toBeTruthy();
 
       const { lang, slug } = parseLangAndSlugFromHref(page.url(), postHref!);
@@ -79,16 +66,15 @@ test.describe("Tag detail page", () => {
       const expectedPath = target.pathname.replace(/\/+$/, "");
       await Promise.all([
         page.waitForURL(new RegExp(`${escapeRegExp(expectedPath)}\\/?$`)),
-        link.click(),
+        link.click()
       ]);
 
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
       const knownSlugs = manifest.blogSlugsByLang[lang] ?? [];
-      expect(
-        knownSlugs.includes(slug),
-        `Slug not found in manifest for ${lang}/${slug}`,
-      ).toBe(true);
+      expect(knownSlugs.includes(slug), `Slug not found in manifest for ${lang}/${slug}`).toBe(
+        true
+      );
 
       // Go back to the tag page and ensure we are still on the same tag
       await page.goBack();

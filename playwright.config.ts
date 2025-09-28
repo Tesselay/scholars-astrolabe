@@ -23,13 +23,13 @@ export default defineConfig({
     baseURL: process.env.E2E_BASE_URL || DEFAULT_URL,
     trace: isCI ? "retain-on-failure" : "on-first-retry",
     screenshot: "only-on-failure",
-    video: isCI ? "retain-on-failure" : "off",
+    video: isCI ? "retain-on-failure" : "off"
   },
 
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+    { name: "webkit", use: { ...devices["Desktop Safari"] } }
   ],
 
   webServer: hasExternalServer
@@ -38,6 +38,6 @@ export default defineConfig({
         command: `npx astro build && npx astro preview --host ${HOST} --port ${PORT}`,
         url: DEFAULT_URL,
         reuseExistingServer: !isCI,
-        timeout: 180_000, // preview + first boot can take a bit on cold caches
-      },
+        timeout: 180_000 // preview + first boot can take a bit on cold caches
+      }
 });

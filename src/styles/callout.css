@@ -31,8 +31,7 @@ aside.callout.danger {
 }
 
 /* collapsed behavior (optional) */
-aside.callout[data-collapsible="true"][data-collapsed="true"]
-  > *:not(:first-child) {
+aside.callout[data-collapsible="true"][data-collapsed="true"] > *:not(:first-child) {
   display: none;
   /* You can add a disclosure triangle + JS if you want interactivity */
 }

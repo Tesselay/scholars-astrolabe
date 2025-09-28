@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from "../layouts/Layout.astro";
 import { pathWithLocale, defaultLocale } from "@/i18n";
 import { env } from "@/types/env.ts";
 
@@ -7,8 +7,8 @@ import { env } from "@/types/env.ts";
 
 export const prerender = env.ROOT_REDIRECT_PAGE;
 
-const pageTitle = 'Redirecting…';
-const target = pathWithLocale(defaultLocale, '/'); // e.g., '/en/'
+const pageTitle = "Redirecting…";
+const target = pathWithLocale(defaultLocale, "/"); // e.g., '/en/'
 ---
 
 <Layout pageTitle={pageTitle}>

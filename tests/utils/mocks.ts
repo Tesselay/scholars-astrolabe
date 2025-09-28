@@ -6,7 +6,7 @@ export const mockMetaEN = {
   "blog:page": { title: "Blog Page EN", description: "Blog Page Desc EN" },
   contact: { title: "Contact EN", description: "Contact Desc EN" },
   "tags:index": { title: "Tags Index EN", description: "Tags Index Desc EN" },
-  "tags:page": { title: "Tags Page EN", description: "Tags Page Desc EN" },
+  "tags:page": { title: "Tags Page EN", description: "Tags Page Desc EN" }
 };
 
 export const mockMetaDE = {
@@ -17,7 +17,7 @@ export const mockMetaDE = {
   "blog:page": { title: "Blog Page DE", description: "Blog Page Desc DE" },
   contact: { title: "Contact DE", description: "Contact Desc DE" },
   "tags:index": { title: "Tags Index DE", description: "Tags Index Desc DE" },
-  "tags:page": { title: "Tags Page DE", description: "Tags Page Desc DE" },
+  "tags:page": { title: "Tags Page DE", description: "Tags Page Desc DE" }
 };
 
 export const mockMetaInvalid = {
@@ -28,7 +28,7 @@ export const mockMetaInvalid = {
   "blog:page": { title: "Blog Page DE" },
   contact: { title: "Contact DE" },
   "tags:index": { title: "Tags Index DE" },
-  "tags:page": { title: "Tags Page DE" },
+  "tags:page": { title: "Tags Page DE" }
 };
 
 export const mockMetaEmpty = {};
@@ -38,8 +38,8 @@ export const mockUiEN = {
     home: "Home EN",
     portfolio: "Portfolio EN",
     blog: "Blog EN",
-    contact: "Contact EN",
-  },
+    contact: "Contact EN"
+  }
 };
 
 export const mockUiDE = {
@@ -47,8 +47,8 @@ export const mockUiDE = {
     home: "Startseite DE",
     portfolio: "Portfolio DE",
     blog: "Blog DE",
-    contact: "Kontakt DE",
-  },
+    contact: "Kontakt DE"
+  }
 };
 
 export const mockUiInvalid = {
@@ -56,8 +56,8 @@ export const mockUiInvalid = {
     home: 42,
     portfolio: "Portfolio",
     blog: "Blog",
-    contact: "Contact",
-  },
+    contact: "Contact"
+  }
 };
 
 export const mockUiEmpty = {};
@@ -68,8 +68,8 @@ export const mockUiExtra = {
     portfolio: "Portfolio",
     blog: "Blog",
     contact: "Contact",
-    extra: "Extra",
-  },
+    extra: "Extra"
+  }
 };
 
 export const mockBlog = [
@@ -79,5 +79,5 @@ export const mockBlog = [
   { id: "de/x1", data: { language: "xx" } },
   { id: "misc/other", data: {} },
   { id: "de/dup", data: {} },
-  { id: "de/dup", data: {} },
+  { id: "de/dup", data: {} }
 ];

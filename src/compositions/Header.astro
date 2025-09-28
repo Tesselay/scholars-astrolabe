@@ -1,15 +1,15 @@
 ---
-import Navigation from '../components/Navigation.astro'
+import Navigation from "../components/Navigation.astro";
 
 import { getLangFromUrl, pathWithLocale, uiLoader } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const ui = await uiLoader.getAsync(lang);
 
-const homeUrl = pathWithLocale(lang, '/');
-const folioUrl = pathWithLocale(lang, '/folio/');
-const blogUrl = pathWithLocale(lang, '/blog/');
-const contactUrl = pathWithLocale(lang, '/contact/');
+const homeUrl = pathWithLocale(lang, "/");
+const folioUrl = pathWithLocale(lang, "/folio/");
+const blogUrl = pathWithLocale(lang, "/blog/");
+const contactUrl = pathWithLocale(lang, "/contact/");
 ---
 
 <header>

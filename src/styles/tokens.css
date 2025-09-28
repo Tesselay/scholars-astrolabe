@@ -45,11 +45,7 @@
 
   /* Text */
   --text-primary: #e9e6df;
-  --text-secondary: color-mix(
-    in oklab,
-    var(--text-primary) 65%,
-    var(--bg-primary)
-  );
+  --text-secondary: color-mix(in oklab, var(--text-primary) 65%, var(--bg-primary));
   --text-link: #8da6ff;
   --text-link-hover: #bbd0ff;
   --text-link-focus: #2246a0;
@@ -72,30 +68,18 @@
 
   /* Component & state tokens */
   --focus-ring: #2246a0;
-  --border-color: color-mix(
-    in oklab,
-    var(--text-primary) 15%,
-    var(--bg-primary)
-  );
+  --border-color: color-mix(in oklab, var(--text-primary) 15%, var(--bg-primary));
   --surface-1: var(--bg-card);
   --surface-2: var(--bg-secondary);
   --overlay: color-mix(in oklab, #000 50%, transparent);
   --shadow-color: 220 3% 15%; /* HSL for layered shadows */
   --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
-  --scrollbar-thumb: color-mix(
-    in oklab,
-    var(--text-primary) 20%,
-    var(--bg-primary)
-  );
+  --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
 
   /* Button semantics */
   --btn-primary-bg: var(--accent-primary);
   --btn-primary-fg: #1b1d21;
-  --btn-primary-hover-bg: color-mix(
-    in oklab,
-    var(--accent-primary) 85%,
-    #000 15%
-  );
+  --btn-primary-hover-bg: color-mix(in oklab, var(--accent-primary) 85%, #000 15%);
   --btn-secondary-bg: var(--bg-tertiary);
   --btn-secondary-fg: var(--text-primary);
   --btn-danger-bg: var(--callout-danger);
@@ -115,11 +99,7 @@
 
     /* Text */
     --text-primary: #1b1d21;
-    --text-secondary: color-mix(
-      in oklab,
-      var(--text-primary) 75%,
-      var(--bg-primary)
-    );
+    --text-secondary: color-mix(in oklab, var(--text-primary) 75%, var(--bg-primary));
     --text-link: #153a77;
     --text-link-hover: #4771c1;
     --text-link-focus: #0e2654;
@@ -142,30 +122,18 @@
 
     /* Component & state tokens */
     --focus-ring: #2246a0;
-    --border-color: color-mix(
-      in oklab,
-      var(--text-primary) 15%,
-      var(--bg-primary)
-    );
+    --border-color: color-mix(in oklab, var(--text-primary) 15%, var(--bg-primary));
     --surface-1: var(--bg-card);
     --surface-2: var(--bg-secondary);
     --overlay: color-mix(in oklab, #000 50%, transparent);
     --shadow-color: 220 3% 15%; /* HSL for layered shadows */
     --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
-    --scrollbar-thumb: color-mix(
-      in oklab,
-      var(--text-primary) 20%,
-      var(--bg-primary)
-    );
+    --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
 
     /* Button semantics */
     --btn-primary-bg: var(--accent-primary);
     --btn-primary-fg: #1b1d21;
-    --btn-primary-hover-bg: color-mix(
-      in oklab,
-      var(--accent-primary) 85%,
-      #000 15%
-    );
+    --btn-primary-hover-bg: color-mix(in oklab, var(--accent-primary) 85%, #000 15%);
     --btn-secondary-bg: var(--bg-tertiary);
     --btn-secondary-fg: var(--text-primary);
     --btn-danger-bg: var(--callout-danger);

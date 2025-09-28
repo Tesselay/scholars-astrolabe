@@ -13,7 +13,7 @@ test.describe("Header & Navigation", () => {
 
   test("primary nav is visible and has exactly 4 localized links in order", async ({
     page,
-    defaultLang,
+    defaultLang
   }) => {
     const nav = page.getByRole("navigation", { name: "Primary" });
     await expect(nav).toBeVisible();
@@ -24,7 +24,7 @@ test.describe("Header & Navigation", () => {
       new RegExp(`^/${defaultLang}/?$`, "i"),
       new RegExp(`^/${defaultLang}/folio/?$`, "i"),
       new RegExp(`^/${defaultLang}/blog/?$`, "i"),
-      new RegExp(`^/${defaultLang}/contact/?$`, "i"),
+      new RegExp(`^/${defaultLang}/contact/?$`, "i")
     ];
 
     for (let i = 0; i < hrefMatchers.length; i++) {
@@ -34,7 +34,7 @@ test.describe("Header & Navigation", () => {
 
   test("navigating each link updates URL and aria-current; main receives focus", async ({
     page,
-    to,
+    to
   }) => {
     const expected = [to(""), to("folio/"), to("blog/"), to("contact/")];
 
@@ -50,10 +50,7 @@ test.describe("Header & Navigation", () => {
 
       for (let j = 0; j < 4; j++) {
         if (j !== i) {
-          await expect(currentLinks.nth(j)).not.toHaveAttribute(
-            "aria-current",
-            "page",
-          );
+          await expect(currentLinks.nth(j)).not.toHaveAttribute("aria-current", "page");
         }
       }
 

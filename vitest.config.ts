@@ -10,8 +10,8 @@ export default getViteConfig({
           name: { label: "unit", color: "cyan" },
           environment: "node",
           dir: "tests/unit",
-          include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],
-        },
+          include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"]
+        }
       },
       {
         extends: true,
@@ -24,9 +24,9 @@ export default getViteConfig({
           // Ensure no race condition trips up CI
           pool: "forks",
           maxWorkers: 1,
-          isolate: false,
-        },
-      },
-    ],
-  },
+          isolate: false
+        }
+      }
+    ]
+  }
 });

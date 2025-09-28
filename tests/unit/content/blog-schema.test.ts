@@ -10,7 +10,7 @@ describe("BlogPostSchema", () => {
       sources: ["https://example.com"],
       language: "en",
       "date-created": new Date("2024-01-01"),
-      "date-modified": new Date("2024-01-02"),
+      "date-modified": new Date("2024-01-02")
     };
     expect(() => BlogPostSchema.parse(data)).not.toThrow();
   });

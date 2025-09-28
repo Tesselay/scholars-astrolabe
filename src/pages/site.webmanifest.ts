@@ -10,7 +10,7 @@ export const GET: APIRoute = () => {
     short_name: "Astrolabe",
     start_url: "/",
     scope: "/",
-    display: "standalone",
+    display: "standalone"
     //background_color: '#ffffff',
     //theme_color: '#0f172a',
     //description: 'Blog & portfolio powered by Astro.',
@@ -24,7 +24,7 @@ export const GET: APIRoute = () => {
   return new Response(JSON.stringify(manifest), {
     headers: {
       "content-type": "application/manifest+json; charset=utf-8",
-      "cache-control": "public, max-age=3600",
-    },
+      "cache-control": "public, max-age=3600"
+    }
   });
 };

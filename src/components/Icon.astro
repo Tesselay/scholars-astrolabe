@@ -9,7 +9,15 @@ interface Props {
   role?: string;
 }
 
-const { rawSvg, title, class: className, style, width, height, role = "graphics-symbol img" } = Astro.props as Props;
+const {
+  rawSvg,
+  title,
+  class: className,
+  style,
+  width,
+  height,
+  role = "graphics-symbol img"
+} = Astro.props as Props;
 
 if (typeof rawSvg !== "string") {
   throw new TypeError("Icon: rawSvg must be a raw SVG string (use ?raw).");
@@ -17,12 +25,13 @@ if (typeof rawSvg !== "string") {
 
 const aria = title ? ` role="${role}" aria-label="${title}"` : `role="${role}" aria-hidden="true"`;
 const sizeAttrs = (width ? ` width="${width}"` : "") + (height ? ` height="${height}"` : "");
-const styleAttrs = (style ? ` style="${style}"` : "") + (className ? ` class="icon ${className}"` : "icon")
+const styleAttrs =
+  (style ? ` style="${style}"` : "") + (className ? ` class="icon ${className}"` : "icon");
 
-const patched = rawSvg.replace( '<svg', `<svg${aria}${sizeAttrs}${styleAttrs}` )
+const patched = rawSvg.replace("<svg", `<svg${aria}${sizeAttrs}${styleAttrs}`);
 ---
 
-<Fragment set:html={patched}/>
+<Fragment set:html={patched} />
 
 <style>
   :global(.icon) {

@@ -1,9 +1,6 @@
 import modelUI from "./dictionaries/en/ui.json";
 import modelMeta from "./dictionaries/en/meta.json";
-import {
-  buildStrictSchema,
-  type StringLeaves,
-} from "@/i18n/utils/schemaBuilder.ts";
+import { buildStrictSchema, type StringLeaves } from "@/i18n/utils/schemaBuilder.ts";
 import { GenericLoader } from "./utils/genericLoader.ts";
 
 export const UiSchema = buildStrictSchema(modelUI);

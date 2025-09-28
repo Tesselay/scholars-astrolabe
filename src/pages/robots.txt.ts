@@ -13,15 +13,9 @@ import { env as appEnv } from "@/types/env.ts";
 export const GET: APIRoute = ({ site, request }) => {
   // Prefer configured site origin; otherwise fall back to env-based origin.
   const forceHttp = appEnv.FORCE_HTTP;
-  const fallbackScheme = forceHttp
-    ? "http"
-    : import.meta.env.PROD
-      ? "https"
-      : "http";
+  const fallbackScheme = forceHttp ? "http" : import.meta.env.PROD ? "https" : "http";
   const rawDomain = appEnv.MAIN_DOMAIN?.trim() || "localhost:4321";
-  const normalizedDomain = rawDomain
-    .replace(/^https?:\/\//, "")
-    .replace(/\/+$/, "");
+  const normalizedDomain = rawDomain.replace(/^https?:\/\//, "").replace(/\/+$/, "");
   const envOrigin = `${fallbackScheme}://${normalizedDomain}`;
   const origin = site?.origin ?? envOrigin ?? new URL(request.url).origin;
 
@@ -29,7 +23,7 @@ export const GET: APIRoute = ({ site, request }) => {
   return new Response(getRobotsTxt(sitemapURL), {
     headers: {
       "content-type": "text/plain; charset=utf-8",
-      "cache-control": "public, max-age=3600",
-    },
+      "cache-control": "public, max-age=3600"
+    }
   });
 };

@@ -6,5 +6,5 @@ export const env = {
   MAIN_DOMAIN: parsed.MAIN_DOMAIN,
   ROOT_REDIRECT_PAGE: parsed.ROOT_REDIRECT_PAGE,
   TEST_PAGE: parsed.TEST_PAGE,
-  FORCE_HTTP: parsed.FORCE_HTTP,
+  FORCE_HTTP: parsed.FORCE_HTTP
 } as const;

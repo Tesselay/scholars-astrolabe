@@ -6,17 +6,12 @@ test.describe("RSS feed", () => {
     await page.goto(to("rss.xml"));
   });
 
-  test("GET /rss.xml returns a valid RSS document with optional items", async ({
-    request,
-  }) => {
+  test("GET /rss.xml returns a valid RSS document with optional items", async ({ request }) => {
     const rssPath = "/rss.xml";
     const res = await request.get(rssPath);
     const body = await res.text();
 
-    expect(
-      res.ok(),
-      `GET ${rssPath} -> ${res.status()} ${res.statusText()}\n${body}`,
-    ).toBeTruthy();
+    expect(res.ok(), `GET ${rssPath} -> ${res.status()} ${res.statusText()}\n${body}`).toBeTruthy();
 
     const ct = res.headers()["content-type"] || "";
     expect(ct).toMatch(/(application|text)\/(xml|rss\+xml)/i);
@@ -25,18 +20,14 @@ test.describe("RSS feed", () => {
     expect(body).toMatch(/<rss\b/i);
 
     // Title may be plain or CDATA-wrapped
-    expect(body).toMatch(
-      /<title>\s*(?:<!\[CDATA\[)?Site Title(?:]]>)?\s*<\/title>/i,
-    );
+    expect(body).toMatch(/<title>\s*(?:<!\[CDATA\[)?Site Title(?:]]>)?\s*<\/title>/i);
 
     // If there are items, validate each item's <link>
     const itemBlocks = body.match(/<item\b[\s\S]*?<\/item>/gi) ?? [];
     if (itemBlocks.length > 0) {
       for (const item of itemBlocks) {
         // Handle plain or CDATA links
-        const m = item.match(
-          /<link>\s*(?:<!\[CDATA\[)?([^<\]]+?)(?:]]>)?\s*<\/link>/i,
-        );
+        const m = item.match(/<link>\s*(?:<!\[CDATA\[)?([^<\]]+?)(?:]]>)?\s*<\/link>/i);
         expect(m, "Each <item> should include a <link>").toBeTruthy();
 
         const rawLink = m?.[1] ?? "";
@@ -47,10 +38,9 @@ test.describe("RSS feed", () => {
         } catch {
           // leave pathname empty so the assertion below fails with a clear message
         }
-        expect(
-          pathname,
-          "Item link pathname should be /en/blog/<slug>",
-        ).toMatch(/^\/en\/blog\/.+$/);
+        expect(pathname, "Item link pathname should be /en/blog/<slug>").toMatch(
+          /^\/en\/blog\/.+$/
+        );
       }
     }
   });

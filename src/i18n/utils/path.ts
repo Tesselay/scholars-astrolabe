@@ -10,9 +10,7 @@ export function trimSlashes(s: string): string {
 
 export function ensureLeadingSlash(s: string): string {
   const collapsed = collapseSlashes(String(s));
-  return collapsed.startsWith("/")
-    ? collapsed
-    : "/" + collapsed.replace(/^\/+/, "");
+  return collapsed.startsWith("/") ? collapsed : "/" + collapsed.replace(/^\/+/, "");
 }
 
 export function ensureTrailingSlash(s: string): string {
@@ -28,9 +26,7 @@ export function stripLangFromUrlOrId(id: string): string {
 
   // Only strip when the first segment is a supported language key
   if (candidate && (locales as readonly string[]).includes(candidate)) {
-    const rest = hasLeadingSlash
-      ? parts.slice(2).join("/")
-      : parts.slice(1).join("/");
+    const rest = hasLeadingSlash ? parts.slice(2).join("/") : parts.slice(1).join("/");
 
     if (!rest) return "/";
 

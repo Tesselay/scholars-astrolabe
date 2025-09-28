@@ -4,7 +4,7 @@ import {
   pathWithLocale,
   stripLangFromUrlOrId,
   altLocalesFor,
-  getContentManifest,
+  getContentManifest
 } from "@/i18n";
 
 const base = "https://example.com";
@@ -14,10 +14,7 @@ describe("Layout SEO links: canonical edge cases", () => {
     const lang: Locale = "en";
     const messy = "///en////blog//example";
     const neutralPath = stripLangFromUrlOrId(messy);
-    const canonicalUrl = new URL(
-      pathWithLocale(lang, String(neutralPath)),
-      base,
-    ).href;
+    const canonicalUrl = new URL(pathWithLocale(lang, String(neutralPath)), base).href;
 
     expect(canonicalUrl).toBe("https://example.com/en/blog/example");
   });
@@ -32,7 +29,7 @@ describe("Layout SEO links: alternates edge cases", () => {
     const alternates = altLocalesFor(current, String(neutralPath), manifest);
     const hrefs = alternates.map((l) => ({
       hreflang: l,
-      href: base + pathWithLocale(l, String(neutralPath)),
+      href: base + pathWithLocale(l, String(neutralPath))
     }));
 
     expect(alternates).toStrictEqual([]);
@@ -48,12 +45,10 @@ describe("Layout SEO links: alternates edge cases", () => {
 
     const hrefs = alternates.map((l) => ({
       hreflang: l,
-      href: base + pathWithLocale(l, String(neutralPath)),
+      href: base + pathWithLocale(l, String(neutralPath))
     }));
 
     expect(alternates).toStrictEqual(["en"]);
-    expect(hrefs).toStrictEqual([
-      { hreflang: "en", href: "https://example.com/en/blog" },
-    ]);
+    expect(hrefs).toStrictEqual([{ hreflang: "en", href: "https://example.com/en/blog" }]);
   });
 });

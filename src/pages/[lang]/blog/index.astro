@@ -1,7 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro'
-import BlogPost from '../../../components/BlogPost.astro'
-import { getCollection } from 'astro:content'
+import Layout from "../../../layouts/Layout.astro";
+import BlogPost from "../../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
 import { type Locale, byLang, buildBlogPostPath, pathsForAllLocales, metaLoader } from "@/i18n";
 
 export function getStaticPaths() {
@@ -13,17 +13,16 @@ const meta = await metaLoader.getAsync(lang);
 const title = meta["blog:index"].title;
 const description = meta["blog:index"].description;
 
-const allPosts = await getCollection('blog', byLang(lang));
+const allPosts = await getCollection("blog", byLang(lang));
 ---
 
-<Layout pageTitle={title} description={description} >
+<Layout pageTitle={title} description={description}>
   <h1>{title}</h1>
   <ul aria-label="Blog Posts">
-    {allPosts.map((post) => (
-      <BlogPost
-        url={buildBlogPostPath(lang, post.id)}
-        title={post.data.title}
-      />
-    ))}
+    {
+      allPosts.map((post) => (
+        <BlogPost url={buildBlogPostPath(lang, post.id)} title={post.data.title} />
+      ))
+    }
   </ul>
 </Layout>

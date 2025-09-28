@@ -17,7 +17,7 @@ export const test = base.extend<Fixtures>({
     async ({}, use, testInfo) => {
       await use(testInfo.project.use.baseURL!);
     },
-    { scope: "test" },
+    { scope: "test" }
   ],
 
   to: [
@@ -26,7 +26,7 @@ export const test = base.extend<Fixtures>({
         new URL(`/${lang}/${path}`, baseURL).toString();
       await use(builder);
     },
-    { scope: "test" },
+    { scope: "test" }
   ],
 
   manifest: [
@@ -36,8 +36,8 @@ export const test = base.extend<Fixtures>({
       const manifest: ContentManifest = await response.json();
       await use(manifest);
     },
-    { scope: "test" },
-  ],
+    { scope: "test" }
+  ]
 });
 
 export { expect };

@@ -1,12 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { buildStrictSchema, GenericLoader, type StringLeaves } from "@/i18n";
 import { fakeGlob } from "../../utils/fake-glob.ts";
-import {
-  mockMetaEmpty,
-  mockMetaInvalid,
-  mockMetaDE,
-  mockMetaEN,
-} from "../../utils/mocks.ts";
+import { mockMetaEmpty, mockMetaInvalid, mockMetaDE, mockMetaEN } from "../../utils/mocks.ts";
 
 describe("Meta loader", () => {
   const MetaSchema = buildStrictSchema(mockMetaEN);
@@ -21,7 +16,7 @@ describe("Meta loader", () => {
     const metaLoader = new GenericLoader<Meta>(
       "meta",
       MetaSchema,
-      fakeGlob(mockMetaEN, mockMetaDE, "meta"),
+      fakeGlob(mockMetaEN, mockMetaDE, "meta")
     );
     const m = await metaLoader.getAsync("en");
     expect(m.folio.title).toBe("Folio EN");
@@ -32,10 +27,8 @@ describe("Meta loader", () => {
     const metaLoader = new GenericLoader<Meta>(
       "meta",
       MetaSchema,
-      fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta"),
+      fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")
     );
-    await expect(metaLoader.init()).rejects.toThrow(
-      "Invalid dictionary for en",
-    );
+    await expect(metaLoader.init()).rejects.toThrow("Invalid dictionary for en");
   });
 });

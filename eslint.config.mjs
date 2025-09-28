@@ -33,9 +33,9 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node,
-      },
-    },
+        ...globals.node
+      }
+    }
   },
 
   // Ignores
@@ -55,7 +55,7 @@ export default defineConfig([
       ".DS_Store",
       "*.log",
       "**/*.d.ts",
-      ".github/",
-    ],
-  },
+      ".github/"
+    ]
+  }
 ]);

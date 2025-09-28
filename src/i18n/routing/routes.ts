@@ -4,9 +4,7 @@ import { pages, nonLocalizedPages } from "../constants/routes";
 import { convertLocalPathToSlug, normalizeNeutralPath } from "../utils/path";
 import { getAlternateLocalesByLang } from "../utils/locale";
 
-const mNonLocalizedPages = new Set(
-  nonLocalizedPages.map((p) => convertLocalPathToSlug(p)),
-);
+const mNonLocalizedPages = new Set(nonLocalizedPages.map((p) => convertLocalPathToSlug(p)));
 const mPages = new Set(pages.map((p) => convertLocalPathToSlug(p)));
 // Precompute base paths for dynamic routes using raw page module keys
 // Example: "/src/pages/[lang]/tags/[...slug].astro" -> base "/src/pages/[lang]/tags" -> slug "/tags/"
@@ -21,7 +19,7 @@ const mDynamicBases = new Set(
       const basePath = p.slice(0, dynIdx); // up to the segment before the dynamic token
       return convertLocalPathToSlug(basePath);
     })
-    .filter((v): v is string => Boolean(v)),
+    .filter((v): v is string => Boolean(v))
 );
 
 function staticPageExists(neutralPath: string): boolean {
@@ -39,7 +37,7 @@ function dynamicPageExists(neutralPath: string): boolean {
 }
 
 function parseContentPath(
-  neutralPath: string,
+  neutralPath: string
 ):
   | { kind: "blog-post"; slug: string }
   | { kind: "tag"; slug: string }
@@ -69,7 +67,7 @@ function parseContentPath(
 export function pageExistsForLocale(
   locale: Locale,
   neutralPath: string,
-  manifest: ContentManifest,
+  manifest: ContentManifest
 ): boolean {
   const parsed = parseContentPath(neutralPath);
   if (parsed.kind === "blog-post") {
@@ -87,7 +85,7 @@ export function pageExistsForLocale(
 export function altLocalesFor(
   currentLocale: Locale,
   neutralPath: string,
-  manifest: ContentManifest,
+  manifest: ContentManifest
 ): Locale[] {
   const parsed = parseContentPath(neutralPath);
   const candidates = getAlternateLocalesByLang(currentLocale);

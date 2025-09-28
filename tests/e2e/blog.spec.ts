@@ -6,11 +6,7 @@ test.describe("Blog page", () => {
     await page.goto(to("blog"));
   });
 
-  test("renders heading and post links (localized)", async ({
-    page,
-    defaultLang,
-    manifest,
-  }) => {
+  test("renders heading and post links (localized)", async ({ page, defaultLang, manifest }) => {
     const path = new RegExp(`/${defaultLang}/blog/?$`, "i");
     await expect(page).toHaveURL(path);
 
@@ -24,10 +20,7 @@ test.describe("Blog page", () => {
     await expect(postLinks.first()).toBeVisible();
 
     const count = await postLinks.count();
-    expect(
-      count,
-      "Expected at least one post on the blog page",
-    ).toBeGreaterThan(0);
+    expect(count, "Expected at least one post on the blog page").toBeGreaterThan(0);
 
     // Quick validation for all links
     for (let i = 0; i < count; i++) {
@@ -37,10 +30,7 @@ test.describe("Blog page", () => {
       const href = await link.getAttribute("href");
       const text = (await link.innerText()).trim();
 
-      expect(
-        text.length,
-        "Post link title should not be empty",
-      ).toBeGreaterThan(0);
+      expect(text.length, "Post link title should not be empty").toBeGreaterThan(0);
       expect(href, "Post link should have an href").toBeTruthy();
 
       // Ensure href parses as a blog post URL
@@ -60,16 +50,15 @@ test.describe("Blog page", () => {
       const expectedPath = target.pathname.replace(/\/+$/, "");
       await Promise.all([
         page.waitForURL(new RegExp(`${escapeRegExp(expectedPath)}\\/?$`)),
-        link.click(),
+        link.click()
       ]);
 
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
       const knownSlugs = manifest.blogSlugsByLang[lang] ?? [];
-      expect(
-        knownSlugs.includes(slug),
-        `Slug not found in manifest for ${lang}/${slug}`,
-      ).toBe(true);
+      expect(knownSlugs.includes(slug), `Slug not found in manifest for ${lang}/${slug}`).toBe(
+        true
+      );
 
       // go back to the blog index
       await page.goBack();

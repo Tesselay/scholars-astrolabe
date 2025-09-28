@@ -1,11 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import { isLocale, locales, type Locale } from "../locales.ts";
-import {
-  pathWithLocale,
-  stripLangFromUrlOrId,
-  trimSlashes,
-  collapseSlashes,
-} from "./path.ts";
+import { pathWithLocale, stripLangFromUrlOrId, trimSlashes, collapseSlashes } from "./path.ts";
 import { filterEntriesByLang } from "./content.ts";
 
 // Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
@@ -34,9 +29,7 @@ export interface PathResult {
   props: { posts: CollectionEntry<"blog">[]; tag: string };
 }
 
-export function buildTagPaths(
-  allPosts: CollectionEntry<"blog">[],
-): PathResult[] {
+export function buildTagPaths(allPosts: CollectionEntry<"blog">[]): PathResult[] {
   const tagsByLang = new Map<Locale, Set<string>>();
   (locales as readonly Locale[]).forEach((l) => tagsByLang.set(l, new Set()));
 
@@ -58,13 +51,13 @@ export function buildTagPaths(
 
     for (const tag of tags) {
       const filteredPosts = langPosts.filter(
-        (p) => Array.isArray(p.data.tags) && p.data.tags.includes(tag),
+        (p) => Array.isArray(p.data.tags) && p.data.tags.includes(tag)
       );
       if (filteredPosts.length === 0) continue;
 
       paths.push({
         params: { lang, slug: encodeTagPath(tag) },
-        props: { posts: filteredPosts, tag },
+        props: { posts: filteredPosts, tag }
       });
     }
   }

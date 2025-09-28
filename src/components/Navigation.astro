@@ -28,9 +28,7 @@ if (isExternal) {
 } else {
   const pathOnly = linkUrl.pathname; // internal path
   const alreadyLocalized = localized || hasLeadingLocale(pathOnly);
-  const localizedPath = alreadyLocalized
-    ? pathOnly
-    : pathWithLocale(curLang, pathOnly);
+  const localizedPath = alreadyLocalized ? pathOnly : pathWithLocale(curLang, pathOnly);
   href = localizedPath + linkUrl.search + linkUrl.hash;
 }
 
@@ -46,13 +44,12 @@ if (!isExternal) {
   const isLocaleRoot = linkNoLang === "/"; // link represents just the locale root
 
   // Exact match preserves trailing slashes comparison using raw paths
-  isCurrent = curPath === linkPathOnly
-    || (!isLocaleRoot && (
+  isCurrent =
+    curPath === linkPathOnly ||
+    (!isLocaleRoot &&
       // Normalize for section-style comparison by ensuring the linkNoLang is a clean prefix
-      curNoLang === linkNoLang
-      || curNoLang.startsWith(linkNoLang.replace(/\/$/, "") + "/")
-    ));
+      (curNoLang === linkNoLang || curNoLang.startsWith(linkNoLang.replace(/\/$/, "") + "/")));
 }
 ---
 
-<a href={href} aria-current={isCurrent ? 'page' : undefined}>{title}</a>
+<a href={href} aria-current={isCurrent ? "page" : undefined}>{title}</a>

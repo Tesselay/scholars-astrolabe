@@ -11,13 +11,10 @@ function assertCompleteMap<T extends Record<Locale, unknown>>(map: T): T {
 
 export const languages = assertCompleteMap({
   en: "English",
-  de: "Deutsch",
+  de: "Deutsch"
 } as const satisfies Record<Locale, string>);
 
 export const ogLocales = assertCompleteMap({
   en: "en_GB",
-  de: "de_DE",
-} as const satisfies Record<
-  Locale,
-  `${Lowercase<Locale>}_${Uppercase<string>}`
->);
+  de: "de_DE"
+} as const satisfies Record<Locale, `${Lowercase<Locale>}_${Uppercase<string>}`>);

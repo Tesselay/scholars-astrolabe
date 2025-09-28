@@ -46,11 +46,7 @@ const rawDomain = (parsed.MAIN_DOMAIN ?? "").trim();
 const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
   .replace(/^https?:\/\//, "")
   .replace(/\/+$/, "");
-const scheme = parsed.FORCE_HTTP
-  ? "http"
-  : MODE === "production"
-    ? "https"
-    : "http";
+const scheme = parsed.FORCE_HTTP ? "http" : MODE === "production" ? "https" : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
 const vitePlugins = envObj.MODE === "production" ? [] : [diagnosticGraph()];
@@ -69,10 +65,10 @@ export default defineConfig({
         {
           aliasDivider: "|",
           pageResolver: (name) => [slugify(name)],
-          hrefTemplate: (permalink) => `/${permalink}`,
-        },
+          hrefTemplate: (permalink) => `/${permalink}`
+        }
       ],
-      callouts,
+      callouts
     ],
     rehypePlugins: [
       rehypeSlug,
@@ -80,32 +76,29 @@ export default defineConfig({
         rehypeAutolinkHeadings,
         {
           behavior: "wrap",
-          properties: { class: "heading-link" },
-        },
+          properties: { class: "heading-link" }
+        }
       ],
       rehypeKatex,
-      [
-        rehypeExternalLinks,
-        { target: "_blank", rel: ["noopener", "noreferrer"] },
-      ],
-    ],
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
+    ]
   },
   integrations: [
     expressiveCode(),
     sitemap({
-      filter: (page) => !page.includes("/test"),
+      filter: (page) => !page.includes("/test")
     }),
-    compress(),
+    compress()
   ],
   i18n: {
     locales,
-    defaultLocale,
+    defaultLocale
   },
   alias: {
     "@": "./src",
-    "@/i18n": "./src/i18n",
+    "@/i18n": "./src/i18n"
   },
   vite: {
-    plugins: vitePlugins,
-  },
+    plugins: vitePlugins
+  }
 });

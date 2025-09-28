@@ -7,7 +7,7 @@ test.describe("Tags index page", () => {
 
   test("renders tag container and localized tag links (supports hierarchy)", async ({
     page,
-    defaultLang,
+    defaultLang
   }) => {
     const path = new RegExp(`/${defaultLang}/tags/?$`, "i");
     await expect(page).toHaveURL(path);
@@ -28,9 +28,7 @@ test.describe("Tags index page", () => {
       const href = await link.getAttribute("href");
       const text = (await link.innerText()).trim();
 
-      expect(text.length, "Tag link text should not be empty").toBeGreaterThan(
-        0,
-      );
+      expect(text.length, "Tag link text should not be empty").toBeGreaterThan(0);
       expect(href, "Tag link should have an href").toBeTruthy();
 
       const encoded = text
@@ -40,13 +38,8 @@ test.describe("Tags index page", () => {
         .map((seg) => encodeURIComponent(seg))
         .join("/");
 
-      const tagPageRegex = new RegExp(
-        `^/${defaultLang}/tags/${encoded}/?$`,
-        "i",
-      );
-      expect(href!, "Tag link should point to /en/tags/<path>").toMatch(
-        tagPageRegex,
-      );
+      const tagPageRegex = new RegExp(`^/${defaultLang}/tags/${encoded}/?$`, "i");
+      expect(href!, "Tag link should point to /en/tags/<path>").toMatch(tagPageRegex);
     }
   });
 });
