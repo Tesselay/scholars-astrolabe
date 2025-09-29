@@ -26,7 +26,7 @@ if (typeof rawSvg !== "string") {
 const aria = title ? ` role="${role}" aria-label="${title}"` : `role="${role}" aria-hidden="true"`;
 const sizeAttrs = (width ? ` width="${width}"` : "") + (height ? ` height="${height}"` : "");
 const styleAttrs =
-  (style ? ` style="${style}"` : "") + (className ? ` class="icon ${className}"` : "icon");
+  (style ? ` style="${style}"` : "") + (className ? ` class="icon ${className}"` : "class=icon");
 
 const patched = rawSvg.replace("<svg", `<svg${aria}${sizeAttrs}${styleAttrs}`);
 ---
