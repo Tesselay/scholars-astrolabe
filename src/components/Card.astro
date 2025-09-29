@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  height?: string | number;
+  width?: string | number;
+  backgroundColor?: string;
+  decorative?: boolean;
+}
+
+const {
+  class: className,
+  style,
+  height,
+  width,
+  backgroundColor,
+  decorative = false,
+  ...attrs
+} = Astro.props as Props;
+
+const styleString = [
+  typeof height === "number" ? `height:${height}px` : height && `height:${height}`,
+  typeof width === "number" ? `width:${width}px` : width && `width:${width}`,
+  backgroundColor && `background-color:${backgroundColor}`,
+  style
+]
+  .filter(Boolean)
+  .join(";");
+---
+
+<div
+  {...attrs}
+  class:list={["card", className]}
+  style={styleString}
+  aria-hidden={decorative ? "true" : undefined}
+  inert={decorative}
+>
+  <slot />
+</div>
+
+<style>
+  .card {
+    display: block;
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin: var(--space-2) 0;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-1);
+    transition:
+      box-shadow 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
+    overflow: hidden;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .card:focus-within {
+    outline: 2px solid var(--focus-ring, Highlight);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+  }
+</style>
