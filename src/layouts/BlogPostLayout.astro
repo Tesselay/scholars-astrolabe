@@ -1,6 +1,6 @@
 ---
 import Layout from "./Layout.astro";
-import { getLangFromUrl, buildTagPath, metaLoader } from "@/i18n";
+import { getLangFromUrl, buildTagPath, metaLoader } from "@/utils";
 
 const { frontmatter } = Astro.props;
 const lang = getLangFromUrl(Astro.url);

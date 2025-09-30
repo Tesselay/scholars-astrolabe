@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildTagPaths, byLang, filterEntriesByLang } from "@/i18n";
+import { buildTagPaths, byLang, filterEntriesByLang } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 
 describe("content filters: byLang and filterEntriesByLang", () => {

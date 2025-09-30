@@ -10,9 +10,9 @@ import {
   normalizeNeutralPath,
   locales,
   type Locale
-} from "@/i18n";
+} from "@/utils";
 
-describe("path utils", () => {
+describe("path common", () => {
   it("collapseSlashes", () => {
     expect(collapseSlashes("")).toBe("");
     expect(collapseSlashes("/a//b///c")).toBe("/a/b/c");

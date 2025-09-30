@@ -31,7 +31,7 @@ const envObj = { ...process.env, ...loadEnv(MODE, process.cwd(), "") };
 
 const require = createRequire(import.meta.url);
 const jiti = require("jiti")(import.meta.url);
-const { locales, defaultLocale } = jiti("./src/i18n/locales.ts");
+const { locales, defaultLocale } = jiti("./src/utils/locales.ts");
 const { parseEnvLike } = jiti("./src/types/parse.ts");
 
 const parsed = parseEnvLike(envObj);
@@ -95,8 +95,7 @@ export default defineConfig({
     defaultLocale
   },
   alias: {
-    "@": "./src",
-    "@/i18n": "./src/i18n"
+    "@": "./src"
   },
   vite: {
     plugins: vitePlugins

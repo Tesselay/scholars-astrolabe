@@ -5,7 +5,7 @@ import {
   encodeTagPath,
   type Locale,
   stripLangFromUrlOrId
-} from "@/i18n";
+} from "@/utils";
 
 describe("url builders", () => {
   it("encodeTagPath encodes each segment", () => {

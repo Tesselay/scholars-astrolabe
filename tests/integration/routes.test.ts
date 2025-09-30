@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { pageExistsForLocale, type Locale, getContentManifest, altLocalesFor } from "@/i18n";
+import { pageExistsForLocale, type Locale, getContentManifest, altLocalesFor } from "@/utils";
 
 const locales: Locale[] = ["en", "de"];
 

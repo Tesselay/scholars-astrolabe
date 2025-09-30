@@ -5,7 +5,7 @@ import {
   stripLangFromUrlOrId,
   altLocalesFor,
   getContentManifest
-} from "@/i18n";
+} from "@/utils";
 
 const base = "https://example.com";
 

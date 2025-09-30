@@ -1,8 +1,8 @@
 import { type Locale } from "../locales";
 import { type ContentManifest } from "../manifests/content";
 import { pages, nonLocalizedPages } from "../constants/routes";
-import { convertLocalPathToSlug, normalizeNeutralPath } from "../utils/path";
-import { getAlternateLocalesByLang } from "../utils/locale";
+import { convertLocalPathToSlug, normalizeNeutralPath } from "@/utils/common/path";
+import { getAlternateLocalesByLang } from "@/utils/common/locale";
 
 const mNonLocalizedPages = new Set(nonLocalizedPages.map((p) => convertLocalPathToSlug(p)));
 const mPages = new Set(pages.map((p) => convertLocalPathToSlug(p)));

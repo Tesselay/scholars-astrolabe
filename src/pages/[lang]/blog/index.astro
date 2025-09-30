@@ -2,7 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { getCollection } from "astro:content";
-import { type Locale, byLang, buildBlogPostPath, pathsForAllLocales, metaLoader } from "@/i18n";
+import { type Locale, byLang, buildBlogPostPath, pathsForAllLocales, metaLoader } from "@/utils";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

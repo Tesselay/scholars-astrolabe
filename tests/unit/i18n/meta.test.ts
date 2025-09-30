@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { buildStrictSchema, GenericLoader, type StringLeaves } from "@/i18n";
+import { buildStrictSchema, GenericLoader, type StringLeaves } from "@/utils";
 import { fakeGlob } from "../../utils/fake-glob.ts";
 import { mockMetaEmpty, mockMetaInvalid, mockMetaDE, mockMetaEN } from "../../utils/mocks.ts";
 

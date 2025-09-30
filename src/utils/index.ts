@@ -4,21 +4,21 @@ export type { Locale } from "./locales";
 
 // Dict API
 export { uiLoader, metaLoader } from "./dictBuilder.ts";
-export { type StringLeaves, buildStrictSchema } from "./utils/schemaBuilder.ts";
-export { GenericLoader, type DictGlob } from "./utils/genericLoader.ts";
+export { type StringLeaves, buildStrictSchema } from "./common/schemaBuilder.ts";
+export { GenericLoader, type DictGlob } from "./common/genericLoader.ts";
 
 // Constants
 export { languages, ogLocales } from "./constants/languages";
 export { pages, nonLocalizedPages } from "./constants/routes";
 
 // Utilities
-export { filterEntriesByLang, byLang } from "./utils/content";
+export { filterEntriesByLang, byLang } from "./common/content";
 export {
   getLangFromUrl,
   getLangFromId,
   getAllLocales,
   getAlternateLocalesByURL
-} from "./utils/locale";
+} from "./common/locale";
 export {
   pathWithLocale,
   pathsForAllLocales,
@@ -28,8 +28,13 @@ export {
   ensureLeadingSlash,
   ensureTrailingSlash,
   normalizeNeutralPath
-} from "./utils/path";
-export { buildBlogPostPath, buildTagPath, encodeTagPath, buildTagPaths } from "./utils/urlBuilders";
+} from "./common/path";
+export {
+  buildBlogPostPath,
+  buildTagPath,
+  encodeTagPath,
+  buildTagPaths
+} from "./common/urlBuilders";
 
 // Routing
 export { pageExistsForLocale, altLocalesFor } from "./routing/routes";

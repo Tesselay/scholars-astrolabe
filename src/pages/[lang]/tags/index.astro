@@ -1,7 +1,7 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { type Locale, byLang, buildTagPath, pathsForAllLocales, metaLoader } from "@/i18n";
+import { type Locale, byLang, buildTagPath, pathsForAllLocales, metaLoader } from "@/utils";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

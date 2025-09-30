@@ -1,4 +1,4 @@
-import type { DictGlob } from "@/i18n";
+import type { DictGlob } from "@/utils";
 
 export function fakeGlob(en: unknown, de: unknown, filename: string): DictGlob {
   return {

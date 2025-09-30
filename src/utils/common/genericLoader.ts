@@ -1,4 +1,4 @@
-import { type Locale, locales } from "@/i18n";
+import { type Locale, locales } from "@/utils";
 import { z } from "zod";
 
 export type DictGlob = Record<string, { default: unknown }>;
@@ -7,7 +7,7 @@ export class GenericLoader<Type> {
   private DICT: Readonly<Record<Locale, Type>> | null = null;
   private readonly schema: z.ZodType<Type>;
   private readonly dictName: string;
-  private readonly dictModules: DictGlob = import.meta.glob("@/i18n/dictionaries/*/*.json", {
+  private readonly dictModules: DictGlob = import.meta.glob("@/utils/dictionaries/*/*.json", {
     eager: true
   });
 

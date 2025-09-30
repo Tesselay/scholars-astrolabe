@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 
 const getContentManifestMock = vi.fn();
-vi.mock("@/i18n", () => ({
+vi.mock("@/utils", () => ({
   getContentManifest: getContentManifestMock
 }));
 

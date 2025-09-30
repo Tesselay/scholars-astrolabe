@@ -5,9 +5,9 @@ import {
   getAlternateLocalesByURL,
   defaultLocale,
   locales
-} from "@/i18n";
+} from "@/utils";
 
-describe("locale utils", () => {
+describe("locale common", () => {
   it("getLangFromUrl returns the first path segment if it is a locale", () => {
     expect(getLangFromUrl(new URL("https://thaum.de/en/blog/example"))).toBe("en");
     expect(getLangFromUrl(new URL("https://thaum.de/de/"))).toBe("de");
