@@ -2,8 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 import { env } from "@/types/env.ts";
-import Icon from "@/components/Icon.astro";
-import heartSvg from "@phosphor-icons/core/assets/regular/heart.svg?raw";
+import HeartIcon from "@phosphor-icons/core/assets/regular/heart.svg";
 import Card from "../components/Card.astro";
 
 export const prerender = env.TEST_PAGE;
@@ -12,14 +11,10 @@ const pageTitle = "Test Page";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <Icon rawSvg={heartSvg} class="astro-icon" title="Favorites" width="48" height="48" />
-  <Icon rawSvg={heartSvg} title="Favorites" width="48" height="48" />
+  <HeartIcon width="48" fill="var(--accent-primary)" />
+  <HeartIcon width="48" fill="red" />
   <Card>Test</Card>
   <Card width="20%" backgroundColor="var(--callout-success)">Test Attributes</Card>
 </Layout>
 
-<style>
-  :global(.astro-icon) {
-    color: red;
-  }
-</style>
+<style></style>
