@@ -11,6 +11,9 @@ export { GenericLoader, type DictGlob } from "./common/genericLoader.ts";
 export { languages, ogLocales } from "./constants/languages";
 export { pages, nonLocalizedPages } from "./constants/routes";
 
+// HTML
+export type { AriaProps, AriaBoolean, AriaCurrent } from "./html/aria";
+
 // Utilities
 export { filterEntriesByLang, byLang } from "./common/content";
 export {
