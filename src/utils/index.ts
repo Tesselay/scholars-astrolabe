@@ -12,8 +12,7 @@ export { languages, ogLocales } from "./constants/languages";
 export { pages, nonLocalizedPages } from "./constants/routes";
 
 // HTML
-export type { AriaProps, AriaBoolean, AriaCurrent } from "./html/aria";
-export { type PatchOptions, patchElement } from "./html/patcher";
+export { buildElementProps } from "./html/patcher";
 
 // Utilities
 export { filterEntriesByLang, byLang } from "./common/content";

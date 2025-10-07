@@ -1,40 +1,38 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { PatchOptions } from "@/types/attributes";
+import { buildElementProps } from "@/utils";
 
-interface Props extends HTMLAttributes<"div"> {
-  height?: string | number;
-  width?: string | number;
+interface CardProps extends PatchOptions<"div"> {
+  height?: string;
+  width?: string;
   backgroundColor?: string;
   decorative?: boolean;
 }
 
 const {
-  class: className,
-  style,
   height,
   width,
   backgroundColor,
   decorative = false,
-  ...attrs
-} = Astro.props as Props;
+  cssClass,
+  style,
+  attributes
+} = Astro.props as CardProps;
 
-const styleString = [
-  typeof height === "number" ? `height:${height}px` : height && `height:${height}`,
-  typeof width === "number" ? `width:${width}px` : width && `width:${width}`,
-  backgroundColor && `background-color:${backgroundColor}`,
-  style
-]
-  .filter(Boolean)
-  .join(";");
+const built = buildElementProps<"div">({
+  cssClass: [...(cssClass ?? []), "card"],
+  style: [
+    ...(style ?? []),
+    `height:${height ?? ""}`.replace(/:$/, ""),
+    `width:${width ?? ""}`.replace(/:$/, ""),
+    backgroundColor ? `background-color:${backgroundColor}` : ""
+  ],
+  decorative,
+  attributes
+});
 ---
 
-<div
-  {...attrs}
-  class:list={["card", className]}
-  style={styleString}
-  aria-hidden={decorative ? "true" : undefined}
-  inert={decorative}
->
+<div {...built}>
   <slot />
 </div>
 
