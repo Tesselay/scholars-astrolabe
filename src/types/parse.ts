@@ -10,7 +10,8 @@ export const EnvSchema = z.object({
   MAIN_DOMAIN: z.string().default("localhost:4321"),
   ROOT_REDIRECT_PAGE: z.union([z.coerce.boolean(), truthy]).default(false),
   TEST_PAGE: z.union([z.coerce.boolean(), truthy]).default(false),
-  FORCE_HTTP: z.union([z.coerce.boolean(), truthy]).default(false)
+  FORCE_HTTP: z.union([z.coerce.boolean(), truthy]).default(false),
+  DIAG_GRAPH: z.union([z.coerce.boolean(), truthy]).default(false)
 });
 
 export type ParsedEnv = z.infer<typeof EnvSchema>;

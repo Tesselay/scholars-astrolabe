@@ -49,7 +49,7 @@ const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
 const scheme = parsed.FORCE_HTTP ? "http" : MODE === "production" ? "https" : "http";
 const siteString = `${scheme}://${normalizedDomain}/`;
 
-const vitePlugins = envObj.MODE === "production" ? [] : [diagnosticGraph()];
+const vitePlugins = [parsed.DIAG_GRAPH && diagnosticGraph()];
 
 export default defineConfig({
   site: siteString,

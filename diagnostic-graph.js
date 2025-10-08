@@ -71,7 +71,7 @@ export default function diagnosticGraph() {
         }
       });
 
-      // Quick peek at moduleGraph lookups
+      // moduleGraph lookups
       server.ws.on("connection", () => {
         const size = server.moduleGraph.idToModuleMap.size;
         console.log("[moduleGraph] entries:", size);
