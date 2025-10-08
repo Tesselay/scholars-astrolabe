@@ -52,9 +52,16 @@ All commands are run from the root of the project, from a terminal:
 ## TODO
 
 - [ ] Add dark/white toggle
-- [ ] Add translation layer
-- [ ] Build with accessibility in mind
-- [ ] Add test page
-- [ ] Define stylesheets
-- [ ] tweak robots.txt (sitemap)
-- [ ] Main domain and redirects
+- [ ] Add language toggle
+- [ ] font-variant-ligatures, font-kerning, and hyphenation
+- [ ] scrollbar (accessible!)
+- [ ] tweak robots.txt (sitemap) / astrojs/sitemap
+- [ ] ICU?
+- [ ] OpenTelemetry / Logging System
+- [ ] Localize existing data
+- [ ] Read time
+- [ ] Unify import system (alias vs. no alias)
+- [ ] Fix messy env var implementation/mode when running CI
+- [ ] Move types to type folder?
+
+---
