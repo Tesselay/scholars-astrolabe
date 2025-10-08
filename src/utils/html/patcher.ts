@@ -5,20 +5,25 @@ import type { PatchOptions } from "@/types/attributes";
 export function buildElementProps<Type extends keyof JSX.DefinedIntrinsicElements>(
   options: PatchOptions<Type> = {}
 ): Partial<HTMLAttributes<Type>> {
-  const { cssClass, style, decorative = false, attributes } = options;
+  const { classList, styleList, decorative = false, attributes } = options;
 
   const result: Record<string, unknown> = { ...(attributes ?? {}) };
 
-  if (cssClass?.length) {
+  if (classList?.length) {
     const provided = (result["class"] as string | undefined)?.trim();
-    const classStr = cssClass.filter(Boolean).map(String).join(" ").trim();
+    const classStr = classList
+      .filter(Boolean)
+      // @ts-expect-error: Item won't ever be null or undefined after filter
+      .map((s) => s.toString().trim())
+      .join(" ")
+      .trim();
     const merged = [provided, classStr].filter(Boolean).join(" ");
     if (merged) result["class"] = merged;
   }
 
-  if (style?.length) {
+  if (styleList?.length) {
     const provided = (result["style"] as string | undefined)?.trim();
-    const styleStr = style
+    const styleStr = styleList
       .filter(Boolean)
       .map(String)
       .join(";")

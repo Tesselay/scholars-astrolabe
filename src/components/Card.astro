@@ -14,15 +14,12 @@ const {
   width,
   backgroundColor,
   decorative = false,
-  cssClass,
-  style,
-  attributes
+  ...attributes
 } = Astro.props as CardProps;
 
 const built = buildElementProps<"div">({
-  cssClass: [...(cssClass ?? []), "card"],
-  style: [
-    ...(style ?? []),
+  classList: ["card"],
+  styleList: [
     `height:${height ?? ""}`.replace(/:$/, ""),
     `width:${width ?? ""}`.replace(/:$/, ""),
     backgroundColor ? `background-color:${backgroundColor}` : ""
