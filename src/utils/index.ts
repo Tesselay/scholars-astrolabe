@@ -13,6 +13,7 @@ export { pages, nonLocalizedPages } from "./constants/routes";
 
 // HTML
 export { buildElementProps } from "./html/patcher";
+export { normalizeClasses, normalizeStyles } from "./html/normalization";
 
 // Utilities
 export { filterEntriesByLang, byLang } from "./common/content";
