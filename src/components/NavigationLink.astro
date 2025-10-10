@@ -1,13 +1,14 @@
 ---
-import { getLangFromUrl, pathWithLocale, stripLangFromUrlOrId } from "@/utils";
+import { getLangFromUrl, pathWithLocale, stripLangFromUrlOrId, buildElementProps } from "@/utils";
+import { type PatchOptions } from "@/types/attributes";
 
-interface Props {
+interface NavLinkProps extends PatchOptions<"a"> {
   title: string;
   link: string;
   localized?: boolean;
 }
 
-const { title, link, localized = false } = Astro.props as Props;
+const { title, link, localized = false, ...attributes } = Astro.props as NavLinkProps;
 
 const base = Astro.site ?? Astro.url.origin;
 const baseUrl = new URL(base);
@@ -41,7 +42,7 @@ if (!isExternal) {
   const curNoLang = stripLangFromUrlOrId(curPath);
   const linkNoLang = stripLangFromUrlOrId(linkPathOnly);
 
-  const isLocaleRoot = linkNoLang === "/"; // link represents just the locale root
+  const isLocaleRoot = linkNoLang === "/";
 
   // Exact match preserves trailing slashes comparison using raw paths
   isCurrent =
@@ -50,6 +51,15 @@ if (!isExternal) {
       // Normalize for section-style comparison by ensuring the linkNoLang is a clean prefix
       (curNoLang === linkNoLang || curNoLang.startsWith(linkNoLang.replace(/\/$/, "") + "/")));
 }
+
+const built = buildElementProps<"a">({
+  classList: ["nav-link"],
+  attributes: {
+    href: href,
+    "aria-current": isCurrent ? "page" : undefined,
+    ...attributes
+  }
+});
 ---
 
-<a href={href} aria-current={isCurrent ? "page" : undefined}>{title}</a>
+<a {...built}>{title}</a>

@@ -1,0 +1,62 @@
+---
+import NavigationLink from "@/components/NavigationLink.astro";
+import { getLangFromUrl, pathWithLocale, uiLoader, buildElementProps } from "@/utils";
+import { type PatchOptions } from "@/types/attributes";
+
+type NavigationStyle = "default" | "embellished";
+
+interface Props extends PatchOptions<"ul"> {
+  mode: NavigationStyle;
+}
+
+const { mode = "default", ...attrs } = Astro.props as Props;
+
+const lang = getLangFromUrl(Astro.url);
+const ui = await uiLoader.getAsync(lang);
+
+const homeUrl = pathWithLocale(lang, "/");
+const folioUrl = pathWithLocale(lang, "/folio/");
+const blogUrl = pathWithLocale(lang, "/blog/");
+const contactUrl = pathWithLocale(lang, "/contact/");
+
+const built = buildElementProps<"ul">({
+  classList: ["nav-links", mode],
+  attributes: attrs
+});
+---
+
+<ul {...built}>
+  <li>
+    <NavigationLink title={ui.nav.home} link={homeUrl} />
+  </li>
+  <li>
+    <NavigationLink title={ui.nav.portfolio} link={folioUrl} />
+  </li>
+  <li>
+    <NavigationLink title={ui.nav.blog} link={blogUrl} />
+  </li>
+  <li>
+    <NavigationLink title={ui.nav.contact} link={contactUrl} />
+  </li>
+</ul>
+
+<style>
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .default {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+  }
+  .embellished {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+  }
+</style>

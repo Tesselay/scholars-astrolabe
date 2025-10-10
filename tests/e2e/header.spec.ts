@@ -1,6 +1,6 @@
 import { test, expect } from "../utils/fixtures.ts";
 
-test.describe("Header & Navigation", () => {
+test.describe("Header & NavigationLink", () => {
   test.beforeEach(async ({ page, to }) => {
     await page.goto(to(""));
   });

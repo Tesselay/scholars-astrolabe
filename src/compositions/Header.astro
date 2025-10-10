@@ -1,42 +1,9 @@
 ---
-import Navigation from "../components/Navigation.astro";
-
-import { getLangFromUrl, pathWithLocale, uiLoader } from "@/utils";
-
-const lang = getLangFromUrl(Astro.url);
-const ui = await uiLoader.getAsync(lang);
-
-const homeUrl = pathWithLocale(lang, "/");
-const folioUrl = pathWithLocale(lang, "/folio/");
-const blogUrl = pathWithLocale(lang, "/blog/");
-const contactUrl = pathWithLocale(lang, "/contact/");
+import Navigation from "./Navigation.astro";
 ---
 
 <header>
   <nav aria-label="Primary">
-    <ul class="nav-links">
-      <li>
-        <Navigation title={ui.nav.home} link={homeUrl} />
-      </li>
-      <li>
-        <Navigation title={ui.nav.portfolio} link={folioUrl} />
-      </li>
-      <li>
-        <Navigation title={ui.nav.blog} link={blogUrl} />
-      </li>
-      <li>
-        <Navigation title={ui.nav.contact} link={contactUrl} />
-      </li>
-    </ul>
+    <Navigation mode="default" />
   </nav>
 </header>
-
-<style>
-  .nav-links {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-</style>
