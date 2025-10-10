@@ -55,7 +55,8 @@ export default defineConfig([
       ".DS_Store",
       "*.log",
       "**/*.d.ts",
-      ".github/"
+      ".github/",
+      "tests/**"
     ]
   }
 ]);
