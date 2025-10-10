@@ -6,16 +6,9 @@ interface CardProps extends PatchOptions<"div"> {
   height?: string;
   width?: string;
   backgroundColor?: string;
-  decorative?: boolean;
 }
 
-const {
-  height,
-  width,
-  backgroundColor,
-  decorative = false,
-  ...attributes
-} = Astro.props as CardProps;
+const { height, width, backgroundColor, ...attributes } = Astro.props as CardProps;
 
 const built = buildElementProps<"div">({
   classList: ["card"],
@@ -24,7 +17,6 @@ const built = buildElementProps<"div">({
     `width:${width ?? ""}`.replace(/:$/, ""),
     backgroundColor ? `background-color:${backgroundColor}` : ""
   ],
-  decorative,
   attributes
 });
 ---
