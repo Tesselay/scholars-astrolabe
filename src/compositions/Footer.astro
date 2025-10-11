@@ -1,8 +1,15 @@
 ---
+import { type PatchOptions } from "@/types/attributes";
+import { buildElementProps } from "../utils";
 
+const { ...attributes } = Astro.props as PatchOptions<"footer">;
+
+const built = buildElementProps<"footer">({
+  attributes
+});
 ---
 
-<footer>Footer</footer>
+<footer {...built}>Footer</footer>
 
 <style>
   footer {

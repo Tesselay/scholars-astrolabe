@@ -1,8 +1,16 @@
 ---
-import Navigation from "./Navigation.astro";
+import Navigation from "@/compositions/Navigation.astro";
+import { type PatchOptions } from "@/types/attributes";
+import { buildElementProps } from "../utils";
+
+const { ...attributes } = Astro.props as PatchOptions<"header">;
+
+const built = buildElementProps<"header">({
+  attributes
+});
 ---
 
-<header>
+<header {...built}>
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>

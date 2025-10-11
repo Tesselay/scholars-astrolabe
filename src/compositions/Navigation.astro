@@ -5,11 +5,11 @@ import { type PatchOptions } from "@/types/attributes";
 
 type NavigationStyle = "default" | "embellished";
 
-interface Props extends PatchOptions<"ul"> {
+interface NavProps extends PatchOptions<"ul"> {
   mode: NavigationStyle;
 }
 
-const { mode = "default", ...attrs } = Astro.props as Props;
+const { mode = "default", ...attrs } = Astro.props as NavProps;
 
 const lang = getLangFromUrl(Astro.url);
 const ui = await uiLoader.getAsync(lang);
