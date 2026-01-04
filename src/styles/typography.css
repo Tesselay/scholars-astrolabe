@@ -2,10 +2,10 @@
 
 :root {
   /* Font Family */
-  --text-family-title: "Cormorant Garamond Variable", ui-serif, Georgia, serif;
-  --text-family-primary: "Source Serif 4 Variable", ui-serif, Georgia, serif;
-  --text-family-secondary: "Inter Variable", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --text-family-mono:
+  --font-family-title: "Cormorant Garamond Variable", ui-serif, Georgia, serif;
+  --font-family-primary: "Source Serif 4 Variable", ui-serif, Georgia, serif;
+  --font-family-secondary: "Inter Variable", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-family-mono:
     "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Scale */
@@ -14,8 +14,8 @@
   --font-size-2: clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
   --font-size-3: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
   --font-size-4: clamp(1.5rem, 1rem + 1.6vw, 2rem);
-  --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2.5rem);
-  --font-size-6: clamp(2rem, 1.25rem + 3.2vw, 3rem);
+  --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2.25rem);
+  --font-size-6: clamp(2rem, 1.25rem + 3.2vw, 2.5rem);
 
   /* Line heights */
   --lh-tight: 1.1;
@@ -42,7 +42,7 @@ html {
   font-size: 100%;
 }
 body {
-  font-family: var(--text-family-primary);
+  font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
   line-height: var(--lh-body);
 }
@@ -54,7 +54,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--text-family-title);
+  font-family: var(--font-family-title);
   font-weight: var(--w-semibold);
   line-height: var(--lh-title);
   margin: 0;
@@ -119,11 +119,11 @@ mark {
 code,
 kbd,
 samp {
-  font-family: var(--text-family-mono);
+  font-family: var(--font-family-mono);
   font-size: 0.875em;
 }
 pre {
-  font-family: var(--text-family-mono);
+  font-family: var(--font-family-mono);
   font-size: 0.95rem;
   line-height: 1.5;
   padding: 1rem;

@@ -25,7 +25,7 @@ body {
   margin: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--text-family-primary);
+  font-family: var(--font-family-primary);
   text-rendering: optimizeLegibility;
   font-kerning: normal;
   font-feature-settings: "liga", "kern";
