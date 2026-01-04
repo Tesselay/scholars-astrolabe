@@ -29,7 +29,7 @@ const title = meta.home.title;
     justify-content: center;
     align-items: center;
 
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-1) var(--space-2);
     background: var(--bg-secondary);
     box-shadow: var(--shadow-1);
     border-bottom: 3px solid var(--accent-primary);
@@ -40,13 +40,14 @@ const title = meta.home.title;
 
   .title {
     color: var(--accent-primary);
+    text-transform: uppercase;
   }
 
   nav {
     flex-grow: 1;
   }
 
-  @container header (width > 600px) {
+  @container header (width > 800px) {
     .title {
       margin-right: auto;
     }
