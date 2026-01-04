@@ -11,11 +11,11 @@
   /* Scale */
   --font-size-0: 0.875rem;
   --font-size-1: 1rem;
-  --font-size-2: clamp(1.125rem, 0.9rem + 0.8vw, 1.25rem);
-  --font-size-3: clamp(1.25rem, 1rem + 1vw, 1.5rem);
-  --font-size-4: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
-  --font-size-5: clamp(2rem, 1.4rem + 2.5vw, 2.5rem);
-  --font-size-6: clamp(2.5rem, 1.8rem + 3.2vw, 3rem);
+  --font-size-2: clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
+  --font-size-3: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  --font-size-4: clamp(1.5rem, 1rem + 1.6vw, 2rem);
+  --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2.5rem);
+  --font-size-6: clamp(2rem, 1.25rem + 3.2vw, 3rem);
 
   /* Line heights */
   --lh-tight: 1.1;
@@ -57,7 +57,7 @@ h6 {
   font-family: var(--text-family-title);
   font-weight: var(--w-semibold);
   line-height: var(--lh-title);
-  margin: 0 0 0.5em;
+  margin: 0;
 }
 h1 {
   font-size: var(--font-size-6);
