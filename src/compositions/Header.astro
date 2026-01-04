@@ -1,17 +1,58 @@
 ---
 import Navigation from "@/compositions/Navigation.astro";
 import { type PatchOptions } from "@/types/attributes";
-import { buildElementProps } from "../utils";
+import { buildElementProps, getLangFromUrl, metaLoader } from "@/utils";
 
 const { ...attributes } = Astro.props as PatchOptions<"header">;
 
 const built = buildElementProps<"header">({
+  classList: ["header"],
   attributes
 });
+
+const lang = getLangFromUrl(Astro.url);
+const meta = await metaLoader.getAsync(lang);
+const title = meta.home.title;
 ---
 
 <header {...built}>
+  <h1 class="title">{title}</h1>
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>
 </header>
+
+<style>
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-1);
+    border-bottom: 3px solid var(--accent-primary);
+
+    container-name: header;
+    container-type: inline-size;
+  }
+
+  .title {
+    color: var(--accent-primary);
+  }
+
+  nav {
+    flex-grow: 1;
+  }
+
+  @container header (width > 600px) {
+    .title {
+      margin-right: auto;
+    }
+
+    nav {
+      flex-grow: 0;
+    }
+  }
+</style>
