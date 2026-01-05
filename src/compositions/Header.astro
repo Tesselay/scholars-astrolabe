@@ -3,6 +3,9 @@ import Navigation from "@/compositions/Navigation.astro";
 import { type PatchOptions } from "@/types/attributes";
 import { buildElementProps, getLangFromUrl, metaLoader } from "@/utils";
 
+import SunIcon from "@phosphor-icons/core/assets/bold/sun-bold.svg";
+import TranslateIcon from "@phosphor-icons/core/assets/bold/translate-bold.svg";
+
 const { ...attributes } = Astro.props as PatchOptions<"header">;
 
 const built = buildElementProps<"header">({
@@ -20,40 +23,79 @@ const title = meta.home.title;
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>
+  <TranslateIcon
+    class="icon translate-icon"
+    width="var(--icon-size)"
+    fill="var(--accent-secondary)"
+  />
+  <SunIcon class="icon sun-icon" width="var(--icon-size)" fill="var(--accent-secondary)" />
 </header>
 
 <style>
   .header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
 
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-2);
     background: var(--bg-secondary);
     box-shadow: var(--shadow-1);
     border-bottom: 3px solid var(--accent-primary);
+  }
 
-    container-name: header;
-    container-type: inline-size;
+  .header > * {
+    margin-block: auto;
   }
 
   .title {
     color: var(--accent-primary);
     text-transform: uppercase;
+    text-align: center;
+
+    grid-column: span 2;
   }
 
   nav {
-    flex-grow: 1;
+    grid-column: span 2;
   }
 
-  @container header (width > 800px) {
+  .icon {
+    grid-row: 2;
+  }
+
+  .translate-icon {
+    grid-column: 1;
+  }
+
+  .sun-icon {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  @media (width > 950px) {
+    .header {
+      grid-template-columns: max-content 1fr max-content max-content max-content;
+      padding: var(--space-1) var(--space-2);
+    }
+
     .title {
-      margin-right: auto;
+      grid-column: 1;
     }
 
     nav {
-      flex-grow: 0;
+      grid-column: 3;
+    }
+
+    .icon {
+      grid-row: 1;
+    }
+
+    .sun-icon {
+      grid-column: 5;
+    }
+
+    .translate-icon {
+      grid-column: 4;
     }
   }
 </style>

@@ -92,6 +92,10 @@ img {
 }
 
 /* Main */
+#main {
+  margin: var(--space-5);
+}
+
 #main:focus {
   outline: none;
 }
