@@ -75,6 +75,7 @@
   --shadow-color: 220 3% 15%; /* HSL for layered shadows */
   --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
   --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
+  --icon-color: var(--accent-secondary);
 
   /* Button semantics */
   --btn-primary-bg: var(--accent-primary);
@@ -129,6 +130,7 @@
     --shadow-color: 220 3% 15%; /* HSL for layered shadows */
     --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
     --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
+    --icon-color: var(--text-link);
 
     /* Button semantics */
     --btn-primary-bg: var(--accent-primary);
