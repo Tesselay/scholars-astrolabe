@@ -11,10 +11,85 @@ const pageTitle = "Test Page";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <HeartIcon width="48" fill="var(--accent-primary)" />
-  <HeartIcon width="48" fill="red" />
-  <Card>Test</Card>
-  <Card width="20%" backgroundColor="var(--callout-success)">Test Attributes</Card>
+  <h1>Test Page</h1>
+
+  <section>
+    <h2>Components</h2>
+
+    <section>
+      <h3>Cards</h3>
+      <div class="cards-section">
+        <Card>Default</Card>
+        <Card sizing="full">Sizing Full</Card>
+        <Card sizing="fit-content">Sizing Fit Content</Card>
+        <Card square="true" width="100px">Square 100px</Card>
+        <Card height="100px">Height 100px</Card>
+        <Card width="100px">Width 100px</Card>
+        <Card backgroundColor="blue">Background Color</Card>
+      </div>
+    </section>
+
+    <section>
+      <h3>Icons</h3>
+      <HeartIcon width="48" fill="var(--accent-primary)" />
+      <HeartIcon width="48" fill="red" />
+    </section>
+  </section>
+
+  <section>
+    <h2>Compositions</h2>
+
+    <section>
+      <h3>Layouts</h3>
+
+      <section>
+        <h4>Flex</h4>
+        <div class="flex">
+          <Card>Card 1</Card>
+          <Card>Card 2</Card>
+          <Card>Card 3</Card>
+          <Card>Card 4</Card>
+          <Card>Card 5</Card>
+          <Card>Card 6</Card>
+          <Card>Card 7</Card>
+          <Card>Card 8</Card>
+          <Card>Card 9</Card>
+          <Card>Card 10</Card>
+        </div>
+      </section>
+
+      <section>
+        <h4>Grid</h4>
+        <div class="grid">
+          <Card>Card 1</Card>
+          <Card>Card 2</Card>
+          <Card>Card 3</Card>
+          <Card>Card 4</Card>
+          <Card>Card 5</Card>
+          <Card>Card 6</Card>
+          <Card>Card 7</Card>
+          <Card>Card 8</Card>
+          <Card>Card 9</Card>
+          <Card>Card 10</Card>
+        </div>
+      </section>
+    </section>
+  </section>
 </Layout>
 
-<style></style>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-5);
+  }
+
+  .flex {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .cards-section > * {
+    margin: var(--space-2) 0;
+  }
+</style>
