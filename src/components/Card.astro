@@ -3,20 +3,30 @@ import type { PatchOptions } from "@/types/attributes";
 import { buildElementProps } from "@/utils";
 
 interface CardProps extends PatchOptions<"div"> {
+  sizing: "fit-content" | "full";
+  square?: boolean;
   height?: string;
   width?: string;
   backgroundColor?: string;
 }
 
-const { height, width, backgroundColor, ...attributes } = Astro.props as CardProps;
+const {
+  square,
+  sizing = "full",
+  height,
+  width,
+  backgroundColor,
+  ...attributes
+} = Astro.props as CardProps;
 
 const built = buildElementProps<"div">({
-  classList: ["card"],
+  classList: ["card", sizing],
   styleList: [
-    `height:${height ?? ""}`.replace(/:$/, ""),
-    `width:${width ?? ""}`.replace(/:$/, ""),
-    backgroundColor ? `background-color:${backgroundColor}` : ""
-  ],
+    square && "aspect-ratio: 1 / 1",
+    backgroundColor && `background-color: ${backgroundColor}`,
+    height && `height: ${height}`,
+    width && `width: ${width}`
+  ].filter(Boolean),
   attributes
 });
 ---
@@ -30,16 +40,20 @@ const built = buildElementProps<"div">({
     display: block;
     border-radius: var(--radius);
     padding: var(--space-2);
-    margin: var(--space-2) 0;
     background-color: var(--bg-card);
     box-shadow: var(--shadow-1);
-    transition:
-      box-shadow 0.2s ease-in-out,
-      background-color 0.2s ease-in-out;
     overflow: hidden;
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: normal;
+  }
+
+  .fit-content {
+    width: fit-content;
+  }
+
+  .full {
+    width: 100%;
   }
 
   .card:focus-within {
