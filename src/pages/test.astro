@@ -14,82 +14,401 @@ const pageTitle = "Test Page";
   <h1>Test Page</h1>
 
   <section>
-    <h2>Components</h2>
+    <h2>Typography</h2>
 
-    <section>
-      <h3>Cards</h3>
-      <div class="cards-section">
-        <Card>Default</Card>
-        <Card sizing="full">Sizing Full</Card>
-        <Card sizing="fit-content">Sizing Fit Content</Card>
-        <Card square="true" width="100px">Square 100px</Card>
-        <Card height="100px">Height 100px</Card>
-        <Card width="100px">Width 100px</Card>
-        <Card backgroundColor="blue">Background Color</Card>
-      </div>
-    </section>
+    <div class="examples">
+      <section>
+        <p>Font Families</p>
+        <div class="selection selection--column">
+          <p class="font-family-example" style="font-family: var(--font-family-title)">
+            Titles Font
+          </p>
+          <p class="font-family-example" style="font-family: var(--font-family-primary)">
+            Primary Body Font
+          </p>
+          <p class="font-family-example" style="font-family: var(--font-family-secondary)">
+            Secondary Body Font
+          </p>
+          <p class="font-family-example" style="font-family: var(--font-family-mono)">Code Font</p>
+        </div>
+      </section>
 
-    <section>
-      <h3>Icons</h3>
-      <HeartIcon width="48" fill="var(--accent-primary)" />
-      <HeartIcon width="48" fill="red" />
-    </section>
+      <section>
+        <p>Font Sizes</p>
+        <div class="selection selection--column">
+          <p style="font-size: var(--font-size-0)">Font Size 0</p>
+          <p style="font-size: var(--font-size-1)">Font Size 1</p>
+          <p style="font-size: var(--font-size-2)">Font Size 2</p>
+          <p style="font-size: var(--font-size-3)">Font Size 3</p>
+          <p style="font-size: var(--font-size-4)">Font Size 4</p>
+          <p style="font-size: var(--font-size-5)">Font Size 5</p>
+          <p style="font-size: var(--font-size-6)">Font Size 6</p>
+        </div>
+      </section>
+
+      <section>
+        <p>Line Heights</p>
+        <div class="selection selection--column selection--line-height-example">
+          <p style="line-height: var(--lh-tight)">Tight Line Height</p>
+          <p style="line-height: var(--lh-title)">Title Line Height</p>
+          <p style="line-height: var(--lh-body)">Body Line Height</p>
+        </div>
+      </section>
+
+      <section>
+        <p>Weights</p>
+        <div class="selection selection--column">
+          <p style="font-weight: var(--w-hairline)">Hairline</p>
+          <p style="font-weight: var(--w-thin)">Thin</p>
+          <p style="font-weight: var(--w-light)">Light</p>
+          <p style="font-weight: var(--w-regular)">Regular</p>
+          <p style="font-weight: var(--w-medium)">Medium</p>
+          <p style="font-weight: var(--w-semibold)">Semibold</p>
+          <p style="font-weight: var(--w-bold)">Bold</p>
+        </div>
+      </section>
+    </div>
   </section>
 
   <section>
-    <h2>Compositions</h2>
-
-    <section>
-      <h3>Layouts</h3>
-
+    <h2>Colors</h2>
+    <div class="examples examples--alt-background">
       <section>
-        <h4>Flex</h4>
-        <div class="flex">
-          <Card>Card 1</Card>
-          <Card>Card 2</Card>
-          <Card>Card 3</Card>
-          <Card>Card 4</Card>
-          <Card>Card 5</Card>
-          <Card>Card 6</Card>
-          <Card>Card 7</Card>
-          <Card>Card 8</Card>
-          <Card>Card 9</Card>
-          <Card>Card 10</Card>
+        <p>Background</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--bg-primary)"></div>
+          <div class="circle" style="background-color: var(--bg-secondary)"></div>
+          <div class="circle" style="background-color: var(--bg-tertiary)"></div>
+          <div class="circle" style="background-color: var(--bg-card)"></div>
+          <div class="circle" style="background-color: var(--bg-code)"></div>
+        </div>
+      </section>
+      <section>
+        <p>Text</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--text-primary)"></div>
+          <div class="circle" style="background-color: var(--text-secondary)"></div>
+          <div class="circle" style="background-color: var(--text-link)"></div>
+          <div class="circle" style="background-color: var(--text-link-hover)"></div>
+          <div class="circle" style="background-color: var(--text-link-focus)"></div>
+        </div>
+      </section>
+      <section>
+        <p>Accent</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--accent-primary)"></div>
+          <div class="circle" style="background-color: var(--accent-secondary)"></div>
+          <div class="circle" style="background-color: var(--accent-tertiary)"></div>
+          <div class="circle" style="background-color: var(--accent-quaternary)"></div>
+        </div>
+      </section>
+      <section>
+        <p>Callouts</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--callout-success)"></div>
+          <div class="circle" style="background-color: var(--callout-warning)"></div>
+          <div class="circle" style="background-color: var(--callout-error)"></div>
+          <div class="circle" style="background-color: var(--callout-info)"></div>
+        </div>
+      </section>
+      <section>
+        <p>Components & States</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--focus-ring)"></div>
+          <div class="circle" style="background-color: var(--border-color)"></div>
+          <div class="circle" style="background-color: var(--surface-1)"></div>
+          <div class="circle" style="background-color: var(--surface-2)"></div>
+          <div class="circle" style="background-color: var(--overlay)"></div>
+          <div class="circle" style="background-color: var(--selection-bg)"></div>
+          <div class="circle" style="background-color: var(--scrollbar-thumb)"></div>
+          <div class="circle" style="background-color: var(--icon-color)"></div>
+        </div>
+      </section>
+      <section>
+        <p>Buttons</p>
+        <div class="selection">
+          <div class="circle" style="background-color: var(--btn-primary-bg)"></div>
+          <div class="circle" style="background-color: var(--btn-primary-fg)"></div>
+          <div class="circle" style="background-color: var(--btn-primary-hover-bg)"></div>
+          <div class="circle" style="background-color: var(--btn-secondary-bg)"></div>
+          <div class="circle" style="background-color: var(--btn-secondary-fg)"></div>
+          <div class="circle" style="background-color: var(--btn-danger-bg)"></div>
+          <div class="circle" style="background-color: var(--btn-danger-fg)"></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <h2>Spacing</h2>
+    <div class="examples">
+      <div>
+        <p>Default</p>
+        <div class="selection--spacing-example">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+      <div>
+        <p>Space 1</p>
+        <div class="selection--spacing-example" style="gap: var(--space-1);">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+      <div>
+        <p>Space 2</p>
+        <div class="selection--spacing-example" style="gap: var(--space-2);">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+      <div>
+        <p>Space 3</p>
+        <div class="selection--spacing-example" style="gap: var(--space-3);">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+      <div>
+        <p>Space 4</p>
+        <div class="selection--spacing-example" style="gap: var(--space-4);">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+      <div>
+        <p>Space 5</p>
+        <div class="selection--spacing-example" style="gap: var(--space-5);">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tokens</h2>
+    <div class="examples">
+      <section>
+        <p>Radii</p>
+        <div class="selection">
+          <Card square class="box" style="border-radius: var(--radius-sm);">sm</Card>
+          <Card square class="box" style="border-radius: var(--radius-md);">md</Card>
+          <Card square class="box" style="border-radius: var(--radius-lg);">lg</Card>
         </div>
       </section>
 
       <section>
-        <h4>Grid</h4>
-        <div class="grid">
-          <Card>Card 1</Card>
-          <Card>Card 2</Card>
-          <Card>Card 3</Card>
-          <Card>Card 4</Card>
-          <Card>Card 5</Card>
-          <Card>Card 6</Card>
-          <Card>Card 7</Card>
-          <Card>Card 8</Card>
-          <Card>Card 9</Card>
-          <Card>Card 10</Card>
+        <p>Shadows</p>
+        <div class="selection">
+          <Card square class="box" style="box-shadow: var(--shadow-1);">1</Card>
+          <Card square class="box" style="box-shadow: var(--shadow-2);">2</Card>
+          <Card square class="box" style="box-shadow: var(--shadow-3);">3</Card>
         </div>
       </section>
-    </section>
+
+      <section>
+        <p>Animations</p>
+        <div class="selection">
+          <div
+            class="circle"
+            style="animation: 4s var(--ease-standard) 0s infinite alternate pulse"
+          >
+          </div>
+          <div
+            class="circle"
+            style="animation: 4s var(--ease-emphasized) 0s infinite alternate pulse"
+          >
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <h2>Components</h2>
+
+    <div class="examples">
+      <section>
+        <p>Cards</p>
+        <div class="selection selection--column">
+          <Card>Default</Card>
+          <Card sizing="full">Sizing Full</Card>
+          <Card sizing="fit-content">Sizing Fit Content</Card>
+          <Card square="true" width="100px">Square 100px</Card>
+          <Card height="100px">Height 100px</Card>
+          <Card width="100px">Width 100px</Card>
+          <Card backgroundColor="blue" style="background-color: red;">Background Color</Card>
+        </div>
+      </section>
+
+      <section>
+        <p>Icons</p>
+        <div class="selection">
+          <HeartIcon width="48" fill="var(--accent-primary)" />
+          <HeartIcon width="48" fill="red" />
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section>
+    <h2>Layouts</h2>
+
+    <div class="examples">
+      <section>
+        <p>Flex</p>
+        <div class="selection selection--flex">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+        </div>
+      </section>
+      <section>
+        <p>Grid</p>
+        <div class="selection selection--grid-example">
+          <Card square class="box">1</Card>
+          <Card square class="box">2</Card>
+          <Card square class="box">3</Card>
+          <Card square class="box">4</Card>
+          <Card square class="box">5</Card>
+          <Card square class="box">6</Card>
+          <Card square class="box">7</Card>
+          <Card square class="box">8</Card>
+          <Card square class="box">9</Card>
+        </div>
+      </section>
+    </div>
   </section>
 </Layout>
 
 <style>
-  .grid {
+  p {
+    font-size: var(--font-size-3);
+  }
+
+  .examples {
+    padding: var(--space-2);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-2);
   }
 
-  .flex {
+  .examples--alt-background {
+    background-color: var(--test-bg);
+  }
+
+  .selection {
     display: flex;
-    gap: var(--space-5);
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
 
-  .cards-section > * {
-    margin: var(--space-2) 0;
+  .selection--column {
+    flex-direction: column;
+  }
+
+  .selection--line-height-example > p {
+    background-color: var(--bg-card);
+  }
+
+  .selection--spacing-example {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(64px, max-content));
+  }
+
+  .selection--grid-example {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    :nth-child(2) {
+      grid-column: span 2;
+      background-color: red;
+      width: 100%;
+      aspect-ratio: initial !important;
+    }
+
+    :nth-child(3) {
+      grid-row: span 2;
+      background-color: blue;
+      aspect-ratio: initial !important;
+    }
+
+    :nth-child(6) {
+      grid-column: span 2;
+      background-color: green;
+      aspect-ratio: initial !important;
+      width: 100%;
+    }
+  }
+
+  .circle {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background-color: var(--accent-primary);
+  }
+
+  .box {
+    width: 64px;
+    border-radius: var(--radius-md);
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  @keyframes pulse {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 </style>
