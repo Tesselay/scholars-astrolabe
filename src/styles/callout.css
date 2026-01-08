@@ -27,7 +27,7 @@ aside.callout.warning {
   background: var(--callout-warning);
 }
 aside.callout.danger {
-  background: var(--callout-danger);
+  background: var(--callout-error);
 }
 
 /* collapsed behavior (optional) */

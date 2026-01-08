@@ -24,6 +24,9 @@
   --lh-body: 1.6;
 
   /* Weights */
+  --w-hairline: 100;
+  --w-thin: 200;
+  --w-light: 300;
   --w-regular: 400;
   --w-medium: 500;
   --w-semibold: 600;
@@ -58,8 +61,18 @@ h6 {
   font-family: var(--font-family-title);
   font-weight: var(--w-semibold);
   line-height: var(--lh-title);
-  margin: 0;
+  margin: 1em 0;
+  color: var(--accent-primary);
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6:first-child {
+  margin-top: 0;
+}
+
 h1 {
   font-size: var(--font-size-6);
 }

@@ -1,10 +1,6 @@
 @import "open-props/style";
 
 :root {
-  /* radius & spacing */
-  --radius: var(--radius-2);
-  --pad: var(--size-3);
-
   /* Spacing aliases */
   --space-1: var(--size-2);
   --space-2: var(--size-3);
@@ -59,12 +55,12 @@
   /* Callouts */
   --callout-success: #57b892;
   --callout-warning: #d2b279;
-  --callout-danger: #e07a63;
+  --callout-error: #e07a63;
   --callout-info: #8da6ff;
 
   /* Hero */
   /* Placeholder Background */
-  --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--accent-primary));
 
   /* Component & state tokens */
   --focus-ring: #2246a0;
@@ -76,6 +72,7 @@
   --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
   --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
   --icon-color: var(--accent-secondary);
+  --test-bg: rgba(0 0 0 / 0.5);
 
   /* Button semantics */
   --btn-primary-bg: var(--accent-primary);
@@ -83,7 +80,7 @@
   --btn-primary-hover-bg: color-mix(in oklab, var(--accent-primary) 85%, #000 15%);
   --btn-secondary-bg: var(--bg-tertiary);
   --btn-secondary-fg: var(--text-primary);
-  --btn-danger-bg: var(--callout-danger);
+  --btn-danger-bg: var(--callout-error);
   --btn-danger-fg: #1b1d21;
 }
 
@@ -114,7 +111,7 @@
     /* Callouts */
     --callout-success: #3d8f70;
     --callout-warning: #b78a44;
-    --callout-danger: #c26f5f;
+    --callout-error: #c26f5f;
     --callout-info: #153a77;
 
     /* Hero */
@@ -131,6 +128,7 @@
     --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
     --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
     --icon-color: var(--text-link);
+    --test-bg: rgba(255 255 255 / 0.5);
 
     /* Button semantics */
     --btn-primary-bg: var(--accent-primary);
@@ -138,7 +136,7 @@
     --btn-primary-hover-bg: color-mix(in oklab, var(--accent-primary) 85%, #000 15%);
     --btn-secondary-bg: var(--bg-tertiary);
     --btn-secondary-fg: var(--text-primary);
-    --btn-danger-bg: var(--callout-danger);
+    --btn-danger-bg: var(--callout-error);
     --btn-danger-fg: #1b1d21;
   }
 }
