@@ -63,5 +63,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Unify import system (alias vs. no alias)
 - [ ] Fix messy env var implementation/mode when running CI
 - [ ] Move types to type folder?
+- [ ] Have all styling component props be style classes instead of inline to keep inlines being
+      highest specifity
 
 ---
