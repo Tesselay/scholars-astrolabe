@@ -235,7 +235,7 @@ const pageTitle = "Test Page";
       <section>
         <p>Radii</p>
         <div class="selection">
-          <Card square class="box" style="border-radius: var(--radius-sm);">sm</Card>
+          <Card square width="100px" class="box" style="border-radius: var(--radius-sm);">sm</Card>
           <Card square class="box" style="border-radius: var(--radius-md);">md</Card>
           <Card square class="box" style="border-radius: var(--radius-lg);">lg</Card>
         </div>
@@ -249,20 +249,43 @@ const pageTitle = "Test Page";
           <Card square class="box" style="box-shadow: var(--shadow-3);">3</Card>
         </div>
       </section>
+    </div>
+  </section>
+
+  <section>
+    <h2>Animations</h2>
+    <div class="examples">
+      <section>
+        <p>Timing Functions</p>
+        <div class="selection">
+          <div class="circle animation" style="animation-timing-function: var(--ease-standard)">
+          </div>
+          <div class="circle animation" style="animation-timing-function: var(--ease-emphasized)">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <p>Durations</p>
+        <div class="selection">
+          <div class="circle animation" style="animation-duration: var(--dur-fast);"></div>
+          <div class="circle animation" style="animation-duration: var(--dur-medium);"></div>
+          <div class="circle animation" style="animation-duration: var(--dur-slow);"></div>
+        </div>
+      </section>
 
       <section>
         <p>Animations</p>
         <div class="selection">
-          <div
-            class="circle"
-            style="animation: 4s var(--ease-standard) 0s infinite alternate pulse"
-          >
-          </div>
-          <div
-            class="circle"
-            style="animation: 4s var(--ease-emphasized) 0s infinite alternate pulse"
-          >
-          </div>
+          <!-- Not all OpenProps animations are working -->
+          <div class="circle animation" style="animation-name: spin"></div>
+          <div class="circle animation" style="animation-name: fade-in"></div>
+          <div class="circle animation" style="animation-name: fade-out"></div>
+          <div class="circle animation" style="animation-name: slide-in-up"></div>
+          <div class="circle animation" style="animation-name: slide-in-right"></div>
+          <div class="circle animation" style="animation-name: slide-out-down"></div>
+          <div class="circle animation" style="animation-name: slide-out-left"></div>
+          <div class="circle animation" style="animation-name: grow"></div>
         </div>
       </section>
     </div>
@@ -342,6 +365,7 @@ const pageTitle = "Test Page";
 
   .examples--alt-background {
     background-color: var(--test-bg);
+    border-radius: var(--radius-lg);
   }
 
   .selection {
@@ -403,12 +427,12 @@ const pageTitle = "Test Page";
     text-align: center;
   }
 
-  @keyframes pulse {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+  .animation {
+    animation-name: scale-up;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function: var(--ease-standard);
+    animation-duration: var(--dur-slow);
   }
 </style>
