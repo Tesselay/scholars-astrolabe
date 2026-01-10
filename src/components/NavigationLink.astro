@@ -53,7 +53,7 @@ if (!isExternal) {
 }
 
 const built = buildElementProps<"a">({
-  classList: ["nav-link"],
+  classList: [],
   attributes: {
     href: href,
     "aria-current": isCurrent ? "page" : undefined,
@@ -63,11 +63,3 @@ const built = buildElementProps<"a">({
 ---
 
 <a {...built}>{title}</a>
-
-<style>
-  .nav-link {
-    font-family: var(--font-family-secondary);
-    text-decoration: none;
-    font-size: var(--font-size-2);
-  }
-</style>

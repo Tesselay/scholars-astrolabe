@@ -50,6 +50,9 @@ code {
 
 a {
   color: var(--text-link);
+  font-family: var(--font-family-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-2);
 }
 a:hover {
   color: var(--text-link-hover);
