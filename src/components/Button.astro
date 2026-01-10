@@ -1,0 +1,69 @@
+---
+import { type PatchOptions } from "@/types/attributes";
+import { buildElementProps } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
+
+interface ButtonBase {
+  as?: "a" | "button";
+  variant: "primary" | "secondary" | "ghost" | "icon" | "danger";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+interface AnchorButton extends ButtonBase, PatchOptions<"a"> {
+  href: string | URL;
+}
+
+interface NativeButton extends ButtonBase, PatchOptions<"button"> {}
+
+type ButtonProps = AnchorButton | NativeButton;
+
+const {
+  variant = "primary",
+  as = "button",
+  size = "md",
+  disabled = false,
+  loading = false,
+  ...attributes
+} = Astro.props as ButtonProps;
+
+let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
+let baseClassList = [
+  "btn",
+  `btn--${variant}`,
+  `btn--${size}`,
+  disabled && "btn--disabled",
+  loading && "btn--loading"
+].filter(Boolean);
+if (as === "a") {
+  const { href } = attributes as { href: string | URL };
+  built = buildElementProps<"a">({
+    classList: [...baseClassList],
+    attributes: { href, ...attributes }
+  });
+} else {
+  built = buildElementProps<"button">({
+    classList: [...baseClassList],
+    attributes
+  });
+}
+---
+
+{
+  as === "a" ? (
+    <a {...built}>
+      <slot />
+      {loading && (
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+      )}
+    </a>
+  ) : (
+    <button {...built} type="button">
+      <slot />
+      {loading && (
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+      )}
+    </button>
+  )
+}
