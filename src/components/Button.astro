@@ -5,10 +5,9 @@ import type { HTMLAttributes } from "astro/types";
 
 interface ButtonBase {
   as?: "a" | "button";
-  variant: "primary" | "secondary" | "ghost" | "icon" | "danger";
+  variant: "primary" | "ghost" | "icon" | "danger";
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
-  loading?: boolean;
 }
 
 interface AnchorButton extends ButtonBase, PatchOptions<"a"> {
@@ -24,28 +23,27 @@ const {
   as = "button",
   size = "md",
   disabled = false,
-  loading = false,
   ...attributes
 } = Astro.props as ButtonProps;
 
 let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
-let baseClassList = [
-  "btn",
-  `btn--${variant}`,
-  `btn--${size}`,
-  disabled && "btn--disabled",
-  loading && "btn--loading"
-].filter(Boolean);
+let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`, disabled && "btn--disabled"].filter(
+  Boolean
+);
+let { inert } = attributes as { inert?: boolean };
+if (disabled) {
+  inert = true;
+}
 if (as === "a") {
   const { href } = attributes as { href: string | URL };
   built = buildElementProps<"a">({
-    classList: [...baseClassList],
-    attributes: { href, ...attributes }
+    classList: [...baseClassList, "btn--anchor"],
+    attributes: { href, inert, ...attributes }
   });
 } else {
   built = buildElementProps<"button">({
-    classList: [...baseClassList],
-    attributes
+    classList: [...baseClassList, "btn--native"],
+    attributes: { inert, ...attributes }
   });
 }
 ---
@@ -54,16 +52,103 @@ if (as === "a") {
   as === "a" ? (
     <a {...built}>
       <slot />
-      {loading && (
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-      )}
     </a>
   ) : (
     <button {...built} type="button">
       <slot />
-      {loading && (
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-      )}
     </button>
   )
 }
+
+<style>
+  .btn {
+    cursor: pointer;
+    touch-action: manipulation;
+
+    font-family: var(--font-family-secondary);
+    color: var(--btn-text);
+    white-space: nowrap;
+
+    background: var(--btn-bg);
+    border: 2px solid var(--btn-border-color);
+    border-radius: var(--btn-border-radius);
+
+    box-shadow:
+      var(--btn-shadow-2),
+      var(--btn-shadow-depth),
+      0 0 0 var(--btn-highlight-size) var(--btn-highlight-color);
+    text-shadow: var(--btn-ink-shadow);
+    outline-color: currentColor;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    gap: 1ch;
+    padding-inline: var(--btn-padding-x);
+    padding-block: var(--btn-padding-y);
+
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+
+    transition: var(--btn-transition);
+
+    &:hover {
+      --btn-highlight-size: 0.5rem;
+    }
+
+    &:focus-visible {
+      outline-offset: 5px;
+    }
+  }
+
+  .btn > :where(svg, [data-icon]) {
+    block-size: var(--btn-icon-size);
+    inline-size: var(--btn-icon-size);
+    stroke: var(--btn-icon-color);
+    filter: drop-shadow(var(--btn-ink-shadow));
+
+    flex-shrink: 0;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .btn--anchor {
+    font-weight: var(--w-light);
+  }
+
+  .btn--native {
+    font-weight: var(--w-semibold);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    border: 0;
+    box-shadow: none !important;
+  }
+
+  .btn--icon {
+  }
+
+  .btn--disabled {
+    cursor: not-allowed;
+    box-shadow: var(--btn-shadow-1);
+    opacity: 0.5;
+    color: hsl(from currentColor h s l / 0.5);
+  }
+
+  .btn--sm {
+    font-size: var(--font-size-0);
+  }
+
+  .btn--md {
+    font-size: var(--font-size-1);
+  }
+
+  .btn--lg {
+    font-size: var(--font-size-2);
+  }
+</style>
