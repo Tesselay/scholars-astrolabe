@@ -17,38 +17,6 @@ const pageTitle = "Test Page";
   <h1>Test Page</h1>
 
   <section>
-    <h2>Buttons</h2>
-
-    <div class="examples">
-      <section>
-        <p>Default Button</p>
-        <div class="selection">
-          <Button>Default</Button>
-          <Button variant="primary">Primary</Button>
-          <Button variant="primary" color="purple">Custom Color</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="icon">Icon <Icon><EnvelopeIcon /></Icon></Button>
-          <Button variant="danger">Danger</Button>
-          <Button disabled>Disabled</Button>
-        </div>
-      </section>
-
-      <section>
-        <p>Anchor Button</p>
-        <div class="selection">
-          <Button as="a" href="#">Default</Button>
-          <Button as="a" href="#" variant="primary">Primary</Button>
-          <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
-          <Button as="a" href="#" variant="ghost">Ghost</Button>
-          <Button as="a" href="#" variant="icon"><Icon><EnvelopeIcon /></Icon> Icon</Button>
-          <Button as="a" href="#" variant="danger">Danger</Button>
-          <Button as="a" href="#" disabled>Disabled</Button>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <section>
     <h2>Typography</h2>
 
     <div class="examples">
@@ -157,18 +125,6 @@ const pageTitle = "Test Page";
           <div class="circle" style="background-color: var(--selection-bg)"></div>
           <div class="circle" style="background-color: var(--scrollbar-thumb)"></div>
           <div class="circle" style="background-color: var(--icon-color)"></div>
-        </div>
-      </section>
-      <section>
-        <p>Buttons</p>
-        <div class="selection">
-          <div class="circle" style="background-color: var(--btn-primary-bg)"></div>
-          <div class="circle" style="background-color: var(--btn-primary-fg)"></div>
-          <div class="circle" style="background-color: var(--btn-primary-hover-bg)"></div>
-          <div class="circle" style="background-color: var(--btn-secondary-bg)"></div>
-          <div class="circle" style="background-color: var(--btn-secondary-fg)"></div>
-          <div class="circle" style="background-color: var(--btn-danger-bg)"></div>
-          <div class="circle" style="background-color: var(--btn-danger-fg)"></div>
         </div>
       </section>
     </div>
@@ -340,6 +296,37 @@ const pageTitle = "Test Page";
           <Card height="100px">Height 100px</Card>
           <Card width="100px">Width 100px</Card>
           <Card backgroundColor="blue" style="background-color: red;">Background Color</Card>
+        </div>
+      </section>
+
+      <section>
+        <p>Buttons</p>
+        <div class="selection">
+          <section>
+            <p>Default Button</p>
+            <div class="selection">
+              <Button>Default</Button>
+              <Button variant="primary">Primary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="icon">Icon <Icon><EnvelopeIcon /></Icon></Button>
+              <Button variant="danger">Danger</Button>
+              <Button disabled>Disabled</Button>
+              <Button variant="primary" color="purple">Custom Color</Button>
+            </div>
+          </section>
+
+          <section>
+            <p>Anchor Button</p>
+            <div class="selection">
+              <Button as="a" href="#">Default</Button>
+              <Button as="a" href="#" variant="primary">Primary</Button>
+              <Button as="a" href="#" variant="ghost">Ghost</Button>
+              <Button as="a" href="#" variant="icon"><Icon><EnvelopeIcon /></Icon> Icon</Button>
+              <Button as="a" href="#" variant="danger">Danger</Button>
+              <Button as="a" href="#" disabled>Disabled</Button>
+              <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
+            </div>
+          </section>
         </div>
       </section>
 
