@@ -1,0 +1,30 @@
+---
+import type { PatchOptions } from "../types/attributes";
+import { buildElementProps } from "../utils";
+
+interface IconProps extends PatchOptions<"svg"> {
+  color?: string;
+}
+
+const { color, ...attributes } = Astro.props as IconProps;
+
+const built = buildElementProps<"svg">({
+  classList: ["icon"],
+  styleList: [color && `color: ${color}`].filter(Boolean),
+  attributes
+});
+---
+
+<span {...built} aria-hidden="true">
+  <slot />
+</span>
+
+<style>
+  .icon {
+    color: var(--icon-color);
+
+    inline-size: var(--icon-size);
+    block-size: var(--icon-size);
+    display: inline-flex;
+  }
+</style>

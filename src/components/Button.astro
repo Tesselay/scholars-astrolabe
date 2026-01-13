@@ -1,11 +1,12 @@
 ---
-import { type PatchOptions } from "@/types/attributes";
+import type { PatchOptions } from "@/types/attributes";
 import { buildElementProps } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
 interface ButtonBase {
   as?: "a" | "button";
   variant: "primary" | "ghost" | "icon" | "danger";
+  color: string;
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
 }
@@ -22,6 +23,7 @@ const {
   variant = "primary",
   as = "button",
   size = "md",
+  color,
   disabled = false,
   ...attributes
 } = Astro.props as ButtonProps;
@@ -30,6 +32,7 @@ let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
 let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`, disabled && "btn--disabled"].filter(
   Boolean
 );
+let styleList = [color && `--btn-accent: ${color}`].filter(Boolean);
 let { inert } = attributes as { inert?: boolean };
 if (disabled) {
   inert = true;
@@ -38,11 +41,13 @@ if (as === "a") {
   const { href } = attributes as { href: string | URL };
   built = buildElementProps<"a">({
     classList: [...baseClassList, "btn--anchor"],
+    styleList: [...styleList],
     attributes: { href, inert, ...attributes }
   });
 } else {
   built = buildElementProps<"button">({
     classList: [...baseClassList, "btn--native"],
+    styleList: [...styleList],
     attributes: { inert, ...attributes }
   });
 }
@@ -104,16 +109,16 @@ if (as === "a") {
     }
   }
 
-  .btn > :where(svg, [data-icon]) {
-    block-size: var(--btn-icon-size);
+  .btn > :global(.icon) {
+    color: var(--btn-text);
     inline-size: var(--btn-icon-size);
+    block-size: var(--btn-icon-size);
+    flex-shrink: 0;
+  }
+
+  .btn > :global(.icon svg) {
     stroke: var(--btn-icon-color);
     filter: drop-shadow(var(--btn-ink-shadow));
-
-    flex-shrink: 0;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
   }
 
   .btn--anchor {

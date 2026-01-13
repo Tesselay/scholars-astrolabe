@@ -16,7 +16,7 @@
   --font-size-4: clamp(1.5rem, 1rem + 1.6vw, 2rem);
   --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2.25rem);
   --font-size-6: clamp(2rem, 1.3rem + 3.5vw, 3rem);
-  --icon-size: clamp(2.5rem, 1rem + 1.25vw, 3rem);
+  --icon-size: 4ch;
 
   /* Line heights */
   --lh-tight: 1.1;

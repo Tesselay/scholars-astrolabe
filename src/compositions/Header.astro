@@ -1,4 +1,5 @@
 ---
+import Icon from "@/components/Icon.astro";
 import Navigation from "@/compositions/Navigation.astro";
 import { type PatchOptions } from "@/types/attributes";
 import { buildElementProps, getLangFromUrl, metaLoader } from "@/utils";
@@ -23,8 +24,8 @@ const title = meta.home.title;
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>
-  <TranslateIcon class="icon translate-icon" width="var(--icon-size)" fill="var(--icon-color)" />
-  <SunIcon class="icon sun-icon" width="var(--icon-size)" fill="var(--icon-color)" />
+  <Icon class="icon translate-icon"><TranslateIcon /></Icon>
+  <Icon class="icon sun-icon"><SunIcon /></Icon>
 </header>
 
 <style>

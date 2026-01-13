@@ -75,6 +75,15 @@ img {
   display: block;
 }
 
+.icon svg {
+  inline-size: 100%;
+  block-size: 100%;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* Skip Link */
 .skip {
   position: absolute;
