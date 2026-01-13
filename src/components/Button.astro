@@ -6,8 +6,9 @@ import type { HTMLAttributes } from "astro/types";
 interface ButtonBase {
   as?: "a" | "button";
   variant: "primary" | "ghost" | "icon" | "danger";
-  color: string;
-  size?: "sm" | "md" | "lg";
+  color?: string;
+  size?: "xs" | "s" | "m" | "l" | "xl";
+  hasLabel?: boolean;
   disabled?: boolean;
 }
 
@@ -22,9 +23,10 @@ type ButtonProps = AnchorButton | NativeButton;
 const {
   variant = "primary",
   as = "button",
-  size = "md",
+  size = "s",
   color,
   disabled = false,
+  hasLabel = variant === "icon",
   ...attributes
 } = Astro.props as ButtonProps;
 
@@ -57,10 +59,20 @@ if (as === "a") {
   as === "a" ? (
     <a {...built}>
       <slot />
+      {hasLabel && (
+        <span class="sr-only">
+          <slot name="sr-label" />
+        </span>
+      )}
     </a>
   ) : (
     <button {...built} type="button">
       <slot />
+      {hasLabel && (
+        <span class="sr-only">
+          <slot name="sr-label" />
+        </span>
+      )}
     </button>
   )
 }
@@ -132,10 +144,17 @@ if (as === "a") {
   .btn--ghost {
     background: transparent;
     border: 0;
-    box-shadow: none !important;
+    box-shadow: none;
   }
 
   .btn--icon {
+    background: transparent;
+    border: 0;
+    width: min-content;
+    box-shadow: none;
+    text-shadow: none;
+    --btn-padding-x: 0;
+    --btn-padding-y: 0;
   }
 
   .btn--disabled {
@@ -145,15 +164,23 @@ if (as === "a") {
     color: hsl(from currentColor h s l / 0.5);
   }
 
-  .btn--sm {
+  .btn--xs {
     font-size: var(--font-size-0);
   }
 
-  .btn--md {
+  .btn--s {
     font-size: var(--font-size-1);
   }
 
-  .btn--lg {
+  .btn--m {
     font-size: var(--font-size-2);
+  }
+
+  .btn--l {
+    font-size: var(--font-size-3);
+  }
+
+  .btn--xl {
+    font-size: var(--font-size-4);
   }
 </style>

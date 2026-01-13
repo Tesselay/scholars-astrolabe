@@ -304,27 +304,46 @@ const pageTitle = "Test Page";
         <div class="selection">
           <section>
             <p>Default Button</p>
-            <div class="selection">
+            <div class="selection selection--button-example">
               <Button>Default</Button>
               <Button variant="primary">Primary</Button>
               <Button variant="ghost">Ghost</Button>
-              <Button variant="icon">Icon <Icon><EnvelopeIcon /></Icon></Button>
               <Button variant="danger">Danger</Button>
               <Button disabled>Disabled</Button>
+              <Button variant="icon" size="xl"
+                ><Icon><EnvelopeIcon /></Icon><slot slot="sr-label">Icon</slot></Button
+              >
+              <Button variant="primary">Text Icon <Icon><EnvelopeIcon /></Icon></Button>
+              <Button hasLabel>Hidden Label<slot slot="sr-label">This Label is hidden</slot></Button
+              >
               <Button variant="primary" color="purple">Custom Color</Button>
             </div>
           </section>
 
           <section>
             <p>Anchor Button</p>
-            <div class="selection">
+            <div class="selection selection--button-example">
               <Button as="a" href="#">Default</Button>
               <Button as="a" href="#" variant="primary">Primary</Button>
               <Button as="a" href="#" variant="ghost">Ghost</Button>
-              <Button as="a" href="#" variant="icon"><Icon><EnvelopeIcon /></Icon> Icon</Button>
               <Button as="a" href="#" variant="danger">Danger</Button>
               <Button as="a" href="#" disabled>Disabled</Button>
+              <Button as="a" href="#" variant="icon" size="xl"
+                ><Icon><EnvelopeIcon /></Icon><slot slot="sr-label">Icon</slot></Button
+              >
+              <Button as="a" href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</Button>
               <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
+            </div>
+          </section>
+
+          <section>
+            <p>Button Sizes</p>
+            <div class="selection selection--button-example">
+              <Button size="xs">Extra Small</Button>
+              <Button size="s">Small</Button>
+              <Button size="m">Medium</Button>
+              <Button size="l">Large</Button>
+              <Button size="xl">Extra Large</Button>
             </div>
           </section>
         </div>
@@ -397,6 +416,10 @@ const pageTitle = "Test Page";
 
   .selection--column {
     flex-direction: column;
+  }
+
+  .selection--button-example {
+    align-items: center;
   }
 
   .selection--line-height-example > p {
