@@ -8,7 +8,6 @@ interface ButtonBase {
   variant: "primary" | "ghost" | "icon" | "danger";
   color?: string;
   size?: "xs" | "s" | "m" | "l" | "xl";
-  disabled?: boolean;
 }
 
 interface AnchorButton extends ButtonBase, PatchOptions<"a"> {
@@ -24,31 +23,31 @@ const {
   as = "button",
   size = "s",
   color,
-  disabled = false,
   ...attributes
 } = Astro.props as ButtonProps;
 
-let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
+const { disabled } = attributes as { disabled?: boolean };
+
 let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`, disabled && "btn--disabled"].filter(
   Boolean
 );
 let styleList = [color && `--btn-accent: ${color}`].filter(Boolean);
-let { inert } = attributes as { inert?: boolean };
-if (disabled) {
-  inert = true;
-}
+
+let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
 if (as === "a") {
   const { href } = attributes as { href: string | URL };
   built = buildElementProps<"a">({
     classList: [...baseClassList, "btn--anchor"],
     styleList: [...styleList],
-    attributes: { href, inert, ...attributes }
+    decorative: disabled,
+    attributes: { href, ...attributes }
   });
 } else {
   built = buildElementProps<"button">({
     classList: [...baseClassList, "btn--native"],
     styleList: [...styleList],
-    attributes: { inert, ...attributes }
+    decorative: disabled,
+    attributes
   });
 }
 ---
