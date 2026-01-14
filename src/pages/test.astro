@@ -310,12 +310,11 @@ const pageTitle = "Test Page";
               <Button variant="ghost">Ghost</Button>
               <Button variant="danger">Danger</Button>
               <Button disabled>Disabled</Button>
-              <Button variant="icon" size="xl"
-                ><Icon><EnvelopeIcon /></Icon><slot slot="sr-label">Icon</slot></Button
+              <Button variant="icon" size="xl" aria-label="Icon"
+                ><Icon><EnvelopeIcon /></Icon></Button
               >
               <Button variant="primary">Text Icon <Icon><EnvelopeIcon /></Icon></Button>
-              <Button hasLabel>Hidden Label<slot slot="sr-label">This Label is hidden</slot></Button
-              >
+              <Button aria-label="This label is hidden">Hidden Label</Button>
               <Button variant="primary" color="purple">Custom Color</Button>
             </div>
           </section>

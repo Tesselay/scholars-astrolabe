@@ -8,7 +8,6 @@ interface ButtonBase {
   variant: "primary" | "ghost" | "icon" | "danger";
   color?: string;
   size?: "xs" | "s" | "m" | "l" | "xl";
-  hasLabel?: boolean;
   disabled?: boolean;
 }
 
@@ -26,7 +25,6 @@ const {
   size = "s",
   color,
   disabled = false,
-  hasLabel = variant === "icon",
   ...attributes
 } = Astro.props as ButtonProps;
 
@@ -59,20 +57,10 @@ if (as === "a") {
   as === "a" ? (
     <a {...built}>
       <slot />
-      {hasLabel && (
-        <span class="sr-only">
-          <slot name="sr-label" />
-        </span>
-      )}
     </a>
   ) : (
     <button {...built} type="button">
       <slot />
-      {hasLabel && (
-        <span class="sr-only">
-          <slot name="sr-label" />
-        </span>
-      )}
     </button>
   )
 }
