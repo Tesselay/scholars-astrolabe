@@ -1,3 +1,9 @@
-yarn format
-yarn lint:fix
-yarn check
+set -e
+
+git diff --cached --name-only -z --diff-filter=ACMR |
+  xargs -0 yarn run format:staged
+
+git diff --cached --name-only -z --diff-filter=ACMR |
+  xargs -0 yarn run lint:staged
+
+git update-index --again
