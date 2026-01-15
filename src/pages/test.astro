@@ -4,6 +4,9 @@ import "../styles/global.css";
 import { env } from "@/types/env.ts";
 import HeartIcon from "@phosphor-icons/core/assets/regular/heart.svg";
 import EnvelopeIcon from "@phosphor-icons/core/assets/regular/envelope.svg";
+import LinkIcon from "@phosphor-icons/core/assets/regular/link.svg";
+import ToggleLeftIcon from "@phosphor-icons/core/assets/regular/toggle-left.svg";
+
 import Card from "../components/Card.astro";
 import Button from "../components/Button.astro";
 import Icon from "../components/Icon.astro";
@@ -307,15 +310,14 @@ const pageTitle = "Test Page";
             <div class="selection selection--button-example">
               <Button>Default</Button>
               <Button variant="primary">Primary</Button>
-              <Button variant="ghost">Ghost</Button>
               <Button variant="danger">Danger</Button>
-              <Button disabled>Disabled</Button>
-              <Button variant="icon" size="xl" aria-label="Icon"
-                ><Icon><EnvelopeIcon /></Icon></Button
-              >
-              <Button variant="primary">Text Icon <Icon><EnvelopeIcon /></Icon></Button>
-              <Button aria-label="This label is hidden">Hidden Label</Button>
               <Button variant="primary" color="purple">Custom Color</Button>
+              <Button variant="primary"><Icon><EnvelopeIcon /></Icon>Text Icon</Button>
+              <Button variant="icon" size="xl" aria-label="Icon"
+                ><Icon><ToggleLeftIcon /></Icon></Button
+              >
+              <Button variant="ghost">Ghost</Button>
+              <Button disabled>Disabled</Button>
             </div>
           </section>
 
@@ -324,15 +326,14 @@ const pageTitle = "Test Page";
             <div class="selection selection--button-example">
               <Button as="a" href="#">Default</Button>
               <Button as="a" href="#" variant="primary">Primary</Button>
-              <Button as="a" href="#" variant="ghost">Ghost</Button>
               <Button as="a" href="#" variant="danger">Danger</Button>
-              <Button as="a" href="#" disabled>Disabled</Button>
-              <Button as="a" href="#" variant="icon" size="xl"
-                ><Icon><EnvelopeIcon /></Icon><slot slot="sr-label">Icon</slot></Button
-              >
-              <Button as="a" href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</Button>
-              <Button as="a" href="#" aria-label="This label is hidden">Hidden Label</Button>
               <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
+              <Button as="a" href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</Button>
+              <Button as="a" href="#" variant="icon" size="xl" aria-label="Icon"
+                ><Icon><LinkIcon /></Icon></Button
+              >
+              <Button as="a" href="#" variant="ghost">Ghost</Button>
+              <Button as="a" href="#" disabled>Disabled</Button>
             </div>
           </section>
 
