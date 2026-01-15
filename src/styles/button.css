@@ -32,7 +32,7 @@
 }
 
 .btn--icon {
-  --btn-icon-size: clamp(44px, 1.5ch + 1vw, 128px);
+  --btn-icon-size: clamp(44px, 2ch + 0.5vw, 128px);
 }
 
 .btn--anchor {
