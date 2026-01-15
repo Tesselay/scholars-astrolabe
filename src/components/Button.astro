@@ -31,21 +31,27 @@ const { disabled } = attributes as { disabled?: boolean };
 let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`, disabled && "btn--disabled"].filter(
   Boolean
 );
-let styleList = [color && `--btn-accent: ${color}`].filter(Boolean);
+let baseStyleList = [color && `--btn-accent: ${color}`].filter(Boolean);
 
 let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
+
 if (as === "a") {
   const { href } = attributes as { href: string | URL };
+
   built = buildElementProps<"a">({
     classList: [...baseClassList, "btn--anchor"],
-    styleList: [...styleList],
+    styleList: [...baseStyleList],
     decorative: disabled,
-    attributes: { href, ...attributes }
+    attributes: {
+      ...attributes,
+      href,
+      ...(disabled && { "aria-disabled": "true", disabled: undefined, href: undefined }) // Conditional Property Inclusion
+    }
   });
 } else {
   built = buildElementProps<"button">({
     classList: [...baseClassList, "btn--native"],
-    styleList: [...styleList],
+    styleList: [...baseStyleList],
     decorative: disabled,
     attributes
   });
@@ -106,6 +112,14 @@ if (as === "a") {
     &:focus-visible {
       outline-offset: 5px;
     }
+
+    &:is(:disabled, [aria-disabled]) {
+      cursor: not-allowed;
+      box-shadow: var(--btn-shadow-1);
+      opacity: 0.5;
+      color: hsl(from currentColor h s l / 0.5);
+      pointer-events: none;
+    }
   }
 
   .btn > :global(.icon) {
@@ -145,10 +159,6 @@ if (as === "a") {
   }
 
   .btn--disabled {
-    cursor: not-allowed;
-    box-shadow: var(--btn-shadow-1);
-    opacity: 0.5;
-    color: hsl(from currentColor h s l / 0.5);
   }
 
   .btn--xs {
