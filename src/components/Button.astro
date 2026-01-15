@@ -56,19 +56,13 @@ if (as === "a") {
     attributes
   });
 }
+
+const Tag = as;
 ---
 
-{
-  as === "a" ? (
-    <a {...built}>
-      <slot />
-    </a>
-  ) : (
-    <button {...built} type="button">
-      <slot />
-    </button>
-  )
-}
+<Tag {...built} type={as === "button" ? "button" : undefined}>
+  <slot />
+</Tag>
 
 <style>
   .btn {
@@ -115,10 +109,10 @@ if (as === "a") {
 
     &:is(:disabled, [aria-disabled]) {
       cursor: not-allowed;
-      box-shadow: var(--btn-shadow-1);
+      pointer-events: none;
+      box-shadow: none;
       opacity: 0.5;
       color: hsl(from currentColor h s l / 0.5);
-      pointer-events: none;
     }
   }
 
@@ -149,11 +143,11 @@ if (as === "a") {
   }
 
   .btn--icon {
+    aspect-ratio: 1;
     background: transparent;
-    border: 0;
-    width: min-content;
     box-shadow: none;
     text-shadow: none;
+    border: 0;
     --btn-padding-x: 0;
     --btn-padding-y: 0;
   }
