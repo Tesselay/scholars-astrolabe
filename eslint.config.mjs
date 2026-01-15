@@ -15,7 +15,7 @@ export default defineConfig([
   // TypeScript
   ...tseslint.configs.recommended,
 
-  // Astro
+  // Astro (+ jsx-a11y)
   ...astro.configs.recommended,
   ...astro.configs["jsx-a11y-recommended"],
 
@@ -24,9 +24,6 @@ export default defineConfig([
 
   // CSS
   css.configs.recommended,
-
-  // Prettier
-  eslintConfigPrettier,
 
   // Globals
   {
@@ -37,6 +34,9 @@ export default defineConfig([
       }
     }
   },
+
+  // Prettier
+  eslintConfigPrettier,
 
   // Ignores
   {
