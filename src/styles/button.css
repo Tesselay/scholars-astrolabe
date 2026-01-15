@@ -31,6 +31,10 @@
   --btn-transition: var(--btn-transition-motion-ok);
 }
 
+.btn--icon {
+  --btn-icon-size: clamp(44px, 1.5ch + 1vw, 128px);
+}
+
 .btn--anchor {
   --btn-accent: var(--text-link);
 }
