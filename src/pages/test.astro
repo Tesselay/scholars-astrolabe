@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
+import Layout from "@/layouts/Layout.astro";
+import "@/styles/global.css";
 import { env } from "@/types/env.ts";
 import HeartIcon from "@phosphor-icons/core/assets/regular/heart.svg";
 import EnvelopeIcon from "@phosphor-icons/core/assets/regular/envelope.svg";
@@ -295,7 +295,7 @@ const pageTitle = "Test Page";
           <Card>Default</Card>
           <Card sizing="full">Sizing Full</Card>
           <Card sizing="fit-content">Sizing Fit Content</Card>
-          <Card square="true" width="100px">Square 100px</Card>
+          <Card square width="100px">Square 100px</Card>
           <Card height="100px">Height 100px</Card>
           <Card width="100px">Width 100px</Card>
           <Card backgroundColor="blue" style="background-color: red;">Background Color</Card>
@@ -313,7 +313,7 @@ const pageTitle = "Test Page";
               <Button variant="danger">Danger</Button>
               <Button variant="primary" color="purple">Custom Color</Button>
               <Button variant="primary"><Icon><EnvelopeIcon /></Icon>Text Icon</Button>
-              <Button variant="icon" size="xl" aria-label="Icon"
+              <Button variant="icon" size="xl" aria-label="Icon Button"
                 ><Icon><ToggleLeftIcon /></Icon></Button
               >
               <Button variant="ghost">Ghost</Button>
@@ -329,7 +329,7 @@ const pageTitle = "Test Page";
               <Button as="a" href="#" variant="danger">Danger</Button>
               <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
               <Button as="a" href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</Button>
-              <Button as="a" href="#" variant="icon" size="xl" aria-label="Icon"
+              <Button as="a" href="#" variant="icon" size="xl" aria-label="Icon Button"
                 ><Icon><LinkIcon /></Icon></Button
               >
               <Button as="a" href="#" variant="ghost">Ghost</Button>
@@ -344,7 +344,7 @@ const pageTitle = "Test Page";
               <Button size="s">Small</Button>
               <Button size="m">Medium</Button>
               <Button size="l">Large</Button>
-              <Button size="xl">Extra Large</Button>
+              <Button size="xl" style="--btn-accent: blue;">Extra Large</Button>
             </div>
           </section>
         </div>
@@ -353,8 +353,9 @@ const pageTitle = "Test Page";
       <section>
         <p>Icons</p>
         <div class="selection">
-          <HeartIcon width="48" fill="var(--accent-primary)" />
-          <HeartIcon width="48" fill="red" />
+          <Icon><HeartIcon /></Icon>
+          <Icon size="50px"><HeartIcon /></Icon>
+          <Icon color="red"><HeartIcon /></Icon>
         </div>
       </section>
     </div>
