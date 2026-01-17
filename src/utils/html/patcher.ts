@@ -8,8 +8,8 @@ import { normalizeClasses, normalizeStyles } from "@/utils";
 // TODO: No styles with missing key or value
 
 export function buildElementProps<Type extends keyof JSX.DefinedIntrinsicElements>(
-  options: PatchOptions<Type> = {}
-): Partial<HTMLAttributes<Type>> {
+  options: PatchOptions<Type>
+): HTMLAttributes<Type> {
   const { classList, styleList, decorative = false, attributes } = options;
 
   const result: Record<string, unknown> = { ...(attributes ?? {}) };
@@ -36,5 +36,5 @@ export function buildElementProps<Type extends keyof JSX.DefinedIntrinsicElement
     if (result["inert"] == null) result["inert"] = true;
   }
 
-  return result as Partial<HTMLAttributes<Type>>;
+  return result as HTMLAttributes<Type>;
 }
