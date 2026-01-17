@@ -32,6 +32,19 @@ export default defineConfig([
         ...globals.browser,
         ...globals.node
       }
+    },
+    settings: {
+      components: {
+        Navigation: "ul",
+        NavigationLink: "a",
+        Header: "header"
+      },
+      attributes: {
+        href: "href",
+        variant: "class",
+        size: "class",
+        sizing: "class"
+      }
     }
   },
 
