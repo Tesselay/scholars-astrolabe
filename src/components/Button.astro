@@ -3,20 +3,18 @@ import type { PatchOptions } from "@/types/attributes";
 import { buildElementProps } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
+// TODO: Split for stricter type safety and better hints
+
 interface ButtonBase {
   as?: "a" | "button";
-  variant: "primary" | "ghost" | "icon" | "danger";
-  color?: string;
+  variant?: "primary" | "ghost" | "icon" | "danger";
   size?: "xs" | "s" | "m" | "l" | "xl";
+  color?: string;
 }
 
-interface AnchorButton extends ButtonBase, PatchOptions<"a"> {
-  href: string | URL;
-}
-
-interface NativeButton extends ButtonBase, PatchOptions<"button"> {}
-
-type ButtonProps = AnchorButton | NativeButton;
+type AnchorButton = ButtonBase & HTMLAttributes<"a"> & Pick<HTMLAttributes<"button">, "disabled">;
+type NativeButton = ButtonBase & HTMLAttributes<"button">;
+type Props = AnchorButton | NativeButton;
 
 const {
   variant = "primary",
@@ -24,45 +22,51 @@ const {
   size = "s",
   color,
   ...attributes
-} = Astro.props as ButtonProps;
+} = Astro.props as Props;
 
-const { disabled } = attributes as { disabled?: boolean };
+let baseClassList = [
+  "btn",
+  `btn--${variant}`,
+  `btn--${size}`,
+  attributes.disabled && "btn--disabled"
+];
+let baseStyleList = [color && `--btn-accent: ${color}`];
 
-let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`, disabled && "btn--disabled"].filter(
-  Boolean
-);
-let baseStyleList = [color && `--btn-accent: ${color}`].filter(Boolean);
-
-let built: Partial<HTMLAttributes<"a">> | Partial<HTMLAttributes<"button">>;
+let built: HTMLAttributes<"a"> | HTMLAttributes<"button">;
 
 if (as === "a") {
-  const { href } = attributes as { href: string | URL };
-
   built = buildElementProps<"a">({
     classList: [...baseClassList, "btn--anchor"],
     styleList: [...baseStyleList],
-    decorative: disabled,
+    decorative: attributes.disabled ? true : undefined,
     attributes: {
       ...attributes,
-      href,
-      ...(disabled && { "aria-disabled": "true", disabled: undefined, href: undefined }) // Conditional Property Inclusion
+      ...(attributes.disabled && { "aria-disabled": "true", disabled: undefined, href: undefined })
     }
-  });
+  } as PatchOptions<"a">);
 } else {
   built = buildElementProps<"button">({
     classList: [...baseClassList, "btn--native"],
     styleList: [...baseStyleList],
-    decorative: disabled,
-    attributes
-  });
+    decorative: attributes.disabled ? true : undefined,
+    attributes: {
+      ...attributes
+    }
+  } as PatchOptions<"button">);
 }
-
-const Tag = as;
 ---
 
-<Tag {...built} type={as === "button" ? "button" : undefined}>
-  <slot />
-</Tag>
+{
+  as === "a" ? (
+    <a {...(built as HTMLAttributes<"a">)}>
+      <slot />
+    </a>
+  ) : (
+    <button {...(built as HTMLAttributes<"button">)}>
+      <slot />
+    </button>
+  )
+}
 
 <style>
   .btn {

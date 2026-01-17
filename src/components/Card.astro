@@ -1,8 +1,8 @@
 ---
-import type { PatchOptions } from "@/types/attributes";
 import { buildElementProps } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
 
-interface CardProps extends PatchOptions<"div"> {
+interface Props extends HTMLAttributes<"div"> {
   sizing: "fit-content" | "full";
   square?: boolean;
   height?: string;
@@ -10,14 +10,7 @@ interface CardProps extends PatchOptions<"div"> {
   backgroundColor?: string;
 }
 
-const {
-  square,
-  sizing = "full",
-  height,
-  width,
-  backgroundColor,
-  ...attributes
-} = Astro.props as CardProps;
+const { square, sizing = "full", height, width, backgroundColor, ...attributes } = Astro.props;
 
 const built = buildElementProps<"div">({
   classList: ["card", sizing],
@@ -26,7 +19,7 @@ const built = buildElementProps<"div">({
     backgroundColor && `background-color: ${backgroundColor}`,
     height && `height: ${height}`,
     width && `width: ${width}`
-  ].filter(Boolean),
+  ],
   attributes
 });
 ---

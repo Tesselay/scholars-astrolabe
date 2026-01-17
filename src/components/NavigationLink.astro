@@ -1,18 +1,18 @@
 ---
 import { getLangFromUrl, pathWithLocale, stripLangFromUrlOrId, buildElementProps } from "@/utils";
-import { type PatchOptions } from "@/types/attributes";
-import Button from "./Button.astro";
+import Button from "@/components/Button.astro";
+import type { HTMLAttributes } from "astro/types";
 
-interface NavLinkProps extends PatchOptions<"a"> {
-  description: string;
+interface Props extends HTMLAttributes<"a"> {
+  description?: string;
   localized?: boolean;
 }
 
-const { description, localized = false, ...attributes } = Astro.props as NavLinkProps;
+const { description, localized = false, ...attributes } = Astro.props;
 
 const base = Astro.site ?? Astro.url.origin;
 const baseUrl = new URL(base);
-const linkUrl = new URL(Astro.props.href, base);
+const linkUrl = new URL(attributes.href ? attributes.href : "", base);
 
 const isExternal = linkUrl.origin !== baseUrl.origin;
 
@@ -54,7 +54,6 @@ if (!isExternal) {
 
 const built = buildElementProps<"a">({
   attributes: {
-    href: href,
     "aria-current": isCurrent ? "page" : undefined,
     ...attributes
   }

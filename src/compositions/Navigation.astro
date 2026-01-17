@@ -1,15 +1,15 @@
 ---
 import NavigationLink from "@/components/NavigationLink.astro";
 import { getLangFromUrl, pathWithLocale, uiLoader, buildElementProps } from "@/utils";
-import { type PatchOptions } from "@/types/attributes";
+import type { HTMLAttributes } from "astro/types";
 
 type NavigationStyle = "default" | "embellished";
 
-interface NavProps extends PatchOptions<"ul"> {
+interface Props extends HTMLAttributes<"ul"> {
   mode: NavigationStyle;
 }
 
-const { mode = "default", ...attrs } = Astro.props as NavProps;
+const { mode = "default", ...attributes } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const ui = await uiLoader.getAsync(lang);
@@ -21,7 +21,7 @@ const contactUrl = pathWithLocale(lang, "/contact/");
 
 const built = buildElementProps<"ul">({
   classList: ["nav-links", mode],
-  attributes: attrs
+  attributes
 });
 ---
 

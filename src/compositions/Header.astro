@@ -1,14 +1,14 @@
 ---
 import Icon from "@/components/Icon.astro";
 import Navigation from "@/compositions/Navigation.astro";
-import { type PatchOptions } from "@/types/attributes";
 import { buildElementProps, getLangFromUrl, metaLoader } from "@/utils";
+import Button from "@/components/Button.astro";
 
 import SunIcon from "@phosphor-icons/core/assets/bold/sun-bold.svg";
 import TranslateIcon from "@phosphor-icons/core/assets/bold/translate-bold.svg";
-import Button from "../components/Button.astro";
+import type { HTMLAttributes } from "astro/types";
 
-const { ...attributes } = Astro.props as PatchOptions<"header">;
+const { ...attributes } = Astro.props as HTMLAttributes<"header">;
 
 const built = buildElementProps<"header">({
   classList: ["header"],
