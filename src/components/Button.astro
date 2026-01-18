@@ -1,40 +1,25 @@
 ---
 import type { PatchOptions } from "@/types/attributes";
 import { buildElementProps } from "@/utils";
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes, Polymorphic } from "astro/types";
 
-// TODO: Split for stricter type safety and better hints
+// TODO: Split for better IntelliSense
 
-interface ButtonBase {
-  as?: "a" | "button";
+type ButtonTags = "a" | "button";
+type Props<Tag extends ButtonTags> = Polymorphic<{
+  as: Tag;
   variant?: "primary" | "ghost" | "icon" | "danger";
   size?: "xs" | "s" | "m" | "l" | "xl";
   color?: string;
-}
+}>;
 
-type AnchorButton = ButtonBase & HTMLAttributes<"a"> & Pick<HTMLAttributes<"button">, "disabled">;
-type NativeButton = ButtonBase & HTMLAttributes<"button">;
-type Props = AnchorButton | NativeButton;
+const { as: Tag = "button", variant = "primary", size = "s", color, ...attributes } = Astro.props;
 
-const {
-  variant = "primary",
-  as = "button",
-  size = "s",
-  color,
-  ...attributes
-} = Astro.props as Props;
-
-let baseClassList = [
-  "btn",
-  `btn--${variant}`,
-  `btn--${size}`,
-  attributes.disabled && "btn--disabled"
-];
+let baseClassList = ["btn", `btn--${variant}`, `btn--${size}`];
 let baseStyleList = [color && `--btn-accent: ${color}`];
 
-let built: HTMLAttributes<"a"> | HTMLAttributes<"button">;
-
-if (as === "a") {
+let built: HTMLAttributes<ButtonTags>;
+if (Tag === "a") {
   built = buildElementProps<"a">({
     classList: [...baseClassList, "btn--anchor"],
     styleList: [...baseStyleList],
@@ -56,17 +41,9 @@ if (as === "a") {
 }
 ---
 
-{
-  as === "a" ? (
-    <a {...(built as HTMLAttributes<"a">)}>
-      <slot />
-    </a>
-  ) : (
-    <button {...(built as HTMLAttributes<"button">)}>
-      <slot />
-    </button>
-  )
-}
+<Tag {...built}>
+  <slot />
+</Tag>
 
 <style>
   .btn {
