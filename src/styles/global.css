@@ -58,11 +58,8 @@ a:hover {
   color: var(--text-link-hover);
 }
 a:focus {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid currentColor;
   outline-offset: 2px;
-}
-a:visited {
-  color: color-mix(in oklab, var(--text-link) 80%, var(--text-primary));
 }
 
 hr {

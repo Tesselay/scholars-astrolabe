@@ -16,7 +16,7 @@
   --font-size-4: clamp(1.5rem, 1rem + 1.6vw, 1.75rem);
   --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2rem);
   --font-size-6: clamp(2rem, 1.3rem + 3.5vw, 2.25rem);
-  --icon-size: 4ch;
+  --icon-size: 2ch;
 
   /* Line heights */
   --lh-tight: 1.1;
@@ -49,6 +49,14 @@ body {
   font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
   line-height: var(--lh-body);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  line-height: inherit;
 }
 
 /* Headings */

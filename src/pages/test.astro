@@ -8,12 +8,13 @@ import LinkIcon from "@phosphor-icons/core/assets/regular/link.svg";
 import ToggleLeftIcon from "@phosphor-icons/core/assets/regular/toggle-left.svg";
 
 import Card from "../components/Card.astro";
-import Button from "../components/Button.astro";
 import Icon from "../components/Icon.astro";
+import ButtonNative from "../components/Button/ButtonNative.astro";
+import ButtonAnchor from "../components/Button/ButtonAnchor.astro";
 
 export const prerender = env.TEST_PAGE;
 
-const pageTitle = "Test Page";
+const pageTitle = "TestComponent Page";
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -308,43 +309,45 @@ const pageTitle = "Test Page";
           <section>
             <p>Default Button</p>
             <div class="selection selection--button-example">
-              <Button>Default</Button>
-              <Button variant="primary">Primary</Button>
-              <Button variant="danger">Danger</Button>
-              <Button variant="primary" color="purple">Custom Color</Button>
-              <Button variant="primary"><Icon><EnvelopeIcon /></Icon>Text Icon</Button>
-              <Button variant="icon" size="xl" aria-label="Icon Button"
-                ><Icon><ToggleLeftIcon /></Icon></Button
+              <ButtonNative>Default</ButtonNative>
+              <ButtonNative variant="primary">Primary</ButtonNative>
+              <ButtonNative variant="primary" color="purple">Custom Color</ButtonNative>
+              <ButtonNative variant="danger">Danger</ButtonNative>
+              <ButtonNative variant="primary"><Icon><EnvelopeIcon /></Icon>Text Icon</ButtonNative>
+              <ButtonNative variant="icon" size="xl" aria-label="Icon Button"
+                ><Icon><ToggleLeftIcon /></Icon></ButtonNative
               >
-              <Button variant="ghost">Ghost</Button>
-              <Button disabled>Disabled</Button>
+              <ButtonNative variant="ghost">Ghost</ButtonNative>
+              <ButtonNative disabled>Disabled</ButtonNative>
             </div>
           </section>
 
           <section>
             <p>Anchor Button</p>
             <div class="selection selection--button-example">
-              <Button as="a" href="#">Default</Button>
-              <Button as="a" href="#" variant="primary">Primary</Button>
-              <Button as="a" href="#" variant="danger">Danger</Button>
-              <Button as="a" href="#" variant="primary" color="forestgreen">Custom Color</Button>
-              <Button as="a" href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</Button>
-              <Button as="a" href="#" variant="icon" size="xl" aria-label="Icon Button"
-                ><Icon><LinkIcon /></Icon></Button
+              <ButtonAnchor href="#">Default</ButtonAnchor>
+              <ButtonAnchor href="#" variant="primary">Primary</ButtonAnchor>
+              <ButtonAnchor href="#" variant="danger">Danger</ButtonAnchor>
+              <ButtonAnchor href="#" variant="primary" color="forestgreen"
+                >Custom Color</ButtonAnchor
               >
-              <Button as="a" href="#" variant="ghost">Ghost</Button>
-              <Button as="a" href="#" disabled>Disabled</Button>
+              <ButtonAnchor href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</ButtonAnchor>
+              <ButtonAnchor href="#" variant="icon" size="xl" aria-label="Icon Button"
+                ><Icon><LinkIcon /></Icon></ButtonAnchor
+              >
+              <ButtonAnchor href="#" variant="ghost">Ghost</ButtonAnchor>
+              <ButtonAnchor href="#" disabled>Disabled</ButtonAnchor>
             </div>
           </section>
 
           <section>
             <p>Button Sizes</p>
             <div class="selection selection--button-example">
-              <Button size="xs">Extra Small</Button>
-              <Button size="s">Small</Button>
-              <Button size="m">Medium</Button>
-              <Button size="l">Large</Button>
-              <Button size="xl" style="--btn-accent: blue;">Extra Large</Button>
+              <ButtonNative size="xs">Extra Small</ButtonNative>
+              <ButtonNative size="s">Small</ButtonNative>
+              <ButtonNative size="m">Medium</ButtonNative>
+              <ButtonNative size="l">Large</ButtonNative>
+              <ButtonNative size="xl" style="--btn-accent: blue;">Extra Large</ButtonNative>
             </div>
           </section>
         </div>

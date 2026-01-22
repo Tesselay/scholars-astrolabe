@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { buildElementProps } from "@/utils";
+
+import type { ButtonBase } from "./button.d.ts";
+import { getButtonClasses, getButtonStyles } from "./styles.ts";
+
+type Props = ButtonBase & HTMLAttributes<"a">;
+
+// Reinstantiate props to set defaults
+const props = {
+  variant: Astro.props.variant ?? "primary",
+  size: Astro.props.size ?? "s",
+  ...Astro.props
+};
+
+const built = buildElementProps<"a">({
+  classList: [...getButtonClasses(props), "btn--anchor"],
+  styleList: [...getButtonStyles(props)],
+  decorative: props.disabled ? true : undefined,
+  attributes: {
+    ...props,
+    ...(props.disabled && { "aria-disabled": "true", disabled: undefined, href: undefined })
+  }
+});
+---
+
+<a {...built}>
+  <slot />
+</a>
+
+<style>
+  @import "./button.css";
+
+  .btn--anchor {
+    font-weight: var(--w-light);
+  }
+</style>
