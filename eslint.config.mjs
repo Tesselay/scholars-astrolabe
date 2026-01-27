@@ -37,7 +37,9 @@ export default defineConfig([
       components: {
         Navigation: "ul",
         NavigationLink: "a",
-        Header: "header"
+        Header: "header",
+        Button: "button",
+        ButtonAnchor: "a"
       },
       attributes: {
         href: "href",
