@@ -1,31 +1,26 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { buildElementProps } from "@/utils";
 
-import type { ButtonBase } from "./button.d.ts";
+import type { ButtonBase } from "./button";
 import { getButtonClasses, getButtonStyles } from "./styles.ts";
 
-type Props = ButtonBase & HTMLAttributes<"a">;
+interface Props extends ButtonBase, HTMLAttributes<"a"> {}
 
-// Reinstantiate props to set defaults
-const props = {
-  variant: Astro.props.variant ?? "primary",
-  size: Astro.props.size ?? "s",
-  ...Astro.props
-};
+const { variant = "primary", size = "s", ...attributes } = Astro.props;
 
-const built = buildElementProps<"a">({
-  classList: [...getButtonClasses(props), "btn--anchor"],
-  styleList: [...getButtonStyles(props)],
-  decorative: props.disabled ? true : undefined,
-  attributes: {
-    ...props,
-    ...(props.disabled && { "aria-disabled": "true", disabled: undefined, href: undefined })
-  }
-});
+if (attributes.disabled) {
+  attributes["aria-disabled"] = "true";
+  attributes["aria-hidden"] = "true";
+  attributes["inert"] = "true";
+  attributes.href = undefined;
+  attributes.disabled = undefined;
+}
+
+const classList = [...getButtonClasses(variant, size), "btn--anchor"];
+const styleList = getButtonStyles(attributes.color);
 ---
 
-<a {...built}>
+<a class:list={classList} style={styleList} {...attributes}>
   <slot />
 </a>
 

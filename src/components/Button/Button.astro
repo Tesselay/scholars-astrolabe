@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import type { ButtonBase } from "./button.d.ts";
+import { getButtonClasses, getButtonStyles } from "./styles";
+
+interface Props extends ButtonBase, HTMLAttributes<"button"> {}
+
+const { variant = "primary", size = "s", ...attributes } = Astro.props;
+
+const classList = [...getButtonClasses(variant, size), "btn--native"];
+const styleList = getButtonStyles(attributes.color);
+---
+
+<button class:list={classList} style={styleList} {...attributes}>
+  <slot />
+</button>
+
+<style>
+  @import "./button.css";
+
+  .btn--native {
+    font-weight: var(--w-semibold);
+  }
+</style>
