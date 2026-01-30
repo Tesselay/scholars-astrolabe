@@ -1,8 +1,26 @@
 import { type Locale } from "../locales";
 import { type ContentManifest } from "../manifests/content";
 import { pages, nonLocalizedPages } from "../constants/routes";
-import { convertLocalPathToSlug, normalizeNeutralPath } from "@/utils/common/path";
+import { collapseSlashes, ensureTrailingSlash, neutralizePath } from "@/utils/common/path";
 import { getAlternateLocalesByLang } from "@/utils/common/locale";
+
+function normalizeFilePath(path: string): string {
+  let normalizedPath = neutralizePath(path);
+  normalizedPath = normalizedPath.replace(
+    /(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i,
+    "$2"
+  );
+  return normalizedPath;
+}
+
+function convertLocalPathToSlug(p: string): string {
+  const slug = normalizeFilePath(p)
+    .replace(/^\/src\/pages/, "")
+    .replace(/\/\[lang\]/, "")
+    .replace(/\[(?:\.\.\.)?slug\]/, "");
+
+  return ensureTrailingSlash(collapseSlashes(slug));
+}
 
 const mNonLocalizedPages = new Set(nonLocalizedPages.map((p) => convertLocalPathToSlug(p)));
 const mPages = new Set(pages.map((p) => convertLocalPathToSlug(p)));
@@ -23,12 +41,12 @@ const mDynamicBases = new Set(
 );
 
 function staticPageExists(neutralPath: string): boolean {
-  const path = normalizeNeutralPath(neutralPath);
+  const path = normalizeFilePath(neutralPath);
   return mNonLocalizedPages.has(path);
 }
 
 function dynamicPageExists(neutralPath: string): boolean {
-  const path = normalizeNeutralPath(neutralPath);
+  const path = normalizeFilePath(neutralPath);
   if (mPages.has(path)) return true;
   for (const base of mDynamicBases) {
     if (path.startsWith(base)) return true;
@@ -44,7 +62,7 @@ function parseContentPath(
   | { kind: "page" }
   | { kind: "static-page" }
   | { kind: "not-found" } {
-  const path = normalizeNeutralPath(neutralPath);
+  const path = normalizeFilePath(neutralPath);
   const blogMatch = path.match(/^\/blog\/(.+?)\/$/);
   if (blogMatch) {
     return { kind: "blog-post", slug: blogMatch[1] };

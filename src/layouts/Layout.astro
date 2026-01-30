@@ -3,11 +3,10 @@ import "../styles/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
 import {
-  normalizeNeutralPath,
+  neutralizePath,
   getContentManifest,
   altLocalesFor,
-  pathWithLocale,
-  stripLangFromUrlOrId,
+  localizePath,
   getLangFromUrl,
   metaLoader,
   ogLocales,
@@ -30,16 +29,15 @@ const fullTitle = pageTitle.includes(siteName) ? pageTitle : `${siteName} - ${pa
 
 const ogLocale = ogLocales[lang] ?? ogLocales[defaultLocale];
 const base = Astro.site ?? Astro.url.origin;
-const rawNeutral = stripLangFromUrlOrId(Astro.url.pathname);
-const neutralPath = normalizeNeutralPath(rawNeutral);
+const neutralPath = neutralizePath(Astro.url.pathname);
 
-const canonicalUrl = new URL(pathWithLocale(lang, neutralPath), base).href;
-const xDefaultUrl = new URL(pathWithLocale(defaultLocale, neutralPath), base).href;
+const canonicalUrl = new URL(localizePath(lang, neutralPath), base).href;
+const xDefaultUrl = new URL(localizePath(defaultLocale, neutralPath), base).href;
 
 const altLocales = altLocalesFor(lang, neutralPath, manifest);
 const alternates = altLocales.map((l) => ({
   hreflang: l,
-  href: new URL(pathWithLocale(l, neutralPath), base).href,
+  href: new URL(localizePath(l, neutralPath), base).href,
   ogLocale: ogLocales[l]
 }));
 

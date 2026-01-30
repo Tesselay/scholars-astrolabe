@@ -6,8 +6,8 @@ import {
   ensureTrailingSlash,
   stripLangFromUrlOrId,
   pathsForAllLocales,
-  pathWithLocale,
-  normalizeNeutralPath,
+  localizePath,
+  normalizeFilePath,
   locales,
   type Locale
 } from "@/utils";
@@ -76,26 +76,26 @@ describe("path common", () => {
     }
   });
 
-  it("pathWithLocale prefixes locale and normalizes slashes", () => {
-    expect(pathWithLocale("en", "about")).toBe("/en/about");
-    expect(pathWithLocale("en", "/about")).toBe("/en/about");
-    expect(pathWithLocale("de", "///about///me")).toBe("/de/about/me");
+  it("localizePath prefixes locale and normalizes slashes", () => {
+    expect(localizePath("en", "about")).toBe("/en/about");
+    expect(localizePath("en", "/about")).toBe("/en/about");
+    expect(localizePath("de", "///about///me")).toBe("/de/about/me");
   });
 
-  describe("normalizeNeutralPath", () => {
+  describe("normalizeFilePath", () => {
     it("strips locale and ensures leading and trailing slash", () => {
-      expect(normalizeNeutralPath("/en/about")).toBe("/about/");
-      expect(normalizeNeutralPath("en/about/")).toBe("/about/");
+      expect(normalizeFilePath("/en/about")).toBe("/about/");
+      expect(normalizeFilePath("en/about/")).toBe("/about/");
     });
 
     it("removes Astro extensions", () => {
-      expect(normalizeNeutralPath("/en/about/index.astro")).toBe("/about/");
-      expect(normalizeNeutralPath("/de/blog/index.astro")).toBe("/blog/");
-      expect(normalizeNeutralPath("/de/blog/post.astro")).toBe("/blog/post/");
+      expect(normalizeFilePath("/en/about/index.astro")).toBe("/about/");
+      expect(normalizeFilePath("/de/blog/index.astro")).toBe("/blog/");
+      expect(normalizeFilePath("/de/blog/post.astro")).toBe("/blog/post/");
     });
 
     it("collapses repeated slashes", () => {
-      expect(normalizeNeutralPath("///en////about//index.astro")).toBe("/about/");
+      expect(normalizeFilePath("///en////about//index.astro")).toBe("/about/");
     });
   });
 });

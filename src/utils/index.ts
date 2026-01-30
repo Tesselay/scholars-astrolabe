@@ -24,14 +24,15 @@ export {
   getAlternateLocalesByURL
 } from "./common/locale";
 export {
-  pathWithLocale,
+  localizePath,
   pathsForAllLocales,
   stripLangFromUrlOrId,
   trimSlashes,
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
-  normalizeNeutralPath
+  neutralizePath,
+  normalizePath
 } from "./common/path";
 export {
   buildBlogPostPath,

@@ -4,7 +4,7 @@ import ButtonAnchor from "./Button/ButtonAnchor.astro";
 
 import { getLangFromUrl } from "@/utils/common/locale";
 import {
-  pathWithLocale,
+  localizePath,
   stripLangFromUrlOrId,
   ensureTrailingSlash,
   ensureLeadingSlash,
@@ -31,7 +31,7 @@ if (isInternal) {
   const rawPath = linkUrl.pathname;
   const hasLocale = stripLangFromUrlOrId(rawPath) !== rawPath;
 
-  const finalPath = localized || hasLocale ? rawPath : pathWithLocale(curLang, rawPath);
+  const finalPath = localized || hasLocale ? rawPath : localizePath(curLang, rawPath);
 
   href = collapseSlashes(ensureLeadingSlash(finalPath) + linkUrl.search + linkUrl.hash);
 

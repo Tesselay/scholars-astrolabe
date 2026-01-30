@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   type Locale,
-  pathWithLocale,
+  localizePath,
   stripLangFromUrlOrId,
   altLocalesFor,
   getContentManifest
@@ -14,7 +14,7 @@ describe("Layout SEO links: canonical edge cases", () => {
     const lang: Locale = "en";
     const messy = "///en////blog//example";
     const neutralPath = stripLangFromUrlOrId(messy);
-    const canonicalUrl = new URL(pathWithLocale(lang, String(neutralPath)), base).href;
+    const canonicalUrl = new URL(localizePath(lang, String(neutralPath)), base).href;
 
     expect(canonicalUrl).toBe("https://example.com/en/blog/example");
   });
@@ -29,7 +29,7 @@ describe("Layout SEO links: alternates edge cases", () => {
     const alternates = altLocalesFor(current, String(neutralPath), manifest);
     const hrefs = alternates.map((l) => ({
       hreflang: l,
-      href: base + pathWithLocale(l, String(neutralPath))
+      href: base + localizePath(l, String(neutralPath))
     }));
 
     expect(alternates).toStrictEqual([]);
@@ -45,7 +45,7 @@ describe("Layout SEO links: alternates edge cases", () => {
 
     const hrefs = alternates.map((l) => ({
       hreflang: l,
-      href: base + pathWithLocale(l, String(neutralPath))
+      href: base + localizePath(l, String(neutralPath))
     }));
 
     expect(alternates).toStrictEqual(["en"]);
