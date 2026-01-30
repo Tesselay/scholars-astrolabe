@@ -1,66 +1,54 @@
 ---
-import { getLangFromUrl, pathWithLocale, stripLangFromUrlOrId, buildElementProps } from "@/utils";
-import Button from "@/components/Button.astro";
-import type { HTMLAttributes } from "astro/types";
+import type { ComponentProps } from "astro/types";
+import ButtonAnchor from "./Button/ButtonAnchor.astro";
 
-interface Props extends HTMLAttributes<"a"> {
-  description?: string;
+import { getLangFromUrl } from "@/utils/common/locale";
+import {
+  pathWithLocale,
+  stripLangFromUrlOrId,
+  ensureTrailingSlash,
+  ensureLeadingSlash,
+  collapseSlashes
+} from "@/utils/common/path";
+
+interface Props extends ComponentProps<typeof ButtonAnchor> {
   localized?: boolean;
 }
 
-const { description, localized = false, ...attributes } = Astro.props;
+const { localized = false, ...attributes } = Astro.props;
 
 const base = Astro.site ?? Astro.url.origin;
 const baseUrl = new URL(base);
-const linkUrl = new URL(attributes.href ? attributes.href : "", base);
+const linkUrl = new URL(attributes.href ?? "", base);
 
-const isExternal = linkUrl.origin !== baseUrl.origin;
+const isInternal = linkUrl.origin === baseUrl.origin;
 
-const curPath = Astro.url.pathname;
-const curLang = getLangFromUrl(Astro.url);
+let href = attributes.href;
 
-function hasLeadingLocale(p: string): boolean {
-  return stripLangFromUrlOrId(p) !== p;
+if (isInternal) {
+  const curLang = getLangFromUrl(Astro.url);
+
+  const rawPath = linkUrl.pathname;
+  const hasLocale = stripLangFromUrlOrId(rawPath) !== rawPath;
+
+  const finalPath = localized || hasLocale ? rawPath : pathWithLocale(curLang, rawPath);
+
+  href = collapseSlashes(ensureLeadingSlash(finalPath) + linkUrl.search + linkUrl.hash);
+
+  // ---- aria-current ----
+  const currentPath = ensureTrailingSlash(stripLangFromUrlOrId(Astro.url.pathname));
+
+  const linkPath = ensureTrailingSlash(stripLangFromUrlOrId(finalPath));
+
+  const isCurrent =
+    currentPath === linkPath || (linkPath !== "/" && currentPath.startsWith(linkPath));
+
+  attributes["aria-current"] = isCurrent ? "page" : undefined;
 }
 
-let href: string;
-if (isExternal) {
-  href = linkUrl.href;
-} else {
-  const pathOnly = linkUrl.pathname; // internal path
-  const alreadyLocalized = localized || hasLeadingLocale(pathOnly);
-  const localizedPath = alreadyLocalized ? pathOnly : pathWithLocale(curLang, pathOnly);
-  href = localizedPath + linkUrl.search + linkUrl.hash;
-}
-
-// aria-current logic (only for internal links):
-// - Exact match for locale root ("/en/")
-// - Otherwise allow startsWith on locale-stripped paths
-let isCurrent = false;
-if (!isExternal) {
-  const linkPathOnly = new URL(href, base).pathname;
-  const curNoLang = stripLangFromUrlOrId(curPath);
-  const linkNoLang = stripLangFromUrlOrId(linkPathOnly);
-
-  const isLocaleRoot = linkNoLang === "/";
-
-  // Exact match preserves trailing slashes comparison using raw paths
-  isCurrent =
-    curPath === linkPathOnly ||
-    (!isLocaleRoot &&
-      // Normalize for section-style comparison by ensuring the linkNoLang is a clean prefix
-      (curNoLang === linkNoLang || curNoLang.startsWith(linkNoLang.replace(/\/$/, "") + "/")));
-}
-
-const built = buildElementProps<"a">({
-  attributes: {
-    "aria-current": isCurrent ? "page" : undefined,
-    ...attributes
-  }
-});
+attributes.href = href;
 ---
 
-<Button as="a" variant="ghost" size="m" {...built}>
+<ButtonAnchor variant="ghost" size="m" {...attributes}>
   <slot />
-  {description && <span class="sr-only">{description}</span>}
-</Button>
+</ButtonAnchor>
