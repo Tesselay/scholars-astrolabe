@@ -38,7 +38,7 @@ export {
 } from "./common/urlBuilders";
 
 // Routing
-export { pageExistsForLocale, altLocalesFor } from "./routing/routes";
+export { pageExistsForLocale, altLocalesFor, normalizeFilePath } from "./routing/routes";
 
 // Manifests
 export { getContentManifest } from "./manifests/content";

@@ -4,7 +4,7 @@ import { pages, nonLocalizedPages } from "../constants/routes";
 import { collapseSlashes, ensureTrailingSlash, neutralizePath } from "@/utils/common/path";
 import { getAlternateLocalesByLang } from "@/utils/common/locale";
 
-function normalizeFilePath(path: string): string {
+export function normalizeFilePath(path: string): string {
   let normalizedPath = neutralizePath(path);
   normalizedPath = normalizedPath.replace(
     /(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i,

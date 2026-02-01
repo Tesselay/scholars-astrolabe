@@ -11,6 +11,7 @@ import {
   locales,
   type Locale
 } from "@/utils";
+import "@/utils/routing/routes.ts";
 
 describe("path common", () => {
   it("collapseSlashes", () => {
