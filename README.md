@@ -51,6 +51,8 @@ All commands are run from the root of the project, from a terminal:
 
 ## TODO
 
+### Architectural
+
 - [ ] Add dark/white toggle
 - [ ] Add language toggle
 - [ ] font-variant-ligatures, font-kerning, and hyphenation
@@ -65,5 +67,16 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Move types to type folder?
 - [ ] Have all styling component props be style classes instead of inline to keep inlines being
       highest specifity
+- https://docs.astro.build/en/guides/environment-variables/#type-safe-environment-variables
+- [ ] Rework utils
+
+### Code
+
+- [ ] noopener / noreferrer for anchor elements
+- [ ] Replace `description` inside NavigationLink with aria-label akin to Button
+- [ ] Add url normalization helper
+- [ ] /utils/constants/languages.ts currently does nothing -> What is my source of truth for
+      locales?
+- [x] Replace buildElementProps
 
 ---
