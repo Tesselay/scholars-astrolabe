@@ -47,6 +47,18 @@ export default defineConfig([
         size: "class",
         sizing: "class"
       }
+    },
+    rules: {
+      "astro/no-unused-define-vars-in-style": "warn",
+      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }]
+    }
+  },
+
+  // Reset TS rule as flat config selector seemingly can't access TypeScript within astro file
+  {
+    files: ["*.ts", "*.tsx"],
+    rules: {
+      "@typescript-eslint/no-empty-object-type": ["error"]
     }
   },
 
