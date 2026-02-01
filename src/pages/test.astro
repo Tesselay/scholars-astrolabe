@@ -299,7 +299,7 @@ const pageTitle = "TestComponent Page";
           <Card square width="100px">Square 100px</Card>
           <Card height="100px">Height 100px</Card>
           <Card width="100px">Width 100px</Card>
-          <Card backgroundColor="blue" style="background-color: red;">Background Color</Card>
+          <Card backgroundColor="var(--test-color)">Background Color</Card>
         </div>
       </section>
 
@@ -311,7 +311,7 @@ const pageTitle = "TestComponent Page";
             <div class="selection selection--button-example">
               <Button>Default</Button>
               <Button variant="primary">Primary</Button>
-              <Button variant="primary" color="purple">Custom Color</Button>
+              <Button variant="primary" color="var(--test-color)">Custom Color</Button>
               <Button variant="danger">Danger</Button>
               <Button variant="primary"><Icon><EnvelopeIcon /></Icon>Text Icon</Button>
               <Button variant="icon" size="xl" aria-label="Icon Button"
@@ -328,13 +328,13 @@ const pageTitle = "TestComponent Page";
               <ButtonAnchor href="#">Default</ButtonAnchor>
               <ButtonAnchor href="#" variant="primary">Primary</ButtonAnchor>
               <ButtonAnchor href="#" variant="danger">Danger</ButtonAnchor>
-              <ButtonAnchor href="#" variant="primary" color="forestgreen"
-                >Custom Color</ButtonAnchor
-              >
+              <ButtonAnchor href="#" variant="primary" color="var(--test-color)">
+                Custom Color
+              </ButtonAnchor>
               <ButtonAnchor href="#"><Icon><EnvelopeIcon /></Icon> Text Icon</ButtonAnchor>
-              <ButtonAnchor href="#" variant="icon" size="xl" aria-label="Icon Button"
-                ><Icon><LinkIcon /></Icon></ButtonAnchor
-              >
+              <ButtonAnchor href="#" variant="icon" size="xl" aria-label="Icon Button">
+                <Icon><LinkIcon /></Icon>
+              </ButtonAnchor>
               <ButtonAnchor href="#" variant="ghost">Ghost</ButtonAnchor>
               <ButtonAnchor href="#" disabled>Disabled</ButtonAnchor>
             </div>
@@ -357,8 +357,8 @@ const pageTitle = "TestComponent Page";
         <p>Icons</p>
         <div class="selection">
           <Icon><HeartIcon /></Icon>
-          <Icon size="50px"><HeartIcon /></Icon>
-          <Icon color="red"><HeartIcon /></Icon>
+          <Icon size="50px"><EnvelopeIcon /></Icon>
+          <Icon color="var(--test-color)"><LinkIcon /></Icon>
         </div>
       </section>
     </div>
@@ -397,6 +397,10 @@ const pageTitle = "TestComponent Page";
   </section>
 </Layout>
 <style>
+  :root {
+    --test-color: #0dbc79;
+  }
+
   p {
     font-size: var(--font-size-3);
   }
@@ -483,5 +487,9 @@ const pageTitle = "TestComponent Page";
     animation-delay: 0s;
     animation-timing-function: var(--ease-standard);
     animation-duration: var(--dur-slow);
+  }
+
+  .class-test {
+    background-color: var(--test-color) !important;
   }
 </style>

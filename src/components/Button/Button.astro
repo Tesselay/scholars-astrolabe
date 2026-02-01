@@ -2,21 +2,20 @@
 import type { HTMLAttributes } from "astro/types";
 
 import type { ButtonBase } from "./button.d.ts";
-import { getButtonClasses, getButtonStyles } from "./styles";
+import { getButtonClasses } from "./styles";
 
-interface Props extends ButtonBase, HTMLAttributes<"button"> {}
+interface Props extends ButtonBase, Omit<HTMLAttributes<"button">, "color"> {}
 
-const { variant = "primary", size = "s", ...attributes } = Astro.props;
+const { color, variant = "primary", size = "s", ...attributes } = Astro.props;
 
 const classList = [...getButtonClasses(variant, size), "btn--native"];
-const styleList = getButtonStyles(attributes.color);
 ---
 
-<button class:list={classList} style={styleList} {...attributes}>
+<button class:list={[classList, attributes.class]} {...attributes}>
   <slot />
 </button>
 
-<style>
+<style define:vars={{ "btn-accent": color }}>
   @import "./button.css";
 
   .btn--native {

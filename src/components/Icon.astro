@@ -1,32 +1,26 @@
 ---
-import { buildElementProps } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<"span"> {
+interface Props extends Omit<HTMLAttributes<"span">, "color"> {
   color?: string;
   size?: string;
 }
 
 const { color, size, ...attributes } = Astro.props;
 
-const built = buildElementProps<"span">({
-  classList: ["icon"],
-  styleList: [color && `color: ${color}`, size && `inline-size: ${size}; block-size: ${size}`],
-  attributes: {
-    "aria-hidden": "true",
-    ...attributes
-  }
-});
+const classList = ["icon"];
+attributes["aria-hidden"] = true;
 ---
 
-<span {...built}>
+<span class:list={[classList, attributes.class]} {...attributes}>
   <slot />
 </span>
 
-<style>
+<style define:vars={{ "icon-color": color, "icon-size": size }}>
   .icon {
+    display: inline-flex;
     inline-size: var(--icon-size);
     block-size: var(--icon-size);
-    display: inline-flex;
+    color: var(--icon-color);
   }
 </style>

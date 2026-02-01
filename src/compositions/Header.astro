@@ -1,36 +1,35 @@
 ---
-import Icon from "@/components/Icon.astro";
-import Navigation from "@/compositions/Navigation.astro";
-import { buildElementProps, getLangFromUrl, metaLoader } from "@/utils";
-import Button from "@/components/Button.astro";
-
+import type { HTMLAttributes } from "astro/types";
 import SunIcon from "@phosphor-icons/core/assets/bold/sun-bold.svg";
 import TranslateIcon from "@phosphor-icons/core/assets/bold/translate-bold.svg";
-import type { HTMLAttributes } from "astro/types";
 
-const { ...attributes } = Astro.props as HTMLAttributes<"header">;
+import Icon from "@/components/Icon.astro";
+import Button from "../components/Button/Button.astro";
+import Navigation from "@/compositions/Navigation.astro";
+import { getLangFromUrl, metaLoader } from "@/utils";
 
-const built = buildElementProps<"header">({
-  classList: ["header"],
-  attributes
-});
+interface Props extends HTMLAttributes<"header"> {}
+
+const { ...attributes } = Astro.props;
+
+const classList = ["header"];
 
 const lang = getLangFromUrl(Astro.url);
 const meta = await metaLoader.getAsync(lang);
 const title = meta.home.title;
 ---
 
-<header {...built}>
+<header class:list={[classList, attributes.class]} {...attributes}>
   <a class="title" href="/">{title}</a>
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>
-  <Button variant="icon" size="xl" color="var(--accent-secondary)" class="icon translate-icon"
-    ><Icon><TranslateIcon /></Icon><slot slot="sr-label">Change Language</slot></Button
-  >
-  <Button variant="icon" size="xl" color="var(--accent-secondary)" class="icon sun-icon"
-    ><Icon><SunIcon /></Icon><slot slot="sr-label">Change Theme</slot></Button
-  >
+  <Button variant="icon" size="xl" color="var(--accent-secondary)" class="icon translate-icon">
+    <Icon><TranslateIcon /></Icon>
+  </Button>
+  <Button variant="icon" size="xl" color="var(--accent-secondary)" class="icon sun-icon">
+    <Icon><SunIcon /></Icon>
+  </Button>
 </header>
 
 <style>

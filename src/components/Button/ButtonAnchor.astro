@@ -2,11 +2,14 @@
 import type { HTMLAttributes } from "astro/types";
 
 import type { ButtonBase } from "./button";
-import { getButtonClasses, getButtonStyles } from "./styles.ts";
+import { getButtonClasses } from "./styles.ts";
 
-interface Props extends ButtonBase, HTMLAttributes<"a"> {}
+interface Props
+  extends ButtonBase,
+    Omit<HTMLAttributes<"a">, "color">,
+    Pick<HTMLAttributes<"button">, "disabled"> {}
 
-const { variant = "primary", size = "s", ...attributes } = Astro.props;
+const { color, variant = "primary", size = "s", ...attributes } = Astro.props;
 
 if (attributes.disabled) {
   attributes["aria-disabled"] = "true";
@@ -17,14 +20,13 @@ if (attributes.disabled) {
 }
 
 const classList = [...getButtonClasses(variant, size), "btn--anchor"];
-const styleList = getButtonStyles(attributes.color);
 ---
 
-<a class:list={classList} style={styleList} {...attributes}>
+<a class:list={[classList, attributes.class]} {...attributes}>
   <slot />
 </a>
 
-<style>
+<style define:vars={{ "btn-accent": color }}>
   @import "./button.css";
 
   .btn--anchor {

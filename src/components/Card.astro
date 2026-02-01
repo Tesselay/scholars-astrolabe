@@ -1,5 +1,4 @@
 ---
-import { buildElementProps } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -10,25 +9,20 @@ interface Props extends HTMLAttributes<"div"> {
   backgroundColor?: string;
 }
 
-const { square, sizing = "full", height, width, backgroundColor, ...attributes } = Astro.props;
+const { square, sizing, height, width, backgroundColor, ...attributes } = Astro.props;
 
-const built = buildElementProps<"div">({
-  classList: ["card", sizing],
-  styleList: [
-    square && "aspect-ratio: 1 / 1",
-    backgroundColor && `background-color: ${backgroundColor}`,
-    height && `height: ${height}`,
-    width && `width: ${width}`
-  ],
-  attributes
-});
+const classList = ["card", sizing, square && "square"];
 ---
 
-<div {...built}>
+<div class:list={[classList, attributes.class]} {...attributes}>
   <slot />
 </div>
 
-<style>
+<style define:vars={{ "bg-card": backgroundColor, width, height }}>
+  .square {
+    aspect-ratio: 1 / 1;
+  }
+
   .card {
     display: block;
     border-radius: var(--radius-sm);
@@ -39,6 +33,9 @@ const built = buildElementProps<"div">({
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: normal;
+
+    height: var(--height, initial);
+    width: var(--width, initial);
   }
 
   .fit-content {

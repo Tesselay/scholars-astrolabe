@@ -11,10 +11,6 @@ export { GenericLoader, type DictGlob } from "./common/genericLoader.ts";
 export { languages, ogLocales } from "./constants/languages";
 export { pages, nonLocalizedPages } from "./constants/routes";
 
-// HTML
-export { buildElementProps } from "./html/patcher";
-export { normalizeClasses, normalizeStyles } from "./html/normalization";
-
 // Utilities
 export { filterEntriesByLang, byLang } from "./common/content";
 export {
