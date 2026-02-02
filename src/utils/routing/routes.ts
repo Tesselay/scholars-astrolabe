@@ -5,11 +5,8 @@ import { collapseSlashes, ensureTrailingSlash, neutralizePath } from "@/utils/co
 import { getAlternateLocalesByLang } from "@/utils/common/locale";
 
 export function normalizeFilePath(path: string): string {
-  let normalizedPath = neutralizePath(path);
-  normalizedPath = normalizedPath.replace(
-    /(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i,
-    "$2"
-  );
+  let normalizedPath = path.replace(/(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i, "$2");
+  normalizedPath = neutralizePath(normalizedPath);
   return normalizedPath;
 }
 

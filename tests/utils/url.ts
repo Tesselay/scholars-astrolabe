@@ -4,7 +4,7 @@ export const toAbs = (href: string) => new URL(href, BASE_URL);
 export const normalize = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase();
 export const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 export const tagPathFromUrl = (url: string, lang: string) =>
-  new URL(url).pathname.replace(new RegExp(`^/${lang}/tags/?`), "");
+  new URL(url).pathname.replace(new RegExp(`^/${lang}/tags/`), "");
 
 export function parseLangAndSlugFromHref(baseUrl: string, href: string) {
   const url = new URL(href, baseUrl);

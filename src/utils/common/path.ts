@@ -48,7 +48,7 @@ export function pathsForAllLocales(): { params: { lang: Locale } }[] {
 }
 
 export function localizePath(lang: Locale, path: string): string {
-  let localizedPath = String(lang) + path;
+  let localizedPath = String(lang) + ensureLeadingSlash(path);
   localizedPath = normalizePath(localizedPath);
   return localizedPath;
 }

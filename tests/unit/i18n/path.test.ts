@@ -78,9 +78,9 @@ describe("path common", () => {
   });
 
   it("localizePath prefixes locale and normalizes slashes", () => {
-    expect(localizePath("en", "about")).toBe("/en/about");
-    expect(localizePath("en", "/about")).toBe("/en/about");
-    expect(localizePath("de", "///about///me")).toBe("/de/about/me");
+    expect(localizePath("en", "about")).toBe("/en/about/");
+    expect(localizePath("en", "/about")).toBe("/en/about/");
+    expect(localizePath("de", "///about///me")).toBe("/de/about/me/");
   });
 
   describe("normalizeFilePath", () => {

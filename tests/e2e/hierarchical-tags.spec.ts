@@ -25,7 +25,7 @@ test.describe("Hierarchical tags", () => {
     await firstTag.click();
 
     const urlSuffix = new RegExp(
-      `/${defaultLang}/tags/${plainTag.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:$|[?#])`,
+      `/${defaultLang}/tags/${plainTag.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/(?:$|[?#])`,
       "i"
     );
     await expect(page).toHaveURL(urlSuffix);

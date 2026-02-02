@@ -32,7 +32,7 @@ test.describe("Tag detail page", () => {
     const h1 = page.getByRole("heading", { level: 1 });
     await expect(h1).toBeVisible();
     const h1Text = (await h1.innerText()).trim();
-    expect(h1Text).toMatch(new RegExp(`${escapeRegExp(tagPath)}`));
+    expect(h1Text).toMatch(new RegExp(`${escapeRegExp(tagPath.replace("/", ""))}`));
 
     const postsNav = page.getByRole("list", { name: "Tagged Posts" });
     await expect(postsNav).toBeVisible();
