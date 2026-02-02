@@ -19,20 +19,19 @@ import callouts from "./src/markdown/remark-callouts.js";
 import diagnosticGraph from "./diagnostic-graph.js";
 
 export default defineConfig({
-  site: "https://www.scholars-astrolabe.com",
+  site: process.env.URL,
   vite: {
     plugins: [process.env.DIAG_GRAPH && diagnosticGraph()]
   },
   env: {
     schema: {
+      URL: envField.string({
+        context: "client",
+        access: "public",
+        default: "http://localhost:4321"
+      }),
       ROOT_REDIRECT_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
       TEST_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
-      FORCE_HTTP: envField.boolean({
-        context: "server",
-        access: "public",
-        default: true,
-        optional: true
-      }),
       DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: true })
     }
   },

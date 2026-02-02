@@ -17,18 +17,13 @@ jobs:
     timeout-minutes: 30
 
     env:
-      CI: true
-      FORCE_HTTP: true
       ASTRO_TELEMETRY_DISABLED: 1
+      URL: "http://localhost:4321"
       HOST: "localhost"
       PORT: "4321"
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
-      SITE_NAME: "Scholar's Astrolabe"
 
     steps:
-      - name: Derive E2E_BASE_URL
-        run: echo "E2E_BASE_URL=http://$HOST:$PORT" >> "$GITHUB_ENV"
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -75,8 +70,8 @@ jobs:
             --verbose
             --max-retries 2
             --max-concurrency 10
-            --base-url ${{ env.E2E_BASE_URL }}
-            --exclude "${{ env.E2E_BASE_URL }}/[a-z]{2}/test/?$"
+            --base-url ${{ env.URL }}
+            --exclude "${{ env.URL }}/[a-z]{2}/test/?$"
             "dist/**/*.html"
           fail: true
 
