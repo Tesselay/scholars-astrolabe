@@ -16,7 +16,7 @@ describe("Layout SEO links: canonical edge cases", () => {
     const neutralPath = stripLangFromUrlOrId(messy);
     const canonicalUrl = new URL(localizePath(lang, String(neutralPath)), base).href;
 
-    expect(canonicalUrl).toBe("https://example.com/en/blog/example");
+    expect(canonicalUrl).toBe("https://example.com/en/blog/example/");
   });
 });
 
@@ -49,6 +49,6 @@ describe("Layout SEO links: alternates edge cases", () => {
     }));
 
     expect(alternates).toStrictEqual(["en"]);
-    expect(hrefs).toStrictEqual([{ hreflang: "en", href: "https://example.com/en/blog" }]);
+    expect(hrefs).toStrictEqual([{ hreflang: "en", href: "https://example.com/en/blog/" }]);
   });
 });
