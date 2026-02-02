@@ -1,58 +1,55 @@
-import { defineConfig } from "astro/config";
-import { loadEnv } from "vite";
-
+import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
+import compress from "astro-compress";
 
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkDirective from "remark-directive";
 import wikiLinkPlugin from "remark-wiki-link";
 import remarkToc from "remark-toc";
+import remarkFrontmatter from "remark-frontmatter";
 
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
-import compress from "astro-compress";
 
 import callouts from "./src/markdown/remark-callouts.js";
-import remarkFrontmatter from "remark-frontmatter";
-import { createRequire } from "node:module";
 import diagnosticGraph from "./diagnostic-graph.js";
 
-const MODE =
-  process.env.NODE_ENV === "production"
-    ? "production"
-    : process.env.NODE_ENV === "test"
-      ? "test"
-      : "development";
-const envObj = { ...process.env, ...loadEnv(MODE, process.cwd(), "") };
-
-const require = createRequire(import.meta.url);
-const jiti = require("jiti")(import.meta.url);
-const { locales, defaultLocale } = jiti("./src/utils/locales.ts");
-const { parseEnvLike } = jiti("./src/types/parse.ts");
-
-const parsed = parseEnvLike(envObj);
-
-const slugify = (s) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
-const rawDomain = (parsed.MAIN_DOMAIN ?? "").trim();
-const normalizedDomain = (rawDomain ? rawDomain : "localhost:4321")
-  .replace(/^https?:\/\//, "")
-  .replace(/\/+$/, "");
-const scheme = parsed.FORCE_HTTP ? "http" : MODE === "production" ? "https" : "http";
-const siteString = `${scheme}://${normalizedDomain}/`;
-
-const vitePlugins = [parsed.DIAG_GRAPH && diagnosticGraph()];
-
 export default defineConfig({
-  site: siteString,
+  site: "https://www.scholars-astrolabe.com",
+  vite: {
+    plugins: [process.env.DIAG_GRAPH && diagnosticGraph()]
+  },
+  env: {
+    schema: {
+      ROOT_REDIRECT_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
+      TEST_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
+      FORCE_HTTP: envField.boolean({
+        context: "server",
+        access: "public",
+        default: true,
+        optional: true
+      }),
+      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: true })
+    }
+  },
+  alias: {
+    "@": "./src"
+  },
+  integrations: [
+    expressiveCode(),
+    sitemap({
+      filter: (page) => !page.includes("/test")
+    }),
+    compress()
+  ],
+  i18n: {
+    locales: ["en", "de"],
+    defaultLocale: "en"
+  },
   markdown: {
     remarkPlugins: [
       remarkGfm,
@@ -63,9 +60,7 @@ export default defineConfig({
       [
         wikiLinkPlugin,
         {
-          aliasDivider: "|",
-          pageResolver: (name) => [slugify(name)],
-          hrefTemplate: (permalink) => `/${permalink}`
+          aliasDivider: "|"
         }
       ],
       callouts
@@ -82,22 +77,5 @@ export default defineConfig({
       rehypeKatex,
       [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
     ]
-  },
-  integrations: [
-    expressiveCode(),
-    sitemap({
-      filter: (page) => !page.includes("/test")
-    }),
-    compress()
-  ],
-  i18n: {
-    locales,
-    defaultLocale
-  },
-  alias: {
-    "@": "./src"
-  },
-  vite: {
-    plugins: vitePlugins
   }
 });

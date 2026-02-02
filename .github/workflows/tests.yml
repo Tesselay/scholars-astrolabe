@@ -29,9 +29,6 @@ jobs:
       - name: Derive E2E_BASE_URL
         run: echo "E2E_BASE_URL=http://$HOST:$PORT" >> "$GITHUB_ENV"
 
-      - name: Set MAIN_DOMAIN
-        run: echo "MAIN_DOMAIN=http://$HOST:$PORT" >> "$GITHUB_ENV"
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4

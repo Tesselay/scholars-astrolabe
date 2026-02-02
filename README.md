@@ -63,20 +63,19 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Localize existing data
 - [ ] Read time
 - [ ] Unify import system (alias vs. no alias)
-- [ ] Fix messy env var implementation/mode when running CI
+- [x] Fix messy env var implementation
 - [ ] Move types to type folder?
-- [ ] Have all styling component props be style classes instead of inline to keep inlines being
-      highest specifity
-- https://docs.astro.build/en/guides/environment-variables/#type-safe-environment-variables
 - [ ] Rework utils
+- [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
+      resources/documents?
+- [ ] Is prerender the best way to exclude files from build (optionally based on an env variable)?
+- [ ] Use i18n helper and define locale there
 
 ### Code
 
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
-- [ ] Add url normalization helper
-- [ ] /utils/constants/languages.ts currently does nothing -> What is my source of truth for
-      locales?
+- [x] Add url normalization helper
 - [x] Replace buildElementProps
 
 ---
