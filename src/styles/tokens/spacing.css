@@ -1,0 +1,7 @@
+:root {
+  --space-1: var(--size-2);
+  --space-2: var(--size-3);
+  --space-3: var(--size-4);
+  --space-4: var(--size-6);
+  --space-5: var(--size-8);
+}

@@ -15,7 +15,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
 
-import callouts from "./src/markdown/remark-callouts.js";
+import callouts from "./src/markdown/callout/remark-callouts.js";
 import diagnosticGraph from "./diagnostic-graph.js";
 
 export default defineConfig({

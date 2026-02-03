@@ -1,35 +1,4 @@
-@import "open-props/style";
-
 :root {
-  /* Spacing aliases */
-  --space-1: var(--size-2);
-  --space-2: var(--size-3);
-  --space-3: var(--size-4);
-  --space-4: var(--size-6);
-  --space-5: var(--size-8);
-
-  /* Radii */
-  --radius-sm: var(--radius-2);
-  --radius-md: var(--radius-3);
-  --radius-lg: var(--radius-4);
-
-  /* Shadows */
-  --shadow-1: 0 1px 2px hsl(var(--shadow-color) / 0.2);
-  --shadow-2: 0 2px 8px hsl(var(--shadow-color) / 0.25);
-  --shadow-3: 0 6px 24px hsl(var(--shadow-color) / 0.3);
-
-  /* Motion */
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-emphasized: cubic-bezier(2, 0, 0, 1);
-  --dur-fast: 120ms;
-  --dur-medium: 200ms;
-  --dur-slow: 320ms;
-
-  /* Layers */
-  --z-header: 100;
-  --z-dropdown: 1000;
-  --z-modal: 2000;
-
   /* Colors */
   /* Background */
   --bg-primary: #0a0e19;

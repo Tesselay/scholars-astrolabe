@@ -1,0 +1,35 @@
+:root {
+  /* Font Family */
+  --font-family-title: "Cormorant Garamond Variable", ui-serif, Georgia, serif;
+  --font-family-primary: "Source Serif 4 Variable", ui-serif, Georgia, serif;
+  --font-family-secondary: "Inter Variable", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-family-mono:
+    "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Scale */
+  --font-size-0: 0.875rem;
+  --font-size-1: 1rem;
+  --font-size-2: clamp(1rem, 0.8rem + 1.2vw, 1.25rem);
+  --font-size-3: clamp(1.25rem, 0.9rem + 1.4vw, 1.5rem);
+  --font-size-4: clamp(1.5rem, 1rem + 1.6vw, 1.75rem);
+  --font-size-5: clamp(1.75rem, 1.1rem + 2.5vw, 2rem);
+  --font-size-6: clamp(2rem, 1.3rem + 3.5vw, 2.25rem);
+  --icon-size: 2ch;
+
+  /* Line heights */
+  --lh-tight: 1.1;
+  --lh-title: 1.2;
+  --lh-body: 1.6;
+
+  /* Weights */
+  --w-hairline: 100;
+  --w-thin: 200;
+  --w-light: 300;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
+
+  /* Optical Size */
+  --opsz-serif: 16;
+}
