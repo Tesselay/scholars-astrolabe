@@ -79,7 +79,7 @@ jobs:
         with:
           name: playwright-traces
           path: |
-            test-results/**/*.zip
-            test-results/**/*.trace
+            tests/output/**/*.zip
+            tests/output/**/*.trace
           if-no-files-found: "ignore"
           retention-days: 14
