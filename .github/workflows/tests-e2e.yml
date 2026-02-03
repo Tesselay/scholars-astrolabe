@@ -48,16 +48,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --inline-builds
 
-      # --- Build + Serve dist ---
-      - name: Build site
-        run: yarn build
-
-      - name: Serve dist
-        run: yarn astro preview --host ${{ env.HOST }} --port ${{ env.PORT }} &
-
-      - name: Wait for server
-        run: yarn wait-on -t 5m "$URL"
-
       # --- E2E Tests ---
       # Cache browsers to save time
       - name: Cache Playwright browsers

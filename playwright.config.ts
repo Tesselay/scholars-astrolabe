@@ -3,24 +3,19 @@ import { defineConfig, devices } from "@playwright/test";
 const isCI = !!process.env.CI;
 const HOST = process.env.HOST || "localhost";
 const PORT = Number(process.env.PORT || 4321);
-const DEFAULT_URL = `http://${HOST}:${PORT}`;
-const hasExternalServer = !!process.env.E2E_BASE_URL;
+const DEFAULT_URL = process.env.URL || `http://${HOST}:${PORT}`;
 
-/**
- * If E2E_BASE_URL is provided (e.g., CI already serves dist),
- * Playwright will not start its own server.
- * Otherwise, it will run a production-like server via `astro preview`.
- */
 export default defineConfig({
   testDir: "./tests/e2e",
+  outputDir: "./tests/output",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
+  forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
   reporter: "html",
 
   use: {
-    baseURL: process.env.E2E_BASE_URL || DEFAULT_URL,
+    baseURL: process.env.URL || DEFAULT_URL,
     trace: isCI ? "retain-on-failure" : "on-first-retry",
     screenshot: "only-on-failure",
     video: isCI ? "retain-on-failure" : "off"
@@ -32,7 +27,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } }
   ],
 
-  webServer: hasExternalServer
+  webServer: process.env.URL
     ? undefined
     : {
         command: `npx astro build && npx astro preview --host ${HOST} --port ${PORT}`,
