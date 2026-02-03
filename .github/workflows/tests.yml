@@ -57,7 +57,7 @@ jobs:
         run: yarn astro preview --host ${{ env.HOST }} --port ${{ env.PORT }} &
 
       - name: Wait for server
-        run: yarn wait-on -t 5m "$E2E_BASE_URL"
+        run: yarn wait-on -t 5m "$URL"
 
       # --- Link checker on the built HTML ---
       - name: Link checker
