@@ -27,7 +27,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } }
   ],
 
-  webServer: process.env.URL
+  webServer: process.env.CI_WEBSERVER
     ? undefined
     : {
         command: `npx astro build && npx astro preview --host ${HOST} --port ${PORT}`,
