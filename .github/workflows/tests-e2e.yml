@@ -18,7 +18,6 @@ jobs:
 
     env:
       ASTRO_TELEMETRY_DISABLED: 1
-      CI_WEBSERVER: false
       HOST: "localhost"
       PORT: "4321"
       URL: "http://localhost:4321"
