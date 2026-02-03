@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const isCI = !!process.env.CI;
+const isCI = Boolean(process.env.CI);
+const hasWebServer = Boolean(process.env.CI_WEBSERVER);
 const HOST = process.env.HOST || "localhost";
 const PORT = Number(process.env.PORT || 4321);
 const DEFAULT_URL = process.env.URL || `http://${HOST}:${PORT}`;
@@ -27,7 +28,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } }
   ],
 
-  webServer: process.env.CI_WEBSERVER
+  webServer: hasWebServer
     ? undefined
     : {
         command: `npx astro build && npx astro preview --host ${HOST} --port ${PORT}`,
