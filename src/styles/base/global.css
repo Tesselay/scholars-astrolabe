@@ -6,8 +6,8 @@
 @import "../tokens/spacing.css";
 @import "../tokens/typography.css";
 
-@import "typography.css";
 @import "reset.css";
+@import "typography.css";
 
 @import "katex/dist/katex.min.css";
 @import "open-props/open-props.min.css";
