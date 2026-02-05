@@ -18,6 +18,8 @@ import rehypeExternalLinks from "rehype-external-links";
 import callouts from "./src/markdown/callout/remark-callouts.js";
 import diagnosticGraph from "./diagnostic-graph.js";
 
+import { locales, defaultLocale } from "./src/utils/locales.ts";
+
 export default defineConfig({
   site: process.env.URL,
   vite: {
@@ -46,8 +48,8 @@ export default defineConfig({
     compress()
   ],
   i18n: {
-    locales: ["en", "de"],
-    defaultLocale: "en"
+    locales,
+    defaultLocale
   },
   markdown: {
     remarkPlugins: [
