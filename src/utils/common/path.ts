@@ -1,4 +1,4 @@
-import { type Locale, locales } from "../locales.ts";
+import { isLocale, type Locale, locales } from "../locales.ts";
 
 export function collapseSlashes(str: string): string {
   return String(str).replace(/\/+/g, "/");
@@ -24,7 +24,7 @@ export function stripLangFromUrlOrId(path: string): string {
   const langIdx = hasLeadingSlash ? 1 : 0;
   const candidate = parts[langIdx] ?? undefined;
 
-  if (candidate && (locales as readonly string[]).includes(candidate)) {
+  if (candidate && isLocale(candidate)) {
     const rest = hasLeadingSlash ? parts.slice(2).join("/") : parts.slice(1).join("/");
 
     if (!rest) return "/";
