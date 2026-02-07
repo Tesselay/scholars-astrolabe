@@ -1,9 +1,9 @@
 ---
 import Layout from "./Layout.astro";
-import { getLangFromUrl, buildTagPath, metaLoader } from "@/utils";
+import { buildTagPath, metaLoader } from "@/utils";
 
 const { frontmatter } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.currentLocale;
 
 const created = frontmatter["date-created"] as Date;
 const modified = frontmatter["date-modified"] as Date;

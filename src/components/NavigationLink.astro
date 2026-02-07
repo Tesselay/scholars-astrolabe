@@ -1,15 +1,8 @@
 ---
 import type { ComponentProps } from "astro/types";
-import ButtonAnchor from "./Button/ButtonAnchor.astro";
-
-import { getLangFromUrl } from "@/utils/common/locale";
-import {
-  localizePath,
-  stripLangFromUrlOrId,
-  ensureTrailingSlash,
-  ensureLeadingSlash,
-  collapseSlashes
-} from "@/utils/common/path";
+import ButtonAnchor from "@/components/Button/ButtonAnchor.astro";
+import { pathHasLocale, normalizePath, neutralizePath } from "@/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props extends ComponentProps<typeof ButtonAnchor> {
   localized?: boolean;
@@ -23,30 +16,27 @@ const linkUrl = new URL(attributes.href ?? "", base);
 
 const isInternal = linkUrl.origin === baseUrl.origin;
 
-let href = attributes.href;
-
 if (isInternal) {
-  const curLang = getLangFromUrl(Astro.url);
-
   const rawPath = linkUrl.pathname;
-  const hasLocale = stripLangFromUrlOrId(rawPath) !== rawPath;
 
-  const finalPath = localized || hasLocale ? rawPath : localizePath(curLang, rawPath);
+  const finalPath =
+    localized || pathHasLocale(rawPath)
+      ? rawPath
+      : getRelativeLocaleUrl(Astro.currentLocale, rawPath);
 
-  href = collapseSlashes(ensureLeadingSlash(finalPath) + linkUrl.search + linkUrl.hash);
+  const href = normalizePath(finalPath + linkUrl.search + linkUrl.hash);
 
   // ---- aria-current ----
-  const currentPath = ensureTrailingSlash(stripLangFromUrlOrId(Astro.url.pathname));
+  const currentPath = neutralizePath(Astro.url.pathname);
 
-  const linkPath = ensureTrailingSlash(stripLangFromUrlOrId(finalPath));
+  const linkPath = neutralizePath(finalPath);
 
   const isCurrent =
     currentPath === linkPath || (linkPath !== "/" && currentPath.startsWith(linkPath));
 
   attributes["aria-current"] = isCurrent ? "page" : undefined;
+  attributes["href"] = href;
 }
-
-attributes.href = href;
 ---
 
 <ButtonAnchor variant="ghost" size="m" {...attributes}>

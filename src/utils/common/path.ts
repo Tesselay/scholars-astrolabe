@@ -1,30 +1,29 @@
 import { type Locale, locales } from "../locales.ts";
 
-export function collapseSlashes(s: string): string {
-  return String(s).replace(/\/+/g, "/");
+export function collapseSlashes(str: string): string {
+  return String(str).replace(/\/+/g, "/");
 }
 
-export function trimSlashes(s: string): string {
-  return String(s).replace(/^\/+|\/+$/g, "");
+export function trimSlashes(str: string): string {
+  return String(str).replace(/^\/+|\/+$/g, "");
 }
 
-export function ensureLeadingSlash(s: string): string {
-  const collapsed = collapseSlashes(String(s));
+export function ensureLeadingSlash(str: string): string {
+  const collapsed = collapseSlashes(String(str));
   return collapsed.startsWith("/") ? collapsed : "/" + collapsed.replace(/^\/+/, "");
 }
 
-export function ensureTrailingSlash(s: string): string {
-  return s.endsWith("/") ? s : s + "/";
+export function ensureTrailingSlash(str: string): string {
+  return str.endsWith("/") ? str : str + "/";
 }
 
-export function stripLangFromUrlOrId(id: string): string {
-  const s = collapseSlashes(String(id));
-  const hasLeadingSlash = s.startsWith("/");
-  const parts = s.split("/");
+export function stripLangFromUrlOrId(path: string): string {
+  const str = normalizePath(path);
+  const hasLeadingSlash = str.startsWith("/");
+  const parts = str.split("/");
   const langIdx = hasLeadingSlash ? 1 : 0;
-  const candidate = parts[langIdx] ?? "";
+  const candidate = parts[langIdx] ?? undefined;
 
-  // Only strip when the first segment is a supported language key
   if (candidate && (locales as readonly string[]).includes(candidate)) {
     const rest = hasLeadingSlash ? parts.slice(2).join("/") : parts.slice(1).join("/");
 
@@ -40,11 +39,15 @@ export function stripLangFromUrlOrId(id: string): string {
     return normalized;
   }
 
-  return id;
+  return path;
 }
 
 export function pathsForAllLocales(): { params: { lang: Locale } }[] {
   return (locales as readonly Locale[]).map((lang) => ({ params: { lang } }));
+}
+
+export function pathHasLocale(path: string): boolean {
+  return stripLangFromUrlOrId(path) !== path;
 }
 
 export function localizePath(lang: Locale, path: string): string {

@@ -63,19 +63,25 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Localize existing data
 - [ ] Read time
 - [ ] Unify import system (alias vs. no alias)
-- [x] Fix messy env var implementation
-- [ ] Move types to type folder?
 - [ ] Rework utils
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
 - [ ] Is prerender the best way to exclude files from build (optionally based on an env variable)?
 - [ ] Use i18n helper and define locale there
+- [ ] Can I break/inject code into the application via markdown frontmatter props?
+- [ ] URL vs. path normalization
+- [ ] Astro actions?
 
 ### Code
 
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
-- [x] Add url normalization helper
-- [x] Replace buildElementProps
+- [ ] Apply hero placeholder
+- [ ] Retype Locale to fit Astro's i18n system ("en", "en_US") -> Layout.astro
+- [ ] global `base = Astro.site ?? Astro.url.origin` &
+      `neutralPath = neutralizePath(Astro.url.pathname)`?
+- [ ] Replace prerender in test and redirect page with middleware redirect
+- [ ] Use routePattern in blog collection helpers
+- [ ] Redirect to default lang current or parent page on 404
 
 ---

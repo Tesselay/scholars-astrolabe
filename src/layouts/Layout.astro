@@ -7,13 +7,13 @@ import {
   getContentManifest,
   altLocalesFor,
   localizePath,
-  getLangFromUrl,
   metaLoader,
   ogLocales,
   defaultLocale
 } from "@/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.currentLocale;
 const meta = await metaLoader.getAsync(lang);
 const siteName = meta.home.title;
 const manifest = await getContentManifest();
@@ -31,8 +31,8 @@ const ogLocale = ogLocales[lang] ?? ogLocales[defaultLocale];
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = neutralizePath(Astro.url.pathname);
 
-const canonicalUrl = new URL(localizePath(lang, neutralPath), base).href;
-const xDefaultUrl = new URL(localizePath(defaultLocale, neutralPath), base).href;
+const canonicalUrl = new URL(Astro.url.pathname, base);
+const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), base);
 
 const altLocales = altLocalesFor(lang, neutralPath, manifest);
 const alternates = altLocales.map((l) => ({

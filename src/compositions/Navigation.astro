@@ -1,7 +1,8 @@
 ---
 import NavigationLink from "@/components/NavigationLink.astro";
-import { getLangFromUrl, localizePath, uiLoader } from "@/utils";
+import { uiLoader } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 type NavigationStyle = "default" | "embellished";
 
@@ -11,13 +12,13 @@ interface Props extends HTMLAttributes<"ul"> {
 
 const { mode = "default", ...attributes } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.currentLocale;
 const ui = await uiLoader.getAsync(lang);
 
-const homeUrl = localizePath(lang, "/");
-const folioUrl = localizePath(lang, "/folio/");
-const blogUrl = localizePath(lang, "/blog/");
-const contactUrl = localizePath(lang, "/contact/");
+const homeUrl = getRelativeLocaleUrl(lang, "");
+const folioUrl = getRelativeLocaleUrl(lang, "folio");
+const blogUrl = getRelativeLocaleUrl(lang, "blog");
+const contactUrl = getRelativeLocaleUrl(lang, "contact");
 
 const classList = ["nav-links", mode];
 ---

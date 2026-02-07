@@ -16,15 +16,11 @@ import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
 
 import callouts from "./src/markdown/callout/remark-callouts.js";
-import diagnosticGraph from "./diagnostic-graph.js";
 
 import { locales, defaultLocale } from "./src/utils/locales.ts";
 
 export default defineConfig({
   site: process.env.URL,
-  vite: {
-    plugins: [process.env.DIAG_GRAPH && diagnosticGraph()]
-  },
   env: {
     schema: {
       URL: envField.string({
@@ -37,9 +33,6 @@ export default defineConfig({
       DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: true })
     }
   },
-  alias: {
-    "@": "./src"
-  },
   integrations: [
     expressiveCode(),
     sitemap({
@@ -48,7 +41,7 @@ export default defineConfig({
     compress()
   ],
   i18n: {
-    locales,
+    locales: [...locales],
     defaultLocale
   },
   markdown: {

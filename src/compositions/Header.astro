@@ -6,7 +6,7 @@ import TranslateIcon from "@phosphor-icons/core/assets/bold/translate-bold.svg";
 import Icon from "@/components/Icon.astro";
 import Button from "../components/Button/Button.astro";
 import Navigation from "@/compositions/Navigation.astro";
-import { getLangFromUrl, metaLoader } from "@/utils";
+import { metaLoader } from "@/utils";
 
 interface Props extends HTMLAttributes<"header"> {}
 
@@ -14,8 +14,7 @@ const { ...attributes } = Astro.props;
 
 const classList = ["header"];
 
-const lang = getLangFromUrl(Astro.url);
-const meta = await metaLoader.getAsync(lang);
+const meta = await metaLoader.getAsync(Astro.currentLocale);
 const title = meta.home.title;
 ---
 

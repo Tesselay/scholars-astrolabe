@@ -1,13 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { localizePath, defaultLocale } from "@/utils";
+import { defaultLocale } from "@/utils";
 import { ROOT_REDIRECT_PAGE } from "astro:env/server";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 // Only emit this page in non‑production builds, in prod pass redirecting to backend
 export const prerender = ROOT_REDIRECT_PAGE;
 
 const pageTitle = "Redirecting…";
-const target = localizePath(defaultLocale, "/"); // e.g., '/en/'
+
+const target = getRelativeLocaleUrl(defaultLocale, "/");
 ---
 
 <Layout pageTitle={pageTitle}>

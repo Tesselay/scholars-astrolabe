@@ -28,7 +28,8 @@ export {
   ensureLeadingSlash,
   ensureTrailingSlash,
   neutralizePath,
-  normalizePath
+  normalizePath,
+  pathHasLocale
 } from "./common/path";
 export {
   buildBlogPostPath,
