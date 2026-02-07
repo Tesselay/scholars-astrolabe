@@ -32,7 +32,7 @@ describe("url builders", () => {
 
   it("stripLangFromUrlOrId used by blog path handles edge cases (integration)", () => {
     const stripped = stripLangFromUrlOrId("/en//nested///post");
-    expect(stripped).toBe("/nested/post");
+    expect(stripped).toBe("/nested/post/");
     expect(buildBlogPostPath("en", "/en//nested///post")).toBe("/en/blog/nested/post/");
   });
 });

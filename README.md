@@ -70,7 +70,9 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use i18n helper and define locale there
 - [ ] Can I break/inject code into the application via markdown frontmatter props?
 - [ ] URL vs. path normalization
+  - [ ] What path utils actually should have normalized paths?
 - [ ] Astro actions?
+- [ ] Fonts API?
 
 ### Code
 
@@ -82,5 +84,6 @@ All commands are run from the root of the project, from a terminal:
       `neutralPath = neutralizePath(Astro.url.pathname)`?
 - [ ] Use routePattern in blog collection helpers
 - [ ] Redirect to default lang current or parent page on 404
+- [ ] Have tests read in trailing slash config
 
 ---

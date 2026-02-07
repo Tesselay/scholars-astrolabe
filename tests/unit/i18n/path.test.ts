@@ -43,9 +43,9 @@ describe("path common", () => {
 
   describe("stripLangFromUrlOrId", () => {
     it("strips known locale at start", () => {
-      expect(stripLangFromUrlOrId("en/about")).toBe("about");
-      expect(stripLangFromUrlOrId("de/about/me")).toBe("about/me");
-      expect(stripLangFromUrlOrId("/en/about")).toBe("/about");
+      expect(stripLangFromUrlOrId("en/about")).toBe("/about/");
+      expect(stripLangFromUrlOrId("de/about/me")).toBe("/about/me/");
+      expect(stripLangFromUrlOrId("/en/about")).toBe("/about/");
     });
 
     it("returns '/' if only locale present", () => {
@@ -60,10 +60,10 @@ describe("path common", () => {
     });
 
     it("normalizes repeated slashes", () => {
-      expect(stripLangFromUrlOrId("///en////about///me")).toBe("/about/me");
-      expect(stripLangFromUrlOrId("//en//about")).toBe("/about");
+      expect(stripLangFromUrlOrId("///en////about///me")).toBe("/about/me/");
+      expect(stripLangFromUrlOrId("//en//about")).toBe("/about/");
       expect(stripLangFromUrlOrId("/en//about//")).toBe("/about/");
-      expect(stripLangFromUrlOrId("de/////about//")).toBe("about/");
+      expect(stripLangFromUrlOrId("de/////about//")).toBe("/about/");
       expect(stripLangFromUrlOrId("about")).toBe("about");
     });
   });
