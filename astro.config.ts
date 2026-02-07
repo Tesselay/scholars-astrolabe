@@ -9,7 +9,6 @@ import remarkDirective from "remark-directive";
 import wikiLinkPlugin from "remark-wiki-link";
 import remarkToc from "remark-toc";
 import remarkFrontmatter from "remark-frontmatter";
-
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
@@ -18,9 +17,13 @@ import rehypeExternalLinks from "rehype-external-links";
 import callouts from "./src/markdown/callout/remark-callouts.js";
 
 import { locales, defaultLocale } from "./src/utils/locales.ts";
+import { loadEnv } from "vite";
+
+const mode = process.env.NODE_ENV ?? "development";
+const { URL } = loadEnv(mode, process.cwd(), "URL");
 
 export default defineConfig({
-  site: process.env.URL,
+  site: URL,
   env: {
     schema: {
       URL: envField.string({
@@ -28,7 +31,11 @@ export default defineConfig({
         access: "public",
         default: "http://localhost:4321"
       }),
-      ROOT_REDIRECT_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
+      ROOT_REDIRECT_PAGE: envField.boolean({
+        context: "server",
+        access: "public",
+        default: true
+      }),
       TEST_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
       DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: true })
     }
