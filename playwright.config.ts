@@ -1,10 +1,19 @@
 import { defineConfig, devices } from "@playwright/test";
+import { loadEnv } from "vite";
+
+console.log(loadEnv("development", process.cwd(), ""));
 
 const isCI = Boolean(process.env.CI);
 const hasWebServer = Boolean(process.env.CI_WEBSERVER);
 const HOST = process.env.HOST || "localhost";
 const PORT = Number(process.env.PORT || 4321);
 const DEFAULT_URL = process.env.URL || `http://${HOST}:${PORT}`;
+
+console.log(`CI ${process.env.CI}`);
+console.log(`CI_WEBSERVER ${process.env.CI_WEBSERVER}`);
+console.log(`HOST ${process.env.HOST}`);
+console.log(`PORT ${process.env.PORT}`);
+console.log(`URL ${process.env.URL}`);
 
 export default defineConfig({
   testDir: "./tests/e2e",
