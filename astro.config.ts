@@ -42,7 +42,8 @@ export default defineConfig({
   ],
   i18n: {
     locales: [...locales],
-    defaultLocale
+    defaultLocale,
+    routing: "manual"
   },
   markdown: {
     remarkPlugins: [

@@ -80,7 +80,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Retype Locale to fit Astro's i18n system ("en", "en_US") -> Layout.astro
 - [ ] global `base = Astro.site ?? Astro.url.origin` &
       `neutralPath = neutralizePath(Astro.url.pathname)`?
-- [ ] Replace prerender in test and redirect page with middleware redirect
 - [ ] Use routePattern in blog collection helpers
 - [ ] Redirect to default lang current or parent page on 404
 

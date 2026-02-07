@@ -9,7 +9,6 @@
   "engines": {
     "node": ">=18.18.0"
   },
-  "main": "src/pages/index.astro",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
