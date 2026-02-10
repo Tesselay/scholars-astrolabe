@@ -20,7 +20,7 @@ import { locales, defaultLocale } from "./src/utils/locales.ts";
 import { loadEnv } from "vite";
 
 const mode = process.env.NODE_ENV ?? "development";
-const env = loadEnv(mode, process.cwd(), ["SITE_URL", "TEST_PAGE", "DIAG_GRAPH"]);
+const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);
 
 export default defineConfig({
   site: env.SITE_URL,

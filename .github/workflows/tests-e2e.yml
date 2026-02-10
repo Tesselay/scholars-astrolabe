@@ -18,9 +18,7 @@ jobs:
 
     env:
       ASTRO_TELEMETRY_DISABLED: 1
-      HOST: "localhost"
-      PORT: "4321"
-      URL: "http://localhost:4321"
+      NODE_ENV: staging
 
     steps:
       - uses: actions/checkout@v4

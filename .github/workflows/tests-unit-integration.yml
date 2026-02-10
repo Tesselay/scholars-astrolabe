@@ -19,6 +19,7 @@ jobs:
     env:
       TZ: UTC
       ASTRO_TELEMETRY_DISABLED: 1
+      NODE_ENV: staging
 
     steps:
       - uses: actions/checkout@v4
