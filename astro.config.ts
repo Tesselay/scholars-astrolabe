@@ -20,24 +20,30 @@ import { locales, defaultLocale } from "./src/utils/locales.ts";
 import { loadEnv } from "vite";
 
 const mode = process.env.NODE_ENV ?? "development";
-const { URL } = loadEnv(mode, process.cwd(), "URL");
+const env = loadEnv(mode, process.cwd(), ["SITE_URL", "TEST_PAGE", "DIAG_GRAPH"]);
 
 export default defineConfig({
-  site: URL,
+  site: env.SITE_URL,
+  i18n: {
+    locales: [...locales],
+    defaultLocale,
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
+      fallbackType: "redirect"
+    }
+  },
   env: {
     schema: {
-      URL: envField.string({
+      PROTOCOL: envField.string({ context: "server", access: "public", default: "http" }),
+      HOST: envField.string({ context: "server", access: "public", default: "localhost" }),
+      PORT: envField.number({ context: "server", access: "public", default: 4321 }),
+      SITE_URL: envField.string({
         context: "client",
         access: "public",
         default: "http://localhost:4321"
       }),
-      ROOT_REDIRECT_PAGE: envField.boolean({
-        context: "server",
-        access: "public",
-        default: true
-      }),
-      TEST_PAGE: envField.boolean({ context: "server", access: "public", default: true }),
-      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: true })
+      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: false })
     }
   },
   integrations: [
@@ -47,11 +53,6 @@ export default defineConfig({
     }),
     compress()
   ],
-  i18n: {
-    locales: [...locales],
-    defaultLocale,
-    routing: "manual"
-  },
   markdown: {
     remarkPlugins: [
       remarkGfm,

@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      CI: true
       ASTRO_TELEMETRY_DISABLED: 1
 
     steps:

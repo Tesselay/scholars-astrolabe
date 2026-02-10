@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { defaultLocale } from "@/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const pageTitle = "Redirecting…";
+
+const target = getRelativeLocaleUrl(defaultLocale, "/");
+---
+
+<Layout pageTitle={pageTitle}>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <p>Redirecting to <a href={target}>{target}</a></p>
+</Layout>
