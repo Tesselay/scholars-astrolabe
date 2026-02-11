@@ -66,13 +66,12 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Rework utils
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
-- [ ] Is prerender the best way to exclude files from build (optionally based on an env variable)?
-- [ ] Use i18n helper and define locale there
 - [ ] Can I break/inject code into the application via markdown frontmatter props?
 - [ ] URL vs. path normalization
   - [ ] What path utils actually should have normalized paths?
 - [ ] Astro actions?
 - [ ] Fonts API?
+- [ ] Add a "cheatsheet" page?
 
 ### Code
 
@@ -83,7 +82,11 @@ All commands are run from the root of the project, from a terminal:
 - [ ] global `base = Astro.site ?? Astro.url.origin` &
       `neutralPath = neutralizePath(Astro.url.pathname)`?
 - [ ] Use routePattern in blog collection helpers
-- [ ] Redirect to default lang current or parent page on 404
+- [ ] Styling not applied in preview/build
+- [ ] Set `trailingSlash` config and use in utils
 - [ ] Have tests read in trailing slash config
+- [ ] Add 404 page
+  - [ ] Redirect or add button to redirect to default lang current or parent page on 404
+- [ ] Write env loader
 
 ---

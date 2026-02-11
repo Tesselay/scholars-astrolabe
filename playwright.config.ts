@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 import { loadEnv } from "vite";
 
-const env = loadEnv("development", process.cwd(), ["CI", "HOST", "PORT", "SITE_URL"]);
+const mode = process.env.NODE_ENV ?? "staging";
+const env = loadEnv(mode, process.cwd(), ["CI", "HOST", "PORT", "SITE_URL"]);
 const isCI = Boolean(env.CI);
 
 export default defineConfig({

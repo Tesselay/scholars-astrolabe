@@ -24,6 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/vite
+
       - uses: actions/setup-node@v4
         id: node
         with:
@@ -52,10 +54,10 @@ jobs:
         run: yarn build
 
       - name: Serve dist
-        run: yarn astro preview --host $HOST --port $PORT &
+        run: yarn astro preview --host "${{ vars.HOST }}" --port "${{ vars.PORT }}" &
 
       - name: Wait for server
-        run: yarn wait-on -t 5m "$SITE_URL"
+        run: yarn wait-on -t 5m "${{ vars.SITE_URL }}"
 
       # --- Link checker on the built HTML ---
       - name: Link checker
@@ -68,8 +70,8 @@ jobs:
             --verbose
             --max-retries 2
             --max-concurrency 10
-            --base-url $SITE_URL
-            --exclude "$SITE_URL/[a-z]{2}/test/?$"
+            --base-url "${{ vars.SITE_URL }}"
+            --exclude "${{ vars.SITE_URL }}/[a-z]{2}/test/?$"
             "dist/**/*.html"
           fail: true
 
@@ -104,7 +106,7 @@ jobs:
           echo "Using Chrome at: $CHROME_PATH"
 
       - name: A11y smoke
-        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json "$SITE_URL" > pa11y-report.json
+        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json "${{ vars.SITE_URL }}" > pa11y-report.json
 
       - name: Upload a11y report
         if: ${{ always() && hashFiles('pa11y-report.json') != '' }}
