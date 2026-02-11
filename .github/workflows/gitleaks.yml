@@ -11,8 +11,9 @@ permissions:
 
 jobs:
   gitleaks:
-    name: Run Gitleaks
     runs-on: ubuntu-latest
+    environment: staging
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
