@@ -22,6 +22,9 @@ import { loadEnv } from "vite";
 const mode = process.env.NODE_ENV ?? "development";
 const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);
 
+console.log(process.env);
+console.log(env);
+
 export default defineConfig({
   site: env.SITE_URL,
   i18n: {
