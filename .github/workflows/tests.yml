@@ -52,10 +52,10 @@ jobs:
         run: yarn build
 
       - name: Serve dist
-        run: yarn astro preview --host ${{ env.HOST }} --port ${{ env.PORT }} &
+        run: yarn astro preview --host $HOST --port $PORT &
 
       - name: Wait for server
-        run: yarn wait-on -t 5m "$URL"
+        run: yarn wait-on -t 5m "$SITE_URL"
 
       # --- Link checker on the built HTML ---
       - name: Link checker
@@ -68,15 +68,15 @@ jobs:
             --verbose
             --max-retries 2
             --max-concurrency 10
-            --base-url ${{ env.URL }}
-            --exclude "${{ env.URL }}/[a-z]{2}/test/?$"
+            --base-url $SITE_URL
+            --exclude "$SITE_URL/[a-z]{2}/test/?$"
             "dist/**/*.html"
           fail: true
 
       # --- A11y ---
       # Ensure Puppeteer cache dir exists and cache it
       - name: Prepare Puppeteer cache dir
-        run: mkdir -p "$PUPPETEER_CACHE_DIR"
+        run: mkdir -p "${{ env.PUPPETEER_CACHE_DIR }}"
 
       - name: Cache Puppeteer browsers
         uses: actions/cache@v4
@@ -87,24 +87,24 @@ jobs:
             ${{ runner.os }}-puppeteer-
 
       - name: Install Chrome for Testing (Pa11y/Puppeteer)
-        run: yarn dlx @puppeteer/browsers install chrome@stable --path "$PUPPETEER_CACHE_DIR"
+        run: yarn dlx @puppeteer/browsers install chrome@stable --path "${{ env.PUPPETEER_CACHE_DIR }}"
 
       - name: Export Chrome path for Puppeteer
         shell: bash
         run: |
           set -euo pipefail
-          CHROME_PATH="$(find "$PUPPETEER_CACHE_DIR" -type f -executable -name 'chrome' -print -quit || true)"
+          CHROME_PATH="$(find "${{ env.PUPPETEER_CACHE_DIR }}" -type f -executable -name 'chrome' -print -quit || true)"
           if [ -z "${CHROME_PATH:-}" ]; then
-            echo "Chrome binary not found in $PUPPETEER_CACHE_DIR"
+            echo "Chrome binary not found in ${{ env.PUPPETEER_CACHE_DIR }}"
             echo "Directory tree for debugging:"
-            ls -R "$PUPPETEER_CACHE_DIR" || true
+            ls -R "${{ env.PUPPETEER_CACHE_DIR }}" || true
             exit 1
           fi
           echo "PUPPETEER_EXECUTABLE_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
           echo "Using Chrome at: $CHROME_PATH"
 
       - name: A11y smoke
-        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json "$URL" > pa11y-report.json
+        run: yarn pa11y-ci --threshold 5 --config chromeLaunchConfig.json --reporter json "$SITE_URL" > pa11y-report.json
 
       - name: Upload a11y report
         if: ${{ always() && hashFiles('pa11y-report.json') != '' }}
