@@ -21,6 +21,10 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: 1
       NODE_ENV: staging
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
+      HOST: ${{ vars.HOST }}
+      PORT: ${{ vars.PORT }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      DIAG_GRAPH: ${{ vars.DIAG_GRAPH }}
 
     steps:
       - uses: actions/checkout@v4

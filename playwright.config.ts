@@ -5,9 +5,6 @@ const mode = process.env.NODE_ENV ?? "staging";
 const env = loadEnv(mode, process.cwd(), ["CI", "HOST", "PORT", "SITE_URL"]);
 const isCI = Boolean(env.CI);
 
-console.log(process.env);
-console.log(env);
-
 export default defineConfig({
   testDir: "./tests/e2e",
   outputDir: "./tests/output",

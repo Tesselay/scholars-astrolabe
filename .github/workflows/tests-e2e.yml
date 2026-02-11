@@ -20,6 +20,10 @@ jobs:
     env:
       ASTRO_TELEMETRY_DISABLED: 1
       NODE_ENV: staging
+      HOST: ${{ vars.HOST }}
+      PORT: ${{ vars.PORT }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      DIAG_GRAPH: ${{ vars.DIAG_GRAPH }}
 
     steps:
       - uses: actions/checkout@v4
