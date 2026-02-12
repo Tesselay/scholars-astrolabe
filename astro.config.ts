@@ -16,7 +16,7 @@ import rehypeExternalLinks from "rehype-external-links";
 
 import callouts from "./src/markdown/callout/remark-callouts.js";
 
-import { locales, defaultLocale } from "./src/utils/locales.ts";
+import { defaultLocale, astroLocales } from "./src/utils/locales.ts";
 import { loadEnv } from "vite";
 
 const mode = process.env.NODE_ENV ?? "development";
@@ -25,7 +25,7 @@ const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);
 export default defineConfig({
   site: env.SITE_URL,
   i18n: {
-    locales: [...locales],
+    locales: astroLocales,
     defaultLocale,
     routing: {
       prefixDefaultLocale: true,

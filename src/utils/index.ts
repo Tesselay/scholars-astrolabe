@@ -1,6 +1,6 @@
 // Locales
-export { locales, defaultLocale, isLocale } from "./locales";
-export type { Locale } from "./locales";
+export { locales, defaultLocale, localeByPath } from "./locales";
+export type { LocalePath } from "./locales";
 
 // Dict API
 export { uiLoader, metaLoader } from "./dictBuilder.ts";
@@ -8,17 +8,11 @@ export { type StringLeaves, buildStrictSchema } from "./common/schemaBuilder.ts"
 export { GenericLoader, type DictGlob } from "./common/genericLoader.ts";
 
 // Constants
-export { languages, ogLocales } from "./constants/languages";
 export { pages, nonLocalizedPages } from "./constants/routes";
 
 // Utilities
 export { filterEntriesByLang, byLang } from "./common/content";
-export {
-  getLangFromUrl,
-  getLangFromId,
-  getAllLocales,
-  getAlternateLocalesByURL
-} from "./common/locale";
+export { getLangFromUrl, getLangFromId, getAlternateLocalesByURL } from "./common/locale";
 export {
   localizePath,
   pathsForAllLocales,

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { pageExistsForLocale, type Locale, getContentManifest, altLocalesFor } from "@/utils";
+import { pageExistsForLocale, getContentManifest, altLocalesFor, type LocalePath } from "@/utils";
 
-const locales: Locale[] = ["en", "de"];
+const locales: LocalePath[] = ["en", "de"];
 
 describe("routing: pageExistsForLocale integration", () => {
   it("recognizes neutral paths for existing localized pages", async () => {

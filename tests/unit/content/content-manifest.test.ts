@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { __resetContentManifest, buildContentManifest } from "@/utils/manifests/content";
-import { mockBlog } from "../../utils/mocks.ts";
+import { mockBlog, mockBlogInvalid } from "../../utils/mocks.ts";
 
 describe("buildContentManifest", () => {
   beforeEach(() => {
@@ -16,9 +16,14 @@ describe("buildContentManifest", () => {
     const enSlugs = Array.from(manifest.blogSlugsByLang.get("en") ?? []).sort();
     const deSlugs = Array.from(manifest.blogSlugsByLang.get("de") ?? []).sort();
 
-    expect(enSlugs).toEqual(["other", "p1"].sort());
+    expect(enSlugs).toEqual(["blog/p3", "p1"].sort());
     expect(deSlugs).toEqual(["blog/p3", "dup", "p2", "x1"].sort());
     expect(manifest.blogPostExists("de", "///blog///p3//")).toBe(true);
     expect(manifest.blogPostExists("en", "p2")).toBe(false);
+  });
+
+  it("fails on invalid language", async () => {
+    const fakeGetCollection = async () => mockBlogInvalid;
+    await expect(buildContentManifest(fakeGetCollection)).rejects.toThrowError();
   });
 });

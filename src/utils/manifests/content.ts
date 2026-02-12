@@ -1,5 +1,5 @@
 import { getCollection as realGetCollection } from "astro:content";
-import { locales, type Locale, isLocale } from "../locales.ts";
+import { locales, type LocalePath, localeByPath } from "../locales.ts";
 import { trimSlashes, collapseSlashes } from "@/utils/common/path.ts";
 import { getLangFromId } from "@/utils/common/locale.ts";
 import { encodeTagPath } from "@/utils/common/urlBuilders.ts";
@@ -19,18 +19,18 @@ export function __resetContentManifest() {
 
 export async function buildContentManifest(getCollection: GetCollection = realGetCollection) {
   const blogEntries = await getCollection("blog");
-  const blogSlugsByLang = new Map<Locale, Set<string>>();
-  const tagsByLang = new Map<Locale, Set<string>>();
+  const blogSlugsByLang = new Map<LocalePath, Set<string>>();
+  const tagsByLang = new Map<LocalePath, Set<string>>();
 
-  (locales as readonly Locale[]).forEach((l) => {
-    blogSlugsByLang.set(l, new Set());
-    tagsByLang.set(l, new Set());
+  locales.forEach((locale) => {
+    blogSlugsByLang.set(locale.path, new Set());
+    tagsByLang.set(locale.path, new Set());
   });
 
   for (const entry of blogEntries) {
     const lang =
-      entry.data.language && isLocale(entry.data.language as string)
-        ? (entry.data.language as Locale)
+      entry.data.language && localeByPath[entry.data.language]
+        ? (entry.data.language as LocalePath)
         : getLangFromId(entry.id);
 
     const slug = entry.id.replace(/^[^/]+\//, "");
@@ -45,11 +45,11 @@ export async function buildContentManifest(getCollection: GetCollection = realGe
   return {
     blogSlugsByLang,
     tagsByLang,
-    blogPostExists(lang: Locale, slug: string) {
+    blogPostExists(lang: LocalePath, slug: string) {
       const normalized = trimSlashes(collapseSlashes(slug));
       return blogSlugsByLang.get(lang)?.has(normalized) ?? false;
     },
-    tagExists(lang: Locale, tagSlug: string) {
+    tagExists(lang: LocalePath, tagSlug: string) {
       const normalized = trimSlashes(collapseSlashes(tagSlug));
       return tagsByLang.get(lang)?.has(normalized) ?? false;
     }

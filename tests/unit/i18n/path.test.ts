@@ -8,8 +8,7 @@ import {
   pathsForAllLocales,
   localizePath,
   normalizeFilePath,
-  locales,
-  type Locale
+  locales
 } from "@/utils";
 import "@/utils/routing/routes.ts";
 
@@ -69,11 +68,11 @@ describe("path common", () => {
   });
 
   it("pathsForAllLocales produces param list for all locales", () => {
-    const res = pathsForAllLocales();
-    expect(res).toHaveLength(locales.length);
-    const langs = res.map((r) => r.params.lang);
-    for (const l of locales as readonly Locale[]) {
-      expect(langs).toContain(l);
+    const paths = pathsForAllLocales();
+    expect(paths).toHaveLength(locales.length);
+    const langs = paths.map((r) => r.params.lang);
+    for (const locale of locales) {
+      expect(langs).toContain(locale.path);
     }
   });
 

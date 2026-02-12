@@ -75,9 +75,17 @@ export const mockUiExtra = {
 export const mockBlog = [
   { id: "en/p1", data: {} },
   { id: "de/p2", data: {} },
+  { id: "en/blog/p3", data: {} },
   { id: "en/blog/p3", data: { language: "de" } },
   { id: "de/x1", data: { language: "xx" } },
-  { id: "misc/other", data: {} },
   { id: "de/dup", data: {} },
   { id: "de/dup", data: {} }
+];
+
+export const mockBlogInvalid = [
+  { id: "xx/p1", data: {} },
+  { id: "de/p2", data: {} },
+  { id: "en/blog/p3", data: {} },
+  { id: "en/blog/p3", data: { language: "xx" } },
+  { id: "de/x1", data: { language: "de" } }
 ];

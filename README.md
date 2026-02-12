@@ -63,7 +63,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Localize existing data
 - [ ] Read time
 - [ ] Unify import system (alias vs. no alias)
-- [ ] Rework utils
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
 - [ ] Can I break/inject code into the application via markdown frontmatter props?
@@ -72,21 +71,33 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Astro actions?
 - [ ] Fonts API?
 - [ ] Add a "cheatsheet" page?
+- [ ] Refine tests
+  - [ ] Use `test` instead of `it` in vitest
 
 ### Code
 
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
 - [ ] Apply hero placeholder
-- [ ] Retype Locale to fit Astro's i18n system ("en", "en_US") -> Layout.astro
-- [ ] global `base = Astro.site ?? Astro.url.origin` &
-      `neutralPath = neutralizePath(Astro.url.pathname)`?
 - [ ] Use routePattern in blog collection helpers
 - [ ] Styling not applied in preview/build
 - [ ] Set `trailingSlash` config and use in utils
 - [ ] Have tests read in trailing slash config
 - [ ] Add 404 page
   - [ ] Redirect or add button to redirect to default lang current or parent page on 404
-- [ ] Write env loader
+
+### Current
+
+- [ ] Rework utils -> Where can I use Astro's functionality, where do I need build-time/file-system
+      aware helpers?
+  - [x] Retype Locale to fit Astro's i18n system ("en", "en_US")
+  - [ ] content manifest
+  - [ ] blog path helpers
+  - [ ] locale.ts
+  - [ ] paths
+  - [ ] Replace utils in Layout with Astro's functionality
+  - [ ] Restructure
+    - [ ] content to content dir
+    - [ ] localization to i18n dir
 
 ---

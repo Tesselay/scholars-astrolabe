@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { buildTagPaths, buildBlogPostPath, metaLoader, type Locale } from "@/utils";
+import { buildTagPaths, buildBlogPostPath, metaLoader } from "@/utils";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
@@ -22,7 +22,7 @@ const description = meta["tags:page"].description;
   <ul aria-label="Tagged Posts">
     {
       posts.map((post) => (
-        <BlogPost url={buildBlogPostPath(lang as Locale, post.id)} title={post.data.title} />
+        <BlogPost url={buildBlogPostPath(lang, post.id)} title={post.data.title} />
       ))
     }
   </ul>

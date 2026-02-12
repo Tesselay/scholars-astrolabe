@@ -1,14 +1,11 @@
 import { z } from "zod";
-import { locales } from "@/utils/locales";
-
-export const LanguageEnum = z.enum(locales);
 
 export const BlogPostSchema = z.object({
   title: z.string(),
   tags: z.array(z.string()),
   summary: z.string(),
   sources: z.array(z.string()),
-  language: LanguageEnum.optional(),
+  language: z.string().optional(),
   "date-created": z.coerce.date(),
   "date-modified": z.coerce.date()
 });

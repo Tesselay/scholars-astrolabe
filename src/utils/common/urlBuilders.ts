@@ -1,10 +1,10 @@
 import type { CollectionEntry } from "astro:content";
-import { isLocale, locales, type Locale } from "../locales.ts";
+import { localeByPath, type LocalePath, locales } from "../locales.ts";
 import { localizePath, stripLangFromUrlOrId, trimSlashes, collapseSlashes } from "./path.ts";
 import { filterEntriesByLang } from "./content.ts";
 
 // Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
-export function buildBlogPostPath(lang: Locale, idOrSlug: string): string {
+export function buildBlogPostPath(lang: LocalePath, idOrSlug: string): string {
   const slug = trimSlashes(stripLangFromUrlOrId(idOrSlug));
   return localizePath(lang, `/blog/${slug}`);
 }
@@ -19,24 +19,24 @@ export function encodeTagPath(tagPath: string): string {
 }
 
 // Builds a localized tag path like "/en/tags/programming/javascript" from a tag path
-export function buildTagPath(lang: Locale, tagPath: string): string {
+export function buildTagPath(lang: LocalePath, tagPath: string): string {
   const encoded = encodeTagPath(tagPath);
   return localizePath(lang, `/tags/${encoded}`);
 }
 
 export interface PathResult {
-  params: { lang: Locale; slug: string };
+  params: { lang: LocalePath; slug: string };
   props: { posts: CollectionEntry<"blog">[]; tag: string };
 }
 
 export function buildTagPaths(allPosts: CollectionEntry<"blog">[]): PathResult[] {
-  const tagsByLang = new Map<Locale, Set<string>>();
-  (locales as readonly Locale[]).forEach((l) => tagsByLang.set(l, new Set()));
+  const tagsByLang = new Map<LocalePath, Set<string>>();
+  locales.forEach((locale) => tagsByLang.set(locale.path, new Set()));
 
   for (const post of allPosts) {
     const [candidate] = post.id.split("/");
-    if (!isLocale(candidate)) continue;
-    const lang = candidate as Locale;
+    if (!localeByPath[candidate]) continue;
+    const lang = candidate as LocalePath;
 
     const tags = Array.isArray(post.data.tags) ? post.data.tags : [];
     for (const t of tags) tagsByLang.get(lang)!.add(t);
@@ -44,9 +44,9 @@ export function buildTagPaths(allPosts: CollectionEntry<"blog">[]): PathResult[]
 
   const paths: PathResult[] = [];
 
-  for (const lang of locales as readonly Locale[]) {
-    const langPosts = filterEntriesByLang(allPosts, lang);
-    const tags = tagsByLang.get(lang);
+  for (const lang of locales) {
+    const langPosts = filterEntriesByLang(allPosts, lang.path);
+    const tags = tagsByLang.get(lang.path);
     if (!tags) continue;
 
     for (const tag of tags) {
@@ -56,7 +56,7 @@ export function buildTagPaths(allPosts: CollectionEntry<"blog">[]): PathResult[]
       if (filteredPosts.length === 0) continue;
 
       paths.push({
-        params: { lang, slug: encodeTagPath(tag) },
+        params: { lang: lang.path, slug: encodeTagPath(tag) },
         props: { posts: filteredPosts, tag }
       });
     }

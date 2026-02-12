@@ -1,26 +1,22 @@
-import { defaultLocale, isLocale, type Locale, locales } from "../locales.ts";
+import { localeByPath, type LocalePath, locales } from "../locales.ts";
 
-export function getLangFromUrl(url: URL): Locale {
-  const [, lang] = url.pathname.split("/");
-  if (isLocale(lang)) return lang as Locale;
-  return defaultLocale;
+export function getLangFromUrl(url: URL): LocalePath {
+  const parts = url.pathname.split("/");
+  const lang = parts[1];
+  return localeByPath[lang].path;
 }
 
-export function getLangFromId(id: string): Locale {
+export function getLangFromId(id: string): LocalePath {
   const parts = ("/" + String(id)).split("/");
-  const candidate = parts[1] ?? "";
-  return isLocale(candidate) ? (candidate as Locale) : defaultLocale;
+  const lang = parts[1] ?? "";
+  return localeByPath[lang].path;
 }
 
-export function getAllLocales(): Locale[] {
-  return [...locales] as Locale[];
-}
-
-export function getAlternateLocalesByURL(url: URL): Locale[] {
+export function getAlternateLocalesByURL(url: URL) {
   const currentLocale = getLangFromUrl(url);
-  return getAllLocales().filter((lang) => lang !== currentLocale);
+  return locales.filter((locale) => locale.path !== currentLocale);
 }
 
-export function getAlternateLocalesByLang(lang: Locale): Locale[] {
-  return getAllLocales().filter((l) => l !== lang);
+export function getAlternateLocalesByLang(lang: LocalePath) {
+  return locales.filter((locale) => locale.path !== lang);
 }

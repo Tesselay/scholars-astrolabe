@@ -1,17 +1,17 @@
 import { describe, it, expect } from "vitest";
 import {
-  type Locale,
   localizePath,
   stripLangFromUrlOrId,
   altLocalesFor,
-  getContentManifest
+  getContentManifest,
+  type LocalePath
 } from "@/utils";
 
 const base = "https://example.com";
 
 describe("Layout SEO links: canonical edge cases", () => {
   it("builds canonical from lang + normalized neutralPath (trailing slash kept)", async () => {
-    const lang: Locale = "en";
+    const lang: LocalePath = "en";
     const messy = "///en////blog//example";
     const neutralPath = stripLangFromUrlOrId(messy);
     const canonicalUrl = new URL(localizePath(lang, String(neutralPath)), base).href;
@@ -23,7 +23,7 @@ describe("Layout SEO links: canonical edge cases", () => {
 describe("Layout SEO links: alternates edge cases", () => {
   it("includes only locales that actually have the blog post", async () => {
     const manifest = await getContentManifest();
-    const current: Locale = "en";
+    const current: LocalePath = "en";
     const neutralPath = stripLangFromUrlOrId("/blog/example2");
 
     const alternates = altLocalesFor(current, String(neutralPath), manifest);
@@ -38,7 +38,7 @@ describe("Layout SEO links: alternates edge cases", () => {
 
   it("offers all other locales for dynamic pages (non content-driven)", async () => {
     const manifest = await getContentManifest();
-    const current: Locale = "de";
+    const current: LocalePath = "de";
     const neutralPath = stripLangFromUrlOrId("blog");
 
     const alternates = altLocalesFor(current, neutralPath, manifest);

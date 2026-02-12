@@ -1,10 +1,10 @@
-import { type Locale, locales } from "@/utils";
+import { type LocalePath, localeByPath } from "@/utils/locales";
 import { z } from "zod";
 
 export type DictGlob = Record<string, { default: unknown }>;
 
 export class GenericLoader<Type> {
-  private DICT: Readonly<Record<Locale, Type>> | null = null;
+  private DICT: Readonly<Record<LocalePath, Type>> | null = null;
   private readonly schema: z.ZodType<Type>;
   private readonly dictName: string;
   private readonly dictModules: DictGlob = import.meta.glob("@/utils/dictionaries/*/*.json", {
@@ -28,7 +28,7 @@ export class GenericLoader<Type> {
     return out;
   }
 
-  validate(locale: Locale, data: unknown): Type {
+  validate(locale: LocalePath, data: unknown): Type {
     const parsed = this.schema.safeParse(data);
     if (!parsed.success) {
       console.error(`[i18n:DICT] Invalid dictionary for ${locale}:`, parsed.error.format());
@@ -39,16 +39,16 @@ export class GenericLoader<Type> {
 
   async init(): Promise<void> {
     const files: DictGlob = this.loadDictFiles();
-    const acc: Partial<Record<Locale, Type>> = {};
+    const acc: Partial<Record<LocalePath, Type>> = {};
     for (const [path, mod] of Object.entries(files)) {
-      const lang = path.split("/").at(-2) as Locale | undefined;
-      if (!lang || !locales.includes(lang)) continue;
+      const lang = path.split("/").at(-2) as LocalePath | undefined;
+      if (!lang || !localeByPath[lang]) continue;
       acc[lang] = this.validate(lang, mod.default);
     }
-    this.DICT = Object.freeze(acc as Record<Locale, Type>);
+    this.DICT = Object.freeze(acc as Record<LocalePath, Type>);
   }
 
-  get(locale: Locale): Type {
+  get(locale: LocalePath): Type {
     if (!this.DICT) {
       throw new Error(
         "[i18n:DICT] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup."
@@ -61,7 +61,7 @@ export class GenericLoader<Type> {
     return dict;
   }
 
-  async getAsync(locale: Locale): Promise<Type> {
+  async getAsync(locale: LocalePath): Promise<Type> {
     if (!this.DICT) await this.init();
     return this.get(locale);
   }

@@ -8,8 +8,8 @@ import {
   altLocalesFor,
   localizePath,
   metaLoader,
-  ogLocales,
-  defaultLocale
+  defaultLocale,
+  locales
 } from "@/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -27,7 +27,7 @@ const {
 
 const fullTitle = pageTitle.includes(siteName) ? pageTitle : `${siteName} - ${pageTitle}`;
 
-const ogLocale = ogLocales[lang] ?? ogLocales[defaultLocale];
+const ogLocale = locales.find((locale) => locale.path == lang)?.og;
 const base = Astro.site ?? Astro.url.origin;
 const neutralPath = neutralizePath(Astro.url.pathname);
 
@@ -35,10 +35,10 @@ const canonicalUrl = new URL(Astro.url.pathname, base);
 const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), base);
 
 const altLocales = altLocalesFor(lang, neutralPath, manifest);
-const alternates = altLocales.map((l) => ({
-  hreflang: l,
-  href: new URL(localizePath(l, neutralPath), base).href,
-  ogLocale: ogLocales[l]
+const alternates = altLocales.map((locale) => ({
+  hreflang: locale,
+  href: new URL(localizePath(locale, neutralPath), base).href,
+  ogLocale: locales.find((locale) => locale.path == lang)?.og
 }));
 
 const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";

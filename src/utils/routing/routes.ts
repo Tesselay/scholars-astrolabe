@@ -1,4 +1,4 @@
-import { type Locale } from "../locales";
+import { type LocalePath } from "../locales";
 import { type ContentManifest } from "../manifests/content";
 import { pages, nonLocalizedPages } from "../constants/routes";
 import { collapseSlashes, ensureTrailingSlash, neutralizePath } from "@/utils/common/path";
@@ -80,7 +80,7 @@ function parseContentPath(
 }
 
 export function pageExistsForLocale(
-  locale: Locale,
+  locale: LocalePath,
   neutralPath: string,
   manifest: ContentManifest
 ): boolean {
@@ -98,21 +98,25 @@ export function pageExistsForLocale(
 }
 
 export function altLocalesFor(
-  currentLocale: Locale,
+  currentLocale: LocalePath,
   neutralPath: string,
   manifest: ContentManifest
-): Locale[] {
+): LocalePath[] {
   const parsed = parseContentPath(neutralPath);
-  const candidates = getAlternateLocalesByLang(currentLocale);
+  const locales = getAlternateLocalesByLang(currentLocale);
 
   if (parsed.kind === "blog-post") {
-    return candidates.filter((l) => manifest.blogPostExists(l, parsed.slug));
+    return locales
+      .filter((locale) => manifest.blogPostExists(locale.path, parsed.slug))
+      .map((locale) => locale.path);
   }
   if (parsed.kind === "tag") {
-    return candidates.filter((l) => manifest.tagExists?.(l, parsed.slug));
+    return locales
+      .filter((locale) => manifest.tagExists?.(locale.path, parsed.slug))
+      .map((locale) => locale.path);
   }
   if (parsed.kind === "page") {
-    return candidates;
+    return locales.map((locale) => locale.path);
   }
 
   return [];

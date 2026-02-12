@@ -1,11 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  buildBlogPostPath,
-  buildTagPath,
-  encodeTagPath,
-  type Locale,
-  stripLangFromUrlOrId
-} from "@/utils";
+import { buildBlogPostPath, buildTagPath, encodeTagPath, stripLangFromUrlOrId } from "@/utils";
 
 describe("url builders", () => {
   it("encodeTagPath encodes each segment", () => {
@@ -25,7 +19,7 @@ describe("url builders", () => {
   it("buildTagPath uses encodeTagPath and prefixes", () => {
     expect(buildTagPath("en", "programming/javascript")).toBe("/en/tags/programming/javascript/");
     expect(buildTagPath("de", "C#/.NET")).toBe("/de/tags/C%23/.NET/");
-    expect(buildTagPath("en" as Locale, "データ/科学")).toBe(
+    expect(buildTagPath("en", "データ/科学")).toBe(
       "/en/tags/%E3%83%87%E3%83%BC%E3%82%BF/%E7%A7%91%E5%AD%A6/"
     );
   });
