@@ -8,7 +8,7 @@ export class GenericDictLoader<Type> {
   private DICT: Readonly<Record<LocalePath, Type>> | null = null;
   private readonly schema: z.ZodType<Type>;
   private readonly dictName: string;
-  private readonly dictModules: DictGlob = import.meta.glob("@/utils/dictionaries/*/*.json", {
+  private readonly dictModules: DictGlob = import.meta.glob("@/utils/i18n/dictionaries/*/*.json", {
     eager: true
   });
 
