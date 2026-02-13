@@ -16,14 +16,13 @@ export { getLangFromUrl, getLangFromId, getAlternateLocalesByURL } from "./commo
 export {
   localizePath,
   pathsForAllLocales,
-  stripLangFromUrlOrId,
+  extractLocaleFromPath,
   trimSlashes,
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
   neutralizePath,
-  normalizePath,
-  pathHasLocale
+  normalizePath
 } from "./common/path";
 export { buildTagPath, encodeTagPath, buildTagPaths } from "./common/urlBuilders";
 

@@ -1,8 +1,8 @@
 ---
 import type { ComponentProps } from "astro/types";
 import ButtonAnchor from "@/components/Button/ButtonAnchor.astro";
-import { pathHasLocale, normalizePath, neutralizePath } from "@/utils";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { normalizePath, neutralizePath } from "@/utils";
+import { pathHasLocale, getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props extends ComponentProps<typeof ButtonAnchor> {
   localized?: boolean;
