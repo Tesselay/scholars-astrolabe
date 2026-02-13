@@ -25,12 +25,7 @@ export {
   normalizePath,
   pathHasLocale
 } from "./common/path";
-export {
-  buildBlogPostPath,
-  buildTagPath,
-  encodeTagPath,
-  buildTagPaths
-} from "./common/urlBuilders";
+export { buildTagPath, encodeTagPath, buildTagPaths } from "./common/urlBuilders";
 
 // Routing
 export { pageExistsForLocale, altLocalesFor, normalizeFilePath } from "./routing/routes";

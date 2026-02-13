@@ -1,13 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import { localeByPath, type LocalePath, locales } from "../locales.ts";
-import { localizePath, stripLangFromUrlOrId, trimSlashes, collapseSlashes } from "./path.ts";
+import { localizePath, trimSlashes, collapseSlashes } from "./path.ts";
 import { filterEntriesByLang } from "./content.ts";
-
-// Builds a localized blog post path like "/en/blog/example" from a content id like "en/example"
-export function buildBlogPostPath(lang: LocalePath, idOrSlug: string): string {
-  const slug = trimSlashes(stripLangFromUrlOrId(idOrSlug));
-  return localizePath(lang, `/blog/${slug}`);
-}
 
 // Encodes each tag path segment for safe URLs while preserving hierarchy
 export function encodeTagPath(tagPath: string): string {

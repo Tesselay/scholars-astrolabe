@@ -1,7 +1,8 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 
-import { buildBlogPostPath } from "@/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { neutralizePath } from "@/utils/index.ts";
 
 export async function GET(context) {
   // Fallback to the request origin if context.site isn't available
@@ -17,7 +18,7 @@ export async function GET(context) {
       tags: post.data.tags,
       dateCreated: post.data["date-created"],
       dateModified: post.data["date-modified"],
-      link: buildBlogPostPath("en", post.id)
+      link: getRelativeLocaleUrl(context.currentLocale, `blog${neutralizePath(post.id)}`)
     })),
     customData: `<language>en-us</language>`
   });

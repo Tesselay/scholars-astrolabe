@@ -71,6 +71,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Astro actions?
 - [ ] Fonts API?
 - [ ] Add a "cheatsheet" page?
+- [ ] Align locale codes to web standard
 - [ ] Refine tests
   - [ ] Use `test` instead of `it` in vitest
 
@@ -83,6 +84,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Styling not applied in preview/build
 - [ ] Set `trailingSlash` config and use in utils
 - [ ] Have tests read in trailing slash config
+- [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Add 404 page
   - [ ] Redirect or add button to redirect to default lang current or parent page on 404
 

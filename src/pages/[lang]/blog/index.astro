@@ -2,7 +2,8 @@
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { getCollection } from "astro:content";
-import { byLang, buildBlogPostPath, pathsForAllLocales, metaLoader } from "@/utils";
+import { byLang, pathsForAllLocales, metaLoader, neutralizePath } from "@/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 export function getStaticPaths() {
   return pathsForAllLocales();
@@ -21,7 +22,10 @@ const allPosts = await getCollection("blog", byLang(lang));
   <ul aria-label="Blog Posts">
     {
       allPosts.map((post) => (
-        <BlogPost url={buildBlogPostPath(lang, post.id)} title={post.data.title} />
+        <BlogPost
+          url={getRelativeLocaleUrl(lang, `blog${neutralizePath(post.id)}`)}
+          title={post.data.title}
+        />
       ))
     }
   </ul>
