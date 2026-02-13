@@ -1,9 +1,10 @@
-import { type LocalePath, localeByPath } from "@/utils/locales";
+import { type LocalePath } from "@/utils/i18n/locales.ts";
 import { z } from "zod";
+import { localeByPath } from "@/utils";
 
 export type DictGlob = Record<string, { default: unknown }>;
 
-export class GenericLoader<Type> {
+export class GenericDictLoader<Type> {
   private DICT: Readonly<Record<LocalePath, Type>> | null = null;
   private readonly schema: z.ZodType<Type>;
   private readonly dictName: string;

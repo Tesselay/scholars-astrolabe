@@ -1,23 +1,8 @@
-import { type LocalePath } from "../locales";
-import { type ContentManifest } from "../manifests/content";
-import { pages, nonLocalizedPages } from "../constants/routes";
-import { collapseSlashes, ensureTrailingSlash, normalizePath } from "@/utils/common/path";
-import { getAlternateLocalesByLang } from "@/utils/common/locale";
-
-export function normalizeFilePath(path: string): string {
-  let normalizedPath = path.replace(/(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i, "$2");
-  normalizedPath = normalizePath(normalizedPath);
-  return normalizedPath;
-}
-
-function convertLocalPathToSlug(p: string): string {
-  const slug = normalizeFilePath(p)
-    .replace(/^\/src\/pages/, "")
-    .replace(/\/\[lang\]/, "")
-    .replace(/\[(?:\.\.\.)?slug\]/, "");
-
-  return ensureTrailingSlash(collapseSlashes(slug));
-}
+import { type LocalePath } from "../i18n/locales.ts";
+import { type ContentManifest } from "@/utils/content/manifest.ts";
+import { nonLocalizedPages, pages } from "./pages.ts";
+import { getAlternateLocalesByLang } from "@/utils/i18n/path.ts";
+import { convertLocalPathToSlug, normalizeFilePath } from "@/utils/common/normalization.ts";
 
 const mNonLocalizedPages = new Set(nonLocalizedPages.map((p) => convertLocalPathToSlug(p)));
 const mPages = new Set(pages.map((p) => convertLocalPathToSlug(p)));

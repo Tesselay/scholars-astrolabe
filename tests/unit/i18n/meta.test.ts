@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { buildStrictSchema, GenericLoader, type StringLeaves } from "@/utils";
+import { buildStrictSchema, GenericDictLoader, type StringLeaves } from "@/utils";
 import { fakeGlob } from "../../utils/fake-glob.ts";
 import { mockMetaEmpty, mockMetaInvalid, mockMetaDE, mockMetaEN } from "../../utils/mocks.ts";
 
@@ -13,7 +13,7 @@ describe("Meta loader", () => {
   });
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
-    const metaLoader = new GenericLoader<Meta>(
+    const metaLoader = new GenericDictLoader<Meta>(
       "meta",
       MetaSchema,
       fakeGlob(mockMetaEN, mockMetaDE, "meta")
@@ -24,7 +24,7 @@ describe("Meta loader", () => {
   });
 
   it("throws when dictionaries are invalid against strict schema", async () => {
-    const metaLoader = new GenericLoader<Meta>(
+    const metaLoader = new GenericDictLoader<Meta>(
       "meta",
       MetaSchema,
       fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")

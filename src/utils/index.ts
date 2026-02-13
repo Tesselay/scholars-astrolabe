@@ -1,33 +1,41 @@
-// Locales
-export { locales, defaultLocale, localeByPath } from "./locales";
-export type { LocalePath } from "./locales";
-
-// Dict API
-export { uiLoader, metaLoader } from "./dictBuilder.ts";
-export { type StringLeaves, buildStrictSchema } from "./common/schemaBuilder.ts";
-export { GenericLoader, type DictGlob } from "./common/genericLoader.ts";
-
-// Constants
-export { pages, nonLocalizedPages } from "./constants/routes";
-
-// Utilities
-export { filterEntriesByLang, byLang } from "./common/content";
-export { getLangFromUrl, getLangFromId, getAlternateLocalesByURL } from "./common/locale";
+// Common
 export {
-  localizePath,
-  pathsForAllLocales,
-  trimSlashes,
   collapseSlashes,
+  trimSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
+  normalizePath,
+  normalizeFilePath,
+  convertLocalPathToSlug
+} from "./common/normalization.ts";
+
+// Localization
+export { locales, astroLocales, defaultLocale, type LocalePath } from "./i18n/locales.ts";
+export {
+  localizePath,
   neutralizePath,
-  normalizePath
-} from "./common/path";
-export { buildTagPath, encodeTagPath, buildTagPaths } from "./common/urlBuilders";
+  pathsForAllLocales,
+  localeByPath,
+  getLangFromUrl,
+  getLangFromId,
+  getAlternateLocalesByURL,
+  getAlternateLocalesByLang
+} from "./i18n/path.ts";
+export { type StringLeaves, buildStrictSchema } from "./i18n/schemaBuilder.ts";
+export { GenericDictLoader, type DictGlob } from "./i18n/genericDictLoader.ts";
+export { uiLoader, metaLoader } from "./i18n/dictBuilder.ts";
 
 // Routing
-export { pageExistsForLocale, altLocalesFor, normalizeFilePath } from "./routing/routes";
+export { pages, nonLocalizedPages } from "./routing/pages.ts";
+export { pageExistsForLocale, altLocalesFor } from "./routing/routes.ts";
+export { encodeTagPath, buildTagPath, buildTagPaths } from "./routing/urlBuilders.ts";
 
-// Manifests
-export { getContentManifest } from "./manifests/content";
-export type { ContentManifest } from "./manifests/content";
+// Content
+export {
+  type GetCollection,
+  type ContentManifest,
+  getContentManifest,
+  buildContentManifest,
+  __resetContentManifest
+} from "./content/manifest.ts";
+export { filterEntriesByLang, byLang } from "./content/filter.ts";

@@ -14,10 +14,10 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
 
-import callouts from "./src/markdown/callout/remark-callouts.js";
-
-import { defaultLocale, astroLocales } from "./src/utils/locales.ts";
 import { loadEnv } from "vite";
+
+import { defaultLocale, astroLocales } from "./src/utils/i18n/locales.ts";
+import callouts from "./src/markdown/callout/remark-callouts.js";
 
 const mode = process.env.NODE_ENV ?? "development";
 const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);

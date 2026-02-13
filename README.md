@@ -74,6 +74,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Align locale codes to web standard
 - [ ] Refine tests
   - [ ] Use `test` instead of `it` in vitest
+- [ ] Generic manifest builder
 
 ### Code
 
@@ -92,13 +93,8 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Rework utils -> Where can I use Astro's functionality, where do I need build-time/file-system
       aware helpers?
-  - [x] Retype Locale to fit Astro's i18n system ("en", "en_US")
   - [ ] content manifest
   - [ ] What should the blog/tag path matcher actually solve? Should paths be neutral?
-  - [ ] paths
   - [ ] Replace utils in Layout with Astro's functionality
-  - [ ] Restructure
-    - [ ] content to content dir
-    - [ ] localization to i18n dir
 
 ---

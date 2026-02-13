@@ -1,8 +1,7 @@
 import { getCollection as realGetCollection } from "astro:content";
-import { locales, type LocalePath, localeByPath } from "../locales.ts";
-import { trimSlashes, collapseSlashes } from "@/utils/common/path.ts";
-import { getLangFromId } from "@/utils/common/locale.ts";
-import { encodeTagPath } from "@/utils/common/urlBuilders.ts";
+import { locales, type LocalePath } from "../i18n/locales.ts";
+import { encodeTagPath } from "@/utils/routing/urlBuilders.ts";
+import { collapseSlashes, getLangFromId, localeByPath, trimSlashes } from "@/utils";
 
 export type GetCollection = typeof realGetCollection;
 export type ContentManifest = Awaited<ReturnType<typeof buildContentManifest>>;
