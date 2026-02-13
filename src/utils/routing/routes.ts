@@ -1,12 +1,12 @@
 import { type LocalePath } from "../locales";
 import { type ContentManifest } from "../manifests/content";
 import { pages, nonLocalizedPages } from "../constants/routes";
-import { collapseSlashes, ensureTrailingSlash, neutralizePath } from "@/utils/common/path";
+import { collapseSlashes, ensureTrailingSlash, normalizePath } from "@/utils/common/path";
 import { getAlternateLocalesByLang } from "@/utils/common/locale";
 
 export function normalizeFilePath(path: string): string {
   let normalizedPath = path.replace(/(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i, "$2");
-  normalizedPath = neutralizePath(normalizedPath);
+  normalizedPath = normalizePath(normalizedPath);
   return normalizedPath;
 }
 
@@ -60,11 +60,11 @@ function parseContentPath(
   | { kind: "static-page" }
   | { kind: "not-found" } {
   const path = normalizeFilePath(neutralPath);
-  const blogMatch = path.match(/^\/blog\/(.+?)\/$/);
+  const blogMatch = path.match(/^\/blog\/(.+?)$/);
   if (blogMatch) {
     return { kind: "blog-post", slug: blogMatch[1] };
   }
-  const tagMatch = path.match(/^\/tags\/(.+?)\/$/);
+  const tagMatch = path.match(/^\/tags\/(.+?)$/);
   if (tagMatch) {
     const slug = tagMatch[1];
     return { kind: "tag", slug };

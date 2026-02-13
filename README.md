@@ -94,8 +94,7 @@ All commands are run from the root of the project, from a terminal:
       aware helpers?
   - [x] Retype Locale to fit Astro's i18n system ("en", "en_US")
   - [ ] content manifest
-  - [ ] blog path helpers
-  - [ ] locale.ts
+  - [ ] What should the blog/tag path matcher actually solve? Should paths be neutral?
   - [ ] paths
   - [ ] Replace utils in Layout with Astro's functionality
   - [ ] Restructure
