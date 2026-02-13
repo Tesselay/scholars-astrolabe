@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildTagPath, encodeTagPath, extractLocaleFromPath } from "@/utils";
+import { buildTagPath, encodeTagPath } from "@/utils";
 
 describe("url builders", () => {
   it("encodeTagPath encodes each segment", () => {

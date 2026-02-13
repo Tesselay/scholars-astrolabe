@@ -4,7 +4,7 @@ import {
   trimSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
-  extractLocaleFromPath,
+  neutralizePath,
   pathsForAllLocales,
   localizePath,
   normalizeFilePath,
@@ -40,30 +40,30 @@ describe("path common", () => {
     expect(ensureTrailingSlash("/a/b/")).toBe("/a/b/");
   });
 
-  describe("extractLocaleFromPath", () => {
+  describe("neutralizePath", () => {
     it("strips known locale at start", () => {
-      expect(extractLocaleFromPath("en/about")).toBe("/about/");
-      expect(extractLocaleFromPath("de/about/me")).toBe("/about/me/");
-      expect(extractLocaleFromPath("/en/about")).toBe("/about/");
+      expect(neutralizePath("en/about")).toBe("/about/");
+      expect(neutralizePath("de/about/me")).toBe("/about/me/");
+      expect(neutralizePath("/en/about")).toBe("/about/");
     });
 
     it("returns '/' if only locale present", () => {
-      expect(extractLocaleFromPath("en")).toBe("/");
-      expect(extractLocaleFromPath("/en")).toBe("/");
-      expect(extractLocaleFromPath("/en/")).toBe("/");
+      expect(neutralizePath("en")).toBe("/");
+      expect(neutralizePath("/en")).toBe("/");
+      expect(neutralizePath("/en/")).toBe("/");
     });
 
     it("does not strip when first segment is not a locale", () => {
-      expect(extractLocaleFromPath("xx/about")).toBe("xx/about");
-      expect(extractLocaleFromPath("/xx/about")).toBe("/xx/about");
+      expect(neutralizePath("xx/about")).toBe("xx/about");
+      expect(neutralizePath("/xx/about")).toBe("/xx/about");
     });
 
     it("normalizes repeated slashes", () => {
-      expect(extractLocaleFromPath("///en////about///me")).toBe("/about/me/");
-      expect(extractLocaleFromPath("//en//about")).toBe("/about/");
-      expect(extractLocaleFromPath("/en//about//")).toBe("/about/");
-      expect(extractLocaleFromPath("de/////about//")).toBe("/about/");
-      expect(extractLocaleFromPath("about")).toBe("about");
+      expect(neutralizePath("///en////about///me")).toBe("/about/me/");
+      expect(neutralizePath("//en//about")).toBe("/about/");
+      expect(neutralizePath("/en//about//")).toBe("/about/");
+      expect(neutralizePath("de/////about//")).toBe("/about/");
+      expect(neutralizePath("about")).toBe("about");
     });
   });
 

@@ -16,7 +16,6 @@ export { getLangFromUrl, getLangFromId, getAlternateLocalesByURL } from "./commo
 export {
   localizePath,
   pathsForAllLocales,
-  extractLocaleFromPath,
   trimSlashes,
   collapseSlashes,
   ensureLeadingSlash,

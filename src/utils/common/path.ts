@@ -18,18 +18,6 @@ export function ensureTrailingSlash(str: string): string {
   return str.endsWith("/") ? str : str + "/";
 }
 
-export function extractLocaleFromPath(path: string): string {
-  if (pathHasLocale(path)) {
-    const resultPath = ensureLeadingSlash(path);
-    const parts = resultPath.split("/");
-
-    return parts[1];
-  }
-
-  console.warn(`Path "${path}" does not contain a locale`);
-  return path;
-}
-
 export function pathsForAllLocales(): { params: { lang: LocalePath } }[] {
   return locales.map((locale) => ({ params: { lang: locale.path } }));
 }
@@ -42,10 +30,17 @@ export function localizePath(lang: LocalePath, path: string): string {
 }
 
 export function neutralizePath(path: string): string {
-  let neutralizedPath = extractLocaleFromPath(path);
-  neutralizedPath = normalizePath(neutralizedPath);
+  if (pathHasLocale(path)) {
+    let neutralizedPath = ensureLeadingSlash(path);
+    const parts = neutralizedPath.split("/");
+    neutralizedPath = parts.slice(2).join("/");
+    neutralizedPath = normalizePath(neutralizedPath);
 
-  return neutralizedPath;
+    return neutralizedPath;
+  }
+
+  console.warn(`Path "${path}" does not contain a supported locale`);
+  return path;
 }
 
 export function normalizePath(path: string): string {
