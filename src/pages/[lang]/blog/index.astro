@@ -1,9 +1,11 @@
 ---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
-import { getCollection } from "astro:content";
-import { byLang, pathsForAllLocales, metaLoader, neutralizePath } from "@/utils";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { pathsForAllLocales, neutralizePath } from "@/utils/i18n/path";
+import { metaLoader } from "@/utils/i18n/dictBuilder";
+import { byLang } from "@/utils/content/filter";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

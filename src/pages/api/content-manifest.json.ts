@@ -1,4 +1,4 @@
-import { getContentManifest } from "@/utils";
+import { getContentManifest } from "@/utils/content/manifest";
 
 export const GET = async () => {
   const manifest = await getContentManifest();

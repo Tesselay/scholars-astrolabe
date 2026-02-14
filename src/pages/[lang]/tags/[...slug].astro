@@ -4,7 +4,9 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
-import { buildTagPaths, metaLoader, neutralizePath } from "@/utils";
+import { buildTagPaths } from "@/utils/routing/urlBuilders";
+import { neutralizePath } from "@/utils/i18n/path";
+import { metaLoader } from "@/utils/i18n/dictBuilder";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");

@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
-import { buildTagPath, metaLoader } from "@/utils";
+import { buildTagPath } from "@/utils/routing/urlBuilders";
+import { metaLoader } from "@/utils/i18n/dictBuilder";
 
 const { frontmatter } = Astro.props;
 const lang = Astro.currentLocale;

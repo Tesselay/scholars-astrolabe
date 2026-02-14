@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { pageExistsForLocale, getContentManifest, altLocalesFor, type LocalePath } from "@/utils";
+import type { LocalePath } from "@/utils/i18n/locales";
+import { getContentManifest } from "@/utils/content/manifest";
+import { altLocalesFor, pageExistsForLocale } from "@/utils/routing/routes";
 
 const locales: LocalePath[] = ["en", "de"];
 

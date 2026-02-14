@@ -1,17 +1,13 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import "../styles/base/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
-import {
-  neutralizePath,
-  getContentManifest,
-  altLocalesFor,
-  localizePath,
-  metaLoader,
-  defaultLocale,
-  locales
-} from "@/utils";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { neutralizePath, localizePath } from "@/utils/i18n/path";
+import { altLocalesFor } from "@/utils/routing/routes";
+import { locales, defaultLocale } from "@/utils/i18n/locales";
+import { getContentManifest } from "@/utils/content/manifest";
+import { metaLoader } from "@/utils/i18n/dictBuilder";
 
 const lang = Astro.currentLocale;
 const meta = await metaLoader.getAsync(lang);

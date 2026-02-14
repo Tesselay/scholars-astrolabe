@@ -74,7 +74,9 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Align locale codes to web standard
 - [ ] Refine tests
   - [ ] Use `test` instead of `it` in vitest
+  - [ ] test utils
 - [ ] Generic manifest builder
+- [ ] Programmatic API for test
 
 ### Code
 
@@ -91,6 +93,10 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
+- [x] Remove barrel import due to circular dependency and module loading issues
+- [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
+- [ ] Use adapter for Astro relevant code
+- [ ] Remove api page
 - [ ] Rework utils -> Where can I use Astro's functionality, where do I need build-time/file-system
       aware helpers?
   - [ ] content manifest

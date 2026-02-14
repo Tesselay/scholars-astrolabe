@@ -1,11 +1,8 @@
 import { describe, it, expect } from "vitest";
-import {
-  localizePath,
-  neutralizePath,
-  altLocalesFor,
-  getContentManifest,
-  type LocalePath
-} from "@/utils";
+import type { LocalePath } from "@/utils/i18n/locales";
+import { localizePath, neutralizePath } from "@/utils/i18n/path";
+import { getContentManifest } from "@/utils/content/manifest";
+import { altLocalesFor } from "@/utils/routing/routes";
 
 const base = "https://example.com";
 

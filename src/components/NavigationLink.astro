@@ -1,7 +1,8 @@
 ---
 import type { ComponentProps } from "astro/types";
 import ButtonAnchor from "@/components/Button/ButtonAnchor.astro";
-import { normalizePath, neutralizePath } from "@/utils";
+import { normalizePath } from "@/utils/common/normalization";
+import { neutralizePath } from "@/utils/i18n/path";
 import { pathHasLocale, getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props extends ComponentProps<typeof ButtonAnchor> {

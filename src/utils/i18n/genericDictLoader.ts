@@ -1,6 +1,6 @@
 import { type LocalePath } from "@/utils/i18n/locales.ts";
 import { z } from "zod";
-import { localeByPath } from "@/utils";
+import { localeByPath } from "@/utils/i18n/path.ts";
 
 export type DictGlob = Record<string, { default: unknown }>;
 

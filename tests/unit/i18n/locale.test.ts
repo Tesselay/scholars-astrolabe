@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { getLangFromUrl, getAlternateLocalesByURL, locales } from "@/utils";
+import { getAlternateLocalesByURL, getLangFromUrl } from "@/utils/i18n/path";
+import { locales } from "@/utils/i18n/locales";
 
 describe("locale common", () => {
   it("getLangFromUrl returns the first path segment if it is a locale", () => {
