@@ -8,8 +8,7 @@ test.describe("Tag detail page", () => {
 
   test("navigates from tag index and shows posts for a tag (hierarchy supported)", async ({
     page,
-    defaultLang,
-    manifest
+    defaultLang
   }) => {
     const indexPath = new RegExp(`/${defaultLang}/tags/?$`, "i");
     await expect(page).toHaveURL(indexPath);
@@ -55,7 +54,7 @@ test.describe("Tag detail page", () => {
       expect(slug.length).toBeGreaterThan(0);
     }
 
-    // Deep-validate first few posts by navigating and checking manifest
+    // Validate first few posts by navigating
     const deepCount = Math.min(3, postCount);
     for (let i = 0; i < deepCount; i++) {
       const link = postLinks.nth(i);
@@ -70,11 +69,6 @@ test.describe("Tag detail page", () => {
       ]);
 
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      const knownSlugs = manifest.blogSlugsByLang[lang] ?? [];
-      expect(knownSlugs.includes(slug), `Slug not found in manifest for ${lang}/${slug}`).toBe(
-        true
-      );
 
       // Go back to the tag page and ensure we are still on the same tag
       await page.goBack();

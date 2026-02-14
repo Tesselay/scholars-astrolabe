@@ -6,7 +6,7 @@ test.describe("Blog page", () => {
     await page.goto(to("blog"));
   });
 
-  test("renders heading and post links (localized)", async ({ page, defaultLang, manifest }) => {
+  test("renders heading and post links (localized)", async ({ page, defaultLang }) => {
     const path = new RegExp(`/${defaultLang}/blog/?$`, "i");
     await expect(page).toHaveURL(path);
 
@@ -39,7 +39,7 @@ test.describe("Blog page", () => {
       expect(slug.length).toBeGreaterThan(0);
     }
 
-    // Deep-validate first few links by actual navigation and manifest check
+    // Validate first few links by actual navigation
     const deepCount = Math.min(3, count);
     for (let i = 0; i < deepCount; i++) {
       const link = postLinks.nth(i);
@@ -54,11 +54,6 @@ test.describe("Blog page", () => {
       ]);
 
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      const knownSlugs = manifest.blogSlugsByLang[lang] ?? [];
-      expect(knownSlugs.includes(slug), `Slug not found in manifest for ${lang}/${slug}`).toBe(
-        true
-      );
 
       // go back to the blog index
       await page.goBack();

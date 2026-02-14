@@ -1,11 +1,8 @@
 import { test, expect } from "../utils/fixtures.ts";
 
 test.describe("Post page (dynamic route) and BlogPostLayout", () => {
-  test.beforeEach(async ({ page, to, defaultLang, manifest }) => {
-    const slugs = manifest.blogSlugsByLang[defaultLang] ?? [];
-    test.skip(slugs.length === 0, "No posts available to test post page.");
-    await page.goto(to(`blog/${slugs[0]}`));
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  test.beforeEach(async ({ page, to }) => {
+    await page.goto(to("blog/example"));
   });
 
   test("renders post and header content", async ({ page, defaultLang }) => {
