@@ -14,9 +14,7 @@ describe("Meta loader", () => {
   });
 
   it("parses strict dictionaries and returns page meta with siteName", async () => {
-    const metaLoader = new GenericDictLoader<Meta>(
-      "meta",
-      MetaSchema,
+    const metaLoader = new GenericDictLoader<Meta>("meta", MetaSchema, () =>
       fakeGlob(mockMetaEN, mockMetaDE, "meta")
     );
     const m = await metaLoader.getAsync("en");
@@ -25,9 +23,7 @@ describe("Meta loader", () => {
   });
 
   it("throws when dictionaries are invalid against strict schema", async () => {
-    const metaLoader = new GenericDictLoader<Meta>(
-      "meta",
-      MetaSchema,
+    const metaLoader = new GenericDictLoader<Meta>("meta", MetaSchema, () =>
       fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")
     );
     await expect(metaLoader.init()).rejects.toThrow("Invalid dictionary for en");

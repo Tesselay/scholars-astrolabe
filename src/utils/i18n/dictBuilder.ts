@@ -9,5 +9,9 @@ export const MetaSchema = buildStrictSchema(modelMeta);
 export type Ui = StringLeaves<typeof modelUI>;
 export type Meta = StringLeaves<typeof modelMeta>;
 
-export const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema);
-export const metaLoader = new GenericDictLoader<Meta>("meta", MetaSchema);
+export const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema, () =>
+  import.meta.glob(`@/utils/i18n/dictionaries/*/ui.json`, { eager: true })
+);
+export const metaLoader = new GenericDictLoader<Meta>("meta", MetaSchema, () =>
+  import.meta.glob(`@/utils/i18n/dictionaries/*/meta.json`, { eager: true })
+);

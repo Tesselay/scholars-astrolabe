@@ -3,34 +3,28 @@ import { z } from "zod";
 import { localeByPath } from "@/utils/i18n/path.ts";
 
 export type DictGlob = Record<string, { default: unknown }>;
+export type DictModuleProvider = (dictName: string) => DictGlob;
 
 export class GenericDictLoader<Type> {
   private DICT: Readonly<Record<LocalePath, Type>> | null = null;
-  private readonly schema: z.ZodType<Type>;
+  private dictModules: DictGlob | null = null;
+  private readonly dictModulesProvider: DictModuleProvider;
+  private readonly dictSchema: z.ZodType<Type>;
   private readonly dictName: string;
-  private readonly dictModules: DictGlob = import.meta.glob("@/utils/i18n/dictionaries/*/*.json", {
-    eager: true
-  });
 
-  constructor(dictName: string, schema: z.ZodType<Type>, dictModules?: DictGlob) {
+  constructor(dictName: string, schema: z.ZodType<Type>, dictModulesProvider: DictModuleProvider) {
     this.dictName = dictName;
-    this.schema = schema;
-    this.dictModules = dictModules ?? this.dictModules;
+    this.dictSchema = schema;
+    this.dictModulesProvider = dictModulesProvider;
   }
 
-  loadDictFiles(): DictGlob {
-    const wanted = this.dictName.endsWith(".json") ? this.dictName : `${this.dictName}.json`;
-    const out: DictGlob = {};
-    for (const path in this.dictModules) {
-      if (path.endsWith(`/${wanted}`)) {
-        out[path] = this.dictModules[path];
-      }
-    }
-    return out;
+  loadModules(): DictGlob {
+    if (!this.dictModules) this.dictModules = this.dictModulesProvider(this.dictName);
+    return this.dictModules;
   }
 
   validate(locale: LocalePath, data: unknown): Type {
-    const parsed = this.schema.safeParse(data);
+    const parsed = this.dictSchema.safeParse(data);
     if (!parsed.success) {
       console.error(`[i18n:DICT] Invalid dictionary for ${locale}:`, parsed.error.format());
       throw new Error(`Invalid dictionary for ${locale}`);
@@ -39,7 +33,7 @@ export class GenericDictLoader<Type> {
   }
 
   async init(): Promise<void> {
-    const files: DictGlob = this.loadDictFiles();
+    const files: DictGlob = this.loadModules();
     const acc: Partial<Record<LocalePath, Type>> = {};
     for (const [path, mod] of Object.entries(files)) {
       const lang = path.split("/").at(-2) as LocalePath | undefined;

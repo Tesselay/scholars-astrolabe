@@ -62,6 +62,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] OpenTelemetry / Logging System
 - [ ] Localize existing data
 - [ ] Read time
+- [ ] Add RSS feed
 - [ ] Unify import system (alias vs. no alias)
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
@@ -93,10 +94,8 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
-- [x] Remove barrel import due to circular dependency and module loading issues
 - [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
 - [ ] Use adapter for Astro relevant code
-- [ ] Remove api page
 - [ ] Rework utils -> Where can I use Astro's functionality, where do I need build-time/file-system
       aware helpers?
   - [ ] content manifest

@@ -14,15 +14,15 @@ describe("UI loader validation", () => {
   });
 
   it("loads and validates, with default-locale strict", async () => {
-    const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema, fakeGlob(mockUiEN, mockUiDE, "ui"));
+    const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema, () =>
+      fakeGlob(mockUiEN, mockUiDE, "ui")
+    );
     const enUi = await uiLoader.getAsync("en");
     expect(enUi.nav.blog).toBe("Blog EN");
   });
 
   it("rejects invalid default-locale schema (wrong types or extra keys)", async () => {
-    const uiLoader = new GenericDictLoader<Ui>(
-      "ui",
-      UiSchema,
+    const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema, () =>
       fakeGlob(mockUiInvalid, mockUiEmpty, "ui")
     );
 
