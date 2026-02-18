@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { type LocalePath } from "@/utils/core/i18n/locale/locales.ts";
 import { localeByPath } from "@/utils/core/i18n/locale/path.ts";
+import type { JsonModule } from "@/utils/core/modules/json.ts";
 
-export type DictGlob = Record<string, { default: unknown }>;
+export type DictGlob<Type = unknown> = Record<string, JsonModule<Type>>;
 export type DictModulesProvider = (dictName: string) => DictGlob;
 
 export class GenericDictLoader<Type> {
@@ -34,12 +35,11 @@ export class GenericDictLoader<Type> {
 
   async init(): Promise<void> {
     const files: DictGlob = this.loadModules();
-    console.log(files);
     const acc: Partial<Record<LocalePath, Type>> = {};
     for (const [path, mod] of Object.entries(files)) {
       const lang = path.split("/").at(-2) as LocalePath | undefined;
       if (!lang || !localeByPath[lang]) continue;
-      acc[lang] = this.validate(lang, mod.default);
+      acc[lang] = this.validate(lang, mod);
     }
     this.DICT = Object.freeze(acc as Record<LocalePath, Type>);
   }
