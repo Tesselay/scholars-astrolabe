@@ -1,18 +1,18 @@
-import { type LocalePath } from "@/utils/core/i18n/locale/locales.ts";
 import { z } from "zod";
+import { type LocalePath } from "@/utils/core/i18n/locale/locales.ts";
 import { localeByPath } from "@/utils/core/i18n/locale/path.ts";
 
 export type DictGlob = Record<string, { default: unknown }>;
-export type DictModuleProvider = (dictName: string) => DictGlob;
+export type DictModulesProvider = (dictName: string) => DictGlob;
 
 export class GenericDictLoader<Type> {
   private DICT: Readonly<Record<LocalePath, Type>> | null = null;
   private dictModules: DictGlob | null = null;
-  private readonly dictModulesProvider: DictModuleProvider;
+  private readonly dictModulesProvider: DictModulesProvider;
   private readonly dictSchema: z.ZodType<Type>;
   private readonly dictName: string;
 
-  constructor(dictName: string, schema: z.ZodType<Type>, dictModulesProvider: DictModuleProvider) {
+  constructor(dictName: string, schema: z.ZodType<Type>, dictModulesProvider: DictModulesProvider) {
     this.dictName = dictName;
     this.dictSchema = schema;
     this.dictModulesProvider = dictModulesProvider;
@@ -34,6 +34,7 @@ export class GenericDictLoader<Type> {
 
   async init(): Promise<void> {
     const files: DictGlob = this.loadModules();
+    console.log(files);
     const acc: Partial<Record<LocalePath, Type>> = {};
     for (const [path, mod] of Object.entries(files)) {
       const lang = path.split("/").at(-2) as LocalePath | undefined;
