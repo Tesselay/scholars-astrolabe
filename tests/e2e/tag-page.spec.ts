@@ -59,7 +59,6 @@ test.describe("Tag detail page", () => {
     for (let i = 0; i < deepCount; i++) {
       const link = postLinks.nth(i);
       const postHref = await link.getAttribute("href");
-      const { lang, slug } = parseLangAndSlugFromHref(page.url(), postHref!);
 
       const target = new URL(postHref!, page.url());
       const expectedPath = target.pathname.replace(/\/+$/, "");
