@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { fakeGlob } from "../../utils/fake-glob.ts";
 import { mockUiEN, mockUiDE, mockUiInvalid, mockUiEmpty } from "../../utils/mocks.ts";
-import { buildStrictSchema, type StringLeaves } from "@/utils/i18n/schemaBuilder";
-import { GenericDictLoader } from "@/utils/i18n/genericDictLoader";
+import { buildStrictSchema, type StringLeaves } from "@/utils/core/i18n/dict/schemaBuilder.ts";
+import { GenericDictLoader } from "@/utils/core/i18n/dict/genericDictLoader.ts";
 
 describe("UI loader validation", () => {
   const UiSchema = buildStrictSchema(mockUiEN);

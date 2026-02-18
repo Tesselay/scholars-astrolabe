@@ -1,5 +1,5 @@
-import modelUI from "@/utils/i18n/dictionaries/en/ui.json";
-import modelMeta from "@/utils/i18n/dictionaries/en/meta.json";
+import modelUI from "@/utils/core/i18n/dict/dictionaries/en/ui.json";
+import modelMeta from "@/utils/core/i18n/dict/dictionaries/en/meta.json";
 import { buildStrictSchema, type StringLeaves } from "./schemaBuilder.ts";
 import { GenericDictLoader } from "./genericDictLoader.ts";
 
@@ -10,8 +10,8 @@ export type Ui = StringLeaves<typeof modelUI>;
 export type Meta = StringLeaves<typeof modelMeta>;
 
 export const uiLoader = new GenericDictLoader<Ui>("ui", UiSchema, () =>
-  import.meta.glob(`@/utils/i18n/dictionaries/*/ui.json`, { eager: true })
+  import.meta.glob("@/utils/core/i18n/dict/dictionaries/*/ui.json", { eager: true })
 );
 export const metaLoader = new GenericDictLoader<Meta>("meta", MetaSchema, () =>
-  import.meta.glob(`@/utils/i18n/dictionaries/*/meta.json`, { eager: true })
+  import.meta.glob("@/utils/core/i18n/dict/dictionaries/*/meta.json", { eager: true })
 );

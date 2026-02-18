@@ -3,9 +3,10 @@ import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
-import { pathsForAllLocales, neutralizePath } from "@/utils/i18n/path";
-import { metaLoader } from "@/utils/i18n/dictBuilder";
+import { neutralizePath } from "@/utils/core/i18n/locale/path.ts";
+import { metaLoader } from "@/utils/core/i18n/dict/dictBuilder.ts";
 import { byLang } from "@/utils/content/filter";
+import { pathsForAllLocales } from "@/utils/core/routing/routes.ts";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

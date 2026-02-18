@@ -77,7 +77,6 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Use `test` instead of `it` in vitest
   - [ ] test utils
 - [ ] Generic manifest builder
-- [ ] Programmatic API for test
 
 ### Code
 
@@ -87,7 +86,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use routePattern in blog collection helpers
 - [ ] Styling not applied in preview/build
 - [ ] Set `trailingSlash` config and use in utils
-- [ ] Have tests read in trailing slash config
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Add 404 page
   - [ ] Redirect or add button to redirect to default lang current or parent page on 404
@@ -101,5 +99,6 @@ All commands are run from the root of the project, from a terminal:
   - [ ] content manifest
   - [ ] What should the blog/tag path matcher actually solve? Should paths be neutral?
   - [ ] Replace utils in Layout with Astro's functionality
+  - [ ] Refactor test fake glob into adapter
 
 ---

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { CollectionEntry } from "astro:content";
 import { byLang, filterEntriesByLang } from "@/utils/content/filter";
-import { buildTagPaths } from "@/utils/routing/urlBuilders";
+import { buildTagPaths } from "@/utils/core/routing/urlBuilders.ts";
 
 describe("content filters: byLang and filterEntriesByLang", () => {
   const entries = [

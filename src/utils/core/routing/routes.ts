@@ -1,7 +1,7 @@
-import { type LocalePath } from "../i18n/locales.ts";
+import { type LocalePath, locales } from "../i18n/locale/locales.ts";
 import { type ContentManifest } from "@/utils/content/manifest.ts";
 import { nonLocalizedPages, pages } from "./pages.ts";
-import { getAlternateLocalesByLang } from "@/utils/i18n/path.ts";
+import { getAlternateLocalesByLang } from "@/utils/core/i18n/locale/path.ts";
 import { normalizeFilePath } from "@/utils/core/path/normalization.ts";
 import { convertLocalPathToSlug } from "@/utils/core/path/slug.ts";
 
@@ -106,4 +106,7 @@ export function altLocalesFor(
   }
 
   return [];
+}
+export function pathsForAllLocales(): { params: { lang: LocalePath } }[] {
+  return locales.map((locale) => ({ params: { lang: locale.path } }));
 }

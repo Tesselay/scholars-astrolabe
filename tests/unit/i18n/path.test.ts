@@ -1,15 +1,16 @@
 import { describe, it, expect } from "vitest";
 
-import "@/utils/routing/routes.ts";
+import "@/utils/core/routing/routes.ts";
 import {
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
   trimSlashes
 } from "@/utils/core/string/normalization.ts";
-import { localizePath, neutralizePath, pathsForAllLocales } from "@/utils/i18n/path";
-import { locales } from "@/utils/i18n/locales";
+import { localizePath, neutralizePath } from "@/utils/core/i18n/locale/path.ts";
+import { locales } from "@/utils/core/i18n/locale/locales.ts";
 import { normalizeFilePath } from "@/utils/core/path/normalization.ts";
+import { pathsForAllLocales } from "@/utils/core/routing/routes.ts";
 
 describe("path common", () => {
   it("collapseSlashes", () => {

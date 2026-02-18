@@ -1,5 +1,5 @@
 import { pathHasLocale } from "astro:i18n";
-import { type LocalePath, locales } from "@/utils/i18n/locales.ts";
+import { type LocalePath, locales } from "@/utils/core/i18n/locale/locales.ts";
 import { ensureLeadingSlash } from "@/utils/core/string/normalization.ts";
 import { normalizePath } from "@/utils/core/path/normalization.ts";
 
@@ -22,10 +22,6 @@ export function neutralizePath(path: string): string {
 
   console.warn(`Path "${path}" does not contain a supported locale`);
   return path;
-}
-
-export function pathsForAllLocales(): { params: { lang: LocalePath } }[] {
-  return locales.map((locale) => ({ params: { lang: locale.path } }));
 }
 
 export const localeByPath = Object.fromEntries(locales.map((locale) => [locale.path, locale]));

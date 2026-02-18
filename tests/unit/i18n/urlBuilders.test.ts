@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildTagPath, encodeTagPath } from "@/utils/routing/urlBuilders";
+import { buildTagPath, encodeTagPath } from "@/utils/core/routing/urlBuilders.ts";
 
 describe("url builders", () => {
   it("encodeTagPath encodes each segment", () => {

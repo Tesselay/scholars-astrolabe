@@ -1,4 +1,4 @@
-import type { DictGlob } from "@/utils/i18n/genericDictLoader";
+import type { DictGlob } from "@/utils/core/i18n/dict/genericDictLoader.ts";
 
 export function fakeGlob(en: unknown, de: unknown, filename: string): DictGlob {
   return {

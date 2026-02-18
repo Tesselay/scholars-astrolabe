@@ -1,8 +1,8 @@
 import type { CollectionEntry } from "astro:content";
-import { type LocalePath, locales } from "../i18n/locales.ts";
-import { filterEntriesByLang } from "../content/filter.ts";
+import { type LocalePath, locales } from "../i18n/locale/locales.ts";
+import { filterEntriesByLang } from "../../content/filter.ts";
 import { collapseSlashes, trimSlashes } from "@/utils/core/string/normalization.ts";
-import { localeByPath, localizePath } from "@/utils/i18n/path.ts";
+import { localeByPath, localizePath } from "@/utils/core/i18n/locale/path.ts";
 
 // Encodes each tag path segment for safe URLs while preserving hierarchy
 export function encodeTagPath(tagPath: string): string {

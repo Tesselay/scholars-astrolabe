@@ -1,4 +1,4 @@
-import type { LocalePath } from "@/utils/i18n/locales.ts";
+import type { LocalePath } from "@/utils/core/i18n/locale/locales.ts";
 
 declare module "astro" {
   interface AstroGlobal {

@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { pathsForAllLocales } from "@/utils/i18n/path";
-import { metaLoader } from "@/utils/i18n/dictBuilder";
+import { metaLoader } from "@/utils/core/i18n/dict/dictBuilder.ts";
+import { pathsForAllLocales } from "@/utils/core/routing/routes.ts";
 
 export function getStaticPaths() {
   return pathsForAllLocales();
