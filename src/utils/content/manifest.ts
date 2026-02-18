@@ -1,7 +1,7 @@
 import { getCollection as realGetCollection } from "astro:content";
 import { locales, type LocalePath } from "../i18n/locales.ts";
 import { encodeTagPath } from "@/utils/routing/urlBuilders.ts";
-import { collapseSlashes, trimSlashes } from "@/utils/common/normalization.ts";
+import { collapseSlashes, trimSlashes } from "@/utils/core/string/normalization.ts";
 import { getLangFromId, localeByPath } from "@/utils/i18n/path.ts";
 
 export type GetCollection = typeof realGetCollection;

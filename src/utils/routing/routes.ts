@@ -2,7 +2,8 @@ import { type LocalePath } from "../i18n/locales.ts";
 import { type ContentManifest } from "@/utils/content/manifest.ts";
 import { nonLocalizedPages, pages } from "./pages.ts";
 import { getAlternateLocalesByLang } from "@/utils/i18n/path.ts";
-import { convertLocalPathToSlug, normalizeFilePath } from "@/utils/common/normalization.ts";
+import { normalizeFilePath } from "@/utils/core/path/normalization.ts";
+import { convertLocalPathToSlug } from "@/utils/core/path/slug.ts";
 
 const mNonLocalizedPages = new Set(nonLocalizedPages.map((p) => convertLocalPathToSlug(p)));
 const mPages = new Set(pages.map((p) => convertLocalPathToSlug(p)));

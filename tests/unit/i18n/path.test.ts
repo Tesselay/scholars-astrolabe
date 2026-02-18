@@ -5,11 +5,11 @@ import {
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash,
-  normalizeFilePath,
   trimSlashes
-} from "@/utils/common/normalization";
+} from "@/utils/core/string/normalization.ts";
 import { localizePath, neutralizePath, pathsForAllLocales } from "@/utils/i18n/path";
 import { locales } from "@/utils/i18n/locales";
+import { normalizeFilePath } from "@/utils/core/path/normalization.ts";
 
 describe("path common", () => {
   it("collapseSlashes", () => {

@@ -1,6 +1,7 @@
 import { pathHasLocale } from "astro:i18n";
 import { type LocalePath, locales } from "@/utils/i18n/locales.ts";
-import { normalizePath, ensureLeadingSlash } from "@/utils/common/normalization.ts";
+import { ensureLeadingSlash } from "@/utils/core/string/normalization.ts";
+import { normalizePath } from "@/utils/core/path/normalization.ts";
 
 export function localizePath(lang: LocalePath, path: string): string {
   let localizedPath = String(lang) + ensureLeadingSlash(path);
