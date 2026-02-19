@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { metaLoader } from "@/utils/core/i18n/dict/dictBuilder.ts";
+import { metaLoader } from "@/utils/core/i18n/dict/metaLoader.ts";
 
 const meta = await metaLoader.getAsync("en");
 

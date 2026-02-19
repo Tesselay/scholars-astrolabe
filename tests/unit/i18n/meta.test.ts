@@ -25,6 +25,6 @@ describe("Meta loader", () => {
     const metaLoader = new GenericDictLoader("meta", MetaSchema, () =>
       fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")
     );
-    await expect(metaLoader.init()).rejects.toThrow("Invalid dictionary for en");
+    expect(metaLoader.init()).rejects.toThrow("Invalid dictionary for en");
   });
 });

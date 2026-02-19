@@ -7,7 +7,7 @@ import { neutralizePath, localizePath } from "@/utils/core/i18n/locale/path.ts";
 import { altLocalesFor } from "@/utils/core/routing/routes.ts";
 import { locales, defaultLocale } from "@/utils/core/i18n/locale/locales.ts";
 import { getContentManifest } from "@/utils/content/manifest";
-import { metaLoader } from "@/utils/core/i18n/dict/dictBuilder.ts";
+import { metaLoader } from "@/utils/core/i18n/dict/metaLoader.ts";
 
 const lang = Astro.currentLocale;
 const meta = await metaLoader.getAsync(lang);

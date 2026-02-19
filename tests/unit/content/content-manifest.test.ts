@@ -24,6 +24,6 @@ describe("buildContentManifest", () => {
 
   it("fails on invalid language", async () => {
     const fakeGetCollection = async () => mockBlogInvalid;
-    await expect(buildContentManifest(fakeGetCollection)).rejects.toThrowError();
+    expect(buildContentManifest(fakeGetCollection)).rejects.toThrowError();
   });
 });
