@@ -26,8 +26,11 @@ export class GenericDictLoader<Type extends z.Schema> {
   validate(locale: LocalePath, data: unknown): z.infer<Type> {
     const parsed = this.dictSchema.safeParse(data);
     if (!parsed.success) {
-      console.error(`[i18n:DICT] Invalid dictionary for ${locale}:`, parsed.error.format());
-      throw new Error(`Invalid dictionary for ${locale}`);
+      console.error(
+        `[i18n:${this.dictName}] Invalid dictionary for ${locale}:`,
+        parsed.error.format()
+      );
+      throw new Error(`[i18n:${this.dictName}]Invalid dictionary for ${locale}`);
     }
     return parsed.data;
   }
