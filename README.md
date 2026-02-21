@@ -77,6 +77,7 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Use `test` instead of `it` in vitest
   - [ ] test utils
 - [ ] Generic manifest builder
+- [ ] JSON Schema?
 
 ### Code
 
@@ -89,6 +90,8 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Add 404 page
   - [ ] Redirect or add button to redirect to default lang current or parent page on 404
+- [ ] Add test for static dict import for dict loader
+- [ ] Let lint ignore astro config
 
 ### Current
 

@@ -1,5 +1,5 @@
 import { type LocalePath, locales } from "../i18n/locale/locales.ts";
-import { type ContentManifest } from "@/utils/content/manifest.ts";
+import { type ContentManifest } from "@/utils/compositional/content/manifest.ts";
 import { nonLocalizedPages, pages } from "./pages.ts";
 import { getAlternateLocalesByLang } from "@/utils/core/i18n/locale/path.ts";
 import { normalizeFilePath } from "@/utils/core/path/normalization.ts";

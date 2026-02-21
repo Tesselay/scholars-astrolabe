@@ -1,5 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { __resetContentManifest, buildContentManifest } from "@/utils/content/manifest.ts";
+import {
+  __resetContentManifest,
+  buildContentManifest
+} from "@/utils/compositional/content/manifest.ts";
 import { mockBlog, mockBlogInvalid } from "../../utils/mocks.ts";
 
 describe("buildContentManifest", () => {

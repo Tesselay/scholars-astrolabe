@@ -1,8 +1,8 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { byLang } from "@/utils/content/filter";
-import { metaLoader } from "@/utils/core/i18n/dict/metaLoader.ts";
+import { byLang } from "@/utils/compositional/content/filter";
+import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { buildTagPath } from "@/utils/core/routing/urlBuilders.ts";
 import { pathsForAllLocales } from "@/utils/core/routing/routes.ts";
 

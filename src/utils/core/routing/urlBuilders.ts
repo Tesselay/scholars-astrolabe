@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import { type LocalePath, locales } from "../i18n/locale/locales.ts";
-import { filterEntriesByLang } from "../../content/filter.ts";
+import { filterEntriesByLang } from "@/utils/compositional/content/filter.ts";
 import { collapseSlashes, trimSlashes } from "@/utils/core/string/normalization.ts";
 import { localeByPath, localizePath } from "@/utils/core/i18n/locale/path.ts";
 

@@ -1,5 +1,5 @@
-import { buildStrictSchema } from "./schemaBuilder.ts";
-import { GenericDictLoader } from "./genericDictLoader.ts";
+import { buildStrictSchema } from "../../core/i18n/dict/schemaBuilder.ts";
+import { GenericDictLoader } from "../../core/i18n/dict/genericDictLoader.ts";
 import { metaDictModules } from "@/utils/adapter/vite/dicts.ts";
 import modelMeta from "@/utils/core/i18n/dict/dictionaries/en/meta.json";
 
