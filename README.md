@@ -103,5 +103,9 @@ All commands are run from the root of the project, from a terminal:
   - [ ] What should the blog/tag path matcher actually solve? Should paths be neutral?
   - [ ] Replace utils in Layout with Astro's functionality
   - [ ] Refactor test fake glob into adapter
+  - [ ] Exports at end of file
+  - [ ] Renaming of path to Path (for Astro consistency), FilesystemPath, UrlPath/Pathname
+  - [ ] Refactor i18n/path.ts, urlBuilders.ts, manifest.ts to use Astro through adapter or not at
+        all
 
 ---
