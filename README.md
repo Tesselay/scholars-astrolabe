@@ -1,8 +1,25 @@
 # Scholar's Astrolabe
 
-This repository is a minimal, publishable Astro starter you can clone or use as a template. It
-avoids project-specific branding and uses neutral placeholders so you can customize it for your own
-site.
+## Introduction
+
+An opinionated and likely overengineered Astro template with a whimsical touch and an eye for
+accessibility and clean code.
+
+## Features
+
+- Dynamic Localization (i18n) with a custom dictionary loader
+- Accessibility-first design
+- Mobile-first design
+- RSS
+- SEO metadata
+- OpenGraph metadata
+- Extensive TypeScript Support
+- Extensive Testing using Vitest & Playwright
+- Configured ESLint & Prettier
+- GitHub Actions CI support
+- Diagnostics plugin for easy debugging
+- Adapterized utils for easy library switching
+- Aliased Imports
 
 ## Quick start
 
@@ -13,19 +30,10 @@ yarn dev
 
 ## Customize
 
-- Site title and metadata
-  - src/pages/index.astro: change `pageTitle` (currently "Site Title").
-  - src/pages/rss.xml.js: update `title` and `description`.
-  - astro.config.mjs: set `site` to your deployed URL.
-- Hero/background imagery
-  - The CSS variable `--hero-bg` in src/styles/tokens.css uses a neutral gradient in both dark and
-    light modes. Replace these gradients with your own images or design if desired.
-- Navigation & layout
-  - src/components/Header.astro: adjust links and structure.
-  - src/layouts/Layout.astro: customize `<head>` metadata, favicon, and overall layout.
-- Content
-  - Example blog posts are included under src/content/blog. Replace with your own content or remove
-    them.
+- Localization
+  - [ ] Add new locale to `/src/utils/core/i18n/locales.ts`
+  - [ ] Add new dictionary to `/src/utils/core/i18n/dict/dictionaries/[locale]/*.json`
+  - [ ] Set default locale in `/src/utils/core/i18n/locales.ts`
 
 ## Commands
 
@@ -37,75 +45,89 @@ All commands are run from the root of the project, from a terminal:
 | `yarn dev`             | Starts local dev server at `localhost:4321`      |
 | `yarn build`           | Build your production site to `./dist/`          |
 | `yarn preview`         | Preview your build locally, before deploying     |
+| `yarn test`            | Run unit & integration tests                     |
+| `yarn e2e`             | Run e2e tests                                    |
+| `yarn lint`            | Run ESLint                                       |
+| `yarn format`          | Run Prettier                                     |
+| `yarn typecheck`       | Check for type issues                            |
+| `yarn test:a11y`       | Runs accessibility check                         |
 | `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `yarn astro -- --help` | Get help using the Astro CLI                     |
 
-## Optional libraries
-
-- @astrojs/rss
-- @astrojs/prefetch
-- Plausible or Umami analytics
-- Pagefind (search)
-- Partytown
-- vite-bundle-visualizer
-
 ## TODO
 
-### Architectural
+- RSS
+- Sitemap
 
-- [ ] Add dark/white toggle
-- [ ] Add language toggle
-- [ ] font-variant-ligatures, font-kerning, and hyphenation
-- [ ] scrollbar (accessible!)
-- [ ] tweak robots.txt (sitemap) / astrojs/sitemap
-- [ ] ICU?
-- [ ] OpenTelemetry / Logging System
-- [ ] Localize existing data
-- [ ] Read time
-- [ ] Add RSS feed
-- [ ] Unify import system (alias vs. no alias)
-- [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
-      resources/documents?
-- [ ] Can I break/inject code into the application via markdown frontmatter props?
-- [ ] URL vs. path normalization
-  - [ ] What path utils actually should have normalized paths?
-- [ ] Astro actions?
-- [ ] Fonts API?
-- [ ] Add a "cheatsheet" page?
-- [ ] Align locale codes to web standard
-- [ ] Refine tests
-  - [ ] Use `test` instead of `it` in vitest
-  - [ ] test utils
-- [ ] Generic manifest builder
-- [ ] JSON Schema?
+### Current
+
+#### Rework Utils
+
+- [ ] Exports at end of file
+- [ ] Renaming of path -> LocalePath (for Astro consistency), FsPath, UrlPath, path (structural
+      only)
+
+#### Rework Testing
+
+- [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
+- [ ] Refactor test fake glob into adapter
+- [ ] Add test for static dict import for dict loader
+- [ ] Use `test` instead of `it` in vitest
+- [ ] Rework test utils
+- [ ] Prevent error printing in test output (invalid dictionary)
+
+### Issues
+
+- [ ] Styling is not applied correctly in preview/build
+- [ ] Layout altLocale helper not checking file existence
 
 ### Code
 
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
 - [ ] Apply hero placeholder
-- [ ] Use routePattern in blog collection helpers
-- [ ] Styling not applied in preview/build
 - [ ] Set `trailingSlash` config and use in utils
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
-- [ ] Add 404 page
-  - [ ] Redirect or add button to redirect to default lang current or parent page on 404
-- [ ] Add test for static dict import for dict loader
 - [ ] Let lint ignore astro config
+- [ ] Update import aliases
+- [ ] Add read time
 
-### Current
+### Components
 
-- [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
-- [ ] Use adapter for Astro relevant code
-- [ ] Rework utils -> Where can I use Astro's functionality, where do I need build-time/file-system
-      aware helpers?
-  - [ ] content manifest
-  - [ ] What should the blog/tag path matcher actually solve? Should paths be neutral?
-  - [ ] Replace utils in Layout with Astro's functionality
-  - [ ] Refactor test fake glob into adapter
-  - [ ] Exports at end of file
-  - [ ] Renaming of path to Path (for Astro consistency), FilesystemPath, UrlPath/Pathname
-  - [ ] Refactor i18n/path.ts, urlBuilders.ts, manifest.ts to use Astro through adapter or not at
-        all
+- [ ] 404 Page
+  - [ ] Redirect or add button to redirect to default lang current or parent page on 404
+- [ ] Theme Switcher
+- [ ] Language Switcher
+- [ ] Accessible Scrollbar
+- [ ] Favicon
+- [ ] Rework Diagnostics Plugin
+- [ ] Rework Tags
+
+### Architectural
+
+- [ ] font-variant-ligatures, font-kerning, and hyphenation
+- [ ] Localize existing data
+- [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
+      resources/documents?
+- [ ] Can I break/inject code into the application via markdown frontmatter props?
+- [ ] Add a "cheatsheet" page?
+- [ ] Align locale codes to web standard
+- [ ] Split out head metadata into separate component?
+- [ ] Rework color system
+- [ ] Markdown frontmatter schema?
+
+### Considerations
+
+- Astro Actions
+- Astro Fonts API
+- JSON Schema
+- ICU MessageFormat
+- OpenTelemetry / Logging System
+- @astrojs/rss
+- @astrojs/prefetch
+- Plausible or Umami Analytics
+- Pagefind
+- Partytown
+- vite-bundle-visualizer
 
 ---
