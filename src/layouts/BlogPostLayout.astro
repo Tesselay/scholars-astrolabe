@@ -1,6 +1,5 @@
 ---
 import Layout from "./Layout.astro";
-import { buildTagPath } from "@/utils/core/routing/urlBuilders.ts";
 import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 
 const { frontmatter } = Astro.props;
@@ -42,7 +41,7 @@ const description = `A blog entry on ${meta["blog:index"].description}`;
             <ul class="tags">
               {frontmatter.tags.map((tag: string) => (
                 <li class="tag">
-                  <a href={buildTagPath(lang, tag)}>{tag}</a>
+                  <p>{tag}</p>
                 </li>
               ))}
             </ul>
