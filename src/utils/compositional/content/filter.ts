@@ -1,4 +1,4 @@
-import type { LocalePath } from "@/utils/core/i18n/locale/locales.ts";
+import { type LocalePath, locales } from "@/utils/core/i18n/locale/locales.ts";
 
 export function filterEntriesByLang<Type extends { id: string }>(
   entries: readonly Type[],
@@ -12,3 +12,7 @@ export const byLang =
   <Type extends { id: string }>(lang: LocalePath) =>
   (entry: Type) =>
     entry.id.startsWith(`${lang}/`);
+
+export function pathsForAllLocales(): { params: { lang: LocalePath } }[] {
+  return locales.map((locale) => ({ params: { lang: locale.path } }));
+}
