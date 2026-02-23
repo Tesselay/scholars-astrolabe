@@ -12,9 +12,3 @@ export function normalizePath(path: string): string {
 
   return normalizedPath;
 }
-
-export function normalizeFilePath(path: string): string {
-  let normalizedPath = path.replace(/(\.astro|index\.astro|\.md|\.mdx|\.ts|\.js)(\/)?$/i, "$2");
-  normalizedPath = normalizePath(normalizedPath);
-  return normalizedPath;
-}

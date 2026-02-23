@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 
-import "@/utils/core/routing/routes.ts";
 import {
   collapseSlashes,
   ensureLeadingSlash,
@@ -9,8 +8,7 @@ import {
 } from "@/utils/core/string/normalization.ts";
 import { localizePath, neutralizePath } from "@/utils/core/i18n/locale/path.ts";
 import { locales } from "@/utils/core/i18n/locale/locales.ts";
-import { normalizeFilePath } from "@/utils/core/path/normalization.ts";
-import { pathsForAllLocales } from "@/utils/core/routing/routes.ts";
+import { pathsForAllLocales } from "@/utils/compositional/content/filter.ts";
 
 describe("path common", () => {
   it("collapseSlashes", () => {
@@ -80,22 +78,5 @@ describe("path common", () => {
     expect(localizePath("en", "about")).toBe("/en/about/");
     expect(localizePath("en", "/about")).toBe("/en/about/");
     expect(localizePath("de", "///about///me")).toBe("/de/about/me/");
-  });
-
-  describe("normalizeFilePath", () => {
-    // it("strips locale and ensures leading and trailing slash", () => {
-    //   expect(normalizeFilePath("/en/about")).toBe("/about/");
-    //   expect(normalizeFilePath("en/about/")).toBe("/about/");
-    // });
-
-    it("removes Astro extensions", () => {
-      expect(normalizeFilePath("/en/about/index.astro")).toBe("/en/about/");
-      expect(normalizeFilePath("/de/blog/index.astro")).toBe("/de/blog/");
-      expect(normalizeFilePath("/de/blog/post.astro")).toBe("/de/blog/post/");
-    });
-
-    it("collapses repeated slashes", () => {
-      expect(normalizeFilePath("///en////about//index.astro")).toBe("/en/about/");
-    });
   });
 });

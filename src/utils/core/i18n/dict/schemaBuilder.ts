@@ -1,11 +1,5 @@
 import { z } from "zod";
 
-export type StringLeaves<T> = T extends string
-  ? string
-  : T extends Record<string, unknown>
-    ? { [K in keyof T]: StringLeaves<T[K]> }
-    : never;
-
 type SchemaOf<T> = T extends string
   ? z.ZodString
   : T extends Record<string, unknown>
