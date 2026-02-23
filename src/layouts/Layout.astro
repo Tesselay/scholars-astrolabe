@@ -3,16 +3,14 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import "../styles/base/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
-import { neutralizePath, localizePath } from "@/utils/core/i18n/locale/path.ts";
-import { altLocalesFor } from "@/utils/core/routing/routes.ts";
+import { neutralizePath, getLangFromId } from "@/utils/core/i18n/locale/path.ts";
 import { locales, defaultLocale } from "@/utils/core/i18n/locale/locales.ts";
-import { getContentManifest } from "@/utils/compositional/content/manifest";
 import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import { getAlternateRelativeLocaleUrlList } from "@/utils/adapter/astro/path.ts";
 
 const lang = Astro.currentLocale;
 const meta = await metaLoader.getAsync(lang);
 const siteName = meta.home.title;
-const manifest = await getContentManifest();
 
 const {
   pageTitle = siteName,
@@ -30,11 +28,11 @@ const neutralPath = neutralizePath(Astro.url.pathname);
 const canonicalUrl = new URL(Astro.url.pathname, base);
 const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), base);
 
-const altLocales = altLocalesFor(lang, neutralPath, manifest);
-const alternates = altLocales.map((locale) => ({
-  hreflang: locale,
-  href: new URL(localizePath(locale, neutralPath), base).href,
-  ogLocale: locales.find((locale) => locale.path == lang)?.og
+const altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
+const alternates = altLocaleUrls.map((url) => ({
+  hreflang: getLangFromId(url),
+  href: new URL(url, base),
+  ogLocale: locales.find((loc) => loc.path == getLangFromId(url))?.og
 }));
 
 const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";
