@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { type LocalePath } from "@/utils/core/i18n/locale/locales.ts";
-import { localeByPath } from "@/utils/core/i18n/locale/path.ts";
+import { getLangFromPath } from "@/utils/core/i18n/locale/path.ts";
 
 export type DictGlob<Type> = Record<string, Type>;
 export type DictModulesProvider<Type> = (dictName?: string) => DictGlob<Type>;
+type Dict<Type> = Record<LocalePath, Type>;
 
-export class GenericDictLoader<Type extends z.Schema> {
-  private DICT: Readonly<Record<LocalePath, z.infer<Type>>> | null = null;
+export class GenericDictLoader<Type extends z.ZodType> {
+  private DICT: Readonly<Dict<z.infer<Type>>> | null = null;
   private dictModules: DictGlob<z.infer<Type>> | null = null;
   private readonly dictModulesProvider: DictModulesProvider<z.infer<Type>>;
   private readonly dictSchema: Type;
@@ -36,20 +37,20 @@ export class GenericDictLoader<Type extends z.Schema> {
   }
 
   async init(): Promise<void> {
-    const files = this.loadModules();
-    const acc: Partial<Record<LocalePath, z.infer<Type>>> = {};
-    for (const [path, mod] of Object.entries(files)) {
-      const lang = path.split("/").at(-2) as LocalePath | undefined;
-      if (!lang || !localeByPath[lang]) continue;
-      acc[lang] = this.validate(lang, mod);
+    const modules = this.loadModules();
+    const dictSkeleton: Partial<Dict<z.infer<Type>>> = {};
+
+    for (const filePath in modules) {
+      const locale = getLangFromPath(filePath);
+      dictSkeleton[locale] = this.validate(locale, modules[filePath]);
     }
-    this.DICT = Object.freeze(acc as Record<LocalePath, z.infer<Type>>);
+    this.DICT = Object.freeze(dictSkeleton as Dict<z.infer<Type>>);
   }
 
   get(locale: LocalePath): z.infer<Type> {
     if (!this.DICT) {
       throw new Error(
-        "[i18n:DICT] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup."
+        `[i18n:${this.dictName}] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup.`
       );
     }
     const dict = this.DICT[locale];

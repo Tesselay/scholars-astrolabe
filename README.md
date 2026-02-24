@@ -66,8 +66,8 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Exports at end of file
 - [ ] Renaming of path -> LocalePath (for Astro consistency), FsPath, UrlPath, path (structural
       only)
-- [ ] Locale lookup by hashmap
 - [ ] Define URL structure
+- [ ] Rename lang to locale
 
 #### Rework Testing
 
