@@ -17,7 +17,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { loadEnv } from "vite";
 
 import callouts from "./src/markdown/callout/remark-callouts.js";
-import { defaultLocale } from "@/utils/core/i18n/locale/definition.ts";
+import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
 import { astroLocales } from "./src/utils/adapter/astro/locales.ts";
 
 const mode = process.env.NODE_ENV ?? "development";
