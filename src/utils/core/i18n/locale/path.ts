@@ -1,4 +1,3 @@
-import { pathHasLocale } from "astro:i18n";
 import {
   type ExtendedLocale,
   type LocalePath,
@@ -8,47 +7,48 @@ import { ensureLeadingSlash } from "@/utils/core/string/normalization.ts";
 import { normalizePath } from "@/utils/core/path/normalization.ts";
 import { assertLocalePath } from "@/utils/core/i18n/locale/guards.ts";
 
-export function localizePath(lang: LocalePath, path: string): string {
-  let localizedPath = String(lang) + ensureLeadingSlash(path);
-  localizedPath = normalizePath(localizedPath);
-
-  return localizedPath;
+function findLocaleSegment(normalizedPath: string): string {
+  const segments = normalizedPath.split("/");
+  for (const segment of segments) {
+    if (localesMap.has(segment as LocalePath)) {
+      return segment;
+    }
+  }
+  return "";
 }
 
 export function neutralizePath(path: string): string {
-  if (pathHasLocale(path)) {
-    let neutralizedPath = ensureLeadingSlash(path);
-    const parts = neutralizedPath.split("/");
-    neutralizedPath = parts.slice(2).join("/");
-    neutralizedPath = normalizePath(neutralizedPath);
+  const normalizedPath = normalizePath(path);
+  const locale = findLocaleSegment(normalizedPath);
 
-    return neutralizedPath;
+  if (locale) {
+    const segments = normalizedPath.split("/");
+    const neutralizedPath = segments.slice(2).join("/");
+
+    return normalizePath(neutralizedPath);
   }
 
-  console.warn(`Path "${path}" does not contain a supported locale`);
-  return path;
+  return normalizedPath;
 }
-
-export function getLocaleByLocalePath(path: string): ExtendedLocale {
+export function getLocaleObjectByLocalePath(path: string): ExtendedLocale {
   assertLocalePath(path);
+
   return localesMap.get(path)!;
 }
+export function localizePath(locale: LocalePath, path: string): string {
+  assertLocalePath(locale);
+  const localizedPath = String(locale) + ensureLeadingSlash(path);
 
-// Assumes URL path like "/[lang]/[...slug]"
-export function getLangFromUrlPath(path: string): LocalePath {
-  const segments = normalizePath(path).split("/");
-  const localeSegment = segments[1];
-  return getLocaleByLocalePath(localeSegment).path;
+  return normalizePath(localizedPath);
 }
 
-export function getLangFromPath(path: string): LocalePath {
+export function getLocalePathFromPath(path: string): string {
   const normalizedPath = normalizePath(path);
-  const segments = normalizedPath.split("/");
-  let localeSegment = "";
-  for (const segment of segments) {
-    if (localesMap.has(segment as LocalePath)) {
-      localeSegment = segment;
-    }
-  }
-  return getLocaleByLocalePath(localeSegment).path;
+  return findLocaleSegment(normalizedPath);
+}
+
+export function getLocalePathFromPathStrict(path: string): LocalePath {
+  const locale = findLocaleSegment(normalizePath(path));
+  assertLocalePath(locale);
+  return locale;
 }
