@@ -98,4 +98,4 @@ path meaning and use it purely only for structural logic.
 | -------------------- | ---------------------------- |
 | **URL Paths**        | `UrlPath`, `localizeUrlPath` |
 | **Filesystem Paths** | `FsPath`, `normalizeFsPath`  |
-| **Astro Paths**      | `LocalePath`                 |
+| **Astro Paths**      | `LocaleRoute`                |

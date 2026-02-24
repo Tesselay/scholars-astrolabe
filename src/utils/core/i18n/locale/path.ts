@@ -1,16 +1,16 @@
 import {
   type ExtendedLocale,
-  type LocalePath,
+  type LocaleRoute,
   localesMap
 } from "@/utils/core/i18n/locale/locales.ts";
 import { ensureLeadingSlash } from "@/utils/core/string/normalization.ts";
 import { normalizePath } from "@/utils/core/path/normalization.ts";
-import { assertLocalePath } from "@/utils/core/i18n/locale/guards.ts";
+import { assertLocaleRoute } from "@/utils/core/i18n/locale/guards.ts";
 
 function findLocaleSegment(normalizedPath: string): string {
   const segments = normalizedPath.split("/");
   for (const segment of segments) {
-    if (localesMap.has(segment as LocalePath)) {
+    if (localesMap.has(segment as LocaleRoute)) {
       return segment;
     }
   }
@@ -30,25 +30,25 @@ export function neutralizePath(path: string): string {
 
   return normalizedPath;
 }
-export function getLocaleObjectByLocalePath(path: string): ExtendedLocale {
-  assertLocalePath(path);
+export function getLocaleObjectByLocaleRoute(path: string): ExtendedLocale {
+  assertLocaleRoute(path);
 
   return localesMap.get(path)!;
 }
-export function localizePath(locale: LocalePath, path: string): string {
-  assertLocalePath(locale);
+export function localizePath(locale: LocaleRoute, path: string): string {
+  assertLocaleRoute(locale);
   const localizedPath = String(locale) + ensureLeadingSlash(path);
 
   return normalizePath(localizedPath);
 }
 
-export function getLocalePathFromPath(path: string): string {
+export function getLocaleRouteFromPath(path: string): string {
   const normalizedPath = normalizePath(path);
   return findLocaleSegment(normalizedPath);
 }
 
-export function getLocalePathFromPathStrict(path: string): LocalePath {
+export function getLocaleRouteFromPathStrict(path: string): LocaleRoute {
   const locale = findLocaleSegment(normalizePath(path));
-  assertLocalePath(locale);
+  assertLocaleRoute(locale);
   return locale;
 }
