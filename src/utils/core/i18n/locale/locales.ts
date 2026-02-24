@@ -3,7 +3,10 @@ export const locales = [
   { path: "de", codes: ["de", "de-DE"], og: "de_DE" }
 ] as const;
 export const defaultLocale: LocaleCode = "en";
+export const localesMap = new Map<LocalePath, ExtendedLocale>(
+  locales.map((locale) => [locale.path, locale])
+);
 
-type ExtendedLocale = (typeof locales)[number];
+export type ExtendedLocale = (typeof locales)[number];
 type LocaleCode = ExtendedLocale["codes"][number];
 export type LocalePath = ExtendedLocale["path"];

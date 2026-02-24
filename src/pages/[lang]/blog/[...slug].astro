@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BlogPostLayout from "../../../layouts/BlogPostLayout.astro";
-import { localeByPath } from "@/utils/core/i18n/locale/path.ts";
+import { assertLocalePath } from "@/utils/core/i18n/locale/guards.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   return posts
     .map((post) => {
       const [lang, ...slugParts] = post.id.split("/");
-      if (!localeByPath[lang]) return null;
+      assertLocalePath(lang);
       return {
         params: { lang, slug: slugParts.join("/") || undefined },
         props: post

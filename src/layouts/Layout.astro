@@ -3,7 +3,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import "../styles/base/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
-import { neutralizePath, getLangFromId } from "@/utils/core/i18n/locale/path.ts";
+import { neutralizePath, getLangFromUrlPath } from "@/utils/core/i18n/locale/path.ts";
 import { locales, defaultLocale } from "@/utils/core/i18n/locale/locales.ts";
 import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { getAlternateRelativeLocaleUrlList } from "@/utils/adapter/astro/path.ts";
@@ -30,9 +30,9 @@ const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), ba
 
 const altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
 const alternates = altLocaleUrls.map((url) => ({
-  hreflang: getLangFromId(url),
+  hreflang: getLangFromUrlPath(url),
   href: new URL(url, base),
-  ogLocale: locales.find((loc) => loc.path == getLangFromId(url))?.og
+  ogLocale: locales.find((loc) => loc.path == getLangFromUrlPath(url))?.og
 }));
 
 const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";
