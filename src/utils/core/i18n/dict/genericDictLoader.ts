@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { type LocaleRoute } from "@/utils/core/i18n/locale/locales.ts";
+import { type LocaleRoute } from "@/utils/core/i18n/locale/definition.ts";
 import { getLocaleRouteFromPathStrict } from "@/utils/core/i18n/locale/path.ts";
 
 export type DictGlob<Type> = Record<string, Type>;

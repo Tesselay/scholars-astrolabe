@@ -7,7 +7,7 @@ import {
   trimSlashes
 } from "@/utils/core/string/normalization.ts";
 import { localizePath, neutralizePath } from "@/utils/core/i18n/locale/path.ts";
-import { locales } from "@/utils/core/i18n/locale/locales.ts";
+import { locales } from "@/utils/core/i18n/locale/definition.ts";
 import { pathsForAllLocales } from "@/utils/compositional/content/filter.ts";
 
 describe("path common", () => {

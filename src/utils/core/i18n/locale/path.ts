@@ -1,8 +1,4 @@
-import {
-  type ExtendedLocale,
-  type LocaleRoute,
-  localesMap
-} from "@/utils/core/i18n/locale/locales.ts";
+import { type LocaleRoute, localesMap } from "@/utils/core/i18n/locale/definition.ts";
 import { ensureLeadingSlash } from "@/utils/core/string/normalization.ts";
 import { normalizePath } from "@/utils/core/path/normalization.ts";
 import { assertLocaleRoute } from "@/utils/core/i18n/locale/guards.ts";
@@ -30,11 +26,7 @@ export function neutralizePath(path: string): string {
 
   return normalizedPath;
 }
-export function getLocaleObjectByLocaleRoute(path: string): ExtendedLocale {
-  assertLocaleRoute(path);
 
-  return localesMap.get(path)!;
-}
 export function localizePath(locale: LocaleRoute, path: string): string {
   assertLocaleRoute(locale);
   const localizedPath = String(locale) + ensureLeadingSlash(path);

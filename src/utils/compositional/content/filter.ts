@@ -1,4 +1,4 @@
-import { type LocaleRoute, locales } from "@/utils/core/i18n/locale/locales.ts";
+import { type LocaleRoute, locales } from "@/utils/core/i18n/locale/definition.ts";
 
 export function filterEntriesByLang<Type extends { id: string }>(
   entries: readonly Type[],
