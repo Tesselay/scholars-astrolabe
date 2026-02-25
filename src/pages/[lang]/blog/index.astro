@@ -4,7 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
 import { neutralizePath } from "@/utils/core/i18n/locale/path.ts";
-import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { byLang, pathsForAllLocales } from "@/utils/compositional/content/filter";
 
 export function getStaticPaths() {
@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.currentLocale;
-const meta = await metaLoader.getAsync(lang);
+const meta = await MetaLoader.getAsync(lang);
 const title = meta["blog:index"].title;
 const description = meta["blog:index"].description;
 

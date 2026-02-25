@@ -3,13 +3,13 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import "../styles/base/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
-import { neutralizePath, getLangFromUrlPath } from "@/utils/core/i18n/locale/path.ts";
+import { getLocaleRouteFromPathStrict, neutralizePath } from "@/utils/core/i18n/locale/path.ts";
 import { locales, defaultLocale } from "@/utils/core/i18n/locale/definition.ts";
-import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { getAlternateRelativeLocaleUrlList } from "@/utils/adapter/astro/path.ts";
 
 const lang = Astro.currentLocale;
-const meta = await metaLoader.getAsync(lang);
+const meta = await MetaLoader.getAsync(lang);
 const siteName = meta.home.title;
 
 const {
@@ -30,9 +30,9 @@ const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), ba
 
 const altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
 const alternates = altLocaleUrls.map((url) => ({
-  hreflang: getLangFromUrlPath(url),
+  hreflang: getLocaleRouteFromPathStrict(url),
   href: new URL(url, base),
-  ogLocale: locales.find((loc) => loc.path == getLangFromUrlPath(url))?.og
+  ogLocale: locales.find((loc) => loc.path == getLocaleRouteFromPathStrict(url))?.og
 }));
 
 const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";

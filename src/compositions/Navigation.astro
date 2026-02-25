@@ -2,7 +2,7 @@
 import NavigationLink from "@/components/NavigationLink.astro";
 import type { HTMLAttributes } from "astro/types";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { uiLoader } from "@/utils/compositional/i18n/uiLoader.ts";
+import { UiLoader } from "@/utils/compositional/i18n/uiLoader.ts";
 
 type NavigationStyle = "default" | "embellished";
 
@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<"ul"> {
 const { mode = "default", ...attributes } = Astro.props;
 
 const lang = Astro.currentLocale;
-const ui = await uiLoader.getAsync(lang);
+const ui = await UiLoader.getAsync(lang);
 
 const homeUrl = getRelativeLocaleUrl(lang, "");
 const folioUrl = getRelativeLocaleUrl(lang, "folio");

@@ -1,9 +1,8 @@
 import { getRelativeLocaleUrlList } from "astro:i18n";
-import { getLangFromUrlPath } from "@/utils/core/i18n/locale/path.ts";
-import type { LocaleRoute } from "@/utils/core/i18n/locale/definition.ts";
+import { getLocaleRouteFromPathStrict } from "@/utils/core/i18n/locale/path.ts";
 
-export function getAlternateRelativeLocaleUrlList(locale: string, pathname: string): LocaleRoute[] {
+export function getAlternateRelativeLocaleUrlList(locale: string, pathname: string): string[] {
   return getRelativeLocaleUrlList(pathname).filter(
-    (loc) => getLangFromUrlPath(loc) !== locale
-  ) as LocaleRoute[];
+    (loc) => getLocaleRouteFromPathStrict(loc) !== locale
+  );
 }

@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { pathsForAllLocales } from "@/utils/compositional/content/filter.ts";
 
 export function getStaticPaths() {
@@ -8,7 +8,7 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.currentLocale;
-const meta = await metaLoader.getAsync(lang);
+const meta = await MetaLoader.getAsync(lang);
 const title = meta.home.title;
 const description = meta.home.description;
 ---

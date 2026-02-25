@@ -13,18 +13,18 @@ describe("UI loader validation", () => {
   });
 
   it("loads and validates, with default-locale strict", async () => {
-    const uiLoader = new GenericDictLoader("ui", UiSchema, () =>
+    const UiLoader = new GenericDictLoader("ui", UiSchema, () =>
       fakeGlob(mockUiEN, mockUiDE, "ui")
     );
-    const enUi = await uiLoader.getAsync("en");
+    const enUi = await UiLoader.getAsync("en");
     expect(enUi.nav.blog).toBe("Blog EN");
   });
 
   it("rejects invalid default-locale schema (wrong types or extra keys)", async () => {
-    const uiLoader = new GenericDictLoader("ui", UiSchema, () =>
+    const UiLoader = new GenericDictLoader("ui", UiSchema, () =>
       fakeGlob(mockUiInvalid, mockUiEmpty, "ui")
     );
 
-    await expect(uiLoader.init()).rejects.toThrow("Invalid dictionary for en");
+    await expect(UiLoader.init()).rejects.toThrow("Invalid dictionary for en");
   });
 });

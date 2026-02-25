@@ -1,6 +1,6 @@
 ---
 import Layout from "./Layout.astro";
-import { metaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 
 const { frontmatter } = Astro.props;
 const lang = Astro.currentLocale;
@@ -10,7 +10,7 @@ const modified = frontmatter["date-modified"] as Date;
 const formattedDateCreated = created.toLocaleDateString(lang);
 const formattedDateModified = modified.toLocaleDateString(lang);
 
-const meta = await metaLoader.getAsync(lang);
+const meta = await MetaLoader.getAsync(lang);
 const description = `A blog entry on ${meta["blog:index"].description}`;
 ---
 

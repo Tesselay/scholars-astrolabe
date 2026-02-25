@@ -63,12 +63,7 @@ All commands are run from the root of the project, from a terminal:
 
 #### Rework Utils
 
-- [ ] Exports at end of file
-- [ ] Renaming of path -> LocaleRoute (for Astro consistency), FsPath, UrlPath, path (structural
-      only)
-- [ ] Define URL structure
-- [ ] Rename lang to locale
-- [ ] Move all astro helper to adapter
+- [ ] Encode URL structure (e.g. for neutralizePath)
 
 #### Rework Testing
 
