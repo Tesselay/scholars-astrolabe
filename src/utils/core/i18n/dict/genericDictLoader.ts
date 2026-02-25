@@ -2,8 +2,8 @@ import { z } from "zod";
 import { type LocaleRoute } from "@/utils/core/i18n/locale/definition.ts";
 import { getLocaleRouteFromPathStrict } from "@/utils/core/i18n/locale/path.ts";
 
-export type DictGlob<Type> = Record<string, Type>;
-export type DictModulesProvider<Type> = (dictName?: string) => DictGlob<Type>;
+type DictGlob<Type> = Record<string, Type>;
+type DictModulesProvider<Type> = (dictName?: string) => DictGlob<Type>;
 type Dict<Type> = Record<LocaleRoute, Type>;
 
 export class GenericDictLoader<Type extends z.ZodType> {

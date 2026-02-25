@@ -63,7 +63,8 @@ All commands are run from the root of the project, from a terminal:
 
 #### Rework Utils
 
-- [ ] Encode URL structure (e.g. for neutralizePath)
+- [ ] Encode URL structure (e.g. for neutralizeUrlPath, localizeUrlPath)
+- [ ] Set `trailingSlash` config and use in utils
 
 #### Rework Testing
 
@@ -84,7 +85,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
 - [ ] Apply hero placeholder
-- [ ] Set `trailingSlash` config and use in utils
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Let lint ignore astro config
 - [ ] Update import aliases
@@ -114,6 +114,8 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
 - [ ] Markdown frontmatter schema?
 - [ ] Use URL for paths? (can work with file paths too)
+- [ ] Exports at end of file?
+- [ ] Have prettier add line before return in functions
 
 ### Considerations
 

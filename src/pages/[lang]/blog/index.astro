@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "../../../layouts/Layout.astro";
 import BlogPost from "../../../components/BlogPost.astro";
-import { neutralizePath } from "@/utils/core/i18n/locale/path.ts";
 import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { byLang, pathsForAllLocales } from "@/utils/compositional/content/filter";
+import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
 
 export function getStaticPaths() {
   return pathsForAllLocales();
@@ -25,7 +25,7 @@ const allPosts = await getCollection("blog", byLang(lang));
     {
       allPosts.map((post) => (
         <BlogPost
-          url={getRelativeLocaleUrl(lang, `blog${neutralizePath(post.id)}`)}
+          url={getRelativeLocaleUrl(lang, `blog${neutralizeUrlPath(post.id)}`)}
           title={post.data.title}
         />
       ))

@@ -3,10 +3,11 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import "../styles/base/global.css";
 import Header from "../compositions/Header.astro";
 import Footer from "../compositions/Footer.astro";
-import { getLocaleRouteFromPathStrict, neutralizePath } from "@/utils/core/i18n/locale/path.ts";
+import { getLocaleRouteFromPathStrict } from "@/utils/core/i18n/locale/path.ts";
 import { locales, defaultLocale } from "@/utils/core/i18n/locale/definition.ts";
 import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { getAlternateRelativeLocaleUrlList } from "@/utils/adapter/astro/path.ts";
+import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
 
 const lang = Astro.currentLocale;
 const meta = await MetaLoader.getAsync(lang);
@@ -23,7 +24,7 @@ const fullTitle = pageTitle.includes(siteName) ? pageTitle : `${siteName} - ${pa
 
 const ogLocale = locales.find((locale) => locale.path == lang)?.og;
 const base = Astro.site ?? Astro.url.origin;
-const neutralPath = neutralizePath(Astro.url.pathname);
+const neutralPath = neutralizeUrlPath(Astro.url.pathname);
 
 const canonicalUrl = new URL(Astro.url.pathname, base);
 const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), base);

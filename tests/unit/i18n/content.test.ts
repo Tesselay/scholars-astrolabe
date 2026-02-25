@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import type { CollectionEntry } from "astro:content";
 import { byLang, filterEntriesByLang } from "@/utils/compositional/content/filter";
 
 describe("content filters: byLang and filterEntriesByLang", () => {
