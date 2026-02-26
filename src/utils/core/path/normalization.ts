@@ -4,10 +4,18 @@ import {
   ensureTrailingSlash
 } from "@/utils/core/string/normalization.ts";
 
-export function normalizePath(path: string): string {
+export type TrailingSlashPolicy = "always" | "never" | "preserve";
+
+export function normalizePath(path: string, trailingSlash: TrailingSlashPolicy): string {
   let normalizedPath = ensureLeadingSlash(path);
-  normalizedPath = ensureTrailingSlash(normalizedPath);
   normalizedPath = collapseSlashes(normalizedPath);
+
+  if (trailingSlash === "always") {
+    normalizedPath = ensureTrailingSlash(normalizedPath);
+  } else if (trailingSlash === "never" && normalizedPath.endsWith("/")) {
+    normalizedPath = normalizedPath.slice(0, -1);
+  }
+
   normalizedPath = normalizedPath.normalize();
 
   return normalizedPath;

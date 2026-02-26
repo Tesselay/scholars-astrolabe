@@ -1,8 +1,8 @@
 import type { LocaleRoute } from "@/utils/core/i18n/locale/definition.ts";
 import { assertLocaleRoute } from "@/utils/core/i18n/locale/guards.ts";
-import { normalizePath } from "@/utils/core/path/normalization.ts";
 import { findLocaleSegment } from "@/utils/core/i18n/locale/path.ts";
 import { urlPathLocaleIndex } from "@/utils/core/routing/url.ts";
+import { normalizeAstroPath } from "@/utils/adapter/astro/path.ts";
 
 export function localizeUrlPath(locale: LocaleRoute, urlPath: string): string {
   const hasLocale = findLocaleSegment(urlPath);
@@ -16,7 +16,7 @@ export function localizeUrlPath(locale: LocaleRoute, urlPath: string): string {
   const segments = urlPath.split("/").filter(Boolean);
   segments.splice(urlPathLocaleIndex, 0, locale);
 
-  return normalizePath(segments.join("/"));
+  return normalizeAstroPath(segments.join("/"));
 }
 
 export function neutralizeUrlPath(urlPath: string): string {
@@ -29,7 +29,7 @@ export function neutralizeUrlPath(urlPath: string): string {
     }
     const neutralizedPath = segments.join("/");
 
-    return normalizePath(neutralizedPath);
+    return normalizeAstroPath(neutralizedPath);
   }
 
   return urlPath;

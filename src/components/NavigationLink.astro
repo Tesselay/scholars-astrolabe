@@ -2,8 +2,8 @@
 import type { ComponentProps } from "astro/types";
 import ButtonAnchor from "@/components/Button/ButtonAnchor.astro";
 import { pathHasLocale, getRelativeLocaleUrl } from "astro:i18n";
-import { normalizePath } from "@/utils/core/path/normalization.ts";
 import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
+import { normalizeAstroPath } from "@/utils/adapter/astro/path.ts";
 
 interface Props extends ComponentProps<typeof ButtonAnchor> {
   localized?: boolean;
@@ -25,7 +25,7 @@ if (isInternal) {
       ? rawPath
       : getRelativeLocaleUrl(Astro.currentLocale, rawPath);
 
-  const href = normalizePath(finalPath + linkUrl.search + linkUrl.hash);
+  const href = normalizeAstroPath(finalPath + linkUrl.search + linkUrl.hash);
 
   // ---- aria-current ----
   const currentPath = neutralizeUrlPath(Astro.url.pathname);
