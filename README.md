@@ -61,10 +61,8 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
-#### Rework Utils
-
-- [ ] Encode URL structure (e.g. for neutralizeUrlPath, localizeUrlPath)
-- [ ] Set `trailingSlash` config and use in utils
+- [ ] Update import aliases
+- [ ] Let lint ignore astro config
 
 #### Rework Testing
 
@@ -78,7 +76,6 @@ All commands are run from the root of the project, from a terminal:
 ### Issues
 
 - [ ] Styling is not applied correctly in preview/build
-- [ ] Layout altLocale helper not checking file existence
 
 ### Code
 
@@ -86,8 +83,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
 - [ ] Apply hero placeholder
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
-- [ ] Let lint ignore astro config
-- [ ] Update import aliases
 - [ ] Add read time
 
 ### Components

@@ -8,6 +8,8 @@ import { locales, defaultLocale } from "@/utils/core/i18n/locale/definition.ts";
 import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { getAlternateRelativeLocaleUrlList } from "@/utils/adapter/astro/path.ts";
 import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
+import { getEntry } from "astro:content";
+import { convertBlogPathToBlogId } from "@/utils/compositional/content/path.ts";
 
 const lang = Astro.currentLocale;
 const meta = await MetaLoader.getAsync(lang);
@@ -29,7 +31,19 @@ const neutralPath = neutralizeUrlPath(Astro.url.pathname);
 const canonicalUrl = new URL(Astro.url.pathname, base);
 const xDefaultUrl = new URL(getRelativeLocaleUrl(defaultLocale, neutralPath), base);
 
-const altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
+let altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
+
+// Temporary solution until I develop content collections further
+const exists = async (pathname: string) => {
+  const blogId = convertBlogPathToBlogId(pathname);
+  return (await getEntry("blog", blogId)) !== undefined;
+};
+
+if (Astro.params.slug) {
+  const entries = await Promise.all(altLocaleUrls.map(exists));
+  altLocaleUrls = altLocaleUrls.filter((_, index) => entries[index]);
+}
+
 const alternates = altLocaleUrls.map((url) => ({
   hreflang: getLocaleRouteFromPathStrict(url),
   href: new URL(url, base),
