@@ -1,8 +1,6 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-
-import type { ButtonBase } from "./button.d.ts";
-import { getButtonClasses } from "./styles";
+import { type HTMLAttributes } from "astro/types";
+import { type ButtonBase, getButtonClasses } from "./button.ts";
 
 interface Props extends ButtonBase, Omit<HTMLAttributes<"button">, "color"> {}
 

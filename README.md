@@ -63,6 +63,7 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Update import aliases
 - [ ] Let lint ignore astro config
+- [ ] Lint for type import `import { type ... } from`
 
 #### Rework Testing
 
