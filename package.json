@@ -33,6 +33,7 @@
     "test:a11y": "pa11y-ci",
     "e2e": "playwright test"
   },
+  "packageManager": "yarn@4.12.0",
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/rss": "^4.0.12",
@@ -87,7 +88,6 @@
     "wait-on": "^8.0.4",
     "zod": "^3.23.8"
   },
-  "packageManager": "yarn@4.12.0",
   "dependencies": {
     "@phosphor-icons/core": "^2.0.8"
   }

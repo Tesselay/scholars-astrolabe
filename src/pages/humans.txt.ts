@@ -6,8 +6,7 @@ export const GET: APIRoute = () => {
       "/* TEAM */",
       "Developer: Dominique Lahl",
       "GitHub: Tesselay",
-      "From: Bremen, Germany",
-      "",
+      "From: Germany",
       "/* SITE */",
       `Last update: ${new Date().toISOString().slice(0, 10)}`
       //'Standards: HTML5, CSS3, ES2025',
