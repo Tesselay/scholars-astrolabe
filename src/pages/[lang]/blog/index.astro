@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import Layout from "../../../layouts/Layout.astro";
-import BlogPost from "../../../components/BlogPost.astro";
+import Layout from "@/ui/layouts/Layout.astro";
+import BlogPost from "../../../ui/components/BlogPost.js";
 import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
 import { byLang, pathsForAllLocales } from "@/utils/compositional/content/filter";
 import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";

@@ -3,10 +3,10 @@ import type { HTMLAttributes } from "astro/types";
 import SunIcon from "@phosphor-icons/core/assets/bold/sun-bold.svg";
 import TranslateIcon from "@phosphor-icons/core/assets/bold/translate-bold.svg";
 
-import Icon from "@/components/Icon.astro";
-import Button from "../components/Button/Button.astro";
-import Navigation from "@/compositions/Navigation.astro";
-import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
+import Icon from "@/ui/components/Icon.js";
+import Button from "@/ui/components/Button/Button.js";
+import Navigation from "@/ui/compositions/Navigation.js";
+import { MetaLoader } from "@utils/compositional/i18n/metaLoader.ts";
 
 interface Props extends HTMLAttributes<"header"> {}
 
@@ -19,7 +19,7 @@ const title = meta.home.title;
 ---
 
 <header class:list={[classList, attributes.class]} {...attributes}>
-  <a class="title" href="/">{title}</a>
+  <a class="title" href="/public">{title}</a>
   <nav aria-label="Primary">
     <Navigation mode="default" />
   </nav>
