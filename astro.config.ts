@@ -2,7 +2,6 @@ import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import compress from "astro-compress";
-
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkDirective from "remark-directive";
@@ -13,9 +12,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
 import rehypeExternalLinks from "rehype-external-links";
-
 import { loadEnv } from "vite";
-
 import callouts from "./src/markdown/callout/remark-callouts.js";
 import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
 import { astroLocales } from "./src/utils/adapter/astro/locales.ts";

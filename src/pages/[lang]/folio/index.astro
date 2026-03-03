@@ -1,7 +1,7 @@
 ---
-import Layout from "@/ui/layouts/Layout.astro";
-import { MetaLoader } from "@/utils/compositional/i18n/metaLoader.ts";
-import { pathsForAllLocales } from "@/utils/compositional/content/filter.ts";
+import Layout from "@ui/Layout.astro";
+import { MetaLoader } from "@utils/compositional/i18n/metaLoader.ts";
+import { pathsForAllLocales } from "@utils/compositional/content/filter.ts";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

@@ -1,5 +1,5 @@
-import { findLocaleSegment } from "@/utils/core/i18n/locale/path.ts";
-import { normalizePath } from "@/utils/core/path/normalization.ts";
+import { findLocaleSegment } from "@utils/core/i18n/locale/path.ts";
+import { normalizePath } from "@utils/core/path/normalization.ts";
 
 export function neutralizeFsPath(path: string): string {
   const locale = findLocaleSegment(path);

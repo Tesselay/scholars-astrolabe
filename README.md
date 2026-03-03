@@ -61,9 +61,11 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
-- [ ] Update import aliases
+- [x] Update import aliases
+  - [ ] alias inside styles and button (internal)?
 - [ ] Let lint ignore astro config
-- [ ] Lint for type import `import { type ... } from`
+- [ ] Lint/Prettier for type import `import { type ... } from`
+- [ ] Lint/Prettier for import order
 
 #### Rework Testing
 

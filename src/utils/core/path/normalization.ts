@@ -2,7 +2,7 @@ import {
   collapseSlashes,
   ensureLeadingSlash,
   ensureTrailingSlash
-} from "@/utils/core/string/normalization.ts";
+} from "@utils/core/string/normalization.ts";
 
 export type TrailingSlashPolicy = "always" | "never" | "preserve";
 

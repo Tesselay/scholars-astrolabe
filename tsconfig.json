@@ -5,7 +5,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@utils/*": ["utils/*"],
+      "@ui/*": ["ui/components/*", "ui/compositions/*", "ui/layouts/*"],
+      "@content/*": ["content/*"],
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"]
     },
     "types": ["astro/client", "vite/client", "vitest"]
   }

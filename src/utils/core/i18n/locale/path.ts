@@ -1,5 +1,5 @@
-import { type LocaleRoute, localesMap } from "@/utils/core/i18n/locale/definition.ts";
-import { assertLocaleRoute } from "@/utils/core/i18n/locale/guards.ts";
+import { type LocaleRoute, localesMap } from "@utils/core/i18n/locale/definition.ts";
+import { assertLocaleRoute } from "@utils/core/i18n/locale/guards.ts";
 
 export function findLocaleSegment(path: string): string {
   const segments = path.split("/");

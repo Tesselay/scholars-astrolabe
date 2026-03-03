@@ -1,14 +1,14 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getEntry } from "astro:content";
 import "@styles/base/global.css";
-import Header from "@/ui/compositions/Header.js";
-import Footer from "@/ui/compositions/Footer.js";
+import Header from "@ui/Header.astro";
+import Footer from "@ui/Footer.astro";
 import { getLocaleRouteFromPathStrict } from "@utils/core/i18n/locale/path.ts";
 import { locales, defaultLocale } from "@utils/core/i18n/locale/definition.ts";
 import { MetaLoader } from "@utils/compositional/i18n/metaLoader.ts";
-import { getAlternateRelativeLocaleUrlList } from "@adapter/astro/path.ts";
+import { getAlternateRelativeLocaleUrlList } from "@utils/adapter/astro/path.ts";
 import { neutralizeUrlPath } from "@utils/compositional/routing/url.ts";
-import { getEntry } from "astro:content";
 import { convertBlogPathToBlogId } from "@utils/compositional/content/path.ts";
 
 const lang = Astro.currentLocale;
