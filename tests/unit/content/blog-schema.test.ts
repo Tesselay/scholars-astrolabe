@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { BlogPostSchema } from "@/content/schema";
+import { BlogPostSchema } from "@/content/schema.ts";
 
 describe("BlogPostSchema", () => {
   it("accepts valid entries", () => {

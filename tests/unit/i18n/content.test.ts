@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { byLang, filterEntriesByLang } from "@/utils/compositional/content/filter";
+import { byLang, filterEntriesByLang } from "@/utils/compositional/content/filter.ts";
 
 describe("content filters: byLang and filterEntriesByLang", () => {
   const entries = [

@@ -49,7 +49,8 @@ export default defineConfig([
       }
     },
     rules: {
-      "astro/no-unused-define-vars-in-style": "off"
+      "astro/no-unused-define-vars-in-style": "off",
+      "@typescript-eslint/no-import-type-side-effects": "error"
     }
   },
 
