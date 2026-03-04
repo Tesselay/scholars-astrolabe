@@ -12,7 +12,7 @@ export async function getStaticPaths() {
       assertLocaleRoute(lang);
       return {
         params: { lang, slug: slugParts.join("/") || undefined },
-        props: post
+        props: post,
       };
     })
     .filter(Boolean);

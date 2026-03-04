@@ -4,34 +4,28 @@ import json from "@eslint/json";
 import css from "@eslint/css";
 import astro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
-import eslintConfigPrettier from "eslint-config-prettier";
-
+import stylistic from "@stylistic/eslint-plugin";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  // JavaScript
+  // Base Presets
   js.configs.recommended,
+  tseslint.configs.recommended,
+  stylistic.configs.recommended,
 
-  // TypeScript
-  ...tseslint.configs.recommended,
-
-  // Astro (+ jsx-a11y)
-  ...astro.configs.recommended,
-  ...astro.configs["jsx-a11y-recommended"],
-
-  // JSON
+  // Language Presets
   json.configs.recommended,
-
-  // CSS
   css.configs.recommended,
+  astro.configs.recommended,
+  astro.configs["jsx-a11y-recommended"],
 
-  // Globals
   {
+    name: "Globals",
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node
-      }
+        ...globals.node,
+      },
     },
     settings: {
       components: {
@@ -39,31 +33,48 @@ export default defineConfig([
         NavigationLink: "a",
         Header: "header",
         Button: "button",
-        ButtonAnchor: "a"
+        ButtonAnchor: "a",
       },
       attributes: {
         href: "href",
         variant: "class",
         size: "class",
-        sizing: "class"
-      }
+        sizing: "class",
+      },
     },
     rules: {
-      "astro/no-unused-define-vars-in-style": "off",
-      "@typescript-eslint/no-import-type-side-effects": "error"
-    }
+      "@typescript-eslint/no-import-type-side-effects": "error",
+    },
   },
 
-  // Astro Override
   {
+    name: "Stylistic Overrides",
+    rules: {
+      "@stylistic/indent": ["error", 2],
+      "@stylistic/quotes": ["error", "double"],
+      "@stylistic/semi": ["error", "always"],
+      "@stylistic/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/brace-style": ["error", "stroustrup"],
+      "@stylistic/arrow-parens": ["error", "always"],
+      "@stylistic/arrow-spacing": ["error", { before: true, after: true }],
+      "@stylistic/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 1 }],
+      "@stylistic/no-trailing-spaces": "error",
+      "@stylistic/member-delimiter-style": ["error", { multiline: { delimiter: "semi" }, singleline: { delimiter: "semi" } }],
+    },
+  },
+
+  {
+    name: "Astro Overrides",
     files: ["**/*.astro"],
     rules: {
-      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }]
-    }
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        { allowInterfaces: "always" },
+      ],
+      "astro/no-unused-define-vars-in-style": "off",
+      "@stylistic/jsx-one-expression-per-line": "off",
+    },
   },
-
-  // Prettier
-  eslintConfigPrettier,
 
   // Ignores
   {
@@ -83,7 +94,7 @@ export default defineConfig([
       "*.log",
       "**/*.d.ts",
       ".github/",
-      "tests/**"
-    ]
-  }
+      "tests/**",
+    ],
+  },
 ]);

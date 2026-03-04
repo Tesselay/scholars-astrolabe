@@ -15,7 +15,7 @@ const TYPE_ALIASES = {
   tip: "tip",
   todo: "todo",
   warning: "warning",
-  caution: "warning"
+  caution: "warning",
 };
 
 function capitalize(s) {
@@ -53,13 +53,13 @@ export default function remarkCallouts() {
       node.data ||= {};
       node.data.hName = "aside";
       node.data.hProperties = {
-        className: ["callout", type],
+        "className": ["callout", type],
         "data-callout": type,
         "data-title": title,
         ...(collapse && {
           "data-collapsible": "true",
-          "data-collapsed": collapse === "-" ? "true" : "false"
-        })
+          "data-collapsed": collapse === "-" ? "true" : "false",
+        }),
       };
     });
   };

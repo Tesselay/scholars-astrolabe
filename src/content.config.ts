@@ -4,7 +4,7 @@ import { BlogPostSchema } from "@content/schema.ts";
 
 const postsCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog/" }),
-  schema: BlogPostSchema
+  schema: BlogPostSchema,
 });
 
 export const collections = { blog: postsCollection };

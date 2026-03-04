@@ -4,8 +4,8 @@ import { type ButtonBase, getButtonClasses } from "./button.ts";
 
 interface Props
   extends ButtonBase,
-    Omit<HTMLAttributes<"a">, "color">,
-    Pick<HTMLAttributes<"button">, "disabled"> {}
+  Omit<HTMLAttributes<"a">, "color">,
+  Pick<HTMLAttributes<"button">, "disabled"> {}
 
 const { color, variant = "primary", size = "s", ...attributes } = Astro.props;
 

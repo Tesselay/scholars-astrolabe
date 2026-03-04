@@ -28,8 +28,8 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: true,
-      fallbackType: "redirect"
-    }
+      fallbackType: "redirect",
+    },
   },
   env: {
     schema: {
@@ -39,17 +39,17 @@ export default defineConfig({
       SITE_URL: envField.string({
         context: "client",
         access: "public",
-        default: "http://localhost:4321"
+        default: "http://localhost:4321",
       }),
-      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: false })
-    }
+      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: false }),
+    },
   },
   integrations: [
     expressiveCode(),
     sitemap({
-      filter: (page) => !page.includes("/test")
+      filter: (page) => !page.includes("/test"),
     }),
-    compress()
+    compress(),
   ],
   markdown: {
     remarkPlugins: [
@@ -61,10 +61,10 @@ export default defineConfig({
       [
         wikiLinkPlugin,
         {
-          aliasDivider: "|"
-        }
+          aliasDivider: "|",
+        },
       ],
-      callouts
+      callouts,
     ],
     rehypePlugins: [
       rehypeSlug,
@@ -72,11 +72,11 @@ export default defineConfig({
         rehypeAutolinkHeadings,
         {
           behavior: "wrap",
-          properties: { class: "heading-link" }
-        }
+          properties: { class: "heading-link" },
+        },
       ],
       rehypeKatex,
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
-    ]
-  }
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+    ],
+  },
 });

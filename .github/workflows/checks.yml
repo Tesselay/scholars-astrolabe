@@ -46,10 +46,7 @@ jobs:
         run: yarn install --immutable --inline-builds
 
       # --- Lint / Format  ---
-      - name: Prettier (format check)
-        run: yarn exec prettier . --check
-
-      - name: ESLint (lint check)
+      - name: ESLint (lint & format)
         if: ${{ hashFiles('eslint.config.*') != '' }}
         run: yarn eslint . --max-warnings=0
 

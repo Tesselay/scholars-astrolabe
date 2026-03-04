@@ -15,14 +15,14 @@ export default function diagnosticGraph() {
       console.log("[cfg.ssr.noExternal]", cfg.ssr?.noExternal);
       console.log(
         "[cfg.optimizeDeps]",
-        pick(cfg.optimizeDeps ?? {}, ["include", "exclude", "esbuildOptions"])
+        pick(cfg.optimizeDeps ?? {}, ["include", "exclude", "esbuildOptions"]),
       );
       console.log("[cfg.define keys]", Object.keys(cfg.define ?? {}));
       console.log("[cfg.envPrefix]", cfg.envPrefix);
 
       console.log(
         "[cfg.plugins]",
-        cfg.plugins.map((p) => p.name)
+        cfg.plugins.map((p) => p.name),
       );
     },
 
@@ -30,19 +30,19 @@ export default function diagnosticGraph() {
     async resolveId(source, importer, options) {
       const r = await this.resolve(source, importer, {
         skipSelf: true,
-        ...options
+        ...options,
       });
       if (r) {
         seenResolutions.set(r.id, {
           importer,
-          plugin: this?.meta?.watchMode ? "dev" : "build"
+          plugin: this?.meta?.watchMode ? "dev" : "build",
         });
         if (/^(astro:|virtual:|\/@fs\/)/.test(source) || source.startsWith("@/")) {
           console.log("[resolveId]", {
             source,
             importer,
             resolved: r.id,
-            ssr: !!options?.ssr
+            ssr: !!options?.ssr,
           });
         }
         return r;
@@ -105,6 +105,6 @@ export default function diagnosticGraph() {
           console.log("  modules:", Object.keys(chunk.modules).slice(0, 5));
         }
       }
-    }
+    },
   };
 }

@@ -63,11 +63,10 @@ All commands are run from the root of the project, from a terminal:
 
 #### Linting & Formatting
 
-- [ ] Lint/Prettier for import order
-- [ ] Use Prettier's `--check` to prevent duplicated formatting?
-      https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-prettier
+- [ ] Lint rule for astro jsx indentation (e.g. in style tag)
+- [ ] Lint for import order
 - [ ] Exports at end of file?
-- [ ] Have prettier add line before return in functions
+- [ ] Lint line before return in functions
 - [ ] Set ESLint and TypeScript to strict
 - [ ] What other rules should I add?
 
@@ -119,6 +118,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
 - [ ] Markdown frontmatter schema?
 - [ ] Use URL for paths? (can work with file paths too)
+- [ ] Completely customized ESLint/TypeScript setup -> separate repo
 
 ### Considerations
 

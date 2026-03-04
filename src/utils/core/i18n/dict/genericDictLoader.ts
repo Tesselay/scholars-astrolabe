@@ -29,7 +29,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
     if (!parsed.success) {
       console.error(
         `[i18n:${this.dictName}] Invalid dictionary for ${locale}:`,
-        parsed.error.format()
+        parsed.error.format(),
       );
       throw new Error(`[i18n:${this.dictName}]Invalid dictionary for ${locale}`);
     }
@@ -50,7 +50,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
   get(locale: LocaleRoute): z.infer<Type> {
     if (!this.DICT) {
       throw new Error(
-        `[i18n:${this.dictName}] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup.`
+        `[i18n:${this.dictName}] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup.`,
       );
     }
     const dict = this.DICT[locale];

@@ -19,7 +19,7 @@ const {
   pageTitle = siteName,
   description = `A page on ${siteName}`,
   ogType = "website",
-  ogImage
+  ogImage,
 } = Astro.props;
 
 const fullTitle = pageTitle.includes(siteName) ? pageTitle : `${siteName} - ${pageTitle}`;
@@ -47,7 +47,7 @@ if (Astro.params.slug) {
 const alternates = altLocaleUrls.map((url) => ({
   hreflang: getLocaleRouteFromPathStrict(url),
   href: new URL(url, base),
-  ogLocale: locales.find((loc) => loc.path == getLocaleRouteFromPathStrict(url))?.og
+  ogLocale: locales.find((loc) => loc.path == getLocaleRouteFromPathStrict(url))?.og,
 }));
 
 const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollow";

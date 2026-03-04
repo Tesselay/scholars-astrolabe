@@ -20,8 +20,8 @@ const isInternal = linkUrl.origin === baseUrl.origin;
 if (isInternal) {
   const rawPath = linkUrl.pathname;
 
-  const finalPath =
-    localized || pathHasLocale(rawPath)
+  const finalPath
+    = localized || pathHasLocale(rawPath)
       ? rawPath
       : getRelativeLocaleUrl(Astro.currentLocale, rawPath);
 
@@ -32,8 +32,8 @@ if (isInternal) {
 
   const linkPath = neutralizeUrlPath(finalPath);
 
-  const isCurrent =
-    currentPath === linkPath || (linkPath !== "/" && currentPath.startsWith(linkPath));
+  const isCurrent
+    = currentPath === linkPath || (linkPath !== "/" && currentPath.startsWith(linkPath));
 
   attributes["aria-current"] = isCurrent ? "page" : undefined;
   attributes["href"] = href;

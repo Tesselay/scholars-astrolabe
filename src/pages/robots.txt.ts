@@ -12,7 +12,7 @@ export const GET: APIRoute = ({ site }) => {
   return new Response(getRobotsTxt(sitemapURL), {
     headers: {
       "content-type": "text/plain; charset=utf-8",
-      "cache-control": "public, max-age=3600"
-    }
+      "cache-control": "public, max-age=3600",
+    },
   });
 };

@@ -1,7 +1,7 @@
 import {
   collapseSlashes,
   ensureLeadingSlash,
-  ensureTrailingSlash
+  ensureTrailingSlash,
 } from "@utils/core/string/normalization.ts";
 
 export type TrailingSlashPolicy = "always" | "never" | "preserve";
@@ -12,7 +12,8 @@ export function normalizePath(path: string, trailingSlash: TrailingSlashPolicy):
 
   if (trailingSlash === "always") {
     normalizedPath = ensureTrailingSlash(normalizedPath);
-  } else if (trailingSlash === "never" && normalizedPath.endsWith("/")) {
+  }
+  else if (trailingSlash === "never" && normalizedPath.endsWith("/")) {
     normalizedPath = normalizedPath.slice(0, -1);
   }
 

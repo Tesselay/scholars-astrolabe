@@ -19,8 +19,8 @@ export async function GET(context) {
       tags: post.data.tags,
       dateCreated: post.data["date-created"],
       dateModified: post.data["date-modified"],
-      link: getRelativeLocaleUrl(context.currentLocale, `blog${neutralizeUrlPath(post.id)}`)
+      link: getRelativeLocaleUrl(context.currentLocale, `blog${neutralizeUrlPath(post.id)}`),
     })),
-    customData: `<language>en-us</language>`
+    customData: "<language>en-us</language>",
   });
 }
