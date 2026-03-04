@@ -11,5 +11,6 @@
       "@types/*": ["types/*"]
     },
     "types": ["astro/client", "vite/client", "vitest"]
-  }
+  },
+  "exclude": ["astro.config.ts", "node_modules"]
 }

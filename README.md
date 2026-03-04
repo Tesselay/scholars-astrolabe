@@ -61,18 +61,15 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
-- [x] Update import aliases
-  - [ ] alias inside styles and button (internal)?
-
 #### Linting & Formatting
 
-- [ ] Let lint ignore astro config
 - [ ] Lint/Prettier for import order
 - [ ] Use Prettier's `--check` to prevent duplicated formatting?
       https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-prettier
 - [ ] Exports at end of file?
 - [ ] Have prettier add line before return in functions
 - [ ] Set ESLint and TypeScript to strict
+- [ ] What other rules should I add?
 
 #### Rework Testing
 
@@ -105,6 +102,9 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Favicon
 - [ ] Rework Diagnostics Plugin
 - [ ] Rework Tags
+- [ ] Improve security txt
+- [ ] Improve robots txt
+- [ ] Improve humans txt
 
 ### Architectural
 
