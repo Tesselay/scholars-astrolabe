@@ -2,12 +2,12 @@
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-import BlogPost from "@ui/BlogPost.astro";
-import Layout from "@ui/Layout.astro";
+import BlogPost from "&ui/BlogPost.astro";
+import Layout from "&ui/Layout.astro";
 
-import { byLang, pathsForAllLocales } from "@utils/compositional/content/filter.ts";
-import { MetaLoader } from "@utils/compositional/i18n/metaLoader.ts";
-import { neutralizeUrlPath } from "@utils/compositional/routing/url.ts";
+import { byLang, pathsForAllLocales } from "&utils/compositional/content/filter.ts";
+import { MetaLoader } from "&utils/compositional/i18n/metaLoader.ts";
+import { neutralizeUrlPath } from "&utils/compositional/routing/url.ts";
 
 export function getStaticPaths() {
   return pathsForAllLocales();

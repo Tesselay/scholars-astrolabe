@@ -37,7 +37,7 @@ export function diagnosticGraph() {
           importer,
           plugin: this?.meta?.watchMode ? "dev" : "build",
         });
-        if (/^(astro:|virtual:|\/@fs\/)/.test(source) || source.startsWith("@/")) {
+        if (/^(astro:|virtual:|\/@fs\/)/.test(source) || source.startsWith("&/")) {
           console.log("[resolveId]", {
             source,
             importer,

@@ -5,10 +5,10 @@ import {
   ensureLeadingSlash,
   ensureTrailingSlash,
   trimSlashes
-} from "@/utils/core/string/normalization.ts";
-import { locales } from "@/utils/core/i18n/locale/definition.ts";
-import { pathsForAllLocales } from "@/utils/compositional/content/filter.ts";
-import { localizeUrlPath, neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
+} from "&utils/core/string/normalization.ts";
+import { locales } from "&utils/core/i18n/locale/definition.ts";
+import { pathsForAllLocales } from "&utils/compositional/content/filter.ts";
+import { localizeUrlPath, neutralizeUrlPath } from "&utils/compositional/routing/url.ts";
 
 describe("path common", () => {
   it("collapseSlashes", () => {

@@ -1,8 +1,8 @@
-import { normalizeAstroPath } from "@utils/adapter/astro/path.ts";
-import type { LocaleRoute } from "@utils/core/i18n/locale/definition.ts";
-import { assertLocaleRoute } from "@utils/core/i18n/locale/guards.ts";
-import { findLocaleSegment } from "@utils/core/i18n/locale/path.ts";
-import { urlPathLocaleIndex } from "@utils/core/routing/url.ts";
+import { normalizeAstroPath } from "&utils/adapter/astro/path.ts";
+import type { LocaleRoute } from "&utils/core/i18n/locale/definition.ts";
+import { assertLocaleRoute } from "&utils/core/i18n/locale/guards.ts";
+import { findLocaleSegment } from "&utils/core/i18n/locale/path.ts";
+import { urlPathLocaleIndex } from "&utils/core/routing/url.ts";
 
 export function localizeUrlPath(locale: LocaleRoute, urlPath: string): string {
   const hasLocale = findLocaleSegment(urlPath);

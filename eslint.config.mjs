@@ -3,7 +3,6 @@ import js from "@eslint/js";
 import json from "@eslint/json";
 import stylistic from "@stylistic/eslint-plugin";
 import { defineConfig } from "eslint/config";
-import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import astro from "eslint-plugin-astro";
 import importx from "eslint-plugin-import-x";
 import globals from "globals";
@@ -70,15 +69,6 @@ export default defineConfig([
 
   {
     name: "Import Overrides",
-    settings: {
-      "import/internal-regex": "^@",
-      "import-x/resolver-next": [
-        createTypeScriptImportResolver({
-          project: "./tsconfig.json",
-          extensions: [".ts", ".tsx", ".js", ".jsx", ".astro"],
-        }),
-      ],
-    },
     rules: {
       "import-x/no-deprecated": "error",
       "import-x/no-empty-named-blocks": "error",
@@ -95,7 +85,7 @@ export default defineConfig([
       "import-x/no-useless-path-segments": "error",
       // Stylistic
       // "import-x/exports-last": "error",
-      "import-x/extensions": ["warn", "always"], // Path aliases are resolved as packages and I couldn't solve it via resolvers, so a few false positives will be accepted
+      "import-x/extensions": ["warn", "ignorePackages"],
       "import-x/first": "error",
       // "import-x/group-exports": "error",
       "import-x/newline-after-import": "error",
@@ -104,11 +94,11 @@ export default defineConfig([
       "import-x/order": ["error", {
         "groups": ["builtin", "external", "internal", "parent", "sibling"],
         "pathGroups": [
-          { pattern: "@ui/**", group: "internal", position: "before" },
-          { pattern: "@content/**", group: "internal", position: "before" },
-          { pattern: "@utils/**", group: "internal", position: "before" },
-          { pattern: "@types/**", group: "internal", position: "before" },
-          { pattern: "@styles/**", group: "internal", position: "before" },
+          { pattern: "&ui/**", group: "internal", position: "before" },
+          { pattern: "&content/**", group: "internal", position: "before" },
+          { pattern: "&utils/**", group: "internal", position: "before" },
+          { pattern: "&types/**", group: "internal", position: "before" },
+          { pattern: "&styles/**", group: "internal", position: "before" },
         ],
         "newlines-between": "always", "alphabetize": { order: "asc", caseInsensitive: true }, "named": { enabled: true, types: "types-first" }, "warnOnUnassignedImports": true }],
       // Already checked via TypeScript
@@ -150,13 +140,11 @@ export default defineConfig([
       "*.yarn/**",
       "dist/",
       ".astro/",
-      "node_modules/",
       ".coverage/",
       "coverage/",
       ".vite/",
       ".vscode/",
       ".idea/",
-      ".git/",
       ".DS_Store",
       "*.log",
       "**/*.d.ts",

@@ -2,7 +2,7 @@ import getRssResponse from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
+import { neutralizeUrlPath } from "&utils/compositional/routing/url.ts";
 
 export async function GET(context) {
   // Fallback to the request origin if context.site isn't available

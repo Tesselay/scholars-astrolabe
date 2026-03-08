@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { globby } from "globby";
 import { getCollection, getEntry } from "astro:content";
 
-import * as cfg from "@/content.config.ts";
+import * as cfg from "&/content.config.ts";
 
 describe("Blog content collections exist", () => {
   it("shows registered collections", () => {
