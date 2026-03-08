@@ -1,6 +1,5 @@
-import rss from "@astrojs/rss";
+import getRssResponse from "@astrojs/rss";
 import { getCollection } from "astro:content";
-
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 import { neutralizeUrlPath } from "@/utils/compositional/routing/url.ts";
@@ -10,7 +9,7 @@ export async function GET(context) {
   const site = (context.site && String(context.site)) || new URL(context.request.url).origin;
 
   const posts = await getCollection("blog");
-  return rss({
+  return getRssResponse({
     site,
     title: "Site Title",
     description: "A description for your blog",

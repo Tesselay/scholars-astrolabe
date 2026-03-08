@@ -22,7 +22,7 @@ function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 }
 
-export default function remarkCallouts() {
+export function remarkCallouts() {
   return (tree) => {
     visit(tree, "blockquote", (node) => {
       const first = node.children && node.children[0];

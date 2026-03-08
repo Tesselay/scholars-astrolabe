@@ -64,15 +64,17 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] Lint for import order
+- [ ] Lint rule for line length
 - [ ] Exports at end of file?
 - [ ] Lint line before return in functions
+- [ ] Typed Lint rules (ESLint & TSESLint)
 - [ ] Set ESLint and TypeScript to strict
-- [ ] What other rules should I add?
+- [ ] CSS Lint
 
 #### Rework Testing
 
 - [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
+- [ ] Vitest & Playwright Linter
 - [ ] Refactor test fake glob into adapter
 - [ ] Add test for static dict import for dict loader
 - [ ] Use `test` instead of `it` in vitest

@@ -1,4 +1,4 @@
-export default function diagnosticGraph() {
+export function diagnosticGraph() {
   const seenResolutions = new Map();
 
   return {

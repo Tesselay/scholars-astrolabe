@@ -1,21 +1,22 @@
-import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import expressiveCode from "astro-expressive-code";
+import { defineConfig, envField } from "astro/config";
 import compress from "astro-compress";
+import expressiveCode from "astro-expressive-code";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeKatex from "rehype-katex";
+import rehypeSlug from "rehype-slug";
+import remarkDirective from "remark-directive";
+import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import remarkDirective from "remark-directive";
-import wikiLinkPlugin from "remark-wiki-link";
 import remarkToc from "remark-toc";
-import remarkFrontmatter from "remark-frontmatter";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeKatex from "rehype-katex";
-import rehypeExternalLinks from "rehype-external-links";
+import wikiLinkPlugin from "remark-wiki-link";
 import { loadEnv } from "vite";
-import callouts from "./src/markdown/callout/remark-callouts.js";
-import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
+
+import { remarkCallouts } from "./src/markdown/callout/remark-callouts.js";
 import { astroLocales } from "./src/utils/adapter/astro/locales.ts";
+import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
 
 const mode = process.env.NODE_ENV ?? "development";
 const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);
@@ -64,7 +65,7 @@ export default defineConfig({
           aliasDivider: "|",
         },
       ],
-      callouts,
+      remarkCallouts,
     ],
     rehypePlugins: [
       rehypeSlug,
