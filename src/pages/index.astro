@@ -12,8 +12,8 @@ const target = getRelativeLocaleUrl(defaultLocale, "/");
 
 <Layout pageTitle={pageTitle}>
   <Fragment slot="head">
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <meta name="robots" content="noindex" />
+    <meta content={`0; url=${target}`} http-equiv="refresh" />
+    <meta content="noindex" name="robots" />
   </Fragment>
 
   <p>Redirecting to <a href={target}>{target}</a></p>

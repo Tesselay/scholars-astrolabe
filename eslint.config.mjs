@@ -114,6 +114,22 @@ export default defineConfig([
     name: "Astro Overrides",
     files: ["**/*.astro"],
     rules: {
+      // Preference
+      "astro/no-exports-from-components": "error",
+      "astro/no-set-html-directive": "error",
+      "astro/no-unsafe-inline-scripts": "error",
+      "astro/no-set-text-directive": "error",
+      "astro/no-unused-css-selector": "warn",
+      "astro/prefer-class-list-directive": "error",
+      "astro/prefer-object-class-list": "error",
+      "astro/prefer-split-class-list": "error",
+      "astro/sort-attributes": "error",
+      "astro/jsx-a11y/anchor-ambiguous-text": "error",
+      "astro/jsx-a11y/control-has-associated-label": "error",
+      "astro/jsx-a11y/lang": "error",
+      "astro/jsx-a11y/no-aria-hidden-on-focusable": "error",
+      "astro/jsx-a11y/prefer-tag-over-role": "warn",
+      // Issues
       "astro/no-unused-define-vars-in-style": "warn",
       "@typescript-eslint/no-empty-object-type": [
         "error",

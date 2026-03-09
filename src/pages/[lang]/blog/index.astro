@@ -21,14 +21,14 @@ const description = meta["blog:index"].description;
 const allPosts = await getCollection("blog", byLang(lang));
 ---
 
-<Layout pageTitle={title} description={description}>
+<Layout description={description} pageTitle={title}>
   <h1>{title}</h1>
   <ul aria-label="Blog Posts">
     {
       allPosts.map((post) => (
         <BlogPost
-          url={getRelativeLocaleUrl(lang, `blog${neutralizeUrlPath(post.id)}`)}
           title={post.data.title}
+          url={getRelativeLocaleUrl(lang, `blog${neutralizeUrlPath(post.id)}`)}
         />
       ))
     }

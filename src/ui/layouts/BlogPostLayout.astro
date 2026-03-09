@@ -15,14 +15,14 @@ const meta = await MetaLoader.getAsync(lang);
 const description = `A blog entry on ${meta["blog:index"].description}`;
 ---
 
-<Layout pageTitle={frontmatter.title} description={description} ogType="article">
+<Layout description={description} ogType="article" pageTitle={frontmatter.title}>
   <Fragment slot="head">
     <link
-      rel="preload"
-      href="/fonts/JetBrainsMono-VariableFont_wght.woff2"
       as="font"
-      type="font/woff2"
       crossorigin
+      href="/fonts/JetBrainsMono-VariableFont_wght.woff2"
+      rel="preload"
+      type="font/woff2"
     />
   </Fragment>
   <article>

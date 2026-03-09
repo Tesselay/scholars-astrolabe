@@ -70,6 +70,11 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Typed Lint rules (ESLint & TSESLint)
 - [ ] Set ESLint and TypeScript to strict
 - [ ] CSS Lint
+- [ ] ESLint Plugins:
+  - [ ] Vitest
+  - [ ] Playwright
+  - [ ] Zod
+  - [ ] Unicorn
 
 #### Rework Testing
 

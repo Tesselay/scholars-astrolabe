@@ -60,61 +60,61 @@ const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollo
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
 
     <!-- Canonical and Alternates -->
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
-    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+    <link href={canonicalUrl} rel="canonical" />
+    <link href={xDefaultUrl} hreflang="x-default" rel="alternate" />
+    {alternates.map((alt) => <link href={alt.href} hreflang={alt.hreflang} rel="alternate" />)}
 
     <!-- Basic SEO Defaults -->
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta content={description} name="description" />
+    <link href="/sitemap-index.xml" rel="sitemap" />
 
     <!-- Open Graph Defaults -->
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content={ogLocale} />
-    {alternates.map((alt) => <meta property="og:locale:alternate" content={alt.ogLocale} />)}
-    <meta property="og:description" content={description} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta content={siteName} property="og:site_name" />
+    <meta content={canonicalUrl} property="og:url" />
+    <meta content={fullTitle} property="og:title" />
+    <meta content={ogType} property="og:type" />
+    <meta content={ogLocale} property="og:locale" />
+    {alternates.map((alt) => <meta content={alt.ogLocale} property="og:locale:alternate" />)}
+    <meta content={description} property="og:description" />
+    {ogImage && <meta content={ogImage} property="og:image" />}
 
     <!-- Socials -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content={fullTitle} name="twitter:title" />
+    <meta content={description} name="twitter:description" />
 
     <!-- Icons -->
     <!-- <link rel="icon" href="/favicon.ico" sizes="any" /> -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
 
     <!-- PWA/UI -->
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2e9d6" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0e19" />
-    <meta name="color-scheme" content="dark light" />
+    <link href="/site.webmanifest" rel="manifest" />
+    <meta content="#f2e9d6" media="(prefers-color-scheme: light)" name="theme-color" />
+    <meta content="#0a0e19" media="(prefers-color-scheme: dark)" name="theme-color" />
+    <meta content="dark light" name="color-scheme" />
 
     <!-- Optional Policies/Perf -->
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="robots" content={robotsContent} />
+    <meta content="strict-origin-when-cross-origin" name="referrer" />
+    <meta content={robotsContent} name="robots" />
     <link
-      rel="preload"
-      href="/fonts/CormorantGaramond-VariableFont_wght.woff2"
       as="font"
-      type="font/woff2"
       crossorigin
+      href="/fonts/CormorantGaramond-VariableFont_wght.woff2"
+      rel="preload"
+      type="font/woff2"
     />
     <link
-      rel="preload"
-      href="/fonts/SourceSerif4-VariableFont_opsz,wght.woff2"
       as="font"
-      type="font/woff2"
       crossorigin
+      href="/fonts/SourceSerif4-VariableFont_opsz,wght.woff2"
+      rel="preload"
+      type="font/woff2"
     />
 
     <!-- Page Specific -->
@@ -123,7 +123,7 @@ const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollo
     <!-- Auto -->
   </head>
   <body>
-    <a href="#main" class="skip">Skip to main content</a>
+    <a class="skip" href="#main">Skip to main content</a>
     <Header />
     <main id="main" tabindex="-1">
       <slot />
@@ -131,10 +131,3 @@ const robotsContent = import.meta.env.PROD ? "index, follow" : "noindex, nofollo
     <Footer />
   </body>
 </html>
-
-<script is:inline>
-  window.addEventListener("DOMContentLoaded", () => {
-    const main = document.getElementById("main");
-    if (main instanceof HTMLElement) main.focus();
-  });
-</script>
