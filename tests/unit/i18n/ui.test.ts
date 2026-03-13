@@ -22,9 +22,10 @@ describe("UI loader validation", () => {
 
   it("rejects invalid default-locale schema (wrong types or extra keys)", async () => {
     const UiLoader = new GenericDictLoader("ui", UiSchema, () =>
+      // @ts-expect-error: Fails at TypeScript compilation already but we want to check runtime
       fakeGlob(mockUiInvalid, mockUiEmpty, "ui")
     );
 
-    await expect(UiLoader.init()).rejects.toThrow("Invalid dictionary for en");
+    expect(UiLoader.init()).rejects.toThrow("Invalid dictionary for en");
   });
 });

@@ -3,7 +3,7 @@ import { z } from "zod";
 type SchemaOf<T> = T extends string
   ? z.ZodString
   : T extends Record<string, unknown>
-    ? z.ZodObject<{ [K in keyof T]: SchemaOf<T[K]> }, "strict">
+    ? z.ZodObject<{ [K in keyof T]: SchemaOf<T[K]> }>
     : never;
 
 export function buildStrictSchema<T>(obj: T): SchemaOf<T> {

@@ -14,7 +14,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
   private readonly dictSchema: Type;
   private readonly dictName: string;
 
-  constructor(dictName: string, schema: Type, dictModulesProvider: DictModulesProvider<unknown>) {
+  constructor(dictName: string, schema: Type, dictModulesProvider: DictModulesProvider<z.infer<Type>>) {
     this.dictName = dictName;
     this.dictSchema = schema;
     this.dictModulesProvider = dictModulesProvider;
@@ -30,7 +30,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
     if (!parsed.success) {
       console.error(
         `[i18n:${this.dictName}] Invalid dictionary for ${locale}:`,
-        parsed.error.format(),
+        z.treeifyError(parsed.error),
       );
       throw new Error(`[i18n:${this.dictName}]Invalid dictionary for ${locale}`);
     }

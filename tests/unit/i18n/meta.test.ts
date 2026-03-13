@@ -23,6 +23,7 @@ describe("Meta loader", () => {
 
   it("throws when dictionaries are invalid against strict schema", async () => {
     const metaLoader = new GenericDictLoader("meta", MetaSchema, () =>
+      // @ts-expect-error: Fails at TypeScript compilation already but we want to check runtime
       fakeGlob(mockMetaInvalid, mockMetaEmpty, "meta")
     );
     expect(metaLoader.init()).rejects.toThrow("Invalid dictionary for en");
