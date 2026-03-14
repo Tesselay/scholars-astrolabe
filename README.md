@@ -64,7 +64,6 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] Exports at end of file?
 - [ ] Typed Lint rules (ESLint & TSESLint)
 - [ ] Set ESLint and TypeScript to strict
 - [ ] CSS Lint

@@ -1,6 +1,6 @@
 import { type LocaleRoute, locales } from "&utils/core/i18n/locale/definition.ts";
 
-export function filterEntriesByLang<Type extends { id: string }>(
+function filterEntriesByLang<Type extends { id: string }>(
   entries: readonly Type[],
   lang: LocaleRoute,
 ): Type[] {
@@ -9,9 +9,11 @@ export function filterEntriesByLang<Type extends { id: string }>(
   return entries.filter((entry) => entry.id.startsWith(prefix));
 }
 
-export const byLang
+const byLang
   = <Type extends { id: string }>(lang: LocaleRoute) => (entry: Type) => entry.id.startsWith(`${lang}/`);
 
-export function pathsForAllLocales(): { params: { lang: LocaleRoute } }[] {
+function pathsForAllLocales(): { params: { lang: LocaleRoute } }[] {
   return locales.map((locale) => ({ params: { lang: locale.path } }));
 }
+
+export { byLang, filterEntriesByLang, pathsForAllLocales };

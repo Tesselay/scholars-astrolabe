@@ -175,10 +175,8 @@ export default defineConfig([
       "import-x/no-useless-path-segments": "error",
       // Stylistic
       "import-x/extensions": ["warn", "ignorePackages"],
-      /*
-       * "import-x/exports-last": "error",
-       * "import-x/group-exports": "error",
-       */
+      "import-x/exports-last": "error",
+      "import-x/group-exports": "error",
       "import-x/first": "error",
       "import-x/newline-after-import": "error",
       "import-x/no-anonymous-default-export": "error",
