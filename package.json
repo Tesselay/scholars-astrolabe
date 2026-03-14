@@ -7,7 +7,7 @@
   "author": "Lahl, Dominique <47154137+Tesselay@users.noreply.github.com>",
   "license": "GPL-3.0-only",
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=22.17.1"
   },
   "scripts": {
     "dev": "astro dev",
@@ -31,7 +31,7 @@
     "test:a11y": "pa11y-ci",
     "e2e": "playwright test"
   },
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "yarn@4.13.0",
   "devDependencies": {
     "@astrojs/check": "0.9.7",
     "@astrojs/rss": "4.0.17",
@@ -40,7 +40,6 @@
     "@eslint/js": "^9.39.4",
     "@eslint/json": "^1.0.1",
     "@eslint/markdown": "^7.5.1",
-    "@lucide/astro": "^0.577.0",
     "@playwright/test": "^1.58.2",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^25.3.5",
@@ -59,7 +58,6 @@
     "globby": "^16.1.1",
     "http-server": "^14.1.1",
     "husky": "^9.1.7",
-    "jiti": "^2.6.1",
     "katex": "^0.16.38",
     "lint-staged": "^16.3.2",
     "open-props": "^1.7.23",

@@ -73,6 +73,7 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Zod
   - [ ] Unicorn
   - [ ] Perfectionist
+  - [ ] Markdown
 
 #### Rework Testing
 
