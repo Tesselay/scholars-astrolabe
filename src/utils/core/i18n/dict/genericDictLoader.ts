@@ -21,7 +21,10 @@ export class GenericDictLoader<Type extends z.ZodType> {
   }
 
   loadModules(): DictGlob<z.infer<Type>> {
-    if (!this.dictModules) this.dictModules = this.dictModulesProvider(this.dictName);
+    if (!this.dictModules) {
+      this.dictModules = this.dictModulesProvider(this.dictName);
+    }
+
     return this.dictModules;
   }
 
@@ -34,6 +37,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
       );
       throw new Error(`[i18n:${this.dictName}]Invalid dictionary for ${locale}`);
     }
+
     return parsed.data;
   }
 
@@ -50,19 +54,22 @@ export class GenericDictLoader<Type extends z.ZodType> {
 
   get(locale: LocaleRoute): z.infer<Type> {
     if (!this.DICT) {
-      throw new Error(
-        `[i18n:${this.dictName}] getDict() called before dictionaries were loaded. Use getDictAsync() or call initDict() in setup.`,
-      );
+      throw new Error(`[i18n:${this.dictName}] getDict() called before dictionaries were loaded. Use getDictAsync() or 
+                      call initDict() in setup.`);
     }
     const dict = this.DICT[locale];
     if (!dict) {
       throw new Error(`[i18n:${this.dictName}] Missing ${locale} dictionary`);
     }
+
     return dict;
   }
 
   async getAsync(locale: LocaleRoute): Promise<z.infer<Type>> {
-    if (!this.DICT) await this.init();
+    if (!this.DICT) {
+      await this.init();
+    }
+
     return this.get(locale);
   }
 

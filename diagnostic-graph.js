@@ -13,17 +13,14 @@ export function diagnosticGraph() {
       console.log("[cfg.mode]", cfg.mode, "command:", cfg.command);
       console.log("[cfg.resolve.alias]", cfg.resolve.alias);
       console.log("[cfg.ssr.noExternal]", cfg.ssr?.noExternal);
-      console.log(
-        "[cfg.optimizeDeps]",
-        pick(cfg.optimizeDeps ?? {}, ["include", "exclude", "esbuildOptions"]),
-      );
+      console.log("[cfg.optimizeDeps]", pick(cfg.optimizeDeps ?? {}, [
+        "include",
+        "exclude",
+        "esbuildOptions",
+      ]));
       console.log("[cfg.define keys]", Object.keys(cfg.define ?? {}));
       console.log("[cfg.envPrefix]", cfg.envPrefix);
-
-      console.log(
-        "[cfg.plugins]",
-        cfg.plugins.map((p) => p.name),
-      );
+      console.log("[cfg.plugins]", cfg.plugins.map((p) => p.name));
     },
 
     // 2) See how ids resolve
@@ -37,7 +34,7 @@ export function diagnosticGraph() {
           importer,
           plugin: this?.meta?.watchMode ? "dev" : "build",
         });
-        if (/^(astro:|virtual:|\/@fs\/)/.test(source) || source.startsWith("&/")) {
+        if ((/^(astro:|virtual:|\/@fs\/)/).test(source) || source.startsWith("&/")) {
           console.log("[resolveId]", {
             source,
             importer,
@@ -45,16 +42,19 @@ export function diagnosticGraph() {
             ssr: !!options?.ssr,
           });
         }
+
         return r;
       }
+
       return null;
     },
 
     // 3) Measure transform effect & which plugin touched the file
     transform(code, id, opts) {
-      if (/src\/content\/blog/.test(id) || id.includes("astro:content")) {
+      if ((/src\/content\/blog/).test(id) || id.includes("astro:content")) {
         console.log("[transform]", { id, ssr: opts?.ssr, length: code.length });
       }
+
       return null;
     },
 
@@ -66,7 +66,7 @@ export function diagnosticGraph() {
 
       // Watch file changes
       server.watcher.on("all", (event, path) => {
-        if (/\.(astro|mdx?|tsx?|jsx?)$/.test(path)) {
+        if ((/\.(astro|mdx?|tsx?|jsx?)$/).test(path)) {
           console.log(`[watcher] ${event}: ${path}`);
         }
       });
@@ -80,10 +80,11 @@ export function diagnosticGraph() {
 
     // 5) Hot updates (when running locally with --watch)
     handleHotUpdate(ctx) {
-      if (/\.(astro|mdx?|tsx?|jsx?)$/.test(ctx.file)) {
+      if ((/\.(astro|mdx?|tsx?|jsx?)$/).test(ctx.file)) {
         const deps = ctx.modules.flatMap((m) => Array.from(m.importers || [])).map((m) => m.id);
         console.log("[HMR]", ctx.file, "-> dependents:", deps.slice(0, 5));
       }
+
       return ctx.modules;
     },
 

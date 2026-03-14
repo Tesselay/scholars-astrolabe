@@ -5,13 +5,12 @@ export function filterEntriesByLang<Type extends { id: string }>(
   lang: LocaleRoute,
 ): Type[] {
   const prefix = `${lang}/`;
+
   return entries.filter((entry) => entry.id.startsWith(prefix));
 }
 
 export const byLang
-  = <Type extends { id: string }>(lang: LocaleRoute) =>
-    (entry: Type) =>
-      entry.id.startsWith(`${lang}/`);
+  = <Type extends { id: string }>(lang: LocaleRoute) => (entry: Type) => entry.id.startsWith(`${lang}/`);
 
 export function pathsForAllLocales(): { params: { lang: LocaleRoute } }[] {
   return locales.map((locale) => ({ params: { lang: locale.path } }));

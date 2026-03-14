@@ -12,6 +12,7 @@ export async function getStaticPaths() {
     .map((post) => {
       const [lang, ...slugParts] = post.id.split("/");
       assertLocaleRoute(lang);
+
       return {
         params: { lang, slug: slugParts.join("/") || undefined },
         props: post,

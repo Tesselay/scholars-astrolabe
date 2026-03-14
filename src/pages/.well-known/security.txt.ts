@@ -4,8 +4,6 @@ export const GET: APIRoute = () => {
   const body
     = [
       "Contact: mailto:postmaster@thaum.de",
-      // 'Policy: https://thaum.de/security',
-      // 'Acknowledgments: https://thaum.de/hall-of-fame',
       "Preferred-Languages: en",
       `Expires: ${new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString()}`,
     ].join("\n") + "\n";

@@ -39,6 +39,7 @@ let altLocaleUrls = getAlternateRelativeLocaleUrlList(lang, neutralPath);
 // Temporary solution until I develop content collections further
 const exists = async (pathname: string) => {
   const blogId = convertBlogPathToBlogId(pathname);
+
   return (await getEntry("blog", blogId)) !== undefined;
 };
 

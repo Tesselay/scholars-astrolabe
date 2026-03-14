@@ -32,7 +32,7 @@ yarn dev
 
 - Localization
   - [ ] Add new locale to `/src/utils/core/i18n/locales.ts`
-  - [ ] Add new dictionary to `/src/utils/core/i18n/dict/dictionaries/[locale]/*.json`
+  - [ ] Add new dictionary to `/src/content/dictionaries/[locale]/*.json`
   - [ ] Set default locale in `/src/utils/core/i18n/locales.ts`
 
 ## Commands
@@ -64,9 +64,7 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] Lint rule for line length
 - [ ] Exports at end of file?
-- [ ] Lint line before return in functions
 - [ ] Typed Lint rules (ESLint & TSESLint)
 - [ ] Set ESLint and TypeScript to strict
 - [ ] CSS Lint
@@ -75,6 +73,7 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Playwright
   - [ ] Zod
   - [ ] Unicorn
+  - [ ] Perfectionist
 
 #### Rework Testing
 
@@ -106,7 +105,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Language Switcher
 - [ ] Accessible Scrollbar
 - [ ] Favicon
-- [ ] Rework Diagnostics Plugin
+- [ ] Rework Diagnostics Plugin (Vite DevTools?)
 - [ ] Rework Tags
 - [ ] Improve security txt
 - [ ] Improve robots txt

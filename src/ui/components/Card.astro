@@ -11,7 +11,11 @@ interface Props extends HTMLAttributes<"div"> {
 
 const { square, sizing, height, width, backgroundColor, ...attributes } = Astro.props;
 
-const classList = ["card", sizing, square && "square"];
+const classList = [
+  "card",
+  sizing,
+  square && "square",
+];
 ---
 
 <div class:list={[classList, attributes.class]} {...attributes}>

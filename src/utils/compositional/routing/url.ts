@@ -9,6 +9,7 @@ export function localizeUrlPath(locale: LocaleRoute, urlPath: string): string {
 
   if (hasLocale) {
     console.warn(`[i18n] Path "${urlPath}" already contains locale "${locale}"`);
+
     return urlPath;
   }
 

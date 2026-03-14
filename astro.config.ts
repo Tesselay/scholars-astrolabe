@@ -14,7 +14,6 @@ import remarkToc from "remark-toc";
 import wikiLinkPlugin from "remark-wiki-link";
 import { loadEnv } from "vite";
 
-import { remarkCallouts } from "./src/markdown/callout/remark-callouts.js";
 import { astroLocales } from "./src/utils/adapter/astro/locales.ts";
 import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
 
@@ -47,9 +46,7 @@ export default defineConfig({
   },
   integrations: [
     expressiveCode(),
-    sitemap({
-      filter: (page) => !page.includes("/test"),
-    }),
+    sitemap({ filter: (page) => !page.includes("/test") }),
     compress(),
   ],
   markdown: {
@@ -59,23 +56,11 @@ export default defineConfig({
       remarkDirective,
       remarkFrontmatter,
       remarkToc,
-      [
-        wikiLinkPlugin,
-        {
-          aliasDivider: "|",
-        },
-      ],
-      remarkCallouts,
+      [wikiLinkPlugin, { aliasDivider: "|" }],
     ],
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: "wrap",
-          properties: { class: "heading-link" },
-        },
-      ],
+      [rehypeAutolinkHeadings, { behavior: "wrap", properties: { class: "heading-link" } }],
       rehypeKatex,
       [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
     ],

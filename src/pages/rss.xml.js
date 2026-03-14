@@ -9,6 +9,7 @@ export async function GET(context) {
   const site = (context.site && String(context.site)) || new URL(context.request.url).origin;
 
   const posts = await getCollection("blog");
+
   return getRssResponse({
     site,
     title: "Site Title",

@@ -8,6 +8,7 @@ export function trimSlashes(str: string): string {
 
 export function ensureLeadingSlash(str: string): string {
   const collapsed = collapseSlashes(String(str));
+
   return collapsed.startsWith("/") ? collapsed : "/" + collapsed.replace(/^\/+/, "");
 }
 
