@@ -29,7 +29,8 @@
     "test:integration": "vitest run --project integration",
     "test:ui": "playwright test --ui",
     "test:a11y": "pa11y-ci",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "clean": "rm -rf .astro dist node_modules"
   },
   "packageManager": "yarn@4.13.0",
   "devDependencies": {
