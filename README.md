@@ -87,6 +87,7 @@ All commands are run from the root of the project, from a terminal:
 ### Issues
 
 - [ ] Styling is not applied correctly in preview/build
+- [ ] Dependabot Alerts
 
 ### Code
 
