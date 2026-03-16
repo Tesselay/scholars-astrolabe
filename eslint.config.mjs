@@ -11,7 +11,7 @@ import tseslint from "typescript-eslint";
 export default defineConfig([
   // Base Presets
   js.configs.recommended,
-  tseslint.configs.recommended,
+  tseslint.configs.strict,
   stylistic.configs.recommended,
   importx.flatConfigs.recommended,
   importx.flatConfigs.typescript,
