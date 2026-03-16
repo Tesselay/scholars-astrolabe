@@ -48,7 +48,6 @@ All commands are run from the root of the project, from a terminal:
 | `yarn test`            | Run unit & integration tests                     |
 | `yarn e2e`             | Run e2e tests                                    |
 | `yarn lint`            | Run ESLint                                       |
-| `yarn format`          | Run Prettier                                     |
 | `yarn typecheck`       | Check for type issues                            |
 | `yarn test:a11y`       | Runs accessibility check                         |
 | `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
@@ -64,8 +63,7 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] Typed Lint rules (ESLint & TSESLint)
-- [ ] Set ESLint and TypeScript to strict
+- [ ] Set TypeScript to strict
 - [ ] CSS Lint
 - [ ] ESLint Plugins:
   - [ ] Vitest
