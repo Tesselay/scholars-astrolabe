@@ -9,18 +9,18 @@ export function diagnosticGraph() {
     // 1) Final merged config
     configResolved(cfg) {
       const pick = (o, ks) => Object.fromEntries(ks.map((k) => [k, o[k]]));
-      console.log("[cfg.root]", cfg.root);
-      console.log("[cfg.mode]", cfg.mode, "command:", cfg.command);
-      console.log("[cfg.resolve.alias]", cfg.resolve.alias);
-      console.log("[cfg.ssr.noExternal]", cfg.ssr?.noExternal);
-      console.log("[cfg.optimizeDeps]", pick(cfg.optimizeDeps ?? {}, [
+      console.debug("[cfg.root]", cfg.root);
+      console.debug("[cfg.mode]", cfg.mode, "command:", cfg.command);
+      console.debug("[cfg.resolve.alias]", cfg.resolve.alias);
+      console.debug("[cfg.ssr.noExternal]", cfg.ssr?.noExternal);
+      console.debug("[cfg.optimizeDeps]", pick(cfg.optimizeDeps ?? {}, [
         "include",
         "exclude",
         "esbuildOptions",
       ]));
-      console.log("[cfg.define keys]", Object.keys(cfg.define ?? {}));
-      console.log("[cfg.envPrefix]", cfg.envPrefix);
-      console.log("[cfg.plugins]", cfg.plugins.map((p) => p.name));
+      console.debug("[cfg.define keys]", Object.keys(cfg.define ?? {}));
+      console.debug("[cfg.envPrefix]", cfg.envPrefix);
+      console.debug("[cfg.plugins]", cfg.plugins.map((p) => p.name));
     },
 
     // 2) See how ids resolve
@@ -35,7 +35,7 @@ export function diagnosticGraph() {
           plugin: this?.meta?.watchMode ? "dev" : "build",
         });
         if ((/^(astro:|virtual:|\/@fs\/)/).test(source) || source.startsWith("&/")) {
-          console.log("[resolveId]", {
+          console.debug("[resolveId]", {
             source,
             importer,
             resolved: r.id,
@@ -52,7 +52,7 @@ export function diagnosticGraph() {
     // 3) Measure transform effect & which plugin touched the file
     transform(code, id, opts) {
       if ((/src\/content\/blog/).test(id) || id.includes("astro:content")) {
-        console.log("[transform]", { id, ssr: opts?.ssr, length: code.length });
+        console.debug("[transform]", { id, ssr: opts?.ssr, length: code.length });
       }
 
       return null;
@@ -61,20 +61,20 @@ export function diagnosticGraph() {
     // 4) Dev-server internals (module graph, middlewares, file events)
     configureServer(server) {
       const routes = server.middlewares.stack.map((l) => l.route || "(middleware)").filter(Boolean);
-      console.log("[server.fs.allow]", server.config.server.fs.allow);
-      console.log("[middlewares]", routes);
+      console.debug("[server.fs.allow]", server.config.server.fs.allow);
+      console.debug("[middlewares]", routes);
 
       // Watch file changes
       server.watcher.on("all", (event, path) => {
         if ((/\.(astro|mdx?|tsx?|jsx?)$/).test(path)) {
-          console.log(`[watcher] ${event}: ${path}`);
+          console.debug(`[watcher] ${event}: ${path}`);
         }
       });
 
       // moduleGraph lookups
       server.ws.on("connection", () => {
         const size = server.moduleGraph.idToModuleMap.size;
-        console.log("[moduleGraph] entries:", size);
+        console.debug("[moduleGraph] entries:", size);
       });
     },
 
@@ -82,7 +82,7 @@ export function diagnosticGraph() {
     handleHotUpdate(ctx) {
       if ((/\.(astro|mdx?|tsx?|jsx?)$/).test(ctx.file)) {
         const deps = ctx.modules.flatMap((m) => Array.from(m.importers || [])).map((m) => m.id);
-        console.log("[HMR]", ctx.file, "-> dependents:", deps.slice(0, 5));
+        console.debug("[HMR]", ctx.file, "-> dependents:", deps.slice(0, 5));
       }
 
       return ctx.modules;
@@ -90,20 +90,20 @@ export function diagnosticGraph() {
 
     // 6) Build-time graph
     buildStart() {
-      console.log("[buildStart] building with", this.meta.watchMode ? "watch" : "once");
+      console.debug("[buildStart] building with", this.meta.watchMode ? "watch" : "once");
     },
     moduleParsed(info) {
-      console.log("[parsed]", info.id);
-      console.log("  imports:", info.importedIds);
-      console.log("  dynamic imports:", info.dynamicallyImportedIds);
-      console.log("  exports:", info.exportedBindings);
+      console.debug("[parsed]", info.id);
+      console.debug("  imports:", info.importedIds);
+      console.debug("  dynamic imports:", info.dynamicallyImportedIds);
+      console.debug("  exports:", info.exportedBindings);
     },
     generateBundle(_, bundle) {
       for (const [fileName, chunk] of Object.entries(bundle)) {
         if (chunk.type === "chunk") {
-          console.log("[chunk]", fileName);
-          console.log("  imports:", chunk.imports);
-          console.log("  modules:", Object.keys(chunk.modules).slice(0, 5));
+          console.debug("[chunk]", fileName);
+          console.debug("  imports:", chunk.imports);
+          console.debug("  modules:", Object.keys(chunk.modules).slice(0, 5));
         }
       }
     },

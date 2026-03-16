@@ -11,7 +11,7 @@ import tseslint from "typescript-eslint";
 export default defineConfig([
   // Base Presets
   js.configs.recommended,
-  tseslint.configs.strict,
+  tseslint.configs.strictTypeChecked,
   stylistic.configs.recommended,
   importx.flatConfigs.recommended,
   importx.flatConfigs.typescript,
@@ -56,8 +56,17 @@ export default defineConfig([
       "max-depth": ["error", 4],
       "max-nested-callbacks": ["error", 4],
       "max-params": ["warn", 4],
-      "max-statements": ["warn", 20],
-      "no-console": "warn",
+      "no-console": [
+        "warn",
+        {
+          allow: [
+            "warn",
+            "error",
+            "debug",
+          ],
+        },
+      ],
+      "no-else-return": ["error", { allowElseIf: false }],
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -66,6 +75,28 @@ export default defineConfig([
         },
       ],
     },
+  },
+
+  {
+    name: "TypeScript Type Checking Configuration",
+    languageOptions: {
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: ["src/pages/.well-known/security.txt.ts"],
+        },
+      },
+    },
+    ignores: ["astro.config.ts", "**/*.js"],
+  },
+
+  {
+    name: "Type Checked Linting Overrides",
+    files: [
+      "astro.config.ts",
+      "**/*.js",
+      "**/*.astro",
+    ],
+    extends: [tseslint.configs.disableTypeChecked],
   },
 
   {

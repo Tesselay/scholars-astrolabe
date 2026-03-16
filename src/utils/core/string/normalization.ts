@@ -1,13 +1,13 @@
 function collapseSlashes(str: string): string {
-  return String(str).replace(/\/+/g, "/");
+  return str.replace(/\/+/g, "/");
 }
 
 function trimSlashes(str: string): string {
-  return String(str).replace(/^\/+|\/+$/g, "");
+  return str.replace(/^\/+|\/+$/g, "");
 }
 
 function ensureLeadingSlash(str: string): string {
-  const collapsed = collapseSlashes(String(str));
+  const collapsed = collapseSlashes(str);
 
   return collapsed.startsWith("/") ? collapsed : "/" + collapsed.replace(/^\/+/, "");
 }

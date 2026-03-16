@@ -12,9 +12,9 @@ export function buildStrictSchema<T>(obj: T): SchemaOf<T> {
   }
 
   if (obj && typeof obj === "object" && !Array.isArray(obj)) {
-    const shape: Record<string, z.ZodType<unknown>> = {};
+    const shape: Record<string, z.ZodType> = {};
     for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
-      shape[key] = buildStrictSchema(value as unknown) as unknown as z.ZodType<unknown>;
+      shape[key] = buildStrictSchema(value) as unknown as z.ZodType;
     }
 
     return z.object(shape).strict() as unknown as SchemaOf<T>;

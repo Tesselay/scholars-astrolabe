@@ -9,8 +9,7 @@ function filterEntriesByLang<Type extends { id: string }>(
   return entries.filter((entry) => entry.id.startsWith(prefix));
 }
 
-const byLang
-  = <Type extends { id: string }>(lang: LocaleRoute) => (entry: Type) => entry.id.startsWith(`${lang}/`);
+const byLang = (lang: LocaleRoute) => (entry: { id: string }) => entry.id.startsWith(`${lang}/`);
 
 function pathsForAllLocales(): { params: { lang: LocaleRoute } }[] {
   return locales.map((locale) => ({ params: { lang: locale.path } }));
