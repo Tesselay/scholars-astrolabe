@@ -4,7 +4,7 @@ import type { LocaleRoute } from "&utils/core/i18n/locale/definition.ts";
 import { getLocaleRouteFromPathStrict } from "&utils/core/i18n/locale/path.ts";
 
 type DictGlob<Type> = Record<string, Type>;
-type DictModulesProvider<Type> = (dictName?: string) => DictGlob<Type>;
+type DictModulesProvider<Type> = (dictName?: string) => Promise<DictGlob<Type>>;
 type Dict<Type> = Record<LocaleRoute, Type>;
 
 export class GenericDictLoader<Type extends z.ZodType> {
@@ -20,9 +20,9 @@ export class GenericDictLoader<Type extends z.ZodType> {
     this.dictModulesProvider = dictModulesProvider;
   }
 
-  loadModules(): DictGlob<z.infer<Type>> {
+  async loadModules(): Promise<DictGlob<z.infer<Type>>> {
     if (!this.dictModules) {
-      this.dictModules = this.dictModulesProvider(this.dictName);
+      this.dictModules = await this.dictModulesProvider(this.dictName);
     }
 
     return this.dictModules;
@@ -42,7 +42,7 @@ export class GenericDictLoader<Type extends z.ZodType> {
   }
 
   async init(): Promise<void> {
-    const modules = this.loadModules();
+    const modules = await this.loadModules();
     const dictSkeleton: Partial<Dict<z.infer<Type>>> = {};
 
     for (const filePath in modules) {
