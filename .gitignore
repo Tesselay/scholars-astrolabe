@@ -24,6 +24,9 @@ pnpm-debug.log*
 .idea/
 .vscode/
 
+# Tests
+/tests/_output/
+
 # Playwright
 /test-results/
 /playwright-report/
@@ -32,4 +35,4 @@ pnpm-debug.log*
 
 # Vitest
 /coverage/
-/tests/output
+

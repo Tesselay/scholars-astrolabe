@@ -8,6 +8,7 @@ const env = loadEnv(mode, process.cwd(), [
   "PORT",
   "SITE_URL",
 ]);
+
 const isCI = Boolean(env.CI);
 
 export default defineConfig({
@@ -32,7 +33,9 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
 
+  // @ts-expect-error exactOptionalPropertyTypes: Temporary exception
   webServer: {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     command: `npx astro build && npx astro preview --host ${env.HOST} --port ${env.PORT}`,
     url: env.SITE_URL,
     reuseExistingServer: !isCI,

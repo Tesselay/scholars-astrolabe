@@ -63,7 +63,6 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] Set TypeScript to strict
 - [ ] CSS Lint
 - [ ] ESLint Plugins:
   - [ ] Vitest
@@ -87,6 +86,7 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Styling is not applied correctly in preview/build
 - [ ] Dependabot Alerts
+- [ ] Validate environment variables beyond Astro context https://catalins.tech/validate-environment-variables-with-zod/ https://www.creatures.sh/blog/env-type-safety-and-validation/#extending-the-global-processenv
 
 ### Code
 
@@ -95,6 +95,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Apply hero placeholder
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Add read time
+- [ ] Use `ReturnType` for dict loader return type
 
 ### Components
 

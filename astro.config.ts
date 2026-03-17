@@ -20,6 +20,7 @@ import { defaultLocale } from "./src/utils/core/i18n/locale/definition.ts";
 const mode = process.env.NODE_ENV ?? "development";
 const env = loadEnv(mode, process.cwd(), ["SITE_URL", "DIAG_GRAPH"]);
 
+// @ts-expect-error exactOptionalPropertyTypes: Temporary exception
 export default defineConfig({
   site: env.SITE_URL,
   i18n: {

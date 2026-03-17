@@ -27,8 +27,8 @@ test.describe("Header & NavigationLink", () => {
       new RegExp(`^/${defaultLang}/contact/?$`, "i")
     ];
 
-    for (let i = 0; i < hrefMatchers.length; i++) {
-      await expect(links.nth(i)).toHaveAttribute("href", hrefMatchers[i]);
+    for (const [i, href] of hrefMatchers.entries()) {
+      await expect(links.nth(i)).toHaveAttribute("href", href);
     }
   });
 
@@ -38,11 +38,11 @@ test.describe("Header & NavigationLink", () => {
   }) => {
     const expected = [to(""), to("folio/"), to("blog/"), to("contact/")];
 
-    for (let i = 0; i < 4; i++) {
+    for (const [i, link] of expected.entries()) {
       const nav = page.getByRole("navigation", { name: "Primary" });
       const links = nav.getByRole("link");
       await links.nth(i).click();
-      await expect(page).toHaveURL(expected[i]);
+      await expect(page).toHaveURL(link);
 
       const currentNav = page.getByRole("navigation", { name: "Primary" });
       const currentLinks = currentNav.getByRole("link");

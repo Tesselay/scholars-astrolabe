@@ -21,12 +21,11 @@ test.describe("Metadata endpoints", () => {
     const m = body.match(/^Sitemap:\s*(\S+)/m);
     expect(m, "Sitemap line should exist").toBeTruthy();
 
-    const urlSitemap = new URL(m![1], baseURL);
+    const urlSitemap = new URL(m![1]!, baseURL);
     expect(urlSitemap.pathname).toBe("/sitemap-index.xml");
   });
 
   test("security.txt is reachable and contains required fields", async ({ request }) => {
-    // Support both preferred and fallback locations
     const res =
       (await pickFirstReachable(request, ["/.well-known/security.txt", "/security.txt"])) ??
       undefined;

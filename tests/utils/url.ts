@@ -6,10 +6,10 @@ export const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$
 export const tagPathFromUrl = (url: string, lang: string) =>
   new URL(url).pathname.replace(new RegExp(`^/${lang}/tags/`), "");
 
-export function parseLangAndSlugFromHref(baseUrl: string, href: string) {
+export function parseLangAndSlugFromHref(baseUrl: string, href: string): Record<"lang" | "slug", string> {
   const url = new URL(href, baseUrl);
   const parts = url.pathname.replace(/^\/+|\/+$/g, "").split("/");
-  if (parts.length < 3 || parts[1] !== "blog")
+  if (parts.length < 3 || parts[1] !== "blog" ||!parts[0])
     throw new Error(`Unexpected blog URL: ${url.pathname}`);
   return { lang: parts[0], slug: parts.slice(2).join("/") };
 }
