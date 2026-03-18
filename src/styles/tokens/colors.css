@@ -1,10 +1,8 @@
 :root {
-  /* Colors */
   /* Background */
   --bg-primary: #0a0e19;
   --bg-secondary: #121831;
   --bg-tertiary: #162e5c;
-
   --bg-card: #101726;
   --bg-code: #141d30;
 
@@ -27,8 +25,7 @@
   --callout-error: #e07a63;
   --callout-info: #8da6ff;
 
-  /* Hero */
-  /* Placeholder Background */
+  /* Hero Placeholder Background */
   --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--accent-primary));
 
   /* Component & state tokens */
@@ -41,17 +38,15 @@
   --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
   --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
   --icon-color: var(--accent-secondary);
-  --test-bg: rgba(0 0 0 / 0.5);
+  --test-bg: rgb(0 0 0 / 50%); 
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    /* Colors */
     /* Background */
     --bg-primary: #f2e9d6;
     --bg-secondary: #e9decb;
     --bg-tertiary: #dcd0ba;
-
     --bg-card: #efe6d3;
     --bg-code: #e8dec7;
 
@@ -74,8 +69,7 @@
     --callout-error: #c26f5f;
     --callout-info: #153a77;
 
-    /* Hero */
-    /* Placeholder Background */
+    /* Hero Placeholder Background */
     --hero-bg: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
 
     /* Component & state tokens */
@@ -88,13 +82,14 @@
     --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
     --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
     --icon-color: var(--text-link);
-    --test-bg: rgba(255 255 255 / 0.5);
+    --test-bg: rgb(255 255 255 / 50%);
   }
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
 }
+
 :root[data-theme="dark"] {
   color-scheme: dark;
 }

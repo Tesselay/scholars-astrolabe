@@ -18,7 +18,7 @@ if (attributes.disabled) {
   attributes.disabled = undefined;
 }
 
-const classList = [...getButtonClasses(variant, size), "btn--anchor"];
+const classList = [...getButtonClasses(variant, size), "btn-anchor"];
 ---
 
 <a class:list={[classList, attributes.class]} {...attributes}>
@@ -26,9 +26,9 @@ const classList = [...getButtonClasses(variant, size), "btn--anchor"];
 </a>
 
 <style define:vars={{ "btn-accent": color }}>
-  @import "button.css";
+  @import url("button.css");
 
-  .btn--anchor {
+  .btn-anchor {
     font-weight: var(--w-light);
   }
 </style>

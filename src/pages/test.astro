@@ -24,7 +24,7 @@ const pageTitle = "TestComponent Page";
     <div class="examples">
       <section>
         <p>Font Families</p>
-        <div class="selection selection--column">
+        <div class="selection selection-column">
           <p class="font-family-example" style="font-family: var(--font-family-title)">
             Titles Font
           </p>
@@ -40,7 +40,7 @@ const pageTitle = "TestComponent Page";
 
       <section>
         <p>Font Sizes</p>
-        <div class="selection selection--column">
+        <div class="selection selection-column">
           <p style="font-size: var(--font-size-0)">Font Size 0</p>
           <p style="font-size: var(--font-size-1)">Font Size 1</p>
           <p style="font-size: var(--font-size-2)">Font Size 2</p>
@@ -53,7 +53,7 @@ const pageTitle = "TestComponent Page";
 
       <section>
         <p>Line Heights</p>
-        <div class="selection selection--column selection--line-height-example">
+        <div class="selection selection-column line-height-example">
           <p style="line-height: var(--lh-tight)">Tight Line Height</p>
           <p style="line-height: var(--lh-title)">Title Line Height</p>
           <p style="line-height: var(--lh-body)">Body Line Height</p>
@@ -62,7 +62,7 @@ const pageTitle = "TestComponent Page";
 
       <section>
         <p>Weights</p>
-        <div class="selection selection--column">
+        <div class="selection selection-column">
           <p style="font-weight: var(--w-hairline)">Hairline</p>
           <p style="font-weight: var(--w-thin)">Thin</p>
           <p style="font-weight: var(--w-light)">Light</p>
@@ -77,7 +77,7 @@ const pageTitle = "TestComponent Page";
 
   <section>
     <h2>Colors</h2>
-    <div class="examples examples--alt-background">
+    <div class="examples examples-alt-background">
       <section>
         <p>Background</p>
         <div class="selection">
@@ -137,7 +137,7 @@ const pageTitle = "TestComponent Page";
     <div class="examples">
       <div>
         <p>Default</p>
-        <div class="selection--spacing-example">
+        <div class="spacing-example">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -151,7 +151,7 @@ const pageTitle = "TestComponent Page";
       </div>
       <div>
         <p>Space 1</p>
-        <div class="selection--spacing-example" style="gap: var(--space-1);">
+        <div class="spacing-example" style="gap: var(--space-1);">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -165,7 +165,7 @@ const pageTitle = "TestComponent Page";
       </div>
       <div>
         <p>Space 2</p>
-        <div class="selection--spacing-example" style="gap: var(--space-2);">
+        <div class="spacing-example" style="gap: var(--space-2);">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -179,7 +179,7 @@ const pageTitle = "TestComponent Page";
       </div>
       <div>
         <p>Space 3</p>
-        <div class="selection--spacing-example" style="gap: var(--space-3);">
+        <div class="spacing-example" style="gap: var(--space-3);">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -193,7 +193,7 @@ const pageTitle = "TestComponent Page";
       </div>
       <div>
         <p>Space 4</p>
-        <div class="selection--spacing-example" style="gap: var(--space-4);">
+        <div class="spacing-example" style="gap: var(--space-4);">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -207,7 +207,7 @@ const pageTitle = "TestComponent Page";
       </div>
       <div>
         <p>Space 5</p>
-        <div class="selection--spacing-example" style="gap: var(--space-5);">
+        <div class="spacing-example" style="gap: var(--space-5);">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -288,7 +288,7 @@ const pageTitle = "TestComponent Page";
     <div class="examples">
       <section>
         <p>Cards</p>
-        <div class="selection selection--column">
+        <div class="selection selection-column">
           <Card>Default</Card>
           <Card sizing="full">Sizing Full</Card>
           <Card sizing="fit-content">Sizing Fit Content</Card>
@@ -304,7 +304,7 @@ const pageTitle = "TestComponent Page";
         <div class="selection">
           <section>
             <p>Default Button</p>
-            <div class="selection selection--button-example">
+            <div class="selection button-example">
               <Button>Default</Button>
               <Button variant="primary">Primary</Button>
               <Button color="var(--test-color)" variant="primary">Custom Color</Button>
@@ -321,7 +321,7 @@ const pageTitle = "TestComponent Page";
 
           <section>
             <p>Anchor Button</p>
-            <div class="selection selection--button-example">
+            <div class="selection button-example">
               <ButtonAnchor href="#">Default</ButtonAnchor>
               <ButtonAnchor href="#" variant="primary">Primary</ButtonAnchor>
               <ButtonAnchor href="#" variant="danger">Danger</ButtonAnchor>
@@ -343,7 +343,7 @@ const pageTitle = "TestComponent Page";
 
           <section>
             <p>Button Sizes</p>
-            <div class="selection selection--button-example">
+            <div class="selection button-example">
               <Button size="xs">Extra Small</Button>
               <Button size="s">Small</Button>
               <Button size="m">Medium</Button>
@@ -382,7 +382,7 @@ const pageTitle = "TestComponent Page";
       </section>
       <section>
         <p>Grid</p>
-        <div class="selection selection--grid-example">
+        <div class="selection grid-example">
           <Card class="box" square>1</Card>
           <Card class="box" square>2</Card>
           <Card class="box" square>3</Card>
@@ -414,7 +414,7 @@ const pageTitle = "TestComponent Page";
     gap: var(--space-2);
   }
 
-  .examples--alt-background {
+  .examples-alt-background {
     background-color: var(--test-bg);
     border-radius: var(--radius-lg);
   }
@@ -425,24 +425,24 @@ const pageTitle = "TestComponent Page";
     gap: var(--space-2);
   }
 
-  .selection--column {
+  .selection-column {
     flex-direction: column;
   }
 
-  .selection--button-example {
+  .button-example {
     align-items: center;
   }
 
-  .selection--line-height-example > p {
+  .line-height-example > p {
     background-color: var(--bg-card);
   }
 
-  .selection--spacing-example {
+  .spacing-example {
     display: grid;
     grid-template-columns: repeat(3, minmax(64px, max-content));
   }
 
-  .selection--grid-example {
+  .grid-example {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
 

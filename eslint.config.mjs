@@ -303,6 +303,7 @@ export default defineConfig([
     files: ["**/*.config.*"],
     rules: {
       "import-x/no-default-export": "off",
+      "import-x/no-anonymous-default-export": "off",
       "import-x/extensions": "off",
     },
   },

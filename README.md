@@ -63,7 +63,7 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for astro jsx indentation (e.g. in style tag)
-- [ ] CSS Lint
+- [ ] `import-x/no-restricted-paths` to better control module domains
 - [ ] ESLint Plugins:
   - [ ] Vitest
   - [ ] Playwright
@@ -81,6 +81,11 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use `test` instead of `it` in vitest
 - [ ] Rework test utils
 - [ ] Prevent error printing in test output (invalid dictionary)
+
+#### Style Rework
+- [ ] Readme for style architecture
+- [ ] BEM
+- [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
 
 ### Issues
 
@@ -121,10 +126,11 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Add a "cheatsheet" page?
 - [ ] Align locale codes to web standard
 - [ ] Split out head metadata into separate component?
-- [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
 - [ ] Markdown frontmatter schema?
 - [ ] Use URL for paths? (can work with file paths too)
+- [ ] Refine TypeScript Configuration https://www.typescript-training.com/course/enterprise-v2/03-tsconfig-strictness/
 - [ ] Completely customized ESLint/TypeScript setup -> separate repo
+- [ ] Use Astro Font API
 
 ### Considerations
 

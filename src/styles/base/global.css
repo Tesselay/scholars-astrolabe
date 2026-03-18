@@ -1,20 +1,21 @@
-@import "../tokens/base.css";
-@import "../tokens/animation.css";
-@import "../tokens/colors.css";
-@import "../tokens/radii.css";
-@import "../tokens/shadows.css";
-@import "../tokens/spacing.css";
-@import "../tokens/typography.css";
-
-@import "reset.css";
-@import "typography.css";
-
-@import "katex/dist/katex.min.css";
-@import "open-props/open-props.min.css";
+@import url("../tokens/base.css");
+@import url("../tokens/animation.css");
+@import url("../tokens/colors.css");
+@import url("../tokens/radii.css");
+@import url("../tokens/shadows.css"); 
+@import url("../tokens/spacing.css");
+@import url("../tokens/typography.css");
+@import url("reset.css");
+@import url("typography.css");
+@import url("katex/dist/katex.min.css");
+@import url("open-props/open-props.min.css");
 
 :root {
   color-scheme: dark light;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-width: thin;
 }
+
 ::selection {
   background: var(--selection-bg);
 }
@@ -31,6 +32,7 @@ code {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 :focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
@@ -49,8 +51,8 @@ img {
 .icon svg {
   inline-size: 100%;
   block-size: 100%;
-  fill: currentColor;
-  stroke: currentColor;
+  fill: currentcolor;
+  stroke: currentcolor;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -64,6 +66,7 @@ img {
   height: 1px;
   overflow: hidden;
 }
+
 .skip:focus {
   position: static;
   width: auto;
@@ -84,30 +87,16 @@ img {
 }
 
 /* Scrollbar */
-/* Firefox */
-:root {
-  scrollbar-color: var(--scrollbar-thumb) transparent;
-  scrollbar-width: thin;
-}
+
 /* WebKit */
 ::-webkit-scrollbar {
   height: 10px;
   width: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
   border-radius: var(--radius-sm);
-}
-
-/* Accessibility */
-.sr-only {
-  position: absolute;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  white-space: nowrap;
-  clip: rect(0, 0, 0, 0);
-  clip-path: inset(50%);
 }
 
 @media (prefers-reduced-motion: reduce) {

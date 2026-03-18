@@ -1,23 +1,28 @@
-/* Tokens */
 .btn {
+  /* * Tokens * */
+
+  /* Colors */
   --btn-accent: var(--accent-primary);
-  --btn-text: hsl(from var(--btn-accent) h s l / 0.85);
+  --btn-text: hsl(from var(--btn-accent) h s l / 85%);
   --btn-bg: var(--bg-secondary);
 
+  /* Padding */
   --btn-padding-x: 1.75ch;
   --btn-padding-y: 0.75ch;
 
+  /* Border */
   --btn-border-radius: 0.5ch;
   --btn-border-color: var(--btn-bg);
 
+  /* Highlight */
   --btn-highlight-size: 0;
-  --btn-highlight-color: hsl(from var(--btn-accent) h s l / 0.25);
+  --btn-highlight-color: hsl(from var(--btn-accent) h s l / 25%);
 
-  --btn-ink-shadow: 0 1px 0 hsl(from var(--btn-text) h s l / 0.15);
-
+  /* Icon */
   --btn-icon-size: 2ch;
   --btn-icon-color: var(--btn-accent);
 
+  /* Shadows */
   --btn-shadow-color: var(--shadow-color);
   --btn-shadow-strength: 25%;
   --btn-shadow-1: 0 1px 2px -1px
@@ -25,71 +30,53 @@
   --btn-shadow-2:
     0 3px 5px -2px hsl(var(--btn-shadow-color) / calc(var(--btn-shadow-strength) + 3%)),
     0 7px 14px -5px hsl(var(--btn-shadow-color) / calc(var(--btn-shadow-strength) + 5%));
+  --btn-ink-shadow: 0 1px 0 hsl(from var(--btn-text) h s l / 15%);
   --btn-shadow-depth: 0 1px var(--btn-border-color);
 
+  /* Animation */
   --btn-transition-motion-reduce: ;
   --btn-transition-motion-ok: box-shadow 145ms ease, outline-offset 145ms ease;
   --btn-transition: var(--btn-transition-motion-ok);
-}
 
-.btn--icon {
-  --btn-icon-size: clamp(44px, 2ch + 0.5vw, 128px);
-}
+  /* * Styles * */
 
-.btn--anchor {
-  --btn-accent: var(--text-link);
-}
-
-.btn--danger {
-  --btn-accent: var(--callout-error);
-}
-
-@media (prefers-color-scheme: light) {
-  .btn {
-    --btn-border-color: hsl(from var(--btn-accent) h s l / 0.25);
-    --btn-shadow-strength: 25%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    --btn-transition: var(--btn-transition-motion-reduce);
-  }
-}
-
-/* Styling */
-.btn {
-  cursor: pointer;
-  touch-action: manipulation;
-
+  /* Typography */
   font-family: var(--font-family-secondary);
   color: var(--btn-text);
   white-space: nowrap;
 
+  /* Structure */
   background: var(--btn-bg);
   border: 2px solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
 
+  /* Shadows */
   box-shadow:
     var(--btn-shadow-2),
     var(--btn-shadow-depth),
     0 0 0 var(--btn-highlight-size) var(--btn-highlight-color);
   text-shadow: var(--btn-ink-shadow);
-  outline-color: currentColor;
+  outline-color: currentcolor;
 
+  /* Layout */
   display: inline-flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
   gap: 1ch;
+
+  /* Padding */
   padding-inline: var(--btn-padding-x);
   padding-block: var(--btn-padding-y);
 
+  /* Interaction */
   user-select: none;
+    cursor: pointer;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 
+  /* Animation */
   transition: var(--btn-transition);
 
   &:hover {
@@ -105,7 +92,7 @@
     pointer-events: none;
     box-shadow: none;
     opacity: 0.5;
-    color: hsl(from currentColor h s l / 0.5);
+    color: hsl(from currentcolor h s l / 50%);
   }
 }
 
@@ -121,38 +108,61 @@
   filter: drop-shadow(var(--btn-ink-shadow));
 }
 
-.btn--ghost {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
+.btn-icon {
+  --btn-icon-size: clamp(44px, 2ch + 0.5vw, 128px);
+  --btn-padding-x: 0;
+  --btn-padding-y: 0;
 
-.btn--icon {
   aspect-ratio: 1;
   background: transparent;
   box-shadow: none;
   text-shadow: none;
   border: 0;
-  --btn-padding-x: 0;
-  --btn-padding-y: 0;
 }
 
-.btn--xs {
+.btn-anchor {
+  --btn-accent: var(--text-link);
+}
+
+.btn-danger {
+  --btn-accent: var(--callout-error);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.btn-xs {
   font-size: var(--font-size-0);
 }
 
-.btn--s {
+.btn-s {
   font-size: var(--font-size-1);
 }
 
-.btn--m {
+.btn-m {
   font-size: var(--font-size-2);
 }
 
-.btn--l {
+.btn-l {
   font-size: var(--font-size-3);
 }
 
-.btn--xl {
+.btn-xl {
   font-size: var(--font-size-4);
+}
+
+@media (prefers-color-scheme: light) {
+  .btn {
+    --btn-border-color: hsl(from var(--btn-accent) h s l / 25%);
+    --btn-shadow-strength: 25%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    --btn-transition: var(--btn-transition-motion-reduce);
+  }
 }

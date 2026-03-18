@@ -7,7 +7,7 @@ interface Props extends ButtonBase, Omit<HTMLAttributes<"button">, "color"> {}
 
 const { color, variant = "primary", size = "s", ...attributes } = Astro.props;
 
-const classList = [...getButtonClasses(variant, size), "btn--native"];
+const classList = [...getButtonClasses(variant, size), "btn-native"];
 ---
 
 <button class:list={[classList, attributes.class]} {...attributes}>
@@ -15,9 +15,9 @@ const classList = [...getButtonClasses(variant, size), "btn--native"];
 </button>
 
 <style define:vars={{ "btn-accent": color }}>
-  @import "button.css";
+  @import url("button.css");
 
-  .btn--native {
+  .btn-native {
     font-weight: var(--w-semibold);
   }
 </style>

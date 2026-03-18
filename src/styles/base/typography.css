@@ -1,6 +1,6 @@
-@import "fonts.css";
-@import "../tokens/typography.css";
-@import "../tokens/colors.css";
+@import url("fonts.css");
+@import url("../tokens/typography.css");
+@import url("../tokens/colors.css");
 
 @supports (font-variation-settings: normal) {
   body {
@@ -11,11 +11,12 @@
 html {
   font-size: 100%;
 }
-body {
+
+body { 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
   line-height: var(--lh-body);
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   font-kerning: normal;
   font-feature-settings: "liga", "kern";
 }
@@ -49,18 +50,23 @@ h6 {
 h1 {
   font-size: var(--font-size-6);
 }
+
 h2 {
   font-size: var(--font-size-5);
 }
+
 h3 {
   font-size: var(--font-size-4);
 }
+
 h4 {
   font-size: var(--font-size-3);
 }
+
 h5 {
   font-size: var(--font-size-2);
 }
+
 h6 {
   font-size: var(--font-size-1);
   font-weight: var(--w-medium);
@@ -75,9 +81,11 @@ blockquote {
   word-break: normal;
   hyphens: auto;
 }
+
 p {
   margin: 0 0 1em;
 }
+
 ul,
 ol {
   padding-inline-start: 1.25em;
@@ -90,11 +98,13 @@ a {
   font-family: var(--font-family-secondary);
   text-decoration: none;
 }
+
 a:hover {
   color: var(--text-link-hover);
 }
+
 a:focus {
-  outline: 2px solid currentColor;
+  outline: 2px solid currentcolor;
   outline-offset: 5px;
   border-radius: 0.25rem;
 }
@@ -104,10 +114,12 @@ strong,
 b {
   font-weight: var(--w-semibold);
 }
+
 em,
 i {
   font-style: italic;
 }
+
 small {
   font-size: var(--font-size-0);
 }
@@ -119,6 +131,7 @@ samp {
   font-family: var(--font-family-mono);
   font-size: 0.875em;
 }
+
 pre {
   font-family: var(--font-family-mono);
   font-size: 0.95rem;
@@ -134,9 +147,11 @@ sub {
   line-height: 0;
   position: relative;
 }
+
 sup {
   top: -0.5em;
 }
+
 sub {
   bottom: -0.25em;
 }
@@ -145,6 +160,7 @@ sub {
 figure {
   margin: 0 0 1em;
 }
+
 figcaption,
 caption {
   font-size: var(--font-size-0);

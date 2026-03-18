@@ -7,7 +7,7 @@ export interface ButtonBase {
 export function getButtonClasses(variant?: ButtonBase["variant"], size?: ButtonBase["size"]) {
   return [
     "btn",
-    variant && `btn--${variant}`,
-    size && `btn--${size}`,
+    variant && `btn-${variant}`,
+    size && `btn-${size}`,
   ];
 }
