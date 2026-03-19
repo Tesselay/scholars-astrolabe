@@ -101,7 +101,9 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
   * {
+    /* stylelint-disable-next-line declaration-no-important */
     animation: none !important;
+    /* stylelint-disable-next-line declaration-no-important */
     transition: none !important;
   }
 }

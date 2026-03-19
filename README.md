@@ -62,7 +62,8 @@ All commands are run from the root of the project, from a terminal:
 
 #### Linting & Formatting
 
-- [ ] Lint rule for astro jsx indentation (e.g. in style tag)
+- [ ] Lint rule for CSS indentation
+- [ ] Fix ESLint CSS not applying
 - [ ] `import-x/no-restricted-paths` to better control module domains
 - [ ] ESLint Plugins:
   - [ ] Vitest
@@ -83,9 +84,12 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Prevent error printing in test output (invalid dictionary)
 
 #### Style Rework
+
 - [ ] Readme for style architecture
 - [ ] BEM
 - [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
+  - [ ] Restrict to one color system (e.g. Oklch)
+- [ ] Flip reduced motion logic and introduce motion via `prefers-reduced-motion: no-preference` media query
 
 ### Issues
 
