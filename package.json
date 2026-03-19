@@ -32,7 +32,7 @@
     "test:e2e": "playwright test",
     "test:a11y": "pa11y-ci",
     "staged:lint": "eslint --fix",
-    "staged:styles": "stylelint \"**/*.{css,scss,sass,html,astro}\" \"!**/dist/**\" --fix",
+    "staged:styles": "stylelint",
     "postinstall": "husky",
     "clean": "rm -rf .astro dist node_modules"
   },
