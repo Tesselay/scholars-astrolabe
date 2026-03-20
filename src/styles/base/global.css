@@ -98,12 +98,3 @@ img {
   background-color: var(--scrollbar-thumb);
   border-radius: var(--radius-sm);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    /* stylelint-disable-next-line declaration-no-important */
-    animation: none !important;
-    /* stylelint-disable-next-line declaration-no-important */
-    transition: none !important;
-  }
-}
