@@ -33,7 +33,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
 
-  // @ts-expect-error exactOptionalPropertyTypes: Temporary exception
+  // @ts-expect-error exactOptionalPropertyTypes: Temporary exception until global env validation
   webServer: {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     command: `npx astro build && npx astro preview --host ${env.HOST} --port ${env.PORT}`,
