@@ -216,7 +216,7 @@ export default defineConfig([
         },
       ],
       "css/no-invalid-properties": ["error", { allowUnknownVariables: true }],
-      // "css/prefer-logical-properties": "error",
+      "css/prefer-logical-properties": "error",
       "css/relative-font-units": ["error", { allowUnits: ["em", "rem"] }],
     },
   },

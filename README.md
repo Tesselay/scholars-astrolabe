@@ -87,7 +87,6 @@ All commands are run from the root of the project, from a terminal:
 #### CSS Rework
 
 - [ ] Readme for style architecture
-- [ ] BEM
 - [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
   - [ ] Restrict to one color system (e.g. Oklch)
 - [ ] Flip reduced motion logic and introduce motion via `prefers-reduced-motion: no-preference` media query
@@ -98,7 +97,10 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Env vars https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/env
 - [ ] Use logical properties
 - [ ] Site is usable with >= 200% zoom
+- [ ] https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
+- [ ] Replace CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/
 - [ ] Layers?
+- [ ] BEM? https://github.com/MorevM/stylelint-plugin
 
 ### Issues
 
