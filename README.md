@@ -63,7 +63,8 @@ All commands are run from the root of the project, from a terminal:
 #### Linting & Formatting
 
 - [ ] Lint rule for CSS indentation
-- [ ] Fix ESLint CSS not applying
+- [ ] Object Newlines
+- [ ] Env Var for glob/file extensions
 - [ ] `import-x/no-restricted-paths` to better control module domains
 - [ ] ESLint Plugins:
   - [ ] Vitest
@@ -83,19 +84,27 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Rework test utils
 - [ ] Prevent error printing in test output (invalid dictionary)
 
-#### Style Rework
+#### CSS Rework
 
 - [ ] Readme for style architecture
 - [ ] BEM
 - [ ] Rework color system https://www.youtube.com/watch?v=vGfTyHPWZLE
   - [ ] Restrict to one color system (e.g. Oklch)
 - [ ] Flip reduced motion logic and introduce motion via `prefers-reduced-motion: no-preference` media query
+- [ ] PostCSS + autoprefixer https://codelucky.com/css-autoprefixer/ (Set StyleLint vendorprefix rules accordingly)
+- [ ] Be aware of CSS ESLint CSS custom property tracking: https://github.com/eslint/css/pull/377
+- [ ] Use FontsAPI https://docs.astro.build/en/reference/font-provider-reference/
+- [ ] font-variant-ligatures, font-kerning, and hyphenation
+- [ ] Env vars https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/env
+- [ ] Use logical properties
+- [ ] Site is usable with >= 200% zoom
+- [ ] Layers?
 
 ### Issues
 
 - [ ] Styling is not applied correctly in preview/build
 - [ ] Dependabot Alerts
-- [ ] Validate environment variables beyond Astro context https://catalins.tech/validate-environment-variables-with-zod/ https://www.creatures.sh/blog/env-type-safety-and-validation/#extending-the-global-processenv
+- [ ] Validate environment variables beyond Astro context https://catalins.tech/validate-environment-variables-with-zod/ | https://www.creatures.sh/blog/env-type-safety-and-validation/#extending-the-global-processenv
 
 ### Code
 
@@ -114,15 +123,15 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Language Switcher
 - [ ] Accessible Scrollbar
 - [ ] Favicon
-- [ ] Rework Diagnostics Plugin (Vite DevTools?)
-- [ ] Rework Tags
+- [ ] Refactor Diagnostics Plugin (Vite DevTools?)
+- [ ] Refactor Tags
 - [ ] Improve security txt
 - [ ] Improve robots txt
 - [ ] Improve humans txt
+- [ ] Scrollbar
 
 ### Architectural
 
-- [ ] font-variant-ligatures, font-kerning, and hyphenation
 - [ ] Localize existing data
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
@@ -134,7 +143,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use URL for paths? (can work with file paths too)
 - [ ] Refine TypeScript Configuration https://www.typescript-training.com/course/enterprise-v2/03-tsconfig-strictness/
 - [ ] Completely customized ESLint/TypeScript setup -> separate repo
-- [ ] Use Astro Font API
 
 ### Considerations
 

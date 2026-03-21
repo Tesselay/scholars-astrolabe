@@ -7,10 +7,6 @@ body {
   height: 100%; 
 }
 
-html {
-  text-size-adjust: 100%;
-}
-
 body {
   margin: 0;
   background: var(--bg-primary);

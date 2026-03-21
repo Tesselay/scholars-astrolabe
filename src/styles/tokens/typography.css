@@ -3,8 +3,7 @@
   --font-family-title: "Cormorant Garamond Variable", ui-serif, georgia, serif;
   --font-family-primary: "Source Serif 4 Variable", ui-serif, georgia, serif;
   --font-family-secondary: "Inter Variable", system-ui, -apple-system, segoe ui, roboto, sans-serif;
-  --font-family-mono:
-    "JetBrains Mono Variable", ui-monospace, sfmono-regular, menlo, consolas, monospace;
+  --font-family-mono: "JetBrains Mono Variable", ui-monospace, sfmono-regular, menlo, consolas, monospace;
 
   /* Scale */
   --font-size-0: 0.875rem;
