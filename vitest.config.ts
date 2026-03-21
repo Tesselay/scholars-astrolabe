@@ -21,10 +21,6 @@ export default getViteConfig({
           dir: "tests/integration",
           include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],
           globalSetup: ["tests/setup/astro-content-server.ts"],
-          // Ensure no race condition trips up CI
-          pool: "forks",
-          maxWorkers: 1,
-          isolate: false,
         },
       },
     ],

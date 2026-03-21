@@ -17,7 +17,9 @@ function localizeUrlPath(locale: LocaleRoute, urlPath: string): string {
   const segments = urlPath.split("/").filter(Boolean);
   segments.splice(urlPathLocaleIndex, 0, locale);
 
-  return normalizeAstroPath(segments.join("/"));
+  const localizedPath = urlPath.endsWith("/") ? segments.join("/") + "/" : segments.join("/");
+
+  return normalizeAstroPath(localizedPath);
 }
 
 function neutralizeUrlPath(urlPath: string): string {
@@ -28,7 +30,8 @@ function neutralizeUrlPath(urlPath: string): string {
     if (segments[urlPathLocaleIndex] === locale) {
       segments.splice(urlPathLocaleIndex, 1);
     }
-    const neutralizedPath = segments.join("/");
+    let neutralizedPath = segments.join("/");
+    neutralizedPath = urlPath.endsWith("/") ? neutralizedPath + "/" : neutralizedPath;
 
     return normalizeAstroPath(neutralizedPath);
   }

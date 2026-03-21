@@ -40,9 +40,9 @@ describe("path common", () => {
 
   describe("neutralizeUrlPath", () => {
     it("strips known locale at start", () => {
-      expect(neutralizeUrlPath("en/about")).toBe("/about/");
-      expect(neutralizeUrlPath("de/about/me")).toBe("/about/me/");
-      expect(neutralizeUrlPath("/en/about")).toBe("/about/");
+      expect(neutralizeUrlPath("en/about")).toBe("/about");
+      expect(neutralizeUrlPath("de/about/me")).toBe("/about/me");
+      expect(neutralizeUrlPath("/en/about/")).toBe("/about/");
     });
 
     it("returns '/' if only locale present", () => {
@@ -57,8 +57,8 @@ describe("path common", () => {
     });
 
     it("normalizes repeated slashes", () => {
-      expect(neutralizeUrlPath("///en////about///me")).toBe("/about/me/");
-      expect(neutralizeUrlPath("//en//about")).toBe("/about/");
+      expect(neutralizeUrlPath("///en////about///me")).toBe("/about/me");
+      expect(neutralizeUrlPath("//en//about")).toBe("/about");
       expect(neutralizeUrlPath("/en//about//")).toBe("/about/");
       expect(neutralizeUrlPath("de/////about//")).toBe("/about/");
       expect(neutralizeUrlPath("about")).toBe("about");
@@ -75,8 +75,8 @@ describe("path common", () => {
   });
 
   it("localizeUrlPath prefixes locale and normalizes slashes", () => {
-    expect(localizeUrlPath("en", "about")).toBe("/en/about/");
-    expect(localizeUrlPath("en", "/about")).toBe("/en/about/");
-    expect(localizeUrlPath("de", "///about///me")).toBe("/de/about/me/");
+    expect(localizeUrlPath("en", "about")).toBe("/en/about");
+    expect(localizeUrlPath("en", "/about/")).toBe("/en/about/");
+    expect(localizeUrlPath("de", "///about///me")).toBe("/de/about/me");
   });
 });
