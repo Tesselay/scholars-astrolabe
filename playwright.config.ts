@@ -13,7 +13,7 @@ const isCI = Boolean(env.CI);
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  outputDir: "./tests/output",
+  outputDir: "./tests/_output",
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
