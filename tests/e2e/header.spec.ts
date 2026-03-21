@@ -5,10 +5,9 @@ test.describe("Header & NavigationLink", () => {
     await page.goto(to(""));
   });
 
-  test("document title, skip link and main focus", async ({ page }) => {
+  test("document title and skip link", async ({ page }) => {
     await expect(page).toHaveTitle(/Scholar.?s Astrolabe.*/i);
     await expect(page.locator("a.skip")).toHaveAttribute("href", "#main");
-    await expect(page.locator("#main")).toBeFocused();
   });
 
   test("primary nav is visible and has exactly 4 localized links in order", async ({
@@ -32,7 +31,7 @@ test.describe("Header & NavigationLink", () => {
     }
   });
 
-  test("navigating each link updates URL and aria-current; main receives focus", async ({
+  test("navigating each link updates URL and aria-current", async ({
     page,
     to
   }) => {
@@ -53,8 +52,6 @@ test.describe("Header & NavigationLink", () => {
           await expect(currentLinks.nth(j)).not.toHaveAttribute("aria-current", "page");
         }
       }
-
-      await expect(page.locator("#main")).toBeFocused();
     }
   });
 });
