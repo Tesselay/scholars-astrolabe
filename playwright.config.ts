@@ -13,12 +13,12 @@ const isCI = Boolean(env.CI);
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  outputDir: "./tests/_output",
+  outputDir: "./tests/_output/playwright",
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
-  reporter: "html",
+  reporter: isCI ? "dot" : [["html", { outputFolder: "./tests/_output/playwright" }]],
 
   use: {
     baseURL: env.SITE_URL,

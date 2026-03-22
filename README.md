@@ -95,9 +95,9 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use FontsAPI https://docs.astro.build/en/reference/font-provider-reference/
 - [ ] font-variant-ligatures, font-kerning, and hyphenation
 - [ ] Env vars https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/env
-- [ ] Use logical properties
 - [ ] Site is usable with >= 200% zoom
 - [ ] https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
+- [ ] Remove unused CSS styling
 - [ ] Replace CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/
 - [ ] Layers?
 - [ ] BEM? https://github.com/MorevM/stylelint-plugin
@@ -107,15 +107,20 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Styling is not applied correctly in preview/build
 - [ ] Dependabot Alerts
 - [ ] Validate environment variables beyond Astro context https://catalins.tech/validate-environment-variables-with-zod/ | https://www.creatures.sh/blog/env-type-safety-and-validation/#extending-the-global-processenv
+- [ ] Playwright mode is always `staging` -> when is NODE_ENV set?
 
 ### Code
 
-- [ ] noopener / noreferrer for anchor elements
 - [ ] Replace `description` inside NavigationLink with aria-label akin to Button
 - [ ] Apply hero placeholder
 - [ ] Have blog and tag links use ButtonAnchor/NavigationLink component
 - [ ] Add read time
 - [ ] Use `ReturnType` for dict loader return type
+
+### Security
+- [ ] noopener / noreferrer for anchor elements
+- [ ] Pin GitHub Actions to commit SHA & use something like dependabot to update
+- [ ] Can I break/inject code into the application via markdown frontmatter props?
 
 ### Components
 
@@ -137,7 +142,6 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Localize existing data
 - [ ] Always trailing slashes (current) or trailing -> directories/collections & no-trailing ->
       resources/documents?
-- [ ] Can I break/inject code into the application via markdown frontmatter props?
 - [ ] Add a "cheatsheet" page?
 - [ ] Align locale codes to web standard
 - [ ] Split out head metadata into separate component?
