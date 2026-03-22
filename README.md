@@ -118,6 +118,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use `ReturnType` for dict loader return type
 
 ### Security
+
 - [ ] noopener / noreferrer for anchor elements
 - [ ] Pin GitHub Actions to commit SHA & use something like dependabot to update
 - [ ] Can I break/inject code into the application via markdown frontmatter props?
