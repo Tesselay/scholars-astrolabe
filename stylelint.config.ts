@@ -47,6 +47,8 @@ export default {
     "media-feature-name-no-unknown": null,
     "media-query-no-invalid": null,
     "selector-anb-no-unmatchable": null,
+    "defensive-css/no-fixed-sizes": null,
+    "defensive-css/require-at-layer": null,
     // Naming grid lines is not always a semantic win
     "defensive-css/require-named-grid-lines": [true, { severity: "warning" }],
     "defensive-css/require-pure-selectors": [
@@ -56,6 +58,8 @@ export default {
         severity: "error",
       },
     ],
+    "defensive-css/require-overscroll-behavior": [true, { severity: "error" }],
+    "defensive-css/require-scrollbar-gutter": true,
   },
   overrides: [
     {

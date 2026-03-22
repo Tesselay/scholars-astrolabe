@@ -97,6 +97,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Env vars https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/env
 - [ ] Site is usable with >= 200% zoom
 - [ ] https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
+- [ ] https://www.joshwcomeau.com/css/browser-support/
 - [ ] Remove unused CSS styling
 - [ ] Replace CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/
 - [ ] Layers?
