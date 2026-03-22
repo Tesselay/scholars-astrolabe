@@ -12,10 +12,12 @@
 
 :root {
   color-scheme: dark light;
+  /* eslint-disable-next-line css/use-baseline -- Is newly available since Dec. 2025 */
   scrollbar-color: var(--scrollbar-thumb) transparent;
   scrollbar-width: thin;
 }
 
+/* eslint-disable-next-line css/use-baseline -- Fallback to default selection color on Safari iOS is acceptable */
 ::selection {
   background: var(--selection-bg);
 }

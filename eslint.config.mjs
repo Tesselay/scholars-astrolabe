@@ -212,8 +212,6 @@ export default defineConfig([
         "error",
         {
           available: "newly",
-          allowSelectors: ["selection"],
-          allowProperties: ["scrollbar-color"],
         },
       ],
       "css/no-invalid-properties": ["error", { allowUnknownVariables: true }],
