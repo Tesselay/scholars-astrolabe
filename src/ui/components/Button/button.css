@@ -52,7 +52,7 @@
   /* Shadows */
   box-shadow:
     var(--btn-shadow-2),
-    /* eslint-disable-next-line css/no-invalid-properties */
+    /* eslint-disable-next-line css/no-invalid-properties -- Custom properties can't be resolved yet */
     var(--btn-shadow-depth),
     0 0 0 var(--btn-highlight-size) var(--btn-highlight-color);
   text-shadow: var(--btn-ink-shadow);
@@ -71,9 +71,9 @@
   padding-block: var(--btn-padding-y);
 
   /* Interaction */
-  -webkit-user-select: none;
-  /* eslint-disable-next-line css/use-baseline */
+  /* eslint-disable-next-line css/use-baseline -- iOS Webview supports this with vendor prefix */
   user-select: none;
+  -webkit-user-select: none;
   cursor: pointer;
   touch-action: manipulation;
 

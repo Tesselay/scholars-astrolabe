@@ -4,6 +4,6 @@ import { assertLocaleRoute } from "&utils/core/i18n/locale/guards.ts";
 export function getLocaleObjectByLocaleRoute(path: string): ExtendedLocale {
   assertLocaleRoute(path);
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- assertion above guarantees existence
   return localesMap.get(path)!;
 }

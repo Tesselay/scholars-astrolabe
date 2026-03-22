@@ -35,7 +35,7 @@ export default defineConfig({
 
   // @ts-expect-error exactOptionalPropertyTypes: Temporary exception until global env validation
   webServer: {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- Temporary exception until global env validation
     command: `npx astro build && npx astro preview --host ${env.HOST} --port ${env.PORT}`,
     url: env.SITE_URL,
     reuseExistingServer: !isCI,

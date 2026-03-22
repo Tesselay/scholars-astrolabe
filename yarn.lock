@@ -614,6 +614,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint-community/eslint-plugin-eslint-comments@npm:^4.7.1":
+  version: 4.7.1
+  resolution: "@eslint-community/eslint-plugin-eslint-comments@npm:4.7.1"
+  dependencies:
+    escape-string-regexp: "npm:^4.0.0"
+    ignore: "npm:^7.0.5"
+  peerDependencies:
+    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
+  checksum: 10c0/055cef9263ea4bd41eb7f96f9f9c679db4c699940e0fb604eec563ddde7f712fcab27c471735ec59fd7ea60f8cc3bf9908175e319cae1b1cd1cadce3c2244e65
+  languageName: node
+  linkType: hard
+
 "@eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.8.0, @eslint-community/eslint-utils@npm:^4.9.1":
   version: 4.9.1
   resolution: "@eslint-community/eslint-utils@npm:4.9.1"
@@ -9190,6 +9202,7 @@ __metadata:
     "@astrojs/check": "npm:0.9.7"
     "@astrojs/rss": "npm:4.0.17"
     "@astrojs/sitemap": "npm:3.7.1"
+    "@eslint-community/eslint-plugin-eslint-comments": "npm:^4.7.1"
     "@eslint/css": "npm:^0.14.1"
     "@eslint/js": "npm:^9.39.4"
     "@eslint/json": "npm:^1.0.1"

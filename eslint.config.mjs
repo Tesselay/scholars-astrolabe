@@ -1,6 +1,7 @@
 import css from "@eslint/css";
 import js from "@eslint/js";
 import json from "@eslint/json";
+import comments from "@eslint-community/eslint-plugin-eslint-comments/configs";
 import stylistic from "@stylistic/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import astro from "eslint-plugin-astro";
@@ -229,6 +230,10 @@ export default defineConfig([
         ...globals.node,
       },
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: "error",
+      reportUnusedInlineConfigs: "error",
+    },
     settings: {
       components: {
         Navigation: "ul",
@@ -244,6 +249,7 @@ export default defineConfig([
         sizing: "class",
       },
     },
+    extends: [comments.recommended],
     rules: {
       "max-lines": [
         "warn",
@@ -251,6 +257,7 @@ export default defineConfig([
           max: 300, skipBlankLines: true, skipComments: true,
         },
       ],
+      "@eslint-community/eslint-comments/require-description": "error",
     },
   },
 
