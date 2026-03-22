@@ -1,15 +1,49 @@
 /* stylelint-disable defensive-css/require-pure-selectors -- Element selectors fine in reset */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-html,
-body {
-  block-size: 100%;
+* {
+  line-height: calc(1em + 0.5rem);
+  overflow-wrap: break-word;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+html {
+  /* eslint-disable-next-line css/use-baseline -- Mostly important for mobile where it is supported with prefixes */
+  text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  /* eslint-disable-next-line css/use-baseline -- fallback to none is acceptable */
+  interpolate-size: allow-keywords;
 }
 
 body {
-  margin: 0;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  min-block-size: 100dvb; /* Possibly bad performance wise but may be acceptable in this project */
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p {
+  /* eslint-disable-next-line css/use-baseline -- fallback to `wrap` is acceptable  */
+  text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+:target {
+  scroll-margin-block: 5ex;
 }

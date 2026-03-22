@@ -98,11 +98,12 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Site is usable with >= 200% zoom
 - [ ] https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/
 - [ ] https://www.joshwcomeau.com/css/browser-support/
+- [ ] https://www.joshwcomeau.com/css/container-queries-unleashed/
 - [ ] Remove unused CSS styling
-- [ ] Replace CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/
-- [ ] Layers?
+- [ ] Layer for base styling (e.g. reset)
 - [ ] BEM? https://github.com/MorevM/stylelint-plugin
 - [ ] Use logical properties in component style helpers too.
+- [ ] Nest CSS selectors (e.g. media in other rules)
 
 ### Issues
 

@@ -17,13 +17,9 @@
   scrollbar-width: thin;
 }
 
-/* eslint-disable-next-line css/use-baseline -- Fallback to default selection color on Safari iOS is acceptable */
+/* eslint-disable-next-line css/use-baseline -- Fallback to default selection color on Safari iOS     is acceptable */
 ::selection {
   background: var(--selection-bg);
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
 }
 
 :focus-visible {

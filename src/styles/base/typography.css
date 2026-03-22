@@ -12,7 +12,6 @@
 body { 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
-  line-height: var(--lh-body);
   text-rendering: optimizelegibility;
   font-kerning: normal;
   font-feature-settings: "liga", "kern";
@@ -27,12 +26,7 @@ h5,
 h6 {
   font-family: var(--font-family-title);
   font-weight: var(--w-semibold);
-  line-height: var(--lh-title);
   color: var(--accent-primary);
-
-  :first-child {
-    margin-block-start: 0;
-  }
 }
 
 h1 {

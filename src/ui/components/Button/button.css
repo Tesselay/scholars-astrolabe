@@ -106,11 +106,6 @@
   flex-shrink: 0;
 }
 
-.btn > :global(.icon svg) {
-  stroke: var(--btn-icon-color);
-  filter: drop-shadow(var(--btn-ink-shadow));
-}
-
 .btn-icon {
   --btn-icon-size: clamp(44px, 2ch + 0.5vw, 128px);
   --btn-padding-x: 0;
