@@ -2,7 +2,12 @@ import type { Config } from "stylelint";
 
 /** @type {import("stylelint").Config} */
 export default {
-  extends: ["stylelint-config-standard", "stylelint-config-html"],
+  plugins: ["stylelint-plugin-defensive-css"],
+  extends: [
+    "stylelint-config-standard",
+    "stylelint-config-html",
+    "stylelint-plugin-defensive-css/configs/recommended",
+  ],
   rules: {
     "selector-pseudo-class-no-unknown": [true, { ignorePseudoClasses: ["global"] }],
     "color-named": "never",
@@ -16,6 +21,9 @@ export default {
         except: ["first-nested"],
       },
     ],
+    "selector-id-pattern": null,
+    // Disable until PostCSS Autoprefixer is enabled
+    "property-no-vendor-prefix": null,
     // Custom Properties currently can't be resolved
     "no-unknown-custom-media": null,
     // ESLint CSS already handles this
@@ -39,7 +47,26 @@ export default {
     "media-feature-name-no-unknown": null,
     "media-query-no-invalid": null,
     "selector-anb-no-unmatchable": null,
+    // Naming grid lines is not always a semantic win
+    "defensive-css/require-named-grid-lines": [true, { severity: "warning" }],
+    "defensive-css/require-pure-selectors": [
+      true,
+      {
+        ignoreElements: ["html", "*"],
+        severity: "error",
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ["**/ui/**/*.css", "**/*.astro"],
+      rules: {
+        // Might be useful for compounding selectors but otherwise ill-advised in a component architecture
+        "defensive-css/require-pure-selectors": null,
+      },
+    },
+  ],
+  reportDescriptionlessDisables: true,
   reportNeedlessDisables: true,
   reportInvalidScopeDisables: true,
 } satisfies Config;

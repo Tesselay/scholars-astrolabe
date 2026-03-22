@@ -1,3 +1,4 @@
+/* stylelint-disable defensive-css/require-pure-selectors -- Element selectors fine in reset */
 * {
   box-sizing: border-box;
 }

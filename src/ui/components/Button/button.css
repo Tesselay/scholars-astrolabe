@@ -52,7 +52,7 @@
   /* Shadows */
   box-shadow:
     var(--btn-shadow-2),
-    /* eslint-disable css/no-invalid-properties */
+    /* eslint-disable-next-line css/no-invalid-properties */
     var(--btn-shadow-depth),
     0 0 0 var(--btn-highlight-size) var(--btn-highlight-color);
   text-shadow: var(--btn-ink-shadow);
@@ -60,6 +60,7 @@
 
   /* Layout */
   display: inline-flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -70,7 +71,8 @@
   padding-block: var(--btn-padding-y);
 
   /* Interaction */
-  /* eslint-disable css/use-baseline */
+  -webkit-user-select: none;
+  /* eslint-disable-next-line css/use-baseline */
   user-select: none;
   cursor: pointer;
   touch-action: manipulation;
@@ -78,8 +80,10 @@
   /* Animation */
   transition: var(--btn-transition);
 
-  &:hover {
-    --btn-highlight-size: 0.5rem;
+  @media (hover: hover) {
+    &:hover {
+      --btn-highlight-size: 0.5rem;
+    }
   }
 
   &:focus-visible {

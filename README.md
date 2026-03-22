@@ -101,6 +101,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Replace CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/
 - [ ] Layers?
 - [ ] BEM? https://github.com/MorevM/stylelint-plugin
+- [ ] Use logical properties in component style helpers too.
 
 ### Issues
 

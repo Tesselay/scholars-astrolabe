@@ -21,7 +21,7 @@ const title = meta.home.title;
 
 <header class:list={[classList, attributes.class]} {...attributes}>
   <a class="title" href="/public">{title}</a>
-  <nav aria-label="Primary">
+  <nav aria-label="Primary Navigation">
     <Navigation mode="default" />
   </nav>
   <Button class="icon translate-icon" color="var(--accent-secondary)" size="xl" variant="icon">
@@ -35,16 +35,16 @@ const title = meta.home.title;
 <style>
   .header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template:
+      "title title" auto
+      "locale theme" auto
+      "navigation navigation" auto
+    / 1fr 1fr;
     gap: var(--space-3);
     padding: var(--space-2);
     background: var(--bg-secondary);
     box-shadow: var(--shadow-1);
     border-bottom: 3px solid var(--accent-primary);
-  }
-
-  .header > * {
-    margin-block: auto;
   }
 
   .title {
@@ -57,52 +57,33 @@ const title = meta.home.title;
     text-align: center;
     text-decoration: none;
     margin: 0;
-    grid-column: span 2;
+    grid-area: title;
   }
 
   nav {
-    grid-column: span 2;
-    margin: 0 var(--space-1);
-  }
-
-  .icon {
-    grid-row: 2;
+    grid-area: navigation;
   }
 
   .translate-icon {
-    grid-column: 1;
     justify-self: start;
+    grid-area: locale;
   }
 
   .sun-icon {
-    grid-column: 2;
     justify-self: end;
+    grid-area: theme;
   }
 
   @media (width > 950px) {
     .header {
-      grid-template-columns: max-content 1fr max-content max-content max-content;
+      grid-template:
+        "title fill navigation locale theme" auto
+        / max-content 1fr max-content max-content max-content;
       padding: var(--space-1) var(--space-2);
     }
 
-    .title {
-      grid-column: 1;
-    }
-
     nav {
-      grid-column: 3;
-    }
-
-    .icon {
-      grid-row: 1;
-    }
-
-    .sun-icon {
-      grid-column: 5;
-    }
-
-    .translate-icon {
-      grid-column: 4;
+      align-self: center;
     }
   }
 </style>
