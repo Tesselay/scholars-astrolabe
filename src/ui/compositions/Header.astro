@@ -43,21 +43,21 @@ const title = meta.home.title;
     gap: var(--space-3);
     padding: var(--space-2);
     background: var(--bg-secondary);
-    box-shadow: var(--shadow-1);
     border-bottom: 3px solid var(--accent-primary);
+    box-shadow: var(--shadow-1);
   }
 
   .title {
+    grid-area: title;
+    margin: 0;
     font-family: var(--font-family-title);
+    font-size: var(--font-size-6);
     font-weight: var(--w-semibold);
     line-height: var(--lh-title);
-    font-size: var(--font-size-6);
     color: var(--accent-primary);
-    text-transform: uppercase;
     text-align: center;
+    text-transform: uppercase;
     text-decoration: none;
-    margin: 0;
-    grid-area: title;
   }
 
   nav {
@@ -65,13 +65,13 @@ const title = meta.home.title;
   }
 
   .translate-icon {
-    justify-self: start;
     grid-area: locale;
+    justify-self: start;
   }
 
   .sun-icon {
-    justify-self: end;
     grid-area: theme;
+    justify-self: end;
   }
 
   @media (width > 950px) {

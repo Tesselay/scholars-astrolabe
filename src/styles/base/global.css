@@ -30,8 +30,8 @@
 /* Skip Link */
 .skip {
   position: absolute;
-  inset-inline-start: -999px;
   inset-block-start: auto;
+  inset-inline-start: -999px;
   inline-size: 1px;
   block-size: 1px;
   overflow: hidden;
@@ -39,12 +39,12 @@
 
 .skip:focus-visible {
   position: static;
+  z-index: 1000;
   inline-size: auto;
   block-size: auto;
   padding: 0.5rem 1rem;
-  background: #000;
   color: #fff;
-  z-index: 1000;
+  background: #000;
 }
 
 /* Main */
@@ -56,8 +56,8 @@
 
 /* WebKit */
 ::-webkit-scrollbar {
-  block-size: 10px;
   inline-size: 10px;
+  block-size: 10px;
 }
 
 ::-webkit-scrollbar-thumb {

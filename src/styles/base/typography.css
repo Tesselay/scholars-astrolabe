@@ -12,9 +12,9 @@
 body { 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
-  text-rendering: optimizelegibility;
-  font-kerning: normal;
   font-feature-settings: "liga", "kern";
+  font-kerning: normal;
+  text-rendering: optimizelegibility;
 }
 
 /* Headings */
@@ -56,8 +56,8 @@ h6 {
 
 /* Links */
 a {
-  color: var(--text-link);
   font-family: var(--font-family-secondary);
+  color: var(--text-link);
   text-decoration: none;
 }
 

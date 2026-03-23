@@ -37,12 +37,33 @@
   --btn-transition-motion-ok: box-shadow 145ms ease, outline-offset 145ms ease;
   --btn-transition: var(--btn-transition-motion-ok);
 
+  /* Layout */
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 1ch;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--btn-padding-y);
+
+  /* Padding */
+  padding-inline: var(--btn-padding-x);
+
   /* * Styles * */
 
   /* Typography */
   font-family: var(--font-family-secondary);
   color: var(--btn-text);
+  text-align: center;
   white-space: nowrap;
+  text-shadow: var(--btn-ink-shadow);
+  touch-action: manipulation;
+  cursor: pointer;
+
+  /* Interaction */
+  -webkit-user-select: none;
+  /* eslint-disable-next-line css/use-baseline -- iOS Webview supports this with vendor prefix */
+  user-select: none;
+  outline-color: currentcolor;
 
   /* Structure */
   background: var(--btn-bg);
@@ -55,27 +76,6 @@
     /* eslint-disable-next-line css/no-invalid-properties -- Custom properties can't be resolved yet */
     var(--btn-shadow-depth),
     0 0 0 var(--btn-highlight-size) var(--btn-highlight-color);
-  text-shadow: var(--btn-ink-shadow);
-  outline-color: currentcolor;
-
-  /* Layout */
-  display: inline-flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 1ch;
-
-  /* Padding */
-  padding-inline: var(--btn-padding-x);
-  padding-block: var(--btn-padding-y);
-
-  /* Interaction */
-  /* eslint-disable-next-line css/use-baseline -- iOS Webview supports this with vendor prefix */
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: pointer;
-  touch-action: manipulation;
 
   /* Animation */
   transition: var(--btn-transition);
@@ -91,19 +91,19 @@
   }
 
   &:is(:disabled, [aria-disabled]) {
-    cursor: not-allowed;
+    color: hsl(from currentcolor h s l / 50%);
     pointer-events: none;
+    cursor: not-allowed;
     box-shadow: none;
     opacity: 0.5;
-    color: hsl(from currentcolor h s l / 50%);
   }
 }
 
 .btn > :global(.icon) {
-  color: var(--btn-text);
+  flex-shrink: 0;
   inline-size: var(--btn-icon-size);
   block-size: var(--btn-icon-size);
-  flex-shrink: 0;
+  color: var(--btn-text);
 }
 
 .btn-icon {
@@ -112,10 +112,10 @@
   --btn-padding-y: 0;
 
   aspect-ratio: 1;
-  background: transparent;
-  box-shadow: none;
   text-shadow: none;
+  background: transparent;
   border: 0;
+  box-shadow: none;
 }
 
 .btn-anchor {

@@ -13,10 +13,10 @@
 }
 
 html {
-  /* eslint-disable-next-line css/use-baseline -- Mostly important for mobile where it is supported with prefixes */
-  text-size-adjust: none;
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
+  /* eslint-disable-next-line css/use-baseline -- Mostly important for mobile where it is supported with prefixes */
+  text-size-adjust: none;
   /* eslint-disable-next-line css/use-baseline -- fallback to none is acceptable */
   interpolate-size: allow-keywords;
 }

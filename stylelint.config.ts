@@ -7,6 +7,7 @@ export default {
     "stylelint-config-standard",
     "stylelint-config-html",
     "stylelint-plugin-defensive-css/configs/recommended",
+    "stylelint-config-recess-order",
   ],
   rules: {
     "selector-pseudo-class-no-unknown": [true, { ignorePseudoClasses: ["global"] }],
