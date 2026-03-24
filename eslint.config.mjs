@@ -17,160 +17,66 @@ const fileGlobGlobal = [...fileGlobScript, ...fileGlobAstro];
 
 export default defineConfig([
   {
-    name: "Script Global",
-    files: fileGlobGlobal,
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.eslintRecommended,
-      tseslint.configs.strictTypeChecked,
+    name: "Global Ignores",
+    ignores: [
+      ".pnp.*",
+      "*.yarn/**",
+      "dist/",
+      ".astro/",
+      ".coverage/",
+      "coverage/",
+      ".vite/",
+      ".vscode/",
+      ".idea/",
+      ".DS_Store",
+      "*.log",
+      "**/*.d.ts",
+      ".github/",
+      "tests/**",
+      "package-lock.json",
+      "yarn.lock",
+      "LICENSE",
     ],
+  },
+
+  {
+    name: "Globals",
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: "error",
+      reportUnusedInlineConfigs: "error",
+    },
+    settings: {
+      components: {
+        Navigation: "ul",
+        NavigationLink: "a",
+        Header: "header",
+        Button: "button",
+        ButtonAnchor: "a",
+      },
+      attributes: {
+        href: "href",
+        variant: "class",
+        size: "class",
+        sizing: "class",
+      },
+    },
+    extends: [comments.recommended],
     rules: {
-      "@typescript-eslint/no-import-type-side-effects": "error",
-      "sort-vars": "error",
-      "prefer-arrow-callback": "error",
-      "curly": "error",
-      "complexity": ["error", 10],
-      "max-lines-per-function": [
+      "max-lines": [
         "warn",
         {
-          max: 100,
+          max: 300,
           skipBlankLines: true,
           skipComments: true,
         },
       ],
-      "max-depth": ["error", 4],
-      "max-nested-callbacks": ["error", 4],
-      "max-params": ["warn", 4],
-      "no-console": [
-        "warn",
-        {
-          allow: [
-            "warn",
-            "error",
-            "debug",
-          ],
-        },
-      ],
-      "no-else-return": ["error", { allowElseIf: false }],
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-        },
-      ],
-      "no-bitwise": "warn",
-    },
-  },
-
-  {
-    name: "Astro",
-    files: fileGlobAstro,
-    extends: [astro.configs.recommended, astro.configs["jsx-a11y-recommended"]],
-    rules: {
-      "astro/no-exports-from-components": "error",
-      "astro/no-set-html-directive": "error",
-      "astro/no-unsafe-inline-scripts": "error",
-      "astro/no-set-text-directive": "error",
-      "astro/no-unused-css-selector": "warn",
-      "astro/prefer-class-list-directive": "error",
-      "astro/prefer-object-class-list": "error",
-      "astro/prefer-split-class-list": "error",
-      "astro/sort-attributes": "error",
-      "astro/jsx-a11y/anchor-ambiguous-text": "error",
-      "astro/jsx-a11y/control-has-associated-label": "error",
-      "astro/jsx-a11y/lang": "error",
-      "astro/jsx-a11y/no-aria-hidden-on-focusable": "error",
-      "astro/jsx-a11y/prefer-tag-over-role": "warn",
-      // Issues
-      "astro/no-unused-define-vars-in-style": "warn",
-      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }],
-      "@stylistic/jsx-one-expression-per-line": "off",
-      "import-x/exports-last": "off",
-    },
-  },
-
-  {
-    name: "Import",
-    files: fileGlobGlobal,
-    extends: [importx.flatConfigs.recommended, importx.flatConfigs.typescript],
-    rules: {
-      "import-x/no-deprecated": "error",
-      "import-x/no-empty-named-blocks": "error",
-      "import-x/no-extraneous-dependencies": "error",
-      "import-x/no-named-as-default": "off",
-      "import-x/no-rename-default": "off",
-      "import-x/no-amd": "error",
-      "import-x/no-commonjs": "error",
-      "import-x/no-import-module-exports": "error",
-      "import-x/no-absolute-path": "warn",
-      "import-x/no-cycle": ["warn", { ignoreExternal: true }],
-      "import-x/no-relative-packages": "error",
-      "import-x/no-self-import": "error",
-      "import-x/no-useless-path-segments": "error",
-      // Stylistic
-      "import-x/extensions": ["warn", "ignorePackages"],
-      "import-x/exports-last": "error",
-      "import-x/group-exports": "error",
-      "import-x/first": "error",
-      "import-x/newline-after-import": "error",
-      "import-x/no-anonymous-default-export": "error",
-      "import-x/no-default-export": "error",
-      "import-x/order": [
-        "error",
-        {
-          "groups": [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-          ],
-          "newlines-between": "always",
-          "alphabetize": {
-            order: "asc",
-            caseInsensitive: true,
-          },
-          "named": {
-            enabled: true,
-            types: "types-first",
-          },
-          "warnOnUnassignedImports": true,
-          "pathGroups": [
-            {
-              pattern: "&ui/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "&content/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "&utils/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "&types/**",
-              group: "internal",
-              position: "before",
-            },
-            {
-              pattern: "&styles/**",
-              group: "internal",
-              position: "before",
-            },
-          ],
-        },
-      ],
-      // Already checked via TypeScript
-      "import-x/named": "off",
-      "import-x/namespace": "off",
-      "import-x/default": "off",
-      "import-x/no-named-as-default-member": "off",
-      "import-x/no-unresolved": "off",
+      "@eslint-community/eslint-comments/require-description": "error",
     },
   },
 
@@ -284,6 +190,164 @@ export default defineConfig([
   },
 
   {
+    name: "Import",
+    files: fileGlobGlobal,
+    extends: [importx.flatConfigs.recommended, importx.flatConfigs.typescript],
+    rules: {
+      "import-x/no-deprecated": "error",
+      "import-x/no-empty-named-blocks": "error",
+      "import-x/no-extraneous-dependencies": "error",
+      "import-x/no-named-as-default": "off",
+      "import-x/no-rename-default": "off",
+      "import-x/no-amd": "error",
+      "import-x/no-commonjs": "error",
+      "import-x/no-import-module-exports": "error",
+      "import-x/no-absolute-path": "warn",
+      "import-x/no-cycle": ["warn", { ignoreExternal: true }],
+      "import-x/no-relative-packages": "error",
+      "import-x/no-self-import": "error",
+      "import-x/no-useless-path-segments": "error",
+      // Stylistic
+      "import-x/extensions": ["warn", "ignorePackages"],
+      "import-x/exports-last": "error",
+      "import-x/group-exports": "error",
+      "import-x/first": "error",
+      "import-x/newline-after-import": "error",
+      "import-x/no-anonymous-default-export": "error",
+      "import-x/no-default-export": "error",
+      "import-x/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+          ],
+          "newlines-between": "always",
+          "alphabetize": {
+            order: "asc",
+            caseInsensitive: true,
+          },
+          "named": {
+            enabled: true,
+            types: "types-first",
+          },
+          "warnOnUnassignedImports": true,
+          "pathGroups": [
+            {
+              pattern: "&ui/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&content/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&utils/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&types/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&styles/**",
+              group: "internal",
+              position: "before",
+            },
+          ],
+        },
+      ],
+      // Already checked via TypeScript
+      "import-x/named": "off",
+      "import-x/namespace": "off",
+      "import-x/default": "off",
+      "import-x/no-named-as-default-member": "off",
+      "import-x/no-unresolved": "off",
+    },
+  },
+
+  {
+    name: "JavaScript/TypeScript",
+    files: fileGlobGlobal,
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.eslintRecommended,
+      tseslint.configs.strictTypeChecked,
+    ],
+    rules: {
+      "@typescript-eslint/no-import-type-side-effects": "error",
+      "sort-vars": "error",
+      "prefer-arrow-callback": "error",
+      "curly": "error",
+      "complexity": ["error", 10],
+      "max-lines-per-function": [
+        "warn",
+        {
+          max: 100,
+          skipBlankLines: true,
+          skipComments: true,
+        },
+      ],
+      "max-depth": ["error", 4],
+      "max-nested-callbacks": ["error", 4],
+      "max-params": ["warn", 4],
+      "no-console": [
+        "warn",
+        {
+          allow: [
+            "warn",
+            "error",
+            "debug",
+          ],
+        },
+      ],
+      "no-else-return": ["error", { allowElseIf: false }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+      "no-bitwise": "warn",
+    },
+  },
+
+  {
+    name: "Astro",
+    files: fileGlobAstro,
+    extends: [astro.configs.recommended, astro.configs["jsx-a11y-recommended"]],
+    rules: {
+      "astro/no-exports-from-components": "error",
+      "astro/no-set-html-directive": "error",
+      "astro/no-unsafe-inline-scripts": "error",
+      "astro/no-set-text-directive": "error",
+      "astro/no-unused-css-selector": "warn",
+      "astro/prefer-class-list-directive": "error",
+      "astro/prefer-object-class-list": "error",
+      "astro/prefer-split-class-list": "error",
+      "astro/sort-attributes": "error",
+      "astro/jsx-a11y/anchor-ambiguous-text": "error",
+      "astro/jsx-a11y/control-has-associated-label": "error",
+      "astro/jsx-a11y/lang": "error",
+      "astro/jsx-a11y/no-aria-hidden-on-focusable": "error",
+      "astro/jsx-a11y/prefer-tag-over-role": "warn",
+      // Issues
+      "astro/no-unused-define-vars-in-style": "warn",
+      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }],
+      "@stylistic/jsx-one-expression-per-line": "off",
+      "import-x/exports-last": "off",
+    },
+  },
+
+  {
     name: "JSON",
     files: fileGlobJson,
     plugins: { json },
@@ -306,47 +370,6 @@ export default defineConfig([
   },
 
   {
-    name: "Globals",
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
-    linterOptions: {
-      reportUnusedDisableDirectives: "error",
-      reportUnusedInlineConfigs: "error",
-    },
-    settings: {
-      components: {
-        Navigation: "ul",
-        NavigationLink: "a",
-        Header: "header",
-        Button: "button",
-        ButtonAnchor: "a",
-      },
-      attributes: {
-        href: "href",
-        variant: "class",
-        size: "class",
-        sizing: "class",
-      },
-    },
-    extends: [comments.recommended],
-    rules: {
-      "max-lines": [
-        "warn",
-        {
-          max: 300,
-          skipBlankLines: true,
-          skipComments: true,
-        },
-      ],
-      "@eslint-community/eslint-comments/require-description": "error",
-    },
-  },
-
-  {
     name: "TypeScript Type Checking Configuration",
     languageOptions: {
       parserOptions: {
@@ -356,17 +379,6 @@ export default defineConfig([
       },
     },
     ignores: ["astro.config.ts", "**/*.js"],
-  },
-
-  {
-    name: "Astro Overrides",
-    files: fileGlobAstro,
-    rules: {
-      "astro/no-unused-define-vars-in-style": "warn",
-      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }],
-      "@stylistic/jsx-one-expression-per-line": "off",
-      "import-x/exports-last": "off",
-    },
   },
 
   {
@@ -389,26 +401,4 @@ export default defineConfig([
     },
   },
 
-  {
-    name: "Ignore Files",
-    ignores: [
-      ".pnp.*",
-      "*.yarn/**",
-      "dist/",
-      ".astro/",
-      ".coverage/",
-      "coverage/",
-      ".vite/",
-      ".vscode/",
-      ".idea/",
-      ".DS_Store",
-      "*.log",
-      "**/*.d.ts",
-      ".github/",
-      "tests/**",
-      "package-lock.json",
-      "yarn.lock",
-      "LICENSE",
-    ],
-  },
 ]);

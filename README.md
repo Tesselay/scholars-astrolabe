@@ -144,6 +144,8 @@ All commands are run from the root of the project, from a terminal:
 ### Linting & Formatting
 
 - [ ] Env Var for glob/file extensions
+- [ ] Separate stylistic rules into own configuration object
+- [ ] Split out ESLint configuration objects into separate configuration files
 - [ ] `import-x/no-restricted-paths` to better control module domains
 - [ ] ESLint Plugins:
   - [ ] Vitest
