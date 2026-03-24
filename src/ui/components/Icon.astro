@@ -6,7 +6,9 @@ interface Props extends Omit<HTMLAttributes<"span">, "color"> {
   size?: string;
 }
 
-const { color, size, ...attributes } = Astro.props;
+const {
+  color, size, ...attributes
+} = Astro.props;
 
 const classList = ["icon"];
 attributes["aria-hidden"] = true;
@@ -16,7 +18,11 @@ attributes["aria-hidden"] = true;
   <slot />
 </span>
 
-<style define:vars={{ "icon-color": color, "icon-size": size }}>
+<style define:vars={{
+  "icon-color": color,
+  "icon-size": size,
+}}
+>
   .icon {
     display: inline-flex;
     flex-wrap: nowrap;

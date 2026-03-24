@@ -9,7 +9,9 @@ interface Props extends HTMLAttributes<"div"> {
   backgroundColor?: string;
 }
 
-const { square, sizing, height, width, backgroundColor, ...attributes } = Astro.props;
+const {
+  square, sizing, height, width, backgroundColor, ...attributes
+} = Astro.props;
 
 const classList = [
   "card",
@@ -22,7 +24,12 @@ const classList = [
   <slot />
 </div>
 
-<style define:vars={{ "bg-card": backgroundColor, width, height }}>
+<style define:vars={{
+  "bg-card": backgroundColor,
+  width,
+  height,
+}}
+>
   .square {
     aspect-ratio: 1 / 1;
   }

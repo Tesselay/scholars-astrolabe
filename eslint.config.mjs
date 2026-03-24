@@ -30,7 +30,14 @@ export default defineConfig([
       "prefer-arrow-callback": "error",
       "curly": "error",
       "complexity": ["error", 10],
-      "max-lines-per-function": ["warn", { max: 100, skipBlankLines: true, skipComments: true }],
+      "max-lines-per-function": [
+        "warn",
+        {
+          max: 100,
+          skipBlankLines: true,
+          skipComments: true,
+        },
+      ],
       "max-depth": ["error", 4],
       "max-nested-callbacks": ["error", 4],
       "max-params": ["warn", 4],
@@ -45,7 +52,13 @@ export default defineConfig([
         },
       ],
       "no-else-return": ["error", { allowElseIf: false }],
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
       "no-bitwise": "warn",
     },
   },
@@ -114,15 +127,41 @@ export default defineConfig([
             "sibling",
           ],
           "newlines-between": "always",
-          "alphabetize": { order: "asc", caseInsensitive: true },
-          "named": { enabled: true, types: "types-first" },
+          "alphabetize": {
+            order: "asc",
+            caseInsensitive: true,
+          },
+          "named": {
+            enabled: true,
+            types: "types-first",
+          },
           "warnOnUnassignedImports": true,
           "pathGroups": [
-            { pattern: "&ui/**", group: "internal", position: "before" },
-            { pattern: "&content/**", group: "internal", position: "before" },
-            { pattern: "&utils/**", group: "internal", position: "before" },
-            { pattern: "&types/**", group: "internal", position: "before" },
-            { pattern: "&styles/**", group: "internal", position: "before" },
+            {
+              pattern: "&ui/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&content/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&utils/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&types/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "&styles/**",
+              group: "internal",
+              position: "before",
+            },
           ],
         },
       ],
@@ -149,9 +188,22 @@ export default defineConfig([
       "@stylistic/comma-dangle": ["error", "always-multiline"],
       "@stylistic/brace-style": ["error", "stroustrup"],
       "@stylistic/arrow-parens": ["error", "always"],
-      "@stylistic/arrow-spacing": ["error", { before: true, after: true }],
+      "@stylistic/arrow-spacing": [
+        "error",
+        {
+          before: true,
+          after: true,
+        },
+      ],
       "@stylistic/no-confusing-arrow": "error",
-      "@stylistic/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 1 }],
+      "@stylistic/no-multiple-empty-lines": [
+        "error",
+        {
+          max: 1,
+          maxBOF: 0,
+          maxEOF: 1,
+        },
+      ],
       "@stylistic/no-trailing-spaces": "error",
       "@stylistic/member-delimiter-style": [
         "error",
@@ -174,20 +226,58 @@ export default defineConfig([
       ],
       "@stylistic/function-call-spacing": ["error", "never"],
       "@stylistic/function-call-argument-newline": ["error", "consistent"],
-      "@stylistic/curly-newline": ["error", { consistent: true, multiline: true }],
-      "@stylistic/object-curly-newline": ["error", { consistent: true, multiline: true }],
-      "@stylistic/array-element-newline": ["error", { minItems: 3, multiline: true }],
-      "@stylistic/array-bracket-newline": ["error", { multiline: true, minItems: 3 }],
+      "@stylistic/curly-newline": ["error", "always"],
+      "@stylistic/object-curly-newline": [
+        "error",
+        {
+          multiline: true,
+          minProperties: 3,
+          consistent: true,
+        },
+      ],
+      "@stylistic/object-property-newline": ["error", { allowAllPropertiesOnSameLine: false }],
+      "@stylistic/array-element-newline": [
+        "error",
+        {
+          minItems: 3,
+          multiline: true,
+        },
+      ],
+      "@stylistic/array-bracket-newline": [
+        "error",
+        {
+          multiline: true,
+          minItems: 3,
+        },
+      ],
       "@stylistic/wrap-regex": "error",
-      "@stylistic/switch-colon-spacing": ["error", { after: true, before: false }],
-      "@stylistic/padding-line-between-statements": ["error", { blankLine: "always", prev: "*", next: "return" }],
+      "@stylistic/switch-colon-spacing": [
+        "error",
+        {
+          after: true,
+          before: false,
+        },
+      ],
+      "@stylistic/padding-line-between-statements": [
+        "error",
+        {
+          blankLine: "always",
+          prev: "*",
+          next: "return",
+        },
+      ],
       "@stylistic/one-var-declaration-per-line": ["error", "initializations"],
-      "@stylistic/object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
       "@stylistic/newline-per-chained-call": ["error", { ignoreChainWithDepth: 3 }],
       "@stylistic/multiline-comment-style": ["warn", "starred-block"],
       "@stylistic/linebreak-style": ["error", "unix"],
       "@stylistic/jsx-self-closing-comp": "error",
-      "@stylistic/jsx-max-props-per-line": ["error", { maximum: 1, when: "multiline" }],
+      "@stylistic/jsx-max-props-per-line": [
+        "error",
+        {
+          maximum: 1,
+          when: "multiline",
+        },
+      ],
       "@stylistic/jsx-pascal-case": ["error", { allowAllCaps: true }],
       "@stylistic/jsx-child-element-spacing": "error",
     },
@@ -208,12 +298,7 @@ export default defineConfig([
     language: "css/css",
     extends: ["css/recommended"],
     rules: {
-      "css/use-baseline": [
-        "error",
-        {
-          available: "newly",
-        },
-      ],
+      "css/use-baseline": ["error", { available: "newly" }],
       "css/no-invalid-properties": ["error", { allowUnknownVariables: true }],
       "css/prefer-logical-properties": "error",
       "css/relative-font-units": ["error", { allowUnits: ["em", "rem"] }],
@@ -252,7 +337,9 @@ export default defineConfig([
       "max-lines": [
         "warn",
         {
-          max: 300, skipBlankLines: true, skipComments: true,
+          max: 300,
+          skipBlankLines: true,
+          skipComments: true,
         },
       ],
       "@eslint-community/eslint-comments/require-description": "error",

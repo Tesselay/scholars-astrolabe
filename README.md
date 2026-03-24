@@ -69,6 +69,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use `test` instead of `it` in vitest
 - [ ] Rework test utils
 - [ ] Prevent error printing in test output (invalid dictionary)
+- [ ] Disable lint ignore for tests
 
 #### CSS Rework
 
@@ -142,7 +143,6 @@ All commands are run from the root of the project, from a terminal:
 
 ### Linting & Formatting
 
-- [ ] Object Newlines
 - [ ] Env Var for glob/file extensions
 - [ ] `import-x/no-restricted-paths` to better control module domains
 - [ ] ESLint Plugins:

@@ -34,15 +34,31 @@ export default defineConfig({
   },
   env: {
     schema: {
-      PROTOCOL: envField.string({ context: "server", access: "public", default: "http" }),
-      HOST: envField.string({ context: "server", access: "public", default: "localhost" }),
-      PORT: envField.number({ context: "server", access: "public", default: 4321 }),
+      PROTOCOL: envField.string({
+        context: "server",
+        access: "public",
+        default: "http",
+      }),
+      HOST: envField.string({
+        context: "server",
+        access: "public",
+        default: "localhost",
+      }),
+      PORT: envField.number({
+        context: "server",
+        access: "public",
+        default: 4321,
+      }),
       SITE_URL: envField.string({
         context: "client",
         access: "public",
         default: "http://localhost:4321",
       }),
-      DIAG_GRAPH: envField.boolean({ context: "server", access: "public", default: false }),
+      DIAG_GRAPH: envField.boolean({
+        context: "server",
+        access: "public",
+        default: false,
+      }),
     },
   },
   integrations: [
@@ -61,9 +77,21 @@ export default defineConfig({
     ],
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: "wrap", properties: { class: "heading-link" } }],
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          properties: { class: "heading-link" },
+        },
+      ],
       rehypeKatex,
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: ["noopener", "noreferrer"],
+        },
+      ],
     ],
   },
 });

@@ -17,4 +17,6 @@ type ExtendedLocale = (typeof locales)[number];
 type LocaleLanguageCode = ExtendedLocale["codes"][number];
 type LocaleRoute = ExtendedLocale["path"];
 
-export { type ExtendedLocale, type LocaleRoute, defaultLocale, locales, localesMap };
+export {
+  type ExtendedLocale, type LocaleRoute, defaultLocale, locales, localesMap,
+};

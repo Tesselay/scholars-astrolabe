@@ -9,7 +9,10 @@ export default getViteConfig({
       {
         extends: true,
         test: {
-          name: { label: "unit", color: "cyan" },
+          name: {
+            label: "unit",
+            color: "cyan",
+          },
           environment: "node",
           dir: "./tests/unit",
           include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],
@@ -18,7 +21,10 @@ export default getViteConfig({
       {
         extends: true,
         test: {
-          name: { label: "integration", color: "magenta" },
+          name: {
+            label: "integration",
+            color: "magenta",
+          },
           environment: "node",
           dir: "./tests/integration",
           include: ["**/*.{test,spec}.{ts,tsx,js,jsx,mts,mjs,cjs}"],

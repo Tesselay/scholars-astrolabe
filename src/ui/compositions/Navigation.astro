@@ -8,9 +8,7 @@ import { UiLoader } from "&utils/compositional/i18n/uiLoader.ts";
 
 type NavigationStyle = "default" | "embellished";
 
-interface Props extends HTMLAttributes<"ul"> {
-  mode: NavigationStyle;
-}
+interface Props extends HTMLAttributes<"ul"> { mode: NavigationStyle }
 
 const { mode = "default", ...attributes } = Astro.props;
 

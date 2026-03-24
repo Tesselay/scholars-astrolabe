@@ -7,9 +7,7 @@ import ButtonAnchor from "&ui/Button/ButtonAnchor.astro";
 import { normalizeAstroPath } from "&utils/adapter/astro/path.ts";
 import { neutralizeUrlPath } from "&utils/compositional/routing/url.ts";
 
-interface Props extends ComponentProps<typeof ButtonAnchor> {
-  localized?: boolean;
-}
+interface Props extends ComponentProps<typeof ButtonAnchor> { localized?: boolean }
 
 const { localized = false, ...attributes } = Astro.props;
 

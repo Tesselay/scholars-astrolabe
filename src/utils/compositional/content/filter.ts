@@ -15,4 +15,7 @@ function pathsForAllLocales(): { params: { lang: LocaleRoute } }[] {
   return locales.map((locale) => ({ params: { lang: locale.path } }));
 }
 
-export { byLang, filterEntriesByLang, pathsForAllLocales };
+export {
+  byLang, filterEntriesByLang,
+  pathsForAllLocales,
+};

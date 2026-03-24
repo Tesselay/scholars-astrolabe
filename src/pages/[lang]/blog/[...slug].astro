@@ -15,7 +15,10 @@ export async function getStaticPaths() {
       const slug = neutralizeUrlPath(post.id);
 
       return {
-        params: { lang: locale, slug },
+        params: {
+          lang: locale,
+          slug,
+        },
         props: post,
       };
     });

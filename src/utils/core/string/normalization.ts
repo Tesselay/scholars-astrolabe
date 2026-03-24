@@ -16,4 +16,6 @@ function ensureTrailingSlash(str: string): string {
   return str.endsWith("/") ? str : str + "/";
 }
 
-export { collapseSlashes, ensureLeadingSlash, ensureTrailingSlash, trimSlashes };
+export {
+  collapseSlashes, ensureLeadingSlash, ensureTrailingSlash, trimSlashes,
+};

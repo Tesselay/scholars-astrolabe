@@ -52,7 +52,11 @@ export function diagnosticGraph() {
     // 3) Measure transform effect & which plugin touched the file
     transform(code, id, opts) {
       if ((/src\/content\/blog/).test(id) || id.includes("astro:content")) {
-        console.debug("[transform]", { id, ssr: opts?.ssr, length: code.length });
+        console.debug("[transform]", {
+          id,
+          ssr: opts?.ssr,
+          length: code.length,
+        });
       }
 
       return null;

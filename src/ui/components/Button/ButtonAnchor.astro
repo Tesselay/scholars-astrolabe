@@ -8,7 +8,9 @@ interface Props
   Omit<HTMLAttributes<"a">, "color">,
   Pick<HTMLAttributes<"button">, "disabled"> {}
 
-const { color, variant = "primary", size = "s", ...attributes } = Astro.props;
+const {
+  color, variant = "primary", size = "s", ...attributes
+} = Astro.props;
 
 if (attributes.disabled) {
   attributes["aria-disabled"] = "true";
