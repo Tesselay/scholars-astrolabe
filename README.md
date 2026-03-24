@@ -60,20 +60,6 @@ All commands are run from the root of the project, from a terminal:
 
 ### Current
 
-#### Linting & Formatting
-
-- [ ] Lint rule for CSS indentation
-- [ ] Object Newlines
-- [ ] Env Var for glob/file extensions
-- [ ] `import-x/no-restricted-paths` to better control module domains
-- [ ] ESLint Plugins:
-  - [ ] Vitest
-  - [ ] Playwright
-  - [ ] Zod
-  - [ ] Unicorn
-  - [ ] Perfectionist
-  - [ ] Markdown
-
 #### Rework Testing
 
 - [ ] Use programmatic API for test setup or remove dev server completely -> What do I need it for?
@@ -153,6 +139,19 @@ All commands are run from the root of the project, from a terminal:
 - [ ] Use URL for paths? (can work with file paths too)
 - [ ] Refine TypeScript Configuration https://www.typescript-training.com/course/enterprise-v2/03-tsconfig-strictness/
 - [ ] Completely customized ESLint/TypeScript setup -> separate repo
+
+### Linting & Formatting
+
+- [ ] Object Newlines
+- [ ] Env Var for glob/file extensions
+- [ ] `import-x/no-restricted-paths` to better control module domains
+- [ ] ESLint Plugins:
+  - [ ] Vitest
+  - [ ] Playwright
+  - [ ] Zod
+  - [ ] Unicorn
+  - [ ] Perfectionist
+  - [ ] Markdown
 
 ### Considerations
 

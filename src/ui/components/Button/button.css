@@ -33,7 +33,7 @@
   --btn-shadow-depth: 0 1px var(--btn-border-color);
 
   /* Animation */
-  --btn-transition-motion-reduce: ;
+  --btn-transition-motion-reduce: unset;
   --btn-transition-motion-ok: box-shadow 145ms ease, outline-offset 145ms ease;
   --btn-transition: var(--btn-transition-motion-ok);
 

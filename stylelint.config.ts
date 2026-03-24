@@ -8,6 +8,7 @@ export default {
     "stylelint-config-html",
     "stylelint-plugin-defensive-css/configs/recommended",
     "stylelint-config-recess-order",
+    "@stylistic/stylelint-config",
   ],
   rules: {
     "selector-pseudo-class-no-unknown": [true, { ignorePseudoClasses: ["global"] }],
@@ -27,7 +28,20 @@ export default {
     "property-no-vendor-prefix": null,
     // Custom Properties currently can't be resolved
     "no-unknown-custom-media": null,
-    // ESLint CSS already handles this
+    // Naming grid lines is not always a semantic win
+    "defensive-css/require-named-grid-lines": [true, { severity: "warning" }],
+    "defensive-css/require-pure-selectors": [
+      true,
+      {
+        ignoreElements: ["html", "*"],
+        severity: "error",
+      },
+    ],
+    "defensive-css/require-overscroll-behavior": [true, { severity: "error" }],
+    "defensive-css/require-scrollbar-gutter": true,
+    "@stylistic/max-line-length": [120, { ignore: ["comments"] }],
+    "@stylistic/indentation": [2, { baseIndentLevel: 1 }],
+    // ESLint CSS already handles these
     "declaration-no-important": null,
     "keyframe-declaration-no-important": null,
     "font-family-no-missing-generic-family-keyword": null,
@@ -50,17 +64,6 @@ export default {
     "selector-anb-no-unmatchable": null,
     "defensive-css/no-fixed-sizes": null,
     "defensive-css/require-at-layer": null,
-    // Naming grid lines is not always a semantic win
-    "defensive-css/require-named-grid-lines": [true, { severity: "warning" }],
-    "defensive-css/require-pure-selectors": [
-      true,
-      {
-        ignoreElements: ["html", "*"],
-        severity: "error",
-      },
-    ],
-    "defensive-css/require-overscroll-behavior": [true, { severity: "error" }],
-    "defensive-css/require-scrollbar-gutter": true,
   },
   overrides: [
     {

@@ -1855,6 +1855,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stylistic/stylelint-config@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@stylistic/stylelint-config@npm:4.0.0"
+  dependencies:
+    "@stylistic/stylelint-plugin": "npm:^5.0.0"
+  peerDependencies:
+    stylelint: ^17.0.0
+  checksum: 10c0/acebbe63fc70093d46e9fe3df09a925ab8329effc9e6f9f25182fe34d2ebf4308ae71a2203f5b836390cd77389bf44577a654511ae28b5fc852f8c2be1c557d9
+  languageName: node
+  linkType: hard
+
+"@stylistic/stylelint-plugin@npm:^5.0.0, @stylistic/stylelint-plugin@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@stylistic/stylelint-plugin@npm:5.0.1"
+  dependencies:
+    "@csstools/css-parser-algorithms": "npm:^4.0.0"
+    "@csstools/css-tokenizer": "npm:^4.0.0"
+    "@csstools/media-query-list-parser": "npm:^5.0.0"
+    postcss: "npm:^8.5.6"
+    postcss-selector-parser: "npm:^7.1.1"
+    postcss-value-parser: "npm:^4.2.0"
+    style-search: "npm:^0.1.0"
+  peerDependencies:
+    stylelint: ^17.0.0
+  checksum: 10c0/60ac19d395d449d2211929a9d3fe2336aa23be8b9f557daf674ea4698b6fccd937975a6c04f79a85147f84d8df6111fc180c46ea2497183fcc9e170d66762aba
+  languageName: node
+  linkType: hard
+
 "@tootallnate/quickjs-emscripten@npm:^0.23.0":
   version: 0.23.0
   resolution: "@tootallnate/quickjs-emscripten@npm:0.23.0"
@@ -9219,6 +9247,8 @@ __metadata:
     "@phosphor-icons/core": "npm:^2.1.1"
     "@playwright/test": "npm:^1.58.2"
     "@stylistic/eslint-plugin": "npm:^5.10.0"
+    "@stylistic/stylelint-config": "npm:^4.0.0"
+    "@stylistic/stylelint-plugin": "npm:^5.0.1"
     "@types/node": "npm:^25.3.5"
     "@typescript-eslint/parser": "npm:^8.57.0"
     "@vitest/coverage-v8": "npm:4.1.0"
@@ -9827,6 +9857,13 @@ __metadata:
   version: 2.2.0
   resolution: "strnum@npm:2.2.0"
   checksum: 10c0/9a656f5048047abff8d10d0bb57761a01916e368a71e95d4f5a962b57f64b738e20672e68ba10b7de3dc78e861c77bc0566bdeed7017abdda1caf0303c929a3f
+  languageName: node
+  linkType: hard
+
+"style-search@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "style-search@npm:0.1.0"
+  checksum: 10c0/9e5cb735e5dc4fc2f8c61bebdf211d5352f1cf01511a64da12bb726a01e8c6948c50d357eb8fd7893d44b4e3189655bdddcf8ab338f9d508fe89a8942c650b14
   languageName: node
   linkType: hard
 

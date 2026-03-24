@@ -9,7 +9,7 @@
   }
 }
 
-body { 
+body {
   font-family: var(--font-family-primary);
   font-size: var(--font-size-1);
   font-feature-settings: "liga", "kern";

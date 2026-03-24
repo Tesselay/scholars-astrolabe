@@ -38,7 +38,7 @@
   --selection-bg: color-mix(in oklab, var(--accent-primary) 35%, transparent);
   --scrollbar-thumb: color-mix(in oklab, var(--text-primary) 20%, var(--bg-primary));
   --icon-color: var(--accent-secondary);
-  --test-bg: rgb(0 0 0 / 50%); 
+  --test-bg: rgb(0 0 0 / 50%);
 }
 
 @media (prefers-color-scheme: light) {

@@ -9,7 +9,7 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --ease-standard: cubic-bezier(0, 0, 0, 0.5);
-    --ease-emphasized: cubic-bezier(0, 0, 0, 1);;
+    --ease-emphasized: cubic-bezier(0, 0, 0, 1);
     --dur-fast: 300ms;
     --dur-medium: 400ms;
     --dur-slow: 500ms;
