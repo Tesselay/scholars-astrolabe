@@ -67,9 +67,9 @@ export default {
   },
   overrides: [
     {
-      files: ["**/ui/**/*.css", "**/*.astro"],
+      files: ["**/ui/**/*.{css,scss,sass}", "**/*.astro"],
       rules: {
-        // Might be useful for compounding selectors but otherwise ill-advised in a component architecture
+        // Not so useful in a component architecture
         "defensive-css/require-pure-selectors": null,
       },
     },

@@ -11,7 +11,7 @@ import tseslint from "typescript-eslint";
 
 const fileGlobScript = ["**/*.{js,ts,jsx,tsx,cjs,cts,mjs,mts}"];
 const fileGlobAstro = ["**/*.astro"];
-const fileGlobCss = ["**/*.css"];
+const fileGlobCss = ["**/*.{css,scss,sass}"];
 const fileGlobJson = ["**/*.{json,jsonc}"];
 const fileGlobGlobal = [...fileGlobScript, ...fileGlobAstro];
 
@@ -357,7 +357,7 @@ export default defineConfig([
 
   {
     name: "CSS",
-    files: [...fileGlobCss],
+    files: fileGlobCss,
     plugins: { css },
     language: "css/css",
     extends: ["css/recommended"],
